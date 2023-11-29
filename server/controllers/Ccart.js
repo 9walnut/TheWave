@@ -40,3 +40,35 @@ exports.deleteCart = async (req, res) => {
     res.status(500).send("장바구니 삭제 오류");
   }
 };
+
+// 장바구니 주문하기
+exports.getCartCheckout = async (req, res) => {
+  try {
+    const { userNumber } = req.params;
+    const cartItems = await db.carts.findAll({ where: { userNumber } });
+
+    const newOrder = await db.orders.create({
+      userNumber,
+      // 아래 두 개 가져오는 방법...?
+      totalPrice,
+      addressID,
+    });
+
+    // 장바구니의 각 항목을 주문 내역에 추가
+    for (const item of cartItems) {
+      await db.orderdetails.create({
+        orderID: newOrder.orderID,
+        productID: item.productID,
+        // 이거 지금 없음....
+        productCount: item.quantity,
+      });
+    }
+
+    await db.carts.destroy({ where: { userNumber } });
+
+    res.send(newOrder);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("장바구니 주문하기 오류");
+  }
+};
