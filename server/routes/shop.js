@@ -1,5 +1,5 @@
 const express = require("express");
-const controller = require("../controller/Cshop");
+const controller = require("../controllers/Cshop");
 const router = express.Router();
 
 // 카테고리별 상품 페이지
