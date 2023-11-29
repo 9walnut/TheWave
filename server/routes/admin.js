@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../controller/Cadmin");
+const controller = require("../controllers/Cadmin");
 
 // 관리 페이지 렌더링
 router.get("/admin", controller.getUsers);

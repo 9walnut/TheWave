@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../controller/Ccart.js");
+const controller = require("../controllers/Ccart.js");
 
 // 장바구니 페이지 렌더링
 router.get("/cart", controller.getCart);
