@@ -1,4 +1,4 @@
-const { db } = require("../model/index");
+const { db } = require("../models/index");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
@@ -19,7 +19,7 @@ exports.loginUser = async (req, res) => {
       // passwordSalt:
     },
   });
-  return res.send(loginUser);
+  res.send(loginUser);
 };
 
 // 회원가입 페이지 렌더
@@ -42,7 +42,7 @@ exports.register = async (req, res) => {
         address: req.body.address,
       },
     });
-    return res.send(userInfo);
+    res.send(userInfo);
   } catch (error) {
     console.error(err);
     res.status(500).send("회원가입 오류");
@@ -63,7 +63,7 @@ exports.findId = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
       },
     });
-    return res.send(findId);
+    res.send(findId);
   } catch (error) {
     console.error(err);
     res.status(500).send("아이디 찾기 오류");
@@ -84,7 +84,7 @@ exports.findPw = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
       },
     });
-    return res.send(findPw);
+    res.send(findPw);
   } catch (error) {
     console.error(err);
     res.status(500).send("비밀번호 찾기 오류");
@@ -99,7 +99,7 @@ exports.newPw = async (req, res) => {
         password: req.body.password,
       },
     });
-    return res.send(newPw);
+    res.send(newPw);
   } catch (error) {
     console.error(err);
     res.status(500).send("비밀번호 재설정 오류");
@@ -124,7 +124,7 @@ exports.editInfoPw = async (req, res) => {
         password: req.body.password,
       },
     });
-    return res.render("mypage/info", checkPw);
+    res.render("mypage/info", checkPw);
   } catch (error) {
     console.error(err);
     res.status(500).send("비밀번호 인증 오류");
@@ -141,7 +141,7 @@ exports.editInfo = async (req, res) => {
         birthday: req.body.birthday,
       },
     });
-    return res.send(editInfo);
+    res.send(editInfo);
   } catch (error) {
     console.error(err);
     res.status(500).send("회원 정보 수정 오류");
@@ -156,7 +156,7 @@ exports.deleteUser = async (req, res) => {
         userNumber: req.session.userNumber,
       },
     });
-    return res.send(deleteUser);
+    res.send(deleteUser);
   } catch (error) {
     console.error(err);
     res.status(500).send("회원 탈퇴 오류");
