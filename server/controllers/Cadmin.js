@@ -12,6 +12,7 @@ const getTotalOrders = async () => {
     throw error;
   }
 };
+
 // 총 판매 금액
 const getTotalOrderPrices = async () => {
   try {
@@ -22,6 +23,7 @@ const getTotalOrderPrices = async () => {
     throw error;
   }
 };
+
 // 배송완료
 const getDeliveryCompleteOrders = async () => {
   try {

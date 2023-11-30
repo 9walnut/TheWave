@@ -29,6 +29,7 @@ CREATE TABLE CARTS
 cartID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   userNumber INT NOT NULL,
   productID INT NOT NULL,
+  cartQuantity INT NOT NULL,
   foreign key (userNumber) references USERS (userNumber),
   foreign key (productID) references PRODUCTS (productID)
 );
@@ -71,3 +72,8 @@ foreign key (orderID) references ORDERS (orderID),
 foreign key (productID) references PRODUCTS (productID)
 
 );
+
+
+alter table carts add cartQuantity INT NOT NULL;
+-- sequelize-auto 활용한 모델 자동 생성(mysql >>> sequelize)
+sequelize-auto -o "./models" -d thewave -h localhost -u root -p 3306 -x 1q2w3e4r -e mysql
