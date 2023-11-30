@@ -1,4 +1,6 @@
+const { createHash } = require("crypto");
 const { db } = require("../models/index");
+const { hashedPwWithSalt, comparePw } = require("../models/pw");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
@@ -10,16 +12,24 @@ exports.loginPage = (req, res) => {
   res.render("login");
 };
 
-// '로그인' 버튼 클릭 시(session 저장)
+// '로그인' 버튼 클릭 시
 exports.loginUser = async (req, res) => {
-  const loginUser = await db.user.findOne({
-    where: {
-      userId: req.body.userId,
-      password: req.body.password,
-      // passwordSalt:
-    },
-  });
-  res.send(loginUser);
+  try {
+    const loginUser = await db.user.findOne({
+      where: { userId: req.body.userId },
+    });
+
+    const { userId, password } = req.body;
+    const pwCheck = await comparePw(userId, password);
+
+    if (loginUser && pwCheck) {
+      req.session.userNumber = loginUser.userNumber; // 로그인 성공 시 session에 userNumber 저장
+      res.send(loginUser);
+    } else res.send({ result: false }); // 로그인 실패 시 false 반환
+  } catch (error) {
+    console.error(err);
+    res.status(500).send("로그인 오류");
+  }
 };
 
 // 회원가입 페이지 렌더
@@ -30,10 +40,12 @@ exports.registerPage = (req, res) => {
 // '회원가입' 버튼 클릭 시 (중복되는 아이디 있는 경우, 회원가입 오류 보내기)
 exports.register = async (req, res) => {
   try {
+    const { password, salt } = await hashedPwWithSalt(req.body.password); // 암호화
     const userInfo = await db.user.create({
       where: {
         userId: req.body.userId,
-        password: req.body.password,
+        password: password,
+        passwordSalt: salt,
         userName: req.body.userName,
         phoneNumber: req.body.phoneNumber,
         birthday: req.body.birthday,
