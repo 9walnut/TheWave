@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/upload");
 const controller = require("../controllers/Cadmin");
 
 // 관리 페이지 렌더링
@@ -11,8 +12,15 @@ router.get("/admin/users", controller.getAdminUsers);
 // 회원 삭제
 router.delete("/admin/users/:userNumber", controller.deleteAdminUsers);
 
-// 상품 등록
-router.post("/admin/products", controller.createAdminProduct);
+// 상품 등록 - 사진 등록 포함
+router.post(
+  "/admin/products",
+  upload.fields([
+    { name: "productImage", maxCount: 1 },
+    { name: "productDetailImage", maxCount: 1 },
+  ]),
+  controller.createAdminProduct
+);
 
 // 전체 등록상품 조회
 router.get("/admin/products", controller.getAdminAllProducts);

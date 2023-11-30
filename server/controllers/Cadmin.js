@@ -116,13 +116,16 @@ exports.createAdminProduct = async (req, res) => {
   try {
     console.log(req.body);
     const { productName, productPrice, productInfo, productStatus } = req.body;
+    const productImage = req.files.productImage[0].path;
+    const productDetailImage = req.files.productDetailImage[0].path;
     const newProduct = await db.products.create({
       productName,
       productPrice,
       productInfo,
       productStatus,
     });
-    return res.send(newProduct);
+    // 테이블 내 이미지 저장하지 않고 client에 이미지 경로 통보
+    return res.send({ ...newProduct, productImage, productDetailImage });
   } catch (error) {
     console.error(error);
     res.status(500).send("회원 삭제 오류");
