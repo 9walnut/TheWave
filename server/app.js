@@ -24,27 +24,17 @@ app.use(
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-const uploadDetail = multer({
-  storage: multer.diskStorage({
-    destination: function (req, file, done) {
-      done(null, "uploads/");
-    },
-    filename: function (req, file, done) {
-      const ext = path.extname(file.originalname);
-      const baseName = path.basename(file.originalname, ext);
-      const fileName = baseName + "_" + Date.now() + ext;
-
-      done(null, fileName);
-    },
-  }),
-  limits: { fileSize: 5 * 1024 * 1024 },
-});
+const authRouter = require("./routes/auth");
+app.use("/", authRouter);
 
 const shopRouter = require("./routes/shop");
 app.use("/", shopRouter);
 
 const adminRouter = require("./routes/admin");
 app.use("/admin", adminRouter);
+
+const cartRouter = require("./routes/cart");
+app.use("/cart", cartRouter);
 
 app.post(
   "/upload/fields",
