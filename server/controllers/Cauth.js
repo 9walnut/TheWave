@@ -15,7 +15,7 @@ exports.loginPage = (req, res) => {
 // '로그인' 버튼 클릭 시
 exports.loginUser = async (req, res) => {
   try {
-    const loginUser = await db.user.findOne({
+    const loginUser = await db.users.findOne({
       where: { userId: req.body.userId },
     });
 
@@ -24,8 +24,9 @@ exports.loginUser = async (req, res) => {
 
     if (loginUser && pwCheck) {
       req.session.userNumber = loginUser.userNumber; // 로그인 성공 시 session에 userNumber 저장
+      req.session.userId = loginUser.userId;
       res.send(loginUser);
-    } else res.send({ result: false }); // 로그인 실패 시 false 반환
+    } else res.send({ result: false });
   } catch (error) {
     console.error(err);
     res.status(500).send("로그인 오류");
@@ -37,24 +38,35 @@ exports.registerPage = (req, res) => {
   res.render("register");
 };
 
-// '회원가입' 버튼 클릭 시 (중복되는 아이디 있는 경우, 회원가입 오류 보내기)
+// '회원가입' 버튼 클릭 시
 exports.register = async (req, res) => {
   try {
-    const { password, salt } = await hashedPwWithSalt(req.body.password); // 암호화
-    const userInfo = await db.user.create({
+    const { userId, userPw, userName, phoneNumber, birthday, gender, address } =
+      req.body;
+
+    const checkInfo = await db.users.findOne({
       where: {
-        userId: req.body.userId,
-        password: password,
-        passwordSalt: salt,
-        userName: req.body.userName,
-        phoneNumber: req.body.phoneNumber,
-        birthday: req.body.birthday,
-        isAdmin: req.body.isAdmin,
-        gender: req.body.gender,
-        address: req.body.address,
+        userId: userId,
+        phoneNumber: phoneNumber,
       },
     });
-    res.send(userInfo);
+
+    if (!checkInfo) {
+      const { password, salt } = await hashedPwWithSalt(userPw); // 암호화
+      const userInfo = await db.users.create({
+        userId: userId,
+        password: password,
+        passwordSalt: salt,
+        userName: userName,
+        phoneNumber: phoneNumber,
+        birthday: birthday,
+        gender: gender,
+        address: address,
+      });
+      res.render("main", { result: true });
+    } else {
+      res.send(checkInfo);
+    }
   } catch (error) {
     console.error(err);
     res.status(500).send("회원가입 오류");
@@ -69,13 +81,15 @@ exports.findIdPage = (req, res) => {
 // '아이디 찾기' 버튼 클릭 시
 exports.findId = async (req, res) => {
   try {
-    const findId = await db.user.findOne({
+    const findId = await db.users.findOne({
       where: {
         userName: req.body.userName,
         phoneNumber: req.body.phoneNumber,
       },
     });
-    res.send(findId);
+
+    if (findId) res.send(findId);
+    else res.send({ result: false }); // 아이디 찾기 실패 시 false 반환
   } catch (error) {
     console.error(err);
     res.status(500).send("아이디 찾기 오류");
@@ -90,13 +104,14 @@ exports.findIdPage = (req, res) => {
 // '비밀번호 찾기' 버튼 클릭 시
 exports.findPw = async (req, res) => {
   try {
-    const findPw = await db.user.findOne({
+    const findPw = await db.users.findOne({
       where: {
         userId: req.body.userId,
         phoneNumber: req.body.phoneNumber,
       },
     });
-    res.send(findPw);
+    if (findPw) res.send(findPw);
+    else res.send({ result: false });
   } catch (error) {
     console.error(err);
     res.status(500).send("비밀번호 찾기 오류");
@@ -106,11 +121,16 @@ exports.findPw = async (req, res) => {
 // 비밀번호 재설정
 exports.newPw = async (req, res) => {
   try {
-    const newPw = await db.user.update({
-      where: {
-        password: req.body.password,
+    const { password, salt } = await hashedPwWithSalt(req.body.password);
+    const newPw = await db.users.update(
+      {
+        password: password,
+        passwordSalt: salt,
       },
-    });
+      {
+        where: { userId: req.body.userId }, // 유저 아이디와 일치하는 컬럼에서 비번 업데이트
+      }
+    );
     res.send(newPw);
   } catch (error) {
     console.error(err);
@@ -131,12 +151,10 @@ exports.editInfo = (req, res) => {
 // 회원 정보 수정 페이지 > 비밀번호 인증
 exports.editInfoPw = async (req, res) => {
   try {
-    const checkPw = await db.user.findOne({
-      where: {
-        password: req.body.password,
-      },
-    });
-    res.render("mypage/info", checkPw);
+    const pwCheck = await comparePw(req.session.userId, password);
+
+    if (pwCheck) res.render("mypage/info", { result: true });
+    else res.send({ result: false });
   } catch (error) {
     console.error(err);
     res.status(500).send("비밀번호 인증 오류");
@@ -146,11 +164,9 @@ exports.editInfoPw = async (req, res) => {
 // 회원 정보 수정
 exports.editInfo = async (req, res) => {
   try {
-    const editInfo = await db.user.update({
+    const editInfo = await db.users.update(req.body, {
       where: {
-        userName: req.body.userName,
-        phoneNumber: req.body.phoneNumber,
-        birthday: req.body.birthday,
+        userNumber: req.session.userNumber,
       },
     });
     res.send(editInfo);
@@ -163,12 +179,18 @@ exports.editInfo = async (req, res) => {
 // 회원 탈퇴
 exports.deleteUser = async (req, res) => {
   try {
-    const deleteUser = await db.user.destroy({
-      where: {
-        userNumber: req.session.userNumber,
-      },
-    });
-    res.send(deleteUser);
+    const pwCheck = await comparePw(req.session.userId, password);
+
+    if (pwCheck) {
+      const deleteUser = await db.users.destroy({
+        where: {
+          userNumber: req.session.userNumber,
+        },
+      });
+      res.send({ result: true });
+    } else {
+      res.send({ result: false });
+    }
   } catch (error) {
     console.error(err);
     res.status(500).send("회원 탈퇴 오류");
