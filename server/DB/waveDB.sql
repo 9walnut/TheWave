@@ -4,12 +4,6 @@ CREATE USER 'admin'@'%' IDENTIFIED BY '1q2w3e4r';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
-create database thewave default character set utf8mb4 default collate utf8mb4_general_ci;
-use thewave;
-CREATE USER 'admin'@'%' IDENTIFIED BY '1q2w3e4r';
-GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-
 CREATE TABLE USERS 
 ( userNumber   INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
   userId    VARCHAR(12) NOT NULL,
@@ -76,5 +70,3 @@ deliveryStatus VARCHAR(20),
 foreign key (orderID) references ORDERS (orderID),
 foreign key (productID) references PRODUCTS (productID)
 );
--- sequelize-auto 활용한 모델 자동 생성(mysql >>> sequelize)
-sequelize-auto -o "./models" -d thewave -h localhost -u root -p 3306 -x 1q2w3e4r -e mysql
