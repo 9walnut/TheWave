@@ -16,9 +16,12 @@ exports.getCart = async (req, res) => {
 exports.editCart = async (req, res) => {
   try {
     console.log(req.body);
-    const { cartID } = req.params;
-    const {} = req.body;
-    const editCart = await db.carts.update({}, { where: { cartID } });
+    const { cartId } = req.params;
+    const { cartQuantity } = req.body;
+    const editCart = await db.carts.update(
+      { cartQuantity },
+      { where: { cartId } }
+    );
     return res.send(editCart);
   } catch (error) {
     console.error(error);
@@ -30,8 +33,8 @@ exports.editCart = async (req, res) => {
 exports.deleteCart = async (req, res) => {
   try {
     console.log(req.body);
-    const { cartID } = req.params;
-    const isDeleted = await db.products.destroy({ where: { cartID } });
+    const { cartId } = req.params;
+    const isDeleted = await db.products.destroy({ where: { cartId } });
     console.log(isDeleted);
     if (isDeleted) return res.send(true);
     else return res.send(false);
@@ -51,14 +54,14 @@ exports.getCartCheckout = async (req, res) => {
       userNumber,
       // 아래 두 개 가져오는 방법...?
       totalPrice,
-      addressID,
+      addressId,
     });
 
     // 장바구니의 각 항목을 주문 내역에 추가
     for (const item of cartItems) {
       await db.orderdetails.create({
-        orderID: newOrder.orderID,
-        productID: item.productID,
+        orderID: newOrder.orderId,
+        productID: item.productId,
         // 이거 지금 없음....
         productCount: item.quantity,
       });
