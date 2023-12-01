@@ -1,18 +1,18 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('products', {
-    productID: {
+    productId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    categoryID: {
+    categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'categories',
-        key: 'categoryID'
+        key: 'categoryId'
       }
     },
     productName: {
@@ -41,14 +41,14 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "productID" },
+          { name: "productId" },
         ]
       },
       {
-        name: "categoryID",
+        name: "categoryId",
         using: "BTREE",
         fields: [
-          { name: "categoryID" },
+          { name: "categoryId" },
         ]
       },
     ]

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('carts', {
-    cartID: {
+    cartId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -15,13 +15,17 @@ module.exports = function(sequelize, DataTypes) {
         key: 'userNumber'
       }
     },
-    productID: {
+    productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'products',
-        key: 'productID'
+        key: 'productId'
       }
+    },
+    cartQuantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,
@@ -33,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "cartID" },
+          { name: "cartId" },
         ]
       },
       {
@@ -44,10 +48,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "productID",
+        name: "productId",
         using: "BTREE",
         fields: [
-          { name: "productID" },
+          { name: "productId" },
         ]
       },
     ]

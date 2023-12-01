@@ -7,20 +7,20 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    orderID: {
+    orderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'orders',
-        key: 'orderID'
+        key: 'orderId'
       }
     },
-    productID: {
+    productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'products',
-        key: 'productID'
+        key: 'productId'
       }
     },
     productCount: {
@@ -45,17 +45,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "orderID",
+        name: "orderId",
         using: "BTREE",
         fields: [
-          { name: "orderID" },
+          { name: "orderId" },
         ]
       },
       {
-        name: "productID",
+        name: "productId",
         using: "BTREE",
         fields: [
-          { name: "productID" },
+          { name: "productId" },
         ]
       },
     ]
