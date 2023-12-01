@@ -155,9 +155,9 @@ exports.getAdminAllProducts = async (req, res) => {
 exports.getAdminProduct = async (req, res) => {
   console.log(req.params);
   try {
-    const { productID } = req.params;
+    const { productId } = req.params;
     const product = await db.products.findOne({
-      where: { productID },
+      where: { productId },
       include: [{ model: db.categories, attributes: ["categoryName"] }],
     });
     return res.send(product);
@@ -171,7 +171,7 @@ exports.getAdminProduct = async (req, res) => {
 exports.editAdminProduct = async (req, res) => {
   try {
     console.log(req.body);
-    const { productID } = req.params;
+    const { productId } = req.params;
     const { productName, productPrice, productInfo, productStatus } = req.body;
     const editProduct = await db.products.update(
       {
@@ -180,7 +180,7 @@ exports.editAdminProduct = async (req, res) => {
         productInfo,
         productStatus,
       },
-      { where: { productID } }
+      { where: { productId } }
     );
     return res.send(editProduct);
   } catch (error) {
@@ -193,8 +193,8 @@ exports.editAdminProduct = async (req, res) => {
 exports.deleteAdminProduct = async (req, res) => {
   try {
     console.log(req.body);
-    const { productID } = req.params;
-    const isDeleted = await db.products.destroy({ where: { productID } });
+    const { productId } = req.params;
+    const isDeleted = await db.products.destroy({ where: { productId } });
     console.log(isDeleted);
     if (isDeleted) return res.send(true);
     else return res.send(false);
@@ -251,11 +251,11 @@ exports.getAdminOrder = async (req, res) => {
 // 배송 상태 변경
 exports.editDeliveryStatus = async (req, res) => {
   try {
-    const { orderID } = req.params;
+    const { orderId } = req.params;
     const { deliveryStatus } = req.body;
     const updatedOrder = await db.orderdetails.update(
       { deliveryStatus },
-      { where: { orderID } }
+      { where: { orderId } }
     );
     return res.send(updatedOrder);
   } catch (error) {
@@ -268,8 +268,8 @@ exports.editDeliveryStatus = async (req, res) => {
 exports.deleteAdminOrder = async (req, res) => {
   try {
     console.log(req.body);
-    const { orderID } = req.params;
-    const isDeleted = await db.products.destroy({ where: { orderID } });
+    const { orderId } = req.params;
+    const isDeleted = await db.products.destroy({ where: { orderId } });
     console.log(isDeleted);
     if (isDeleted) return res.send(true);
     else return res.send(false);
