@@ -1,6 +1,6 @@
 const { createHash } = require("crypto");
 const { db } = require("../models/index");
-const { hashedPwWithSalt, comparePw } = require("../models/pw");
+const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
