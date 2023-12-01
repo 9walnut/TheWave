@@ -43,3 +43,5 @@ router.patch("/mypage/info", controller.editInfo);
 
 // 회원 탈퇴
 router.delete("/mypage", controller.deleteUser);
+
+module.exports = router;

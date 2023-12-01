@@ -4,7 +4,7 @@ const upload = require("../middleware/upload");
 const controller = require("../controllers/Cadmin");
 
 // 관리 페이지 렌더링
-router.get("/admin", controller.getUsers);
+// router.get("/admin", controller.getUsers);
 
 // 전체 회원 조회
 router.get("/admin/users", controller.getAdminUsers);
@@ -35,7 +35,7 @@ router.patch("/admin/products/:productID", controller.editAdminProduct);
 router.delete("/admin/products/:productID", controller.deleteAdminProduct);
 
 // 전체 주문현황 조회
-router.get("/admin/orders", getAdminAllOrders);
+router.get("/admin/orders", controller.getAdminAllOrders);
 
 // 주문 상세 조회
 router.get("/admin/orders/:orderID", controller.getAdminOrder);
