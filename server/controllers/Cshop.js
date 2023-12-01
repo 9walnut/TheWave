@@ -36,14 +36,22 @@ exports.productPage = async (req, res) => {
   }
 };
 
-// 장바구니 담기
+// 장바구니 담기 (장바구니Id가 어디에서 오는지...?)
 exports.cartIn = async (req, res) => {
   try {
+    const userNumber = req.session.userNumber;
+    const productId = req.params.productId;
+    const cartId = req.body.cartId;
+    const cartQuantity = req.body.cartQuantity;
+
     const cartIn = await db.carts.create({
-      productId: req.params.productId,
-      cartId: req.body.cartId,
+      productId: productId,
+      cartId: cartId,
+      userNumber: userNumber,
+      cartQuantity: cartQuantity,
     });
-    res.send(cartIn);
+    if (cartIn) res.send({ result: true });
+    else res.send({ result: false });
   } catch (error) {
     console.error(err);
     res.status(500).send("장바구니 담기 오류");
