@@ -4,12 +4,12 @@ const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
-  res.render("main");
+  res.send({ result: true });
 };
 
 // 로그인 페이지 랜더
 exports.loginPage = (req, res) => {
-  res.render("login");
+  res.send({ result: true });
 };
 
 // '로그인' 버튼 클릭 시
@@ -25,7 +25,7 @@ exports.loginUser = async (req, res) => {
     if (loginUser && pwCheck) {
       req.session.userNumber = loginUser.userNumber; // 로그인 성공 시 session에 userNumber 저장
       req.session.userId = loginUser.userId;
-      res.send(loginUser);
+      res.send({ result: true });
     } else res.send({ result: false });
   } catch (error) {
     console.error(err);
@@ -35,7 +35,7 @@ exports.loginUser = async (req, res) => {
 
 // 회원가입 페이지 렌더
 exports.registerPage = (req, res) => {
-  res.render("register");
+  res.send({ result: true });
 };
 
 // '회원가입' 버튼 클릭 시
@@ -63,9 +63,9 @@ exports.register = async (req, res) => {
         gender: gender,
         address: address,
       });
-      res.render("main", { result: true });
+      res.send({ result: true });
     } else {
-      res.send(checkInfo);
+      res.json(checkInfo);
     }
   } catch (error) {
     console.error(err);
@@ -75,7 +75,7 @@ exports.register = async (req, res) => {
 
 // 아이디 찾기 페이지 렌더
 exports.findIdPage = (req, res) => {
-  res.render("findId");
+  res.send({ result: true });
 };
 
 // '아이디 찾기' 버튼 클릭 시
@@ -88,7 +88,7 @@ exports.findId = async (req, res) => {
       },
     });
 
-    if (findId) res.send(findId);
+    if (findId) res.json(findId);
     else res.send({ result: false }); // 아이디 찾기 실패 시 false 반환
   } catch (error) {
     console.error(err);
@@ -98,7 +98,7 @@ exports.findId = async (req, res) => {
 
 // 비밀번호 찾기 페이지 렌더
 exports.findIdPage = (req, res) => {
-  res.render("findPw");
+  res.send({ result: true });
 };
 
 // '비밀번호 찾기' 버튼 클릭 시
@@ -110,7 +110,7 @@ exports.findPw = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
       },
     });
-    if (findPw) res.send(findPw);
+    if (findPw) res.send({ result: true });
     else res.send({ result: false });
   } catch (error) {
     console.error(err);
@@ -131,7 +131,7 @@ exports.newPw = async (req, res) => {
         where: { userId: req.body.userId }, // 유저 아이디와 일치하는 컬럼에서 비번 업데이트
       }
     );
-    res.send(newPw);
+    res.send({ result: true });
   } catch (error) {
     console.error(err);
     res.status(500).send("비밀번호 재설정 오류");
@@ -140,12 +140,12 @@ exports.newPw = async (req, res) => {
 
 // 회원 마이페이지
 exports.mypage = (req, res) => {
-  render("mypage");
+  res.send({ result: true });
 };
 
 // 회원 정보 수정 페이지
 exports.editInfo = (req, res) => {
-  render("editInfo");
+  res.send({ result: true });
 };
 
 // 회원 정보 수정 페이지 > 비밀번호 인증
@@ -153,7 +153,7 @@ exports.editInfoPw = async (req, res) => {
   try {
     const pwCheck = await comparePw(req.session.userId, password);
 
-    if (pwCheck) res.render("mypage/info", { result: true });
+    if (pwCheck) res.send({ result: true });
     else res.send({ result: false });
   } catch (error) {
     console.error(err);
@@ -169,7 +169,7 @@ exports.editInfo = async (req, res) => {
         userNumber: req.session.userNumber,
       },
     });
-    res.send(editInfo);
+    res.send({ result: true });
   } catch (error) {
     console.error(err);
     res.status(500).send("회원 정보 수정 오류");
