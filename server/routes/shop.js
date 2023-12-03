@@ -12,6 +12,6 @@ router.get("/product/:productId", controller.productPage);
 router.post("/payment/:productId", controller.cartIn);
 
 // 결제하기
-router.get("/payment", controller.payment);
+router.get("/payment/:productId", controller.goPayment);
 
 module.exports = router;

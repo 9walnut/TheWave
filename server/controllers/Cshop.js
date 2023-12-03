@@ -16,7 +16,7 @@ exports.categoryPage = async (req, res) => {
         ],
       },
     });
-    res.render("products", categoryPage);
+    res.json(categoryPage);
   } catch {
     console.error(err);
     res.status(500).send("카테고리 페이지 오류");
@@ -29,14 +29,14 @@ exports.productPage = async (req, res) => {
     const productDetail = await db.products.findOne({
       where: { productId: req.params.productId },
     });
-    res.send(productDetail);
+    res.json(productDetail);
   } catch (error) {
     console.error(err);
     res.status(500).send("상품 상세 페이지 오류");
   }
 };
 
-// 장바구니 담기 (장바구니Id가 어디에서 오는지...?)
+// 장바구니 담기
 exports.cartIn = async (req, res) => {
   try {
     const userNumber = req.session.userNumber;
@@ -58,10 +58,13 @@ exports.cartIn = async (req, res) => {
   }
 };
 
-// 결제하기 (일단 보류...)
-exports.payment = async (req, res) => {
+// 결제하기(상품 상세 페이지에서 바로)
+exports.goPayment = async (req, res) => {
   try {
-    res.render("mypage", result);
+    const productInfo = await db.products.findOne({
+      where: { productId: req.params.productId },
+    });
+    res.json(productInfo);
   } catch (error) {
     console.err(err);
     res.status(500).send("결제하기 오류");
