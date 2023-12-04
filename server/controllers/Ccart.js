@@ -34,7 +34,7 @@ exports.deleteCart = async (req, res) => {
   try {
     console.log(req.body);
     const { cartId } = req.params;
-    const isDeleted = await db.products.destroy({ where: { cartId } });
+    const isDeleted = await db.carts.destroy({ where: { cartId } });
     console.log(isDeleted);
     if (isDeleted) return res.send(true);
     else return res.send(false);
@@ -47,26 +47,36 @@ exports.deleteCart = async (req, res) => {
 // 장바구니 주문하기
 exports.getCartCheckout = async (req, res) => {
   try {
-    const { userNumber } = req.params;
+    const { userNumber } = req.body;
     const cartItems = await db.carts.findAll({ where: { userNumber } });
 
+    let totalPrice = 0;
+
+    const address = await db.address.findOne({ where: { userNumber } });
+    const addressId = address.addressId;
+
+    // 장바구니의 각 항목을 주문 내역에 추가
+    for (const item of cartItems) {
+      const product = await db.products.findOne({
+        where: { productId: item.productId },
+      });
+      totalPrice += product.productPrice * item.cartQuantity;
+
+      await db.orderdetails.create({
+        orderID: newOrder.orderId,
+        productID: item.productId,
+        productCount: item.cartQuantity,
+      });
+    }
+
+    // 주문 생성
     const newOrder = await db.orders.create({
       userNumber,
-      // 아래 두 개 가져오는 방법...?
       totalPrice,
       addressId,
     });
 
-    // 장바구니의 각 항목을 주문 내역에 추가
-    for (const item of cartItems) {
-      await db.orderdetails.create({
-        orderID: newOrder.orderId,
-        productID: item.productId,
-        // 이거 지금 없음....
-        productCount: item.quantity,
-      });
-    }
-
+    // 장바구니 비우기
     await db.carts.destroy({ where: { userNumber } });
 
     res.send(newOrder);

@@ -25,7 +25,25 @@ exports.loginUser = async (req, res) => {
     if (loginUser && pwCheck) {
       req.session.userNumber = loginUser.userNumber; // 로그인 성공 시 session에 userNumber 저장
       req.session.userId = loginUser.userId;
-      res.send({ result: true });
+      req.session.isAdmin = loginUser.isAdmin; // session에 isAdmin 값 저장
+
+      // 비회원 장바구니 동기화
+      if (cart && cart.length > 0) {
+        for (const item of cart) {
+          const { productId, cartQuantity } = item;
+          await db.carts.create({
+            userNumber: loginUser.userNumber,
+            productId,
+            cartQuantity,
+          });
+        }
+      }
+      // isAdmin 값에 따라 페이지 이동
+      if (loginUser.isAdmin === "Y") {
+        res.send({ result: true, isAdmin: true });
+      } else {
+        res.send({ result: true, isAdmin: false });
+      }
     } else res.send({ result: false });
   } catch (error) {
     console.error(err);
