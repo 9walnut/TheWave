@@ -6,10 +6,10 @@ const controller = require("../controllers/Ccart.js");
 router.get("/cart", controller.getCart);
 
 // 장바구니 상품 수정
-router.patch("/cart/:cartID", controller.editCart);
+router.patch("/cart/:cartId", controller.editCart);
 
 // 장바구니 상품 제거
-router.delete("/cart/:cartID", controller.deleteCart);
+router.delete("/cart/:cartId", controller.deleteCart);
 
 // 장바구니 결제하기
 router.get("/cart/checkout", controller.getCartCheckout);

@@ -85,6 +85,28 @@ const getCategoryCount = async () => {
   }
 };
 
+// 관리 페이지 렌더링
+exports.getAdminMain = async (req, res) => {
+  try {
+    const totalOrders = await getTotalOrders();
+    const totalOrderPrices = await getTotalOrderPrices();
+    const deliveryCompleteOrders = await getDeliveryCompleteOrders();
+    const deliveryReadyOrders = await getDeliveryReadyOrders();
+    const totalProducts = await getTotalProducts();
+    const categoryCount = await getCategoryCount();
+    res.send(
+      totalOrders,
+      totalOrderPrices,
+      deliveryCompleteOrders,
+      deliveryReadyOrders,
+      totalProducts,
+      categoryCount
+    );
+  } catch (error) {
+    res.status(500).send("관리페이지 오류");
+  }
+};
+
 // 회원 조회
 exports.getAdminUsers = async (req, res) => {
   try {
@@ -114,24 +136,23 @@ exports.deleteAdminUsers = async (req, res) => {
 // 상품 등록
 exports.createAdminProduct = async (req, res) => {
   try {
-    console.log(req.body);
     const { productName, productPrice, productInfo, productStatus } = req.body;
-    const productImage = req.files.productImage[0].path;
-    const productDetailImage = req.files.productDetailImage[0].path;
+    const productImages = req.files.map((file) => file.location); // 이미지 URL 배열
+
     const newProduct = await db.products.create({
       productName,
       productPrice,
       productInfo,
       productStatus,
+      productImages,
     });
-    // 테이블 내 이미지 저장하지 않고 client에 이미지 경로 통보
-    return res.send({ ...newProduct, productImage, productDetailImage });
+
+    res.send(newProduct);
   } catch (error) {
     console.error(error);
-    res.status(500).send("회원 삭제 오류");
+    res.status(500).send("상품 등록 오류");
   }
 };
-
 // 전체 등록상품 조회
 exports.getAdminAllProducts = async (req, res) => {
   try {
