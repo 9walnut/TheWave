@@ -18,7 +18,7 @@ exports.categoryPage = async (req, res) => {
     });
     res.json(categoryPage);
   } catch {
-    console.error(err);
+    console.error(error);
     res.status(500).send("카테고리 페이지 오류");
   }
 };
@@ -31,7 +31,7 @@ exports.productPage = async (req, res) => {
     });
     res.json(productDetail);
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("상품 상세 페이지 오류");
   }
 };
@@ -53,7 +53,7 @@ exports.cartIn = async (req, res) => {
     if (cartIn) res.send({ result: true });
     else res.send({ result: false });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("장바구니 담기 오류");
   }
 };

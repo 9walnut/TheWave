@@ -48,7 +48,7 @@ exports.loginUser = async (req, res) => {
       }
     } else res.send({ result: false });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("로그인 오류");
   }
 };
@@ -72,7 +72,7 @@ exports.register = async (req, res) => {
     });
 
     if (!checkInfo) {
-      const { password, salt } = await hashedPwWithSalt(userPw); // 암호화
+      const { password, salt } = hashedPwWithSalt(userPw); // 암호화
       const userInfo = await db.users.create({
         userId: userId,
         password: password,
@@ -88,7 +88,7 @@ exports.register = async (req, res) => {
       res.json(checkInfo);
     }
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("회원가입 오류");
   }
 };
@@ -111,7 +111,7 @@ exports.findId = async (req, res) => {
     if (findId) res.json(findId);
     else res.send({ result: false }); // 아이디 찾기 실패 시 false 반환
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("아이디 찾기 오류");
   }
 };
@@ -133,7 +133,7 @@ exports.findPw = async (req, res) => {
     if (findPw) res.send({ result: true });
     else res.send({ result: false });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("비밀번호 찾기 오류");
   }
 };
@@ -153,7 +153,7 @@ exports.newPw = async (req, res) => {
     );
     res.send({ result: true });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("비밀번호 재설정 오류");
   }
 };
@@ -176,7 +176,7 @@ exports.editInfoPw = async (req, res) => {
     if (pwCheck) res.send({ result: true });
     else res.send({ result: false });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("비밀번호 인증 오류");
   }
 };
@@ -191,7 +191,7 @@ exports.editInfo = async (req, res) => {
     });
     res.send({ result: true });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("회원 정보 수정 오류");
   }
 };
@@ -212,7 +212,7 @@ exports.deleteUser = async (req, res) => {
       res.send({ result: false });
     }
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("회원 탈퇴 오류");
   }
 };
