@@ -14,6 +14,8 @@ exports.loginPage = (req, res) => {
 
 // '로그인' 버튼 클릭 시
 exports.loginUser = async (req, res) => {
+  // console.log("asdf");
+  // res.send({ result: true });
   try {
     const loginUser = await db.users.findOne({
       where: { userId: req.body.userId },
