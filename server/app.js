@@ -37,7 +37,7 @@ const paymentRouter = require("./routes/payment");
 app.use("/payment", paymentRouter);
 
 const adminRouter = require("./routes/admin");
-app.use("/admin", adminRouter);
+app.get("/admin", adminRouter);
 
 const cartRouter = require("./routes/cart");
 app.use("/cart", cartRouter);
