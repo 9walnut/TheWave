@@ -118,12 +118,12 @@ exports.getAdminUsers = async (req, res) => {
   }
 };
 
-// 회원 삭제
+// 회원 삭제 - 체크박스
 exports.deleteAdminUsers = async (req, res) => {
   try {
-    const { userNumber } = req.params;
+    const userNumbers = req.body.userNumbers; // 클라이언트로부터 받은 userNumber 리스트
     const isDeleted = await db.users.destroy({
-      where: userNumber,
+      where: { userNumber: { [Op.in]: userNumbers } }, // 수정된 부분
     });
     if (isDeleted) return res.send(true);
     else return res.send(false);
@@ -161,7 +161,8 @@ exports.getAdminAllProducts = async (req, res) => {
       include: [
         {
           model: db.categories,
-          attributes: ["categoryName"],
+          as: "category",
+          attributes: ["categoryname"],
         },
       ],
     });
@@ -179,7 +180,9 @@ exports.getAdminProduct = async (req, res) => {
     const { productId } = req.params;
     const product = await db.products.findOne({
       where: { productId },
-      include: [{ model: db.categories, attributes: ["categoryName"] }],
+      include: [
+        { model: db.categories, as: "category", attributes: ["categoryName"] },
+      ],
     });
     return res.send(product);
   } catch (error) {
@@ -226,21 +229,36 @@ exports.deleteAdminProduct = async (req, res) => {
 };
 
 // 전체 주문 현황 조회
+// 세부 현황에서 어떤 것이 나오게 할지?
+// 현재는 orderdetails + 총 가격, 상품 이름
+// 주소 추가해야할듯
 exports.getAdminAllOrders = async (req, res) => {
   try {
     console.log(req.params);
-    const orders = await db.orders.findAll({
+    const orderdDetail = await db.orderdetails.findAll({
       include: [
         {
-          model: db.orderdetails,
-          attributes: ["productCount", "deliveryStatus"],
+          model: db.orders,
+          as: "order",
+          attributes: ["totalPrice"],
+        },
+        {
+          model: db.products,
+          as: "product",
+          attributes: ["productName"],
+        },
+        // db 드랍 후 수정 필요
+        {
+          model: db.address,
+          as: "adress",
+          attributes: ["adress"],
         },
       ],
     });
-    return res.send(orders);
+    return res.send(orderdDetail);
   } catch (error) {
     console.error(error);
-    res.status(500).send("등록 상품 삭제 오류");
+    res.status(500).send("전체 주문 현황 오류");
   }
 };
 
