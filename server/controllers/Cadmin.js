@@ -27,7 +27,7 @@ const getTotalOrderPrices = async () => {
 // 배송완료
 const getDeliveryCompleteOrders = async () => {
   try {
-    const totalDeliveryCompleteOrders = await db.orders.count({
+    const totalDeliveryCompleteOrders = await db.orderdetails.count({
       where: { deliveryStatus: "배송완료" },
     });
     return totalDeliveryCompleteOrders;
@@ -40,7 +40,7 @@ const getDeliveryCompleteOrders = async () => {
 // 배송 준비 중
 const getDeliveryReadyOrders = async () => {
   try {
-    const totalDeliveryReadyOrders = await db.orders.count({
+    const totalDeliveryReadyOrders = await db.orderdetails.count({
       where: { deliveryStatus: "배송준비중" },
     });
     return totalDeliveryReadyOrders;

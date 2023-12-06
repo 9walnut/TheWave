@@ -25,19 +25,19 @@ module.exports = function(sequelize, DataTypes) {
     },
     phoneNumber: {
       type: DataTypes.CHAR(11),
-      allowNull: true
+      allowNull: false
     },
     birthday: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: false
     },
     isAdmin: {
       type: DataTypes.CHAR(1),
-      allowNull: true
+      allowNull: false
     },
     gender: {
       type: DataTypes.CHAR(1),
-      allowNull: true
+      allowNull: false
     }
   }, {
     sequelize,
