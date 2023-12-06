@@ -1,8 +1,8 @@
 const express = require("express");
-const controller = require("../controllers/Cmypage.js");
+const controller = require("../controllers/Cpayment.js");
 const router = express.Router();
 
-// 장바구니 담기
-router.post("/payment/:productId", controller.cartIn);
+// 결제하기
+router.post("/payment/:productId", controller.goPayment);
 
 module.exports = router;
