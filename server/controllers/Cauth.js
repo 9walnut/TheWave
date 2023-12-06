@@ -22,7 +22,7 @@ exports.loginUser = async (req, res) => {
     });
 
     const { userId, password } = req.body;
-    const pwCheck = await comparePw(userId, password);
+    const pwCheck = comparePw(userId, password);
 
     if (loginUser && pwCheck) {
       req.session.userNumber = loginUser.userNumber; // 로그인 성공 시 session에 userNumber 저장
