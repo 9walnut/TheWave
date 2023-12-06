@@ -75,31 +75,39 @@ exports.idCheck = async (req, res) => {
   }
 };
 
-// '회원가입' 버튼 클릭 시 (전화번호 중복 여부 체크 추가)
+// '회원가입' 버튼 클릭 시
 exports.register = async (req, res) => {
   try {
-    const { userId, userPw, userName, phoneNumber, birthday, gender, address } =
-      req.body;
+    const {
+      userId,
+      password,
+      userName,
+      phoneNumber,
+      birthday,
+      gender,
+      isAdmin,
+      address,
+    } = req.body;
 
-    const checkPhone = await db.users.findOne({
+    // const checkPhone = await db.users.findOne({
+    //   where: { phoneNumber: phoneNumber },
+    // });
+
+    const { userPw, salt } = await hashedPwWithSalt(password); // 암호화
+
+    const userInfo = await db.users.create({
+      userId: userId,
+      password: userPw,
+      passwordSalt: salt,
+      userName: userName,
       phoneNumber: phoneNumber,
+      birthday: birthday,
+      isAdmin: isAdmin,
+      gender: gender,
     });
+    const userAddress = await db.address.create({ address: address });
 
-    if (!checkPhone) {
-      const { password, salt } = hashedPwWithSalt(userPw); // 암호화
-      const userInfo = await db.users.create({
-        userId: userId,
-        password: password,
-        passwordSalt: salt,
-        userName: userName,
-        phoneNumber: phoneNumber,
-        birthday: birthday,
-        gender: gender,
-      });
-      const userAddress = await db.address.create({ address: address });
-
-      res.send(userInfo, userAddress, { result: true });
-    } else res.send({ result: false });
+    res.send(userInfo, userAddress, { result: true });
   } catch (error) {
     console.error(error);
     res.status(500).send("회원가입 오류");

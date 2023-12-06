@@ -2,7 +2,7 @@ const crypto = require("crypto");
 const { db } = require("../models/index");
 
 const createSalt = () => {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     crypto.randomBytes(64, (err, buf) => {
       if (err) reject(err);
       resolve(buf.toString("base64"));
@@ -10,14 +10,20 @@ const createSalt = () => {
   });
 };
 
-const hashedPwWithSalt = (pw) => {
-  new Promise(async (resolve, reject) => {
+const hashedPwWithSalt = async (pw) => {
+  try {
     const salt = await createSalt();
-    crypto.pbkdf2(pw, salt, 100, 64, "sha512", (err, key) => {
-      if (err) reject(err);
-      resolve({ password: key.toString("base64"), salt });
+
+    return new Promise((resolve, reject) => {
+      crypto.pbkdf2(pw, salt, 100, 64, "sha512", (err, key) => {
+        if (err) reject(err);
+        const userPw = key.toString("base64");
+        resolve({ userPw, salt });
+      });
     });
-  });
+  } catch (err) {
+    reject(err);
+  }
 };
 
 const comparePw = (userId, pw) => {
