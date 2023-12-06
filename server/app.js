@@ -24,8 +24,17 @@ app.use(
 const authRouter = require("./routes/auth");
 app.use("/", authRouter);
 
-const shopRouter = require("./routes/shop");
-app.use("/", shopRouter);
+const mypageRouter = require("./routes/mypage");
+app.use("/mypage", mypageRouter);
+
+const categoryRouter = require("./routes/category");
+app.use("/category", categoryRouter);
+
+const productRouter = require("./routes/product");
+app.use("/product", productRouter);
+
+const paymentRouter = require("./routes/payment");
+app.use("/payment", paymentRouter);
 
 const adminRouter = require("./routes/admin");
 app.use("/admin", adminRouter);
