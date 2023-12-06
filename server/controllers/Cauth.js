@@ -17,12 +17,15 @@ exports.loginUser = async (req, res) => {
   // console.log("asdf");
   // res.send({ result: true });
   try {
-    const loginUser = await db.users.findOne({
-      where: { userId: req.body.userId },
-    });
-
     const { userId, password } = req.body;
+
+    const loginUser = await db.users.findOne({
+      where: { userId: userId },
+    });
+    console.log("loginUser", loginUser);
+
     const pwCheck = comparePw(userId, password);
+    console.log("pwCheck", pwCheck);
 
     if (loginUser && pwCheck) {
       req.session.userNumber = loginUser.userNumber; // 로그인 성공 시 session에 userNumber 저장
@@ -58,16 +61,16 @@ exports.registerPage = (req, res) => {
   res.send({ result: true });
 };
 
-// '아이디 중복 체크' 버튼 클릭 시
+// '아이디 중복 확인' 버튼 클릭 시
 exports.idCheck = async (req, res) => {
   try {
     const checkInfo = await db.users.findOne({
       where: {
-        userId: userId,
-        phoneNumber: phoneNumber,
+        userId: req.body.userId,
+        phoneNumber: req.body.phoneNumber,
       },
     });
-    if (!checkInfo) res.send({ result: false });
+    if (!checkInfo) res.send({ result: true });
     else res.send({ result: false });
   } catch (error) {
     console.error(error);
@@ -105,9 +108,13 @@ exports.register = async (req, res) => {
       isAdmin: isAdmin,
       gender: gender,
     });
-    const userAddress = await db.address.create({ address: address });
 
-    res.send(userInfo, userAddress, { result: true });
+    const userAddress = await db.address.create({
+      userNumber: userInfo.userNumber,
+      address: address,
+    });
+
+    res.send({ userInfo, userAddress, result: true });
   } catch (error) {
     console.error(error);
     res.status(500).send("회원가입 오류");
@@ -162,17 +169,18 @@ exports.findPw = async (req, res) => {
 // 비밀번호 재설정
 exports.newPw = async (req, res) => {
   try {
-    const { password, salt } = hashedPwWithSalt(req.body.password);
+    const { password, userId } = req.body;
+
+    const { userPw, salt } = await hashedPwWithSalt(password);
     const newPw = await db.users.update(
       {
-        password: password,
+        password: userPw,
         passwordSalt: salt,
       },
-      {
-        where: { userId: req.body.userId }, // 유저 아이디와 일치하는 컬럼에서 비번 업데이트
-      }
+      { where: { userId: userId } } // 유저 아이디와 일치하는 컬럼에서 비번 업데이트
     );
-    res.send(newPw, { result: true });
+    console.log("newPw", newPw);
+    res.send({ result: true });
   } catch (error) {
     console.error(error);
     res.status(500).send("비밀번호 재설정 오류");
