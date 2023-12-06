@@ -29,19 +29,4 @@ router.get("/findPw", controller.findPw);
 // 비밀번호 재설정
 router.post("/findPw/newPw", controller.newPw);
 
-// 회원 마이페이지
-router.get("/mypage", controller.mypage);
-
-// 회원 정보 수정 페이지
-router.get("/mypage/info", controller.editInfo);
-
-// 회원 정보 수정 페이지 > 비밀번호 인증
-router.post("/mypage/pwCheck", controller.editInfoPw);
-
-// 회원 정보 수정
-router.patch("/mypage/info", controller.editInfo);
-
-// 회원 탈퇴
-router.delete("/mypage", controller.deleteUser);
-
 module.exports = router;
