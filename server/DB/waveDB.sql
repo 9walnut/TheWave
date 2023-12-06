@@ -9,10 +9,10 @@ drop database thewave;
 CREATE TABLE USERS 
 ( userNumber   INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
   userId    VARCHAR(12) NOT NULL,
-  password  VARCHAR(12) NOT NULL,
+  password  VARCHAR(255) NOT NULL,
   passwordSalt VARCHAR(255) NOT NULL,
   userName  VARCHAR(20) NOT NULL, 
-  phoneNumber CHAR(11) NOT NULL, 
+  phoneNumber VARCHAR(11) NOT NULL, 
   birthday DATE NOT NULL,
   isAdmin CHAR(1) NOT NULL,
   gender CHAR(1) NOT NULL
@@ -52,14 +52,15 @@ CREATE TABLE CARTS
   foreign key (productId) references PRODUCTS (productId)
 );
 
+-- userNumber >>> userName
 CREATE TABLE ORDERS
 (
 orderId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 userNumber INT NOT NULL,
 totalPrice INT,
-addressId INT NOT NULL,
+address VARCHAR(200) NOT NULL,
 foreign key (userNumber) references USERS (userNumber),
-foreign key (addressId) references ADDRESS (addressId)
+foreign key (addressId) references ADDRESS (address)
 );
 
 CREATE TABLE ORDERDETAILS
@@ -105,8 +106,8 @@ insert into CARTS(cartId, userNumber, productId, cartQuantity) values
 (3, 3, 3, 3),
 (4, 4, 4, 4);
 
-insert into ORDERS (orderId, userNumber, totalPrice, addressId) values
-(1, 1, 35000, 1);
+insert into ORDERS (orderId, userNumber, totalPrice, address) values
+(1, 1, 35000, "전북 익산시");
 
 insert into ORDERDETAILS (orderDetailNumber, orderId, productId, productCount, deliverystatus) values
 (1, 1, 1, 1, "배송완료")
