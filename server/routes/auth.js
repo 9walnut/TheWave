@@ -11,6 +11,9 @@ router.get("/login", controller.loginPage);
 // '로그인' 버튼 클릭 시
 router.post("/login", controller.loginUser);
 
+// '아이디 중복 확인' 버튼 클릭시
+router.get("/register", controller.idCheck);
+
 // 회원가입 페이지
 router.get("/register", controller.registerPage);
 

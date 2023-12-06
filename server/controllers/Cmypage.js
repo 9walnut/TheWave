@@ -31,7 +31,8 @@ exports.editInfo = async (req, res) => {
         userNumber: req.session.userNumber,
       },
     });
-    res.send({ result: true });
+    if (editInfo) res.send({ result: true });
+    else res.send({ result: false });
   } catch (error) {
     console.error(err);
     res.status(500).send("회원 정보 수정 오류");
@@ -44,15 +45,13 @@ exports.deleteUser = async (req, res) => {
     const pwCheck = await comparePw(req.session.userId, password);
 
     if (pwCheck) {
-      const deleteUser = await db.users.destroy({
+      await db.users.destroy({
         where: {
           userNumber: req.session.userNumber,
         },
       });
       res.send({ result: true });
-    } else {
-      res.send({ result: false });
-    }
+    } else res.send({ result: false });
   } catch (error) {
     console.error(err);
     res.status(500).send("회원 탈퇴 오류");

@@ -18,7 +18,7 @@ exports.categoryPage = async (req, res) => {
     });
     res.json(categoryPage);
   } catch {
-    console.error(err);
+    console.error(error);
     res.status(500).send("카테고리 페이지 오류");
   }
 };
