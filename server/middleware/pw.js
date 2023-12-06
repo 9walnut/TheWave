@@ -27,7 +27,7 @@ const hashedPwWithSalt = async (pw) => {
 };
 
 const comparePw = (userId, pw) => {
-  new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       const dbSalt = await db.users.findOne({
         attributes: ["passwordSalt"],
