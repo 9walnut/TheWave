@@ -58,20 +58,34 @@ exports.registerPage = (req, res) => {
   res.send({ result: true });
 };
 
-// '회원가입' 버튼 클릭 시
-exports.register = async (req, res) => {
+// '아이디 중복 체크' 버튼 클릭 시
+exports.idCheck = async (req, res) => {
   try {
-    const { userId, userPw, userName, phoneNumber, birthday, gender, address } =
-      req.body;
-
     const checkInfo = await db.users.findOne({
       where: {
         userId: userId,
         phoneNumber: phoneNumber,
       },
     });
+    if (!checkInfo) res.send({ result: false });
+    else res.send({ result: false });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("아이디 중복 체크 오류");
+  }
+};
 
-    if (!checkInfo) {
+// '회원가입' 버튼 클릭 시 (전화번호 중복 여부 체크 추가)
+exports.register = async (req, res) => {
+  try {
+    const { userId, userPw, userName, phoneNumber, birthday, gender, address } =
+      req.body;
+
+    const checkPhone = await db.users.findOne({
+      phoneNumber: phoneNumber,
+    });
+
+    if (!checkPhone) {
       const { password, salt } = hashedPwWithSalt(userPw); // 암호화
       const userInfo = await db.users.create({
         userId: userId,
@@ -81,12 +95,11 @@ exports.register = async (req, res) => {
         phoneNumber: phoneNumber,
         birthday: birthday,
         gender: gender,
-        address: address,
       });
-      res.send({ result: true });
-    } else {
-      res.json(checkInfo);
-    }
+      const userAddress = await db.address.create({ address: address });
+
+      res.send(userInfo, userAddress, { result: true });
+    } else res.send({ result: false });
   } catch (error) {
     console.error(error);
     res.status(500).send("회원가입 오류");
@@ -141,7 +154,7 @@ exports.findPw = async (req, res) => {
 // 비밀번호 재설정
 exports.newPw = async (req, res) => {
   try {
-    const { password, salt } = await hashedPwWithSalt(req.body.password);
+    const { password, salt } = hashedPwWithSalt(req.body.password);
     const newPw = await db.users.update(
       {
         password: password,
@@ -151,7 +164,7 @@ exports.newPw = async (req, res) => {
         where: { userId: req.body.userId }, // 유저 아이디와 일치하는 컬럼에서 비번 업데이트
       }
     );
-    res.send({ result: true });
+    res.send(newPw, { result: true });
   } catch (error) {
     console.error(error);
     res.status(500).send("비밀번호 재설정 오류");
