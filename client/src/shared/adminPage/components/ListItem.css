@@ -1,0 +1,18 @@
+li.list-item {
+  list-style-type: none;
+  margin: 1px 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.list-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.list-item-text {
+  width: 300px;
+  margin-left: 3px;
+}

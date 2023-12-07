@@ -6,7 +6,14 @@ import RegisterPage from "./pages/RegisterPage";
 import FindIdPage from "./pages/FindIdPage";
 import FindPwPage from "./pages/FindPwPage";
 import NewPwPage from "./pages/NewPwPage";
-import AdminPage from "./pages/AdminPage";
+import AdminPageMain from "./pages/adminPage/AdminPageMain";
+// admin
+import MainDashBoard from "./pages/adminPage/MainDashBoard";
+import SideBar from "./pages/adminPage/SideBar";
+import Products from "./pages/adminPage/Products";
+import Orders from "./pages/adminPage/Orders";
+import Users from "./pages/adminPage/Users";
+import NotFound from "./shared/NotFound404";
 
 function App() {
   return (
@@ -18,7 +25,15 @@ function App() {
         <Route path="/findId" element={<FindIdPage />} />
         <Route path="/findPw" element={<FindPwPage />} />
         <Route path="/findPw/newPw" element={<NewPwPage />} />
-        <Route path="/admin" element={<AdminPage />} />
+
+        {/* admin */}
+        <Route path="/admin/*" element={<AdminPageMain />}>
+          <Route path="dashboard" element={<MainDashBoard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="users" element={<Users />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
