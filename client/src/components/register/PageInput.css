@@ -1,0 +1,12 @@
+.pageInput {
+  width: 600px;
+  padding: 15px 15px;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #d2d2d7;
+}
+
+.pageInput::placeholder {
+  color: #808080;
+  text-align: center;
+}

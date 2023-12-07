@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  /* height: 100%; */
+}
+
+section {
+  height: 1200px;
+  padding: 40px 250px;
+}
+
+.formBox {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}

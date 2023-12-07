@@ -1,0 +1,113 @@
+header > * {
+  font-size: 13px;
+}
+
+.logoBar {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px 0 15px;
+  /* width: 100%; */
+}
+
+.logoBar a {
+  cursor: pointer;
+}
+
+.logoBar > div {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  /* cursor: pointer; */
+}
+
+.logoBar > div > div {
+  margin: 5px;
+  /* cursor: pointer; */
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #dde1e6;
+  color: #5a5a5a;
+  padding: 10px;
+  /* position: fixed;
+  width: 100%; */
+  z-index: 997;
+}
+
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: #5a5a5a;
+  padding-bottom: 5px;
+}
+
+nav a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #8b8787; /* 밑줄 색상 설정 */
+  transition: width 0.3s ease-in-out;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 30px 0 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.myPageMenu {
+  position: absolute;
+  text-align: center;
+  right: 65px;
+  z-index: 999;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1);
+}
+
+.myPageMenu > div {
+  padding: 5px;
+  margin: 10px 5px;
+}
+
+.menuItem {
+  position: relative;
+  color: #5a5a5a;
+  padding-bottom: 5px;
+}
+
+.menuItem::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #8b8787;
+  transition: width 0.3s ease-in-out;
+}
+
+.menuItem:hover::before {
+  width: 100%;
+}
