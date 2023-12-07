@@ -1,0 +1,8 @@
+.carouselBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120px;
+  border: 1px solid black;
+  height: 300px;
+}
