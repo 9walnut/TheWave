@@ -15,17 +15,17 @@ module.exports = function(sequelize, DataTypes) {
         key: 'userNumber'
       }
     },
-    totalPrice: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    addressId: {
+    productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'address',
-        key: 'addressId'
+        model: 'products',
+        key: 'productId'
       }
+    },
+    orderQuantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,
@@ -48,10 +48,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "addressId",
+        name: "productId",
         using: "BTREE",
         fields: [
-          { name: "addressId" },
+          { name: "productId" },
         ]
       },
     ]
