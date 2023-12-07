@@ -15,17 +15,21 @@ module.exports = function(sequelize, DataTypes) {
         key: 'orderId'
       }
     },
-    productId: {
+    cartId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'products',
-        key: 'productId'
+        model: 'carts',
+        key: 'cartId'
       }
     },
-    productCount: {
+    addressId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'address',
+        key: 'addressId'
+      }
     },
     deliveryStatus: {
       type: DataTypes.STRING(20),
@@ -52,10 +56,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "productId",
+        name: "cartId",
         using: "BTREE",
         fields: [
-          { name: "productId" },
+          { name: "cartId" },
+        ]
+      },
+      {
+        name: "addressId",
+        using: "BTREE",
+        fields: [
+          { name: "addressId" },
         ]
       },
     ]

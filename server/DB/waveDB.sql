@@ -18,6 +18,7 @@ CREATE TABLE USERS
   gender CHAR(1) NOT NULL
 );
 
+
 CREATE TABLE ADDRESS
 ( addressId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   userNumber INT NOT NULL,
@@ -52,26 +53,26 @@ CREATE TABLE CARTS
   foreign key (productId) references PRODUCTS (productId)
 );
 
--- userNumber >>> userName
 CREATE TABLE ORDERS
 (
 orderId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 userNumber INT NOT NULL,
-totalPrice INT,
-address VARCHAR(200) NOT NULL,
+productId INT NOT NULL,
+orderQuantity INT NOT NULL,
 foreign key (userNumber) references USERS (userNumber),
-foreign key (addressId) references ADDRESS (address)
+foreign key (productId) references PRODUCTS (productId)
 );
 
 CREATE TABLE ORDERDETAILS
 (
 orderDetailNumber INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 orderId INT NOT NULL,
-productId INT NOT NULL,
-productCount INT NOT NULL,
+cartId INT NOT NULL,
+addressId INT NOT NULL,
 deliveryStatus VARCHAR(20),
 foreign key (orderId) references ORDERS (orderId),
-foreign key (productId) references PRODUCTS (productId)
+foreign key (cartId) references CARTS (cartId),
+foreign key (addressId) references ADDRESS (addressId)
 );
 
 insert into USERS(userNumber, userId, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender) values 
@@ -94,6 +95,8 @@ insert into CATEGORIES(categoryId, categoryName) values
 (3, "생일파티"),
 (4, "용돈풍선");
 
+
+
 insert into PRODUCTS (productId, categoryId, productName, productPrice, productInfo, productStatus) values
 (1, 1, "샤랄랄라풍선", 40000, "이거쩝니다", "판매중"),
 (2, 1, "샤랄랄라풍선", 35000, "이거 개쩝니다", "판매중"),
@@ -106,8 +109,10 @@ insert into CARTS(cartId, userNumber, productId, cartQuantity) values
 (3, 3, 3, 3),
 (4, 4, 4, 4);
 
-insert into ORDERS (orderId, userNumber, totalPrice, address) values
-(1, 1, 35000, "전북 익산시");
+insert into ORDERS (orderId, userNumber, productId, orderQuantity) values
+(1, 1, 1, 1);
 
-insert into ORDERDETAILS (orderDetailNumber, orderId, productId, productCount, deliverystatus) values
-(1, 1, 1, 1, "배송완료")
+insert into ORDERDETAILS (orderDetailNumber, cartId, orderId, addressId, deliverystatus) values
+(1, 1, 1, 1, "배송완료");
+
+select * from ORDERDETAILS;
