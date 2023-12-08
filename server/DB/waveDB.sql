@@ -40,6 +40,8 @@ productName VARCHAR(20) NOT NULL,
 productPrice INT NOT NULL,
 productInfo VARCHAR(255),
 productStatus VARCHAR(10),
+thumbnailUrl VARCHAR(255),
+detailUrls TEXT;
 foreign key (categoryId) references CATEGORIES (categoryId)
 );
 
@@ -69,6 +71,7 @@ orderDetailNumber INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 orderId INT NOT NULL,
 cartId INT NOT NULL,
 addressId INT NOT NULL,
+totalPrice INT,
 deliveryStatus VARCHAR(20),
 foreign key (orderId) references ORDERS (orderId),
 foreign key (cartId) references CARTS (cartId),
