@@ -12,6 +12,12 @@ router.get("/users", controller.getAdminUsers);
 // 전체 조회 - 회원 삭제 기능(체크박스)
 router.delete("/users", controller.deleteAdminUsers);
 
+// 전체 등록상품 조회
+router.get("/products", controller.getAdminAllProducts);
+
+// 등록 상품 삭제 - 체크 박스
+router.delete("/products", controller.deleteAdminProductsChecked);
+
 // 상품 등록
 router.post("/products", controller.createAdminProduct);
 
@@ -29,16 +35,27 @@ router.post(
   controller.uploadDetails
 );
 
-// 전체 등록상품 조회
-router.get("/products", controller.getAdminAllProducts);
-
 // 등록상품 상세 조회
 router.get("/products/:productId", controller.getAdminProduct);
 
 // 등록 상품 수정
-router.patch("/products/:productID", controller.editAdminProduct);
+router.patch("/products/:productId", controller.editAdminProduct);
 
-// 등록 상품 삭제
+// 썸네일 사진 수정
+router.patch(
+  "/products/:productId/thumbnail",
+  thumbnailUpload.array("thumbnailUrl"),
+  controller.uploadThumbnail
+);
+
+// 상세 사진 수정
+router.patch(
+  "/products/:productId/detail",
+  detailUpload.array("detailUrls"),
+  controller.uploadDetails
+);
+
+// 등록 상품 삭제 - 상세 조회 페이지 내부
 router.delete("/products/:productId", controller.deleteAdminProduct);
 
 // 전체 주문현황 조회
