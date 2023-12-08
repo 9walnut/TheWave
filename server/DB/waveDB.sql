@@ -18,6 +18,7 @@ CREATE TABLE USERS
   gender CHAR(1) NOT NULL
 );
 
+alter table users modify phoneNumber VARCHAR(11);
 
 CREATE TABLE ADDRESS
 ( addressId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -41,7 +42,7 @@ productPrice INT NOT NULL,
 productInfo VARCHAR(255),
 productStatus VARCHAR(10),
 thumbnailUrl VARCHAR(255),
-detailUrls TEXT;
+detailUrls TEXT,
 foreign key (categoryId) references CATEGORIES (categoryId)
 );
 
@@ -115,7 +116,7 @@ insert into CARTS(cartId, userNumber, productId, cartQuantity) values
 insert into ORDERS (orderId, userNumber, productId, orderQuantity) values
 (1, 1, 1, 1);
 
-insert into ORDERDETAILS (orderDetailNumber, cartId, orderId, addressId, deliverystatus) values
-(1, 1, 1, 1, "배송완료");
+insert into ORDERDETAILS (orderDetailNumber, cartId, orderId, addressId, totalPrice, deliverystatus) values
+(1, 1, 1, 1, 90000, "배송완료");
 
 select * from ORDERDETAILS;

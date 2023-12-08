@@ -157,13 +157,45 @@ exports.getAdminAllProducts = async (req, res) => {
   }
 };
 
+// 등록상품 삭제 - 체크 박스
+exports.deleteAdminProductsChecked = async (req, res) => {
+  try {
+    const productIds = req.body.productId;
+    const isDeleted = await db.products.destroy({
+      where: { productId: { [Op.in]: productIds } },
+    });
+
+    if (isDeleted) return res.send(true);
+    else return res.send(false);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("등록 상품 삭제 오류");
+  }
+};
+
 // 상품 등록
 exports.createAdminProduct = async (req, res) => {
+  console.log(req.body);
   try {
-    const { productName, productPrice, productInfo, productStatus } = req.body;
-    const productImages = req.files.map((file) => file.location); // 이미지 URL 배열
+    const {
+      categoryName,
+      productName,
+      productPrice,
+      productInfo,
+      productStatus,
+      thumbnailUrl,
+      detailUrls,
+    } = req.body;
+    // 카테고리 이름으로 categoryId 찾기
+    const category = await db.categories.findOne({ where: { categoryName } });
+    if (!category) {
+      return res.status(400).send("Invalid categoryName");
+    }
+
+    const categoryId = category.categoryId;
 
     const newProduct = await db.products.create({
+      categoryId,
       productName,
       productPrice,
       productInfo,
@@ -222,22 +254,65 @@ exports.getAdminProduct = async (req, res) => {
 // 상품 수정
 exports.editAdminProduct = async (req, res) => {
   try {
-    console.log(req.body);
     const { productId } = req.params;
-    const { productName, productPrice, productInfo, productStatus } = req.body;
-    const editProduct = await db.products.update(
-      {
-        productName,
-        productPrice,
-        productInfo,
-        productStatus,
-      },
-      { where: { productId } }
-    );
-    return res.send(editProduct);
+    const {
+      categoryName,
+      productName,
+      productPrice,
+      productInfo,
+      productStatus,
+      thumbnailUrl,
+      detailUrls,
+    } = req.body;
+
+    const category = await db.categories.findOne({ where: { categoryName } });
+    if (!category) {
+      return res.status(400).send("Invalid categoryName");
+    }
+
+    const categoryId = category.categoryId;
+
+    const product = await db.products.findByPk(productId);
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+
+    const updatedProduct = await product.update({
+      categoryId,
+      productName,
+      productPrice,
+      productInfo,
+      productStatus,
+      thumbnailUrl,
+      detailUrls,
+    });
+
+    res.send(updatedProduct);
   } catch (error) {
     console.error(error);
     res.status(500).send("상품 수정 오류");
+  }
+};
+
+// 썸네일 사진 수정
+exports.uploadThumbnail = async (req, res) => {
+  try {
+    const thumbnailUrl = req.file.location;
+    res.send({ thumbnailUrl });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("썸네일 수정 오류");
+  }
+};
+
+// 상세 사진 수정
+exports.uploadDetails = async (req, res) => {
+  try {
+    const detailUrls = req.files.map((file) => file.location);
+    res.send({ detailUrls });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("상세 사진 수정 오류");
   }
 };
 
