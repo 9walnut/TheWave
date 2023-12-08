@@ -16,19 +16,21 @@ function initModels(sequelize) {
   var products = _products(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
 
-  orders.belongsTo(address, { as: "address", foreignKey: "addressId" });
-  address.hasMany(orders, { as: "orders", foreignKey: "addressId" });
+  orderdetails.belongsTo(address, { as: "address", foreignKey: "addressId" });
+  address.hasMany(orderdetails, {
+    as: "orderdetails",
+    foreignKey: "addressId",
+  });
+  orderdetails.belongsTo(carts, { as: "cart", foreignKey: "cartId" });
+  carts.hasMany(orderdetails, { as: "orderdetails", foreignKey: "cartId" });
   products.belongsTo(categories, { as: "category", foreignKey: "categoryId" });
   categories.hasMany(products, { as: "products", foreignKey: "categoryId" });
   orderdetails.belongsTo(orders, { as: "order", foreignKey: "orderId" });
   orders.hasMany(orderdetails, { as: "orderdetails", foreignKey: "orderId" });
   carts.belongsTo(products, { as: "product", foreignKey: "productId" });
   products.hasMany(carts, { as: "carts", foreignKey: "productId" });
-  orderdetails.belongsTo(products, { as: "product", foreignKey: "productId" });
-  products.hasMany(orderdetails, {
-    as: "orderdetails",
-    foreignKey: "productId",
-  });
+  orders.belongsTo(products, { as: "product", foreignKey: "productId" });
+  products.hasMany(orders, { as: "orders", foreignKey: "productId" });
   address.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber" });
   users.hasMany(address, { as: "addresses", foreignKey: "userNumber" });
   carts.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber" });
