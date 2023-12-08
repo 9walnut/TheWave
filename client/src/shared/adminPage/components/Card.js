@@ -1,9 +1,9 @@
 import React from "react";
 
-import "./Card.css";
+import * as S from "./CardStyle.js";
 
 function Card({ children }) {
-  return <div className="card">{children}</div>;
+  return <S.CardBox>{children}</S.CardBox>;
 }
 
 export default Card;

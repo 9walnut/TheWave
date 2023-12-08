@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../components/adminPage/Orders.css";
+import * as S from "../../styles/adminPage/Orders.js";
 
 import Card from "../../shared/adminPage/components/Card";
 

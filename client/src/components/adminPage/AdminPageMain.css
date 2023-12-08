@@ -1,16 +1,16 @@
-.grid-container {
+/* .grid-container {
   display: grid;
-  grid-template-columns: 255px 1fr; /* 왼쪽은 255px, 오른쪽은 나머지 전체 */
+  grid-template-columns: 255px 1fr; 
   grid-gap: 10px;
-}
+} */
 
-.left-box {
+/* .left-box {
   background-color: none;
-}
+} */
 
-.right-box {
+/* .right-box {
   background-color: white;
-}
-main {
+} */
+/* main {
   margin: 20px;
-}
+} */

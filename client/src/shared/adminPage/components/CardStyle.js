@@ -1,4 +1,6 @@
-.card {
+import styled from "styled-components";
+
+export const CardBox = styled.div`
   background-color: white;
   position: relative;
   margin: 0;
@@ -8,4 +10,4 @@
   padding: 1rem;
   overflow: hidden;
   height: 1000px;
-}
+`;
