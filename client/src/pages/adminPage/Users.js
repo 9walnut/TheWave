@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../components/adminPage/Users.css";
+import * as S from "../../styles/adminPage/Users.js";
 
 import Card from "../../shared/adminPage/components/Card";
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../components/adminPage/MainDashBoard.css";
+import * as S from "../../styles/adminPage/MainDashBoard.js";
 
 import Card from "../../shared/adminPage/components/Card";
 

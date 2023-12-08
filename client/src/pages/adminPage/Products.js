@@ -1,12 +1,12 @@
 import React from "react";
 // import { useState } from "react";
 
-import "../../components/adminPage/Products.css";
+import * as S from "../../styles/adminPage/Products.js";
 
 import Card from "../../shared/adminPage/components/Card";
 import DataTable from "../../shared/adminPage/components/DataTable";
 
-const headers = [
+const header = [
   {
     text: "NO.",
     value: "productID",
@@ -15,9 +15,13 @@ const headers = [
     text: "상품명",
     value: "productName",
   },
+  // {
+  //   text: "카테고리아이디",
+  //   value: "categoryID",
+  // },
   {
     text: "카테고리",
-    value: "categoryID",
+    value: "categoryName",
   },
   {
     text: "가격",
@@ -33,22 +37,24 @@ const headers = [
   },
 ];
 
-const PRODUCTS = [
+const DUMMY = [
   {
     productID: 1,
-    productName: "flower",
-    categoryID: 2,
+    productName: "루돌프풍선",
+    // categoryID: 2,
+    categoryName: "커스텀풍선",
     productPrice: 17000,
-    productStatus: "status",
-    productInfo: "hi info",
+    productStatus: "판매중",
+    productInfo: "이렇다",
   },
   {
-    productID: 12,
-    productName: "flower",
-    categoryID: 3,
+    productID: 2,
+    productName: "곰돌이풍선",
+    // categoryID: 3,
+    categoryName: "용돈풍선",
     productPrice: 17000,
-    productStatus: "status",
-    productInfo: "hi info",
+    productStatus: "재고없음",
+    productInfo: "저렇다",
   },
 ];
 function Products() {
@@ -56,7 +62,7 @@ function Products() {
     <>
       <Card>
         <h3>상품 관리</h3>
-        <DataTable headers={headers} PRODUCTS={PRODUCTS} />
+        <DataTable headers={header} items={DUMMY} />
       </Card>
     </>
   );

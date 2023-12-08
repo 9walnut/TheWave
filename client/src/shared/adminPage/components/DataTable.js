@@ -2,7 +2,7 @@ import React from "react";
 
 import "../components/DataTable.css";
 
-function DataTable({ headers, PRODUCTS }) {
+function DataTable({ headers, items }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
@@ -20,10 +20,10 @@ function DataTable({ headers, PRODUCTS }) {
           </tr>
         </thead>
         <tbody>
-          {PRODUCTS.map((PRODUCTS) => (
-            <tr key={PRODUCTS.productID}>
+          {items.map((items) => (
+            <tr key={items.productID}>
               {headerList.map((value) => (
-                <td key={value}>{PRODUCTS[value]}</td>
+                <td key={value}>{items[value]}</td>
               ))}
             </tr>
           ))}
