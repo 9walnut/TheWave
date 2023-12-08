@@ -24,7 +24,7 @@ CREATE TABLE ADDRESS
 ( addressId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   userNumber INT NOT NULL,
   address VARCHAR(200) NOT NULL,
-  foreign key (userNumber) references USERS (userNumber)
+  foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE
 );
 
 CREATE TABLE CATEGORIES 
@@ -52,7 +52,7 @@ CREATE TABLE CARTS
   userNumber INT NOT NULL,
   productId INT NOT NULL,
   cartQuantity INT NOT NULL,
-  foreign key (userNumber) references USERS (userNumber),
+  foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE,
   foreign key (productId) references PRODUCTS (productId)
 );
 
@@ -62,7 +62,7 @@ orderId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 userNumber INT NOT NULL,
 productId INT NOT NULL,
 orderQuantity INT NOT NULL,
-foreign key (userNumber) references USERS (userNumber),
+foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE,
 foreign key (productId) references PRODUCTS (productId)
 );
 

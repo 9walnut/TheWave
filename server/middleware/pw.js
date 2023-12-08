@@ -29,25 +29,28 @@ const hashedPwWithSalt = async (pw) => {
 const comparePw = (userId, pw) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const dbSalt = await db.users.findOne({
-        attributes: ["passwordSalt"],
-        where: { userId },
+      const idCheck = await db.users.findOne({
+        where: { userId: userId },
       });
 
-      const salt = dbSalt ? dbSalt.passwordSalt : null; // dbSalt가 true면 db에 저장된 salt값 반환
+      if (idCheck) {
+        const dbSalt = idCheck.passwordSalt;
+        const dbPw = idCheck.password;
 
-      if (!salt) {
-        reject(new Error("비밀번호 찾기 오류"));
-        return;
-      }
-
-      crypto.pbkdf2(pw, salt, 100, 64, "sha512", (err, key) => {
-        if (err) {
-          reject(err);
+        if (!dbSalt) {
+          reject(new Error("비밀번호 찾기 오류: salt값이 존재하지 않음"));
           return;
         }
-        resolve(key.toString("base64"));
-      });
+
+        crypto.pbkdf2(pw, dbSalt, 100, 64, "sha512", (err, key) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          if (key.toString("base64") === dbPw) resolve(true);
+          else resolve(false);
+        });
+      } else resolve(false);
     } catch (error) {
       reject(error);
     }

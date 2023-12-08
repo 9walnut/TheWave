@@ -16,6 +16,7 @@ module.exports = function (sequelize, DataTypes) {
           model: "users",
           key: "userNumber",
         },
+        onDelete: "CASCADE",
       },
       productId: {
         type: DataTypes.INTEGER,

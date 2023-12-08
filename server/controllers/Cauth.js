@@ -14,35 +14,33 @@ exports.loginPage = (req, res) => {
 
 // '로그인' 버튼 클릭 시
 exports.loginUser = async (req, res) => {
-  // console.log("asdf");
-  // res.send({ result: true });
   try {
     const { userId, password } = req.body;
 
-    const loginUser = await db.users.findOne({
-      where: { userId: userId },
-    });
-    console.log("loginUser", loginUser);
+    const userCheck = await comparePw(userId, password);
+    console.log("userCheck", userCheck);
 
-    const pwCheck = comparePw(userId, password);
-    console.log("pwCheck", pwCheck);
+    if (userCheck) {
+      const loginUser = await db.users.findOne({
+        where: { userId: userId },
+      });
 
-    if (loginUser && pwCheck) {
       req.session.userNumber = loginUser.userNumber; // 로그인 성공 시 session에 userNumber 저장
       req.session.userId = loginUser.userId;
       req.session.isAdmin = loginUser.isAdmin; // session에 isAdmin 값 저장
 
       // 비회원 장바구니 동기화
-      if (cart && cart.length > 0) {
-        for (const item of cart) {
-          const { productId, cartQuantity } = item;
-          await db.carts.create({
-            userNumber: loginUser.userNumber,
-            productId,
-            cartQuantity,
-          });
-        }
-      }
+      // if (cart && cart.length > 0) {
+      //   for (const item of cart) {
+      //     const { productId, cartQuantity } = item;
+      //     await db.carts.create({
+      //       userNumber: loginUser.userNumber,
+      //       productId,
+      //       cartQuantity,
+      //     });
+      //   }
+      // }
+
       // isAdmin 값에 따라 페이지 이동
       if (loginUser.isAdmin === "Y") {
         res.send({ result: true, isAdmin: true });
