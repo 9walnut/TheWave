@@ -8,10 +8,10 @@ const sequelize = new Sequelize(
   config.password,
   config
 );
-
 const db = initModels(sequelize);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db.Op = Sequelize.Op; // Op 추가
 
 module.exports = { db, sequelize };

@@ -1,11 +1,14 @@
-const { db } = require("../models/index");
+const {
+  db,
+  db: { Op },
+} = require("../models/index");
 
 // 대시보드 내 현황 가져오기
 // -------- 1번 대시보드------------ //
 // 총 주문수
 const getTotalOrders = async () => {
   try {
-    const totalOrders = await db.orders.count();
+    const totalOrders = await db.orderdetails.count();
     return totalOrders;
   } catch (error) {
     console.error("총 주문 수 오류", error);
@@ -16,7 +19,7 @@ const getTotalOrders = async () => {
 // 총 판매 금액
 const getTotalOrderPrices = async () => {
   try {
-    const totalOrderPrices = await db.orders.sum("totalPrice");
+    const totalOrderPrices = await db.orderdetails.sum("totalPrice");
     return totalOrderPrices;
   } catch (error) {
     console.error("총 판매 금액", error);
@@ -119,40 +122,21 @@ exports.getAdminUsers = async (req, res) => {
 };
 
 // 회원 삭제 - 체크박스
+// 체크박스로 구현해서 body로 요청
 exports.deleteAdminUsers = async (req, res) => {
   try {
-    const userNumbers = req.body.userNumbers; // 클라이언트로부터 받은 userNumber 리스트
+    const userNumbers = req.body.userNumber; // 클라이언트로부터 받은 userNumber 리스트
     const isDeleted = await db.users.destroy({
-      where: { userNumber: { [Op.in]: userNumbers } }, // 수정된 부분
+      where: { userNumber: { [Op.in]: userNumbers } },
     });
-    if (isDeleted) return res.send(true);
-    else return res.send(false);
+    if (isDeleted) return res.status(200).json({ message: "회원 삭제 성공" });
+    else return res.status(404).json({ message: "회원을 찾을 수 없음" });
   } catch (error) {
     console.error(error);
-    res.status(500).send("회원 삭제 오류");
+    res.status(500).json({ message: "회원 삭제 오류" });
   }
 };
 
-// 상품 등록
-exports.createAdminProduct = async (req, res) => {
-  try {
-    const { productName, productPrice, productInfo, productStatus } = req.body;
-    const productImages = req.files.map((file) => file.location); // 이미지 URL 배열
-
-    const newProduct = await db.products.create({
-      productName,
-      productPrice,
-      productInfo,
-      productStatus,
-      productImages,
-    });
-
-    res.send(newProduct);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("상품 등록 오류");
-  }
-};
 // 전체 등록상품 조회
 exports.getAdminAllProducts = async (req, res) => {
   try {
@@ -170,6 +154,50 @@ exports.getAdminAllProducts = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("전체 등록 상품 조회 오류");
+  }
+};
+
+// 상품 등록
+exports.createAdminProduct = async (req, res) => {
+  try {
+    const { productName, productPrice, productInfo, productStatus } = req.body;
+    const productImages = req.files.map((file) => file.location); // 이미지 URL 배열
+
+    const newProduct = await db.products.create({
+      productName,
+      productPrice,
+      productInfo,
+      productStatus,
+      thumbnailUrl,
+      detailUrls,
+    });
+
+    res.send(newProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("상품 등록 오류");
+  }
+};
+
+// 사진 등록 - 썸네일
+exports.uploadThumbnail = async (req, res) => {
+  try {
+    const thumbnailUrl = req.file.location;
+    res.send({ thumbnailUrl });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("썸네일 등록 오류");
+  }
+};
+
+// 사진 등록 - 상세 사진
+exports.uploadDetails = async (req, res) => {
+  try {
+    const detailUrls = req.files.map((file) => file.location);
+    res.send({ detailUrls });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("상세 사진 등록 오류");
   }
 };
 
