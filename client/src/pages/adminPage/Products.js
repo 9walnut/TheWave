@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import { useState } from "react";
 
 import * as S from "../../styles/adminPage/Products.js";
 
 import Card from "../../shared/adminPage/components/Card";
 import DataTable from "../../shared/adminPage/components/DataTable";
+import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
+import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 
 const header = [
   {
@@ -63,6 +66,10 @@ function Products() {
       <Card>
         <h3>상품 관리</h3>
         <DataTable headers={header} items={DUMMY} />
+        <S.ButtonContainer>
+          <AdminButtonGrey>선택 상품 삭제하기</AdminButtonGrey>
+          <AdminButtonBlack>상품 등록하기</AdminButtonBlack>
+        </S.ButtonContainer>
       </Card>
     </>
   );

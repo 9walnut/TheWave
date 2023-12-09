@@ -10,7 +10,12 @@ export const TableHeader = styled.th`
   padding: 10px;
 `;
 
-export const TableCell = styled.td`
+export const TableTr = styled.tr`
+  width: 200px;
+  padding: 10px;
+`;
+
+export const TableTd = styled.td`
   width: 200px;
   padding: 10px;
 `;
