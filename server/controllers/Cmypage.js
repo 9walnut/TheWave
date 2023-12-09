@@ -1,9 +1,19 @@
 const { db } = require("../models/index");
 const { comparePw } = require("../middleware/pw");
 
-// 회원 마이페이지
-exports.mypage = (req, res) => {
-  res.send({ result: true });
+// 회원 마이페이지(마이페이지 렌더 시 바로 주문 내역 노출)
+exports.mypage = async (req, res) => {
+  try {
+    const orderList = await db.orders.findAll({
+      where: { userNumber: req.session.userNumber },
+      attributes: ["productId", "orderDate", "totalPrice", "deliveryRequest"],
+    });
+    if (orderList) res.json(orderList);
+    else res.send({ result: true }); // 주문 내역 없는 경우
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("마이페이지 렌더 오류");
+  }
 };
 
 // 회원 정보 수정 페이지
