@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as S from "../../styles/adminPage/ProductsAdd.js";
+// import * as S from "../../styles/adminPage/ProductsAdd.js";
 
 function ProductsAdd() {
   return (
