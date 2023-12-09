@@ -6,78 +6,213 @@ FLUSH PRIVILEGES;
 
 drop database thewave;
 
-CREATE TABLE USERS 
-( userNumber   INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
-  userId    VARCHAR(12) NOT NULL,
-  password  VARCHAR(255) NOT NULL,
-  passwordSalt VARCHAR(255) NOT NULL,
-  userName  VARCHAR(20) NOT NULL, 
-  phoneNumber VARCHAR(11) NOT NULL, 
-  birthday DATE NOT NULL,
-  isAdmin CHAR(1) NOT NULL,
-  gender CHAR(1) NOT NULL
+CREATE TABLE `USERS` (
+	`userNumber`	INT	NOT NULL,
+	`userID`	VARCHAR(12)	NOT NULL,
+	`password`	VARCHAR(12)	NULL,
+	`passwordSalt`	VARCHAR(255)	NULL,
+	`userName`	VARCHAR(20)	NULL,
+	`phoneNumber`	VARCHAR(11)	NULL,
+	`birthday`	DATE	NULL,
+	`isAdmin`	CHAR(1)	NULL,
+	`gender`	CHAR(1)	NULL
 );
 
-alter table users modify phoneNumber VARCHAR(11);
-
-CREATE TABLE ADDRESS
-( addressId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  userNumber INT NOT NULL,
-  address VARCHAR(200) NOT NULL,
-  foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE
+CREATE TABLE `ADDRESS` (
+	`addreddID`	INT	NOT NULL,
+	`userNumber`	INT	NOT NULL,
+	`adress`	VARCHAR(200)	NULL
 );
 
-CREATE TABLE CATEGORIES 
-(
-categoryId INT NOT NULL auto_increment PRIMARY KEY,
-categoryName VARCHAR(20) NOT NULL
+CREATE TABLE `PRODUCTS` (
+	`productID`	INT	NOT NULL,
+	`categotyID`	INT	NOT NULL,
+	`productName`	VARCHAR(20)	NULL,
+	`productPrice`	INT	NULL,
+	`productInfo`	VARCHAR(255)	NULL,
+	`productStatus`	VARCHAR(10)	NULL,
+	`thumbnailUrl`	VARCHAR(255)	NULL,
+	`detailUrls`	TEXT	NULL
 );
 
-CREATE TABLE PRODUCTS
-(
-productId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-categoryId INT NOT NULL,
-productName VARCHAR(20) NOT NULL,
-productPrice INT NOT NULL,
-productInfo VARCHAR(255),
-productStatus VARCHAR(10),
-thumbnailUrl VARCHAR(255),
-detailUrls TEXT,
-foreign key (categoryId) references CATEGORIES (categoryId)
+CREATE TABLE `CARTS` (
+	`cartID`	INT	NOT NULL,
+	`userNumber`	INT	NOT NULL,
+	`productID`	INT	NOT NULL,
+	`cartQuantity`	INT	NULL,
+	`isChecked`	INT	NULL,
+	`isPaid`	INT	NULL
 );
 
-CREATE TABLE CARTS
-(
-  cartId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  userNumber INT NOT NULL,
-  productId INT NOT NULL,
-  cartQuantity INT NOT NULL,
-  foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE,
-  foreign key (productId) references PRODUCTS (productId)
+CREATE TABLE `CATEGORIES` (
+	`categotyID`	INT	NOT NULL,
+	`categoryName`	VARCHAR(20)	NULL
 );
 
-CREATE TABLE ORDERS
-(
-orderId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-userNumber INT NOT NULL,
-productId INT NOT NULL,
-orderQuantity INT NOT NULL,
-foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE,
-foreign key (productId) references PRODUCTS (productId)
+CREATE TABLE `ORDERS` (
+	`orderID`	INT	NOT NULL,
+	`userNumber`	INT	NOT NULL,
+	`cartID`	INT	NOT NULL,
+	`productID`	INT	NOT NULL,
+	`orderQuantity`	INT	NULL,
+	`receiveName`	VARCHAR(10)	NULL,
+	`address`	VARCHAR(200)	NULL,
+	`deliveryRequest`	VARCHAR(255)	NULL,
+	`orderDate`	DATE	NULL,
+	`Field`	INT	NULL,
+	`status`	INT	NULL,
+	`changeDate`	DATE	NULL
 );
 
-CREATE TABLE ORDERDETAILS
-(
-orderDetailNumber INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-orderId INT NOT NULL,
-cartId INT NOT NULL,
-addressId INT NOT NULL,
-totalPrice INT,
-deliveryStatus VARCHAR(20),
-foreign key (orderId) references ORDERS (orderId),
-foreign key (cartId) references CARTS (cartId),
-foreign key (addressId) references ADDRESS (addressId)
+CREATE TABLE `PAYMENT` (
+	`paymentId`	INT	NOT NULL,
+	`orderID`	INT	NOT NULL,
+	`payPrice`	INT	NULL,
+	`payMethod`	INT	NULL,
+	`isPaid`	INT	NULL,
+	`isRefund`	INT	NULL
 );
+
+CREATE TABLE `productOption` (
+	`productID`	INT	NOT NULL,
+	`color`	VARCHAR(50)	NULL,
+	`size`	VARCHAR(50)	NULL,
+	`deliveryHope`	VARCHAR(50)	NULL
+);
+
+CREATE TABLE `productOut` (
+	`productOutId`	VARCHAR(255)	NOT NULL,
+	`orderID`	INT	NOT NULL,
+	`cartID`	INT	NOT NULL,
+	`productID`	INT	NOT NULL,
+	`status`	VARCHAR(255)	NULL,
+	`outDate`	DATE	NULL
+);
+
+ALTER TABLE `USERS` ADD CONSTRAINT `PK_USERS` PRIMARY KEY (
+	`userNumber`
+);
+
+ALTER TABLE `ADDRESS` ADD CONSTRAINT `PK_ADDRESS` PRIMARY KEY (
+	`addreddID`,
+	`userNumber`
+);
+
+ALTER TABLE `PRODUCTS` ADD CONSTRAINT `PK_PRODUCTS` PRIMARY KEY (
+	`productID`
+);
+
+ALTER TABLE `CARTS` ADD CONSTRAINT `PK_CARTS` PRIMARY KEY (
+	`cartID`
+);
+
+ALTER TABLE `CATEGORIES` ADD CONSTRAINT `PK_CATEGORIES` PRIMARY KEY (
+	`categotyID`
+);
+
+ALTER TABLE `ORDERS` ADD CONSTRAINT `PK_ORDERS` PRIMARY KEY (
+	`orderID`
+);
+
+ALTER TABLE `PAYMENT` ADD CONSTRAINT `PK_PAYMENT` PRIMARY KEY (
+	`paymentId`,
+	`orderID`
+);
+
+ALTER TABLE `productOption` ADD CONSTRAINT `PK_PRODUCTOPTION` PRIMARY KEY (
+	`productID`
+);
+
+ALTER TABLE `productOut` ADD CONSTRAINT `PK_PRODUCTOUT` PRIMARY KEY (
+	`productOutId`,
+	`orderID`
+);
+
+ALTER TABLE `ADDRESS` ADD CONSTRAINT `FK_USERS_TO_ADDRESS_1` FOREIGN KEY (
+	`userNumber`
+)
+REFERENCES `USERS` (
+	`userNumber`
+);
+
+ALTER TABLE `PRODUCTS` ADD CONSTRAINT `FK_CATEGORIES_TO_PRODUCTS_1` FOREIGN KEY (
+	`categotyID`
+)
+REFERENCES `CATEGORIES` (
+	`categotyID`
+);
+
+ALTER TABLE `CARTS` ADD CONSTRAINT `FK_USERS_TO_CARTS_1` FOREIGN KEY (
+	`userNumber`
+)
+REFERENCES `USERS` (
+	`userNumber`
+);
+
+ALTER TABLE `CARTS` ADD CONSTRAINT `FK_PRODUCTS_TO_CARTS_1` FOREIGN KEY (
+	`productID`
+)
+REFERENCES `PRODUCTS` (
+	`productID`
+);
+
+ALTER TABLE `ORDERS` ADD CONSTRAINT `FK_USERS_TO_ORDERS_1` FOREIGN KEY (
+	`userNumber`
+)
+REFERENCES `USERS` (
+	`userNumber`
+);
+
+ALTER TABLE `ORDERS` ADD CONSTRAINT `FK_CARTS_TO_ORDERS_1` FOREIGN KEY (
+	`cartID`
+)
+REFERENCES `CARTS` (
+	`cartID`
+);
+
+ALTER TABLE `ORDERS` ADD CONSTRAINT `FK_PRODUCTS_TO_ORDERS_1` FOREIGN KEY (
+	`productID`
+)
+REFERENCES `PRODUCTS` (
+	`productID`
+);
+
+ALTER TABLE `PAYMENT` ADD CONSTRAINT `FK_ORDERS_TO_PAYMENT_1` FOREIGN KEY (
+	`orderID`
+)
+REFERENCES `ORDERS` (
+	`orderID`
+);
+
+ALTER TABLE `productOption` ADD CONSTRAINT `FK_PRODUCTS_TO_productOption_1` FOREIGN KEY (
+	`productID`
+)
+REFERENCES `PRODUCTS` (
+	`productID`
+);
+
+ALTER TABLE `productOut` ADD CONSTRAINT `FK_ORDERS_TO_productOut_1` FOREIGN KEY (
+	`orderID`
+)
+REFERENCES `ORDERS` (
+	`orderID`
+);
+
+ALTER TABLE `productOut` ADD CONSTRAINT `FK_CARTS_TO_productOut_1` FOREIGN KEY (
+	`cartID`
+)
+REFERENCES `CARTS` (
+	`cartID`
+);
+
+ALTER TABLE `productOut` ADD CONSTRAINT `FK_PRODUCTS_TO_productOut_1` FOREIGN KEY (
+	`productID`
+)
+REFERENCES `PRODUCTS` (
+	`productID`
+);
+
+
 
 insert into USERS(userNumber, userId, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender) values 
 (1, "kguho9202", "qwer1234", "1234", "권구호", 01063219202, "1992-02-04",  "Y", "M"),
