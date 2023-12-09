@@ -1,6 +1,7 @@
 import React from "react";
 
-import "../components/DataTable.css";
+// import "../components/DataTable.css";
+import * as S from "./DataTableStyle.js";
 
 function DataTable({ headers, items }) {
   if (!headers || !headers.length) {
@@ -11,24 +12,24 @@ function DataTable({ headers, items }) {
   const headerList = headers.map((header) => header.value);
   return (
     <>
-      <table>
+      <S.Table>
         <thead>
-          <tr>
+          <S.TableTr>
             {headers.map((header) => (
-              <th key={header.text}>{header.text}</th>
+              <S.TableHeader key={header.text}>{header.text}</S.TableHeader>
             ))}
-          </tr>
+          </S.TableTr>
         </thead>
         <tbody>
           {items.map((items) => (
-            <tr key={items.productID}>
+            <S.TableTr key={items.productID}>
               {headerList.map((value) => (
-                <td key={value}>{items[value]}</td>
+                <S.TableTd key={value}>{items[value]}</S.TableTd>
               ))}
-            </tr>
+            </S.TableTr>
           ))}
         </tbody>
-      </table>
+      </S.Table>
     </>
   );
 }
