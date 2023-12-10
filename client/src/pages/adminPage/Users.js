@@ -58,7 +58,7 @@ function Users() {
           <li>✅상세조회는 없음</li>
           <li>✅10명씩. 페이지네이션</li>
         </ol>
-        <DataTable headers={header} items={DUMMY} />
+        <DataTable keySet="usersTb_" headers={header} items={DUMMY} />
       </Card>
     </>
   );

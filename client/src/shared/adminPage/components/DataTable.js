@@ -3,7 +3,7 @@ import React from "react";
 // import "../components/DataTable.css";
 import * as S from "./DataTableStyle.js";
 
-function DataTable({ headers, items }) {
+function DataTable({ keySet, headers, items }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
@@ -21,10 +21,12 @@ function DataTable({ headers, items }) {
           </S.TableTr>
         </thead>
         <tbody>
-          {items.map((items) => (
-            <S.TableTr key={items.productID}>
-              {headerList.map((value) => (
-                <S.TableTd key={value}>{items[value]}</S.TableTd>
+          {items.map((item, index) => (
+            <S.TableTr key={`${keySet}_${index}`}>
+              {headerList.map((value, columnIndex) => (
+                <S.TableTd key={`${keySet}_${index}_${columnIndex}`}>
+                  {item[value]}
+                </S.TableTd>
               ))}
             </S.TableTr>
           ))}
