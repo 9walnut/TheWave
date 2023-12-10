@@ -1,14 +1,8 @@
+// ProductsAdd.js 파일
 import React from "react";
 
-// import * as S from "../../styles/adminPage/ProductsAdd.js";
-
 function ProductsAdd() {
-  return (
-    <>
-      <h3>상품 등록 페이지</h3>
-      <h3>products/add</h3>
-    </>
-  );
+  return <h3>Products Add Page</h3>;
 }
 
 export default ProductsAdd;

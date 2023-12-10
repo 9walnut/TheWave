@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ListItem = styled.li`
+export const ListBox = styled.div`
   list-style-type: none;
   margin: 1px 0;
   display: flex;

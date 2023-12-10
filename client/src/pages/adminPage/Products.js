@@ -68,7 +68,9 @@ function Products() {
         <DataTable headers={header} items={DUMMY} />
         <S.ButtonContainer>
           <AdminButtonGrey>선택 상품 삭제하기</AdminButtonGrey>
-          <AdminButtonBlack>상품 등록하기</AdminButtonBlack>
+          <Link to="/admin/products/add">
+            <AdminButtonBlack>상품 등록하기</AdminButtonBlack>
+          </Link>
         </S.ButtonContainer>
       </Card>
     </>

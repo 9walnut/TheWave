@@ -28,14 +28,15 @@ function App() {
         <Route path="/findPw/newPw" element={<NewPwPage />} />
 
         {/* admin */}
-
         <Route path="/admin/*" element={<AdminPageMain />}>
           <Route path="dashboard" element={<MainDashBoard />} />
           <Route path="products" element={<Products />} />
+          <Route path="products/add" element={<ProductsAdd />} />
+
           <Route path="orders" element={<Orders />} />
           <Route path="users" element={<Users />} />
-          <Route path="*" element={<NotFound />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
