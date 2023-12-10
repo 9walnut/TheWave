@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     categoryName: {
       type: DataTypes.STRING(20),
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
