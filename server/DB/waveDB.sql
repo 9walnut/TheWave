@@ -58,28 +58,30 @@
 		`productId`	INT	NOT NULL,
 		`cartQuantity`	INT	NULL,
 		`isChecked`	INT	NULL,
+		`isDeleted` BOOLEAN DEFAULT FALSE,
 		foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE,
 		foreign key (productId) references PRODUCTS (productId) ON DELETE CASCADE
 	);
 
 
-	CREATE TABLE `ORDERS` (
-		`orderId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		`userNumber`	INT	NOT NULL,
-		`cartId`	INT	NOT NULL,
-		`productId`	INT	NOT NULL,
-		`orderQuantity`	INT	NULL,
-		`receiveName`	VARCHAR(10)	NULL,
-		`address`	VARCHAR(200)	NULL,
-		`deliveryRequest`	VARCHAR(255)	NULL,
-		`orderDate`	DATE	NULL,
-		`orderStatus`	INT	NULL,
-		`changeDate`	DATE	NULL,
-		FOREIGN KEY (userNumber) REFERENCES USERS (userNumber) ON DELETE CASCADE,
-		FOREIGN KEY (cartId) REFERENCES CARTS (cartId),
-		FOREIGN KEY (productId) REFERENCES PRODUCTS (productId)
-	);
-
+CREATE TABLE `ORDERS` (
+	`orderId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`userNumber`	INT	NOT NULL,
+	`cartId`	INT	 NULL,
+	`productId`	INT	NOT NULL,
+	`orderQuantity`	INT	NULL,
+	`color`	VARCHAR(50)	NULL,
+	`size`	VARCHAR(50)	NULL, 
+	`receiveName`	VARCHAR(10)	NULL,
+	`address`	VARCHAR(200)	NULL,
+	`deliveryRequest`	VARCHAR(255)	NULL,
+	`orderDate`	DATE	NULL,
+	`orderStatus`	INT	NULL DEFAULT 1,
+	`changeDate`	DATE	NULL,
+	FOREIGN KEY (userNumber) REFERENCES USERS (userNumber) ON DELETE CASCADE,
+	FOREIGN KEY (cartId) REFERENCES CARTS (cartId),
+	FOREIGN KEY (productId) REFERENCES PRODUCTS (productId)
+);
 	CREATE TABLE `PAYMENT` (
 		`paymentId`	INT	NOT NULL  AUTO_INCREMENT PRIMARY KEY,
 		`orderId`	INT	NOT NULL,
@@ -103,29 +105,29 @@
 	);
 
 
-	INSERT INTO `USERS` (`userID`, `password`, `passwordSalt`, `userName`, `phoneNumber`, `birthday`, `isAdmin`, `gender`)
-	VALUES ('testUser', 'testPassword', 'testSalt', '홍길동', '01012345678', '1990-01-01', 'Y', 'M');
+INSERT INTO USERS (userID, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender)
+VALUES ('testUser', 'testPassword', 'testSalt', 'Test Name', '01012345678', '1990-01-01', 'N', 'M');
 
-	INSERT INTO `ADDRESS` (`userNumber`, `address`)
-	VALUES (1, '서울시 강남구');
+INSERT INTO ADDRESS (userNumber, address)
+VALUES (1, '서울특별시 강남구 테스트로 123');
 
-INSERT INTO `CATEGORIES` (`categoryName`)
+INSERT INTO CATEGORIES (categoryName)
 VALUES ('레터링풍선');
 
-	INSERT INTO `PRODUCTS` (`categoryId`, `productName`, `productPrice`, `productInfo`, `productStatus`, `thumbnailUrl`, `detailUrls`)
-	VALUES (1, 'iPhone', 1000000, 'Latest model', 'In Stock', 'thumbnail_url', 'detail_url');
+INSERT INTO PRODUCTS (categoryId, productName, productPrice, productInfo, productStatus, thumbnailUrl, detailUrls, isDeleted)
+VALUES (1, 'Test Product', 10000, 'This is a test product', 'In Stock', 'http://test.com/image.jpg', 'http://test.com/detail.jpg', FALSE);
 
-	INSERT INTO `productOption` (`productId`, `color`, `size`, `deliveryHope`)
-	VALUES (1, 'Black', 'Large', 'Fast Delivery');
+INSERT INTO productOption (productId, color, size, deliveryHope)
+VALUES (1, 'Red', 'M', 'Fast Delivery');
 
-	INSERT INTO `CARTS` (`userNumber`, `productId`, `cartQuantity`, `isChecked`)
-	VALUES (1, 1, 1, 1);
+INSERT INTO CARTS (userNumber, productId, cartQuantity, isChecked, isDeleted)
+VALUES (1, 1, 2, 1, FALSE);
 
-	INSERT INTO `ORDERS` (`userNumber`, `cartId`, `productId`, `orderQuantity`, `receiveName`, `address`, `deliveryRequest`, `orderDate`, `orderStatus`, `changeDate`)
-	VALUES (1, 1, 1, 1, '홍길동', '서울시 강남구', '문 앞에 놔주세요', '2023-12-10', 0, '2023-12-10');
+INSERT INTO ORDERS (userNumber, cartId, productId, orderQuantity, color, size, receiveName, address, deliveryRequest, orderDate, orderStatus, changeDate)
+VALUES (1, 1, 1, 2, 'Red', 'M', '권구호', '서울특별시 강남구 테스트로 123', 'Fast Delivery', CURDATE(), 1, CURDATE());
 
-	INSERT INTO `PAYMENT` (`orderId`, `payPrice`, `payMethod`, `isPaid`, `isRefund`)
-	VALUES (1, 1000000, 1, 0, 0);
+INSERT INTO PAYMENT (orderId, payPrice, payMethod, isPaid, isRefund)
+VALUES (1, 20000, 1, 1, 0);
 
-	INSERT INTO `productOut` (`orderId`, `cartId`, `productId`, `outStatus`, `outDate`)
-	VALUES (1, 1, 1, '결제대기', '2023-12-10');
+INSERT INTO productOut (orderId, cartId, productId, outStatus, outDate)
+VALUES (1, 1, 1, 'Out for Delivery', CURDATE());

@@ -1,9 +1,21 @@
-const { db } = require("../models/index");
+const {
+  db,
+  db: { Op },
+} = require("../models/index");
 
 // 장바구니 조회
 exports.getCart = async (req, res) => {
   try {
-    const cart = await db.carts.findAll();
+    let cart;
+    if (req.session.userId) {
+      // 회원인 경우
+      cart = await db.carts.findAll({
+        where: { userNumber: req.session.userId },
+      });
+    } else {
+      // 비회원인 경우
+      cart = req.body.cart || [];
+    }
     return res.send(cart);
   } catch (error) {
     console.error(error);
@@ -12,16 +24,12 @@ exports.getCart = async (req, res) => {
 };
 
 // 장바구니 수정
-// 장바구니에서 수정할 수량 추가 필요
 exports.editCart = async (req, res) => {
   try {
-    console.log(req.body);
     const { cartId } = req.params;
-    const { cartQuantity } = req.body;
-    const editCart = await db.carts.update(
-      { cartQuantity },
-      { where: { cartId } }
-    );
+    const { cartQuantity, color, size, deliveryHope } = req.body; // 옵션 정보 추가
+    let updateData = { cartQuantity, color, size, deliveryHope }; // 수정할 데이터에 옵션 정보 포함
+    const editCart = await db.carts.update(updateData, { where: { cartId } });
     return res.send(editCart);
   } catch (error) {
     console.error(error);
@@ -32,11 +40,12 @@ exports.editCart = async (req, res) => {
 // 장바구니 삭제
 exports.deleteCart = async (req, res) => {
   try {
-    console.log(req.body);
-    const { cartId } = req.params;
-    const isDeleted = await db.carts.destroy({ where: { cartId } });
-    console.log(isDeleted);
-    if (isDeleted) return res.send(true);
+    const { cartIds } = req.body.cartId;
+    const isDeleted = await db.carts.update(
+      { isDeleted: true },
+      { where: { cartId: { [Op.in]: cartIds } } }
+    );
+    if (isDeleted[0] > 0) return res.send(true);
     else return res.send(false);
   } catch (error) {
     console.error(error);
@@ -44,44 +53,58 @@ exports.deleteCart = async (req, res) => {
   }
 };
 
-// 장바구니 주문하기
-exports.getCartCheckout = async (req, res) => {
+// 장바구니 결제하기 버튼
+// cartItems는 체크박스 체크된 항목
+exports.payCart = async (req, res) => {
   try {
-    const { userNumber } = req.body;
-    const cartItems = await db.carts.findAll({ where: { userNumber } });
+    const { userNumber, cartItems } = req.body;
+    const t = await db.sequelize.transaction();
 
-    let totalPrice = 0;
+    try {
+      for (let i = 0; i < cartItems.length; i++) {
+        const { cartId, quantity, color, size, deliveryHope } = cartItems[i];
 
-    const address = await db.address.findOne({ where: { userNumber } });
-    const addressId = address.addressId;
+        const cart = await db.carts.findOne(
+          { where: { cartId, userNumber } },
+          { transaction: t }
+        );
+        if (!cart || cart.isDeleted) {
+          throw new Error(`Cart not found: ${cartId}`);
+        }
 
-    // 장바구니의 각 항목을 주문 내역에 추가
-    for (const item of cartItems) {
-      const product = await db.products.findOne({
-        where: { productId: item.productId },
-      });
-      totalPrice += product.productPrice * item.cartQuantity;
+        const productOption = await db.productoption.findOne(
+          { where: { productId: cart.productId, color, size } }, // deliveryHope 조건 제거
+          { transaction: t }
+        );
 
-      await db.orderdetails.create({
-        orderID: newOrder.orderId,
-        productID: item.productId,
-        productCount: item.cartQuantity,
-      });
+        const order = await db.orders.create(
+          {
+            userNumber,
+            cartId,
+            productId: cart.productId,
+            orderQuantity: quantity,
+            color,
+            size,
+            deliveryRequest: deliveryHope,
+            orderDate: new Date(),
+            orderStatus: 1,
+            changeDate: new Date(),
+          },
+          { transaction: t }
+        );
+
+        // 결제가 완료되면 장바구니 제거
+        // await cart.update({ isDeleted: true }, { transaction: t });
+      }
+
+      await t.commit();
+      res.send(true);
+    } catch (error) {
+      await t.rollback();
+      throw error;
     }
-
-    // 주문 생성
-    const newOrder = await db.orders.create({
-      userNumber,
-      totalPrice,
-      addressId,
-    });
-
-    // 장바구니 비우기
-    await db.carts.destroy({ where: { userNumber } });
-
-    res.send(newOrder);
   } catch (error) {
     console.error(error);
-    res.status(500).send("장바구니 주문하기 오류");
+    res.status(500).send("결제 오류");
   }
 };

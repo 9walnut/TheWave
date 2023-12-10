@@ -9,7 +9,7 @@ import SideBar from "./SideBar";
 import Products from "./Products";
 import Orders from "./Orders";
 import Users from "./Users";
-import NotFound from "../../shared/NotFound404";
+import ProductsAdd from "./ProductsAdd.js";
 
 import * as S from "../../styles/adminPage/StyleAdminPageMain.js";
 
@@ -28,9 +28,9 @@ function AdminPageMain() {
           <Route path="/" element={<MainDashBoard />} />
           <Route path="dashboard" element={<MainDashBoard />} />
           <Route path="products" element={<Products />} />
+          <Route path="products/add" element={<ProductsAdd />} />
           <Route path="orders" element={<Orders />} />
           <Route path="users" element={<Users />} />
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </S.RightBox>
     </S.AdminPageMainLayout>
