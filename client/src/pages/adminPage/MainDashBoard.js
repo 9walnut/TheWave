@@ -7,10 +7,12 @@ import Card from "../../shared/adminPage/components/Card";
 function MainDashBoard() {
   return (
     <>
-      <Card>
-        <h3>DashBoard 대시보드</h3>
-        <h3>어드민 메인 겸 대시보드임!</h3>
-      </Card>
+      <S.AdminPageMainLayout>
+        <S.StyledCard>1</S.StyledCard>
+        <S.StyledCard>2</S.StyledCard>
+        <S.StyledCard>3</S.StyledCard>
+        <S.StyledCard>4</S.StyledCard>
+      </S.AdminPageMainLayout>
     </>
   );
 }
