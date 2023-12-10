@@ -8,7 +8,7 @@ const {
 // 총 주문수
 const getTotalOrders = async () => {
   try {
-    const totalOrders = await db.orderdetails.count();
+    const totalOrders = await db.orders.count();
     return totalOrders;
   } catch (error) {
     console.error("총 주문 수 오류", error);
@@ -19,7 +19,7 @@ const getTotalOrders = async () => {
 // 총 판매 금액
 const getTotalOrderPrices = async () => {
   try {
-    const totalOrderPrices = await db.orderdetails.sum("totalPrice");
+    const totalOrderPrices = await db.payment.sum("payPrice");
     return totalOrderPrices;
   } catch (error) {
     console.error("총 판매 금액", error);
@@ -30,8 +30,8 @@ const getTotalOrderPrices = async () => {
 // 배송완료
 const getDeliveryCompleteOrders = async () => {
   try {
-    const totalDeliveryCompleteOrders = await db.orderdetails.count({
-      where: { deliveryStatus: "배송완료" },
+    const totalDeliveryCompleteOrders = await db.productout.count({
+      where: { outStatus: "배송완료" },
     });
     return totalDeliveryCompleteOrders;
   } catch (error) {
@@ -43,8 +43,8 @@ const getDeliveryCompleteOrders = async () => {
 // 배송 준비 중
 const getDeliveryReadyOrders = async () => {
   try {
-    const totalDeliveryReadyOrders = await db.orderdetails.count({
-      where: { deliveryStatus: "배송준비중" },
+    const totalDeliveryReadyOrders = await db.productout.count({
+      where: { outStatus: "배송준비중" },
     });
     return totalDeliveryReadyOrders;
   } catch (error) {
@@ -161,11 +161,14 @@ exports.getAdminAllProducts = async (req, res) => {
 exports.deleteAdminProductsChecked = async (req, res) => {
   try {
     const productIds = req.body.productId;
-    const isDeleted = await db.products.destroy({
-      where: { productId: { [Op.in]: productIds } },
-    });
+    const isDeleted = await db.products.update(
+      { isDeleted: true },
+      {
+        where: { productId: { [Op.in]: productIds } },
+      }
+    );
 
-    if (isDeleted) return res.send(true);
+    if (isDeleted[0] > 0) return res.send(true);
     else return res.send(false);
   } catch (error) {
     console.error(error);
@@ -255,6 +258,7 @@ exports.getAdminProduct = async (req, res) => {
 exports.editAdminProduct = async (req, res) => {
   try {
     const { productId } = req.params;
+    console.log(req.body);
     const {
       categoryName,
       productName,
@@ -319,11 +323,13 @@ exports.uploadDetails = async (req, res) => {
 // 등록 상품 삭제
 exports.deleteAdminProduct = async (req, res) => {
   try {
-    console.log(req.body);
     const { productId } = req.params;
-    const isDeleted = await db.products.destroy({ where: { productId } });
-    console.log(isDeleted);
-    if (isDeleted) return res.send(true);
+    const isDeleted = await db.products.update(
+      { isDeleted: true },
+      { where: { productId } }
+    );
+
+    if (isDeleted[0] > 0) return res.send(true);
     else return res.send(false);
   } catch (error) {
     console.error(error);
@@ -332,29 +338,26 @@ exports.deleteAdminProduct = async (req, res) => {
 };
 
 // 전체 주문 현황 조회
-// 세부 현황에서 어떤 것이 나오게 할지?
-// 현재는 orderdetails + 총 가격, 상품 이름
-// 주소 추가해야할듯
 exports.getAdminAllOrders = async (req, res) => {
   try {
-    console.log(req.params);
-    const orderdDetail = await db.orderdetails.findAll({
+    const orderdDetail = await db.orders.findAll({
       include: [
         {
-          model: db.orders,
-          as: "order",
-          attributes: ["totalPrice"],
+          model: db.users,
+          as: "userNumber_user",
+          attributes: ["userName"],
+          include: [
+            {
+              model: db.address,
+              as: "addresses",
+              attributes: ["address"],
+            },
+          ],
         },
         {
           model: db.products,
           as: "product",
           attributes: ["productName"],
-        },
-        // db 드랍 후 수정 필요
-        {
-          model: db.address,
-          as: "adress",
-          attributes: ["adress"],
         },
       ],
     });
@@ -369,17 +372,26 @@ exports.getAdminAllOrders = async (req, res) => {
 exports.getAdminOrder = async (req, res) => {
   console.log(req.params);
   try {
-    const { orderID } = req.params;
-    const order = await db.products.findOne({
-      where: { orderID },
+    const { orderId } = req.params;
+    const order = await db.orders.findOne({
+      where: { orderId },
       include: [
         {
-          model: db.orderdetails,
-          attributes: ["productCount", "deliveryStatus"],
+          model: db.users,
+          as: "userNumber_user",
+          attributes: ["userName"],
+          include: [
+            {
+              model: db.address,
+              as: "addresses",
+              attributes: ["address"],
+            },
+          ],
         },
         {
-          model: db.address,
-          attributes: ["address"],
+          model: db.products,
+          as: "product",
+          attributes: ["productName"],
         },
       ],
     });
@@ -390,19 +402,31 @@ exports.getAdminOrder = async (req, res) => {
   }
 };
 
-// 배송 상태 변경
-exports.editDeliveryStatus = async (req, res) => {
+// 출고 상태 변경
+// 상품 출고 상태 변경
+exports.updateOutStatus = async (req, res) => {
   try {
     const { orderId } = req.params;
-    const { deliveryStatus } = req.body;
-    const updatedOrder = await db.orderdetails.update(
-      { deliveryStatus },
-      { where: { orderId } }
-    );
-    return res.send(updatedOrder);
+    let { outStatus } = req.body;
+
+    const productOut = await db.productout.findByPk(orderId);
+    if (!productOut) {
+      return res.status(404).send("ProductOut not found");
+    }
+
+    if (outStatus === "출고") {
+      outStatus = {
+        outStatus,
+        outDate: new Date(),
+      };
+    }
+
+    const updatedProductOut = await productOut.update(outStatus);
+
+    res.send(updatedProductOut);
   } catch (error) {
     console.error(error);
-    res.status(500).send("등록 상품 상세 조회 오류");
+    res.status(500).send("상품 출고 상태 변경 오류");
   }
 };
 

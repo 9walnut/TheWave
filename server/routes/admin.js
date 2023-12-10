@@ -64,8 +64,8 @@ router.get("/orders", controller.getAdminAllOrders);
 // 주문 상세 조회
 router.get("/orders/:orderId", controller.getAdminOrder);
 
-// 배송 상태 변경
-router.patch("/orders/:orderId", controller.editDeliveryStatus);
+// 출고 상태 변경
+router.patch("/orders/:orderId", controller.updateOutStatus);
 
 // 거래 취소 - 삭제
 router.delete("/orders/:orderId", controller.deleteAdminOrder);

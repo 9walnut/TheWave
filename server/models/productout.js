@@ -1,18 +1,18 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('orders', {
-    orderId: {
+  return sequelize.define('productout', {
+    productOutId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    userNumber: {
+    orderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'users',
-        key: 'userNumber'
+        model: 'orders',
+        key: 'orderId'
       }
     },
     cartId: {
@@ -31,37 +31,17 @@ module.exports = function(sequelize, DataTypes) {
         key: 'productId'
       }
     },
-    orderQuantity: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    receiveName: {
-      type: DataTypes.STRING(10),
-      allowNull: true
-    },
-    address: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    deliveryRequest: {
+    outStatus: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    orderDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
-    orderStatus: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    changeDate: {
+    outDate: {
       type: DataTypes.DATEONLY,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'orders',
+    tableName: 'productout',
     timestamps: false,
     indexes: [
       {
@@ -69,14 +49,14 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "orderId" },
+          { name: "productOutId" },
         ]
       },
       {
-        name: "userNumber",
+        name: "orderId",
         using: "BTREE",
         fields: [
-          { name: "userNumber" },
+          { name: "orderId" },
         ]
       },
       {
