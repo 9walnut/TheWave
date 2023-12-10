@@ -7,7 +7,7 @@ FLUSH PRIVILEGES;
 drop database thewave;
 
 CREATE TABLE `USERS` (
-	`userNumber`	INT	NOT NULL,
+	`userNumber`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`userID`	VARCHAR(12)	NOT NULL,
 	`password`	VARCHAR(12)	NULL,
 	`passwordSalt`	VARCHAR(255)	NULL,
@@ -19,239 +19,112 @@ CREATE TABLE `USERS` (
 );
 
 CREATE TABLE `ADDRESS` (
-	`addreddID`	INT	NOT NULL,
+	`addreddId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`userNumber`	INT	NOT NULL,
-	`adress`	VARCHAR(200)	NULL
+	`address`	VARCHAR(200)	NULL,
+  foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE
+);
+
+CREATE TABLE `CATEGORIES` (
+	`categoryId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`categoryName`	VARCHAR(20)	NULL
 );
 
 CREATE TABLE `PRODUCTS` (
-	`productID`	INT	NOT NULL,
-	`categotyID`	INT	NOT NULL,
+	`productId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`categoryId`	INT	NOT NULL,
 	`productName`	VARCHAR(20)	NULL,
 	`productPrice`	INT	NULL,
 	`productInfo`	VARCHAR(255)	NULL,
 	`productStatus`	VARCHAR(10)	NULL,
 	`thumbnailUrl`	VARCHAR(255)	NULL,
-	`detailUrls`	TEXT	NULL
+	`detailUrls`	TEXT	NULL,
+  foreign key (categoryId) references CATEGORIES (categoryId)
+);
+
+CREATE TABLE `productOption` (
+	`productId`	INT	NOT NULL,
+	`color`	VARCHAR(50)	NULL,
+	`size`	VARCHAR(50)	NULL,
+	`deliveryHope`	VARCHAR(50)	NULL,
+	PRIMARY KEY (`productId`),
+	FOREIGN KEY (`productId`) REFERENCES `PRODUCTS` (`productId`)
 );
 
 CREATE TABLE `CARTS` (
-	`cartID`	INT	NOT NULL,
+	`cartId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`userNumber`	INT	NOT NULL,
-	`productID`	INT	NOT NULL,
+	`productId`	INT	NOT NULL,
 	`cartQuantity`	INT	NULL,
 	`isChecked`	INT	NULL,
-	`isPaid`	INT	NULL
+  foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE,
+  foreign key (productId) references PRODUCTS (productId) ON DELETE CASCADE
 );
 
-CREATE TABLE `CATEGORIES` (
-	`categotyID`	INT	NOT NULL,
-	`categoryName`	VARCHAR(20)	NULL
-);
 
 CREATE TABLE `ORDERS` (
-	`orderID`	INT	NOT NULL,
+	`orderId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`userNumber`	INT	NOT NULL,
-	`cartID`	INT	NOT NULL,
-	`productID`	INT	NOT NULL,
+	`cartId`	INT	NOT NULL,
+	`productId`	INT	NOT NULL,
 	`orderQuantity`	INT	NULL,
 	`receiveName`	VARCHAR(10)	NULL,
 	`address`	VARCHAR(200)	NULL,
 	`deliveryRequest`	VARCHAR(255)	NULL,
 	`orderDate`	DATE	NULL,
-	`Field`	INT	NULL,
-	`status`	INT	NULL,
-	`changeDate`	DATE	NULL
+	`orderStatus`	INT	NULL,
+	`changeDate`	DATE	NULL,
+	FOREIGN KEY (userNumber) REFERENCES USERS (userNumber) ON DELETE CASCADE,
+	FOREIGN KEY (cartId) REFERENCES CARTS (cartId),
+	FOREIGN KEY (productId) REFERENCES PRODUCTS (productId)
 );
 
 CREATE TABLE `PAYMENT` (
-	`paymentId`	INT	NOT NULL,
-	`orderID`	INT	NOT NULL,
+	`paymentId`	INT	NOT NULL  AUTO_INCREMENT PRIMARY KEY,
+	`orderId`	INT	NOT NULL,
 	`payPrice`	INT	NULL,
 	`payMethod`	INT	NULL,
 	`isPaid`	INT	NULL,
-	`isRefund`	INT	NULL
-);
-
-CREATE TABLE `productOption` (
-	`productID`	INT	NOT NULL,
-	`color`	VARCHAR(50)	NULL,
-	`size`	VARCHAR(50)	NULL,
-	`deliveryHope`	VARCHAR(50)	NULL
+	`isRefund`	INT	NULL,
+  foreign key (orderId) references ORDERS (orderId) ON DELETE CASCADE
 );
 
 CREATE TABLE `productOut` (
-	`productOutId`	VARCHAR(255)	NOT NULL,
-	`orderID`	INT	NOT NULL,
-	`cartID`	INT	NOT NULL,
-	`productID`	INT	NOT NULL,
-	`status`	VARCHAR(255)	NULL,
-	`outDate`	DATE	NULL
-);
-
-ALTER TABLE `USERS` ADD CONSTRAINT `PK_USERS` PRIMARY KEY (
-	`userNumber`
-);
-
-ALTER TABLE `ADDRESS` ADD CONSTRAINT `PK_ADDRESS` PRIMARY KEY (
-	`addreddID`,
-	`userNumber`
-);
-
-ALTER TABLE `PRODUCTS` ADD CONSTRAINT `PK_PRODUCTS` PRIMARY KEY (
-	`productID`
-);
-
-ALTER TABLE `CARTS` ADD CONSTRAINT `PK_CARTS` PRIMARY KEY (
-	`cartID`
-);
-
-ALTER TABLE `CATEGORIES` ADD CONSTRAINT `PK_CATEGORIES` PRIMARY KEY (
-	`categotyID`
-);
-
-ALTER TABLE `ORDERS` ADD CONSTRAINT `PK_ORDERS` PRIMARY KEY (
-	`orderID`
-);
-
-ALTER TABLE `PAYMENT` ADD CONSTRAINT `PK_PAYMENT` PRIMARY KEY (
-	`paymentId`,
-	`orderID`
-);
-
-ALTER TABLE `productOption` ADD CONSTRAINT `PK_PRODUCTOPTION` PRIMARY KEY (
-	`productID`
-);
-
-ALTER TABLE `productOut` ADD CONSTRAINT `PK_PRODUCTOUT` PRIMARY KEY (
-	`productOutId`,
-	`orderID`
-);
-
-ALTER TABLE `ADDRESS` ADD CONSTRAINT `FK_USERS_TO_ADDRESS_1` FOREIGN KEY (
-	`userNumber`
-)
-REFERENCES `USERS` (
-	`userNumber`
-);
-
-ALTER TABLE `PRODUCTS` ADD CONSTRAINT `FK_CATEGORIES_TO_PRODUCTS_1` FOREIGN KEY (
-	`categotyID`
-)
-REFERENCES `CATEGORIES` (
-	`categotyID`
-);
-
-ALTER TABLE `CARTS` ADD CONSTRAINT `FK_USERS_TO_CARTS_1` FOREIGN KEY (
-	`userNumber`
-)
-REFERENCES `USERS` (
-	`userNumber`
-);
-
-ALTER TABLE `CARTS` ADD CONSTRAINT `FK_PRODUCTS_TO_CARTS_1` FOREIGN KEY (
-	`productID`
-)
-REFERENCES `PRODUCTS` (
-	`productID`
-);
-
-ALTER TABLE `ORDERS` ADD CONSTRAINT `FK_USERS_TO_ORDERS_1` FOREIGN KEY (
-	`userNumber`
-)
-REFERENCES `USERS` (
-	`userNumber`
-);
-
-ALTER TABLE `ORDERS` ADD CONSTRAINT `FK_CARTS_TO_ORDERS_1` FOREIGN KEY (
-	`cartID`
-)
-REFERENCES `CARTS` (
-	`cartID`
-);
-
-ALTER TABLE `ORDERS` ADD CONSTRAINT `FK_PRODUCTS_TO_ORDERS_1` FOREIGN KEY (
-	`productID`
-)
-REFERENCES `PRODUCTS` (
-	`productID`
-);
-
-ALTER TABLE `PAYMENT` ADD CONSTRAINT `FK_ORDERS_TO_PAYMENT_1` FOREIGN KEY (
-	`orderID`
-)
-REFERENCES `ORDERS` (
-	`orderID`
-);
-
-ALTER TABLE `productOption` ADD CONSTRAINT `FK_PRODUCTS_TO_productOption_1` FOREIGN KEY (
-	`productID`
-)
-REFERENCES `PRODUCTS` (
-	`productID`
-);
-
-ALTER TABLE `productOut` ADD CONSTRAINT `FK_ORDERS_TO_productOut_1` FOREIGN KEY (
-	`orderID`
-)
-REFERENCES `ORDERS` (
-	`orderID`
-);
-
-ALTER TABLE `productOut` ADD CONSTRAINT `FK_CARTS_TO_productOut_1` FOREIGN KEY (
-	`cartID`
-)
-REFERENCES `CARTS` (
-	`cartID`
-);
-
-ALTER TABLE `productOut` ADD CONSTRAINT `FK_PRODUCTS_TO_productOut_1` FOREIGN KEY (
-	`productID`
-)
-REFERENCES `PRODUCTS` (
-	`productID`
+	`productOutId`	INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`orderId`	INT	NOT NULL,
+	`cartId`	INT	NOT NULL,
+	`productId`	INT	NOT NULL,
+	`outStatus`	VARCHAR(255)	NULL,
+	`outDate`	DATE	NULL,
+	FOREIGN KEY (orderId) REFERENCES ORDERS (orderId) ON DELETE CASCADE,
+	FOREIGN KEY (cartId) REFERENCES CARTS (cartId) ON DELETE CASCADE,
+	FOREIGN KEY (productId) REFERENCES PRODUCTS (productId) ON DELETE CASCADE
 );
 
 
+INSERT INTO `USERS` (`userID`, `password`, `passwordSalt`, `userName`, `phoneNumber`, `birthday`, `isAdmin`, `gender`)
+VALUES ('testUser', 'testPassword', 'testSalt', '홍길동', '01012345678', '1990-01-01', 'Y', 'M');
 
-insert into USERS(userNumber, userId, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender) values 
-(1, "kguho9202", "qwer1234", "1234", "권구호", 01063219202, "1992-02-04",  "Y", "M"),
-(2, "kguho9202", "qwer1234", "2134", "권구호", 01063219202, "1992-02-04", "Y", "M"),
-(3, "kguho9202", "qwer1234", "1234", "권구호", 01063219202,"1992-02-04", "Y", "M"),
-(4, "kguho9202", "qwer1234", "1234", "권구호", 01063219202,"1992-02-04", "Y", "M"),
-(5, "kguho9202", "qwer1234", "1234", "권구호", 01063219202,"1992-02-04", "Y", "M");
+INSERT INTO `ADDRESS` (`userNumber`, `address`)
+VALUES (1, '서울시 강남구');
 
-insert into ADDRESS(addressId, userNumber, address) values
-(1, 1, "전북익산~~"),
-(2, 2, "경기도 고양★특례시★"),
-(3, 3, "서울특별시"),
-(4, 4, "경기도 고양★특례시★"),
-(5, 5, "전라남도 장성군");
+INSERT INTO `CATEGORIES` (`categoryName`)
+VALUES ('Electronics');
 
-insert into CATEGORIES(categoryId, categoryName) values
-(1, "레터링풍선"),
-(2, "브라이덜샤워"),
-(3, "생일파티"),
-(4, "용돈풍선");
+INSERT INTO `PRODUCTS` (`categoryId`, `productName`, `productPrice`, `productInfo`, `productStatus`, `thumbnailUrl`, `detailUrls`)
+VALUES (1, 'iPhone', 1000000, 'Latest model', 'In Stock', 'thumbnail_url', 'detail_url');
 
+INSERT INTO `productOption` (`productId`, `color`, `size`, `deliveryHope`)
+VALUES (1, 'Black', 'Large', 'Fast Delivery');
 
+INSERT INTO `CARTS` (`userNumber`, `productId`, `cartQuantity`, `isChecked`)
+VALUES (1, 1, 1, 1);
 
-insert into PRODUCTS (productId, categoryId, productName, productPrice, productInfo, productStatus) values
-(1, 1, "샤랄랄라풍선", 40000, "이거쩝니다", "판매중"),
-(2, 1, "샤랄랄라풍선", 35000, "이거 개쩝니다", "판매중"),
-(3, 3, "HBD 촛불", 4000, "이거 개쩝니다", "판매중"),
-(4, 1, "샤랄랄라풍선", 5000, "이거 개쩝니다", "판매중");
+INSERT INTO `ORDERS` (`userNumber`, `cartId`, `productId`, `orderQuantity`, `receiveName`, `address`, `deliveryRequest`, `orderDate`, `orderStatus`, `changeDate`)
+VALUES (1, 1, 1, 1, '홍길동', '서울시 강남구', '문 앞에 놔주세요', '2023-12-10', 0, '2023-12-10');
 
-insert into CARTS(cartId, userNumber, productId, cartQuantity) values
-(1, 1, 1, 1),
-(2, 2, 2, 2),
-(3, 3, 3, 3),
-(4, 4, 4, 4);
+INSERT INTO `PAYMENT` (`orderId`, `payPrice`, `payMethod`, `isPaid`, `isRefund`)
+VALUES (1, 1000000, 1, 0, 0);
 
-insert into ORDERS (orderId, userNumber, productId, orderQuantity) values
-(1, 1, 1, 1);
-
-insert into ORDERDETAILS (orderDetailNumber, cartId, orderId, addressId, totalPrice, deliverystatus) values
-(1, 1, 1, 1, 90000, "배송완료");
-
-select * from ORDERDETAILS;
+INSERT INTO `productOut` (`orderId`, `cartId`, `productId`, `outStatus`, `outDate`)
+VALUES (1, 1, 1, 'Ready', '2023-12-10');
