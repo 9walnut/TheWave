@@ -6,11 +6,9 @@ import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 
 function MainPage() {
-  const [toggle, setToggle] = useState(false);
-
   return (
     <>
-      <Navbar toggle={toggle} setToggle={setToggle} />
+      <Navbar />
 
       <section>
         <Carousel />
