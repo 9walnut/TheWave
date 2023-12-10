@@ -1,8 +1,9 @@
 import React from "react";
 
-import "../components/DataTable.css";
+// import "../components/DataTable.css";
+import * as S from "./DataTableStyle.js";
 
-function DataTable({ headers, PRODUCTS }) {
+function DataTable({ headers, items }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
@@ -11,24 +12,24 @@ function DataTable({ headers, PRODUCTS }) {
   const headerList = headers.map((header) => header.value);
   return (
     <>
-      <table>
+      <S.Table>
         <thead>
-          <tr>
+          <S.TableTr>
             {headers.map((header) => (
-              <th key={header.text}>{header.text}</th>
+              <S.TableHeader key={header.text}>{header.text}</S.TableHeader>
             ))}
-          </tr>
+          </S.TableTr>
         </thead>
         <tbody>
-          {PRODUCTS.map((PRODUCTS) => (
-            <tr key={PRODUCTS.productID}>
+          {items.map((items) => (
+            <S.TableTr key={items.productID}>
               {headerList.map((value) => (
-                <td key={value}>{PRODUCTS[value]}</td>
+                <S.TableTd key={value}>{items[value]}</S.TableTd>
               ))}
-            </tr>
+            </S.TableTr>
           ))}
         </tbody>
-      </table>
+      </S.Table>
     </>
   );
 }

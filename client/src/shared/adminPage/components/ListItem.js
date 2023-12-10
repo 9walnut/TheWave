@@ -1,13 +1,14 @@
 import React from "react";
-import "./ListItem.css";
+
+import * as S from "./ListItemStyle.js";
 
 function ListItem(props) {
   return (
-    <li className="list-item">
-      <img src={props.icon} alt="Icon" className="list-icon" />
-      <div className="list-item-text">{props.children}</div>
-      <img src={props.arrow} alt="arrow" className="list-arrow" />
-    </li>
+    <S.ListBox>
+      <S.ListIconImg src={props.icon} alt="Icon" className="list-icon" />
+      <S.ListItemBox>{props.children}</S.ListItemBox>
+      <S.ListIconImg src={props.arrow} alt="arrow" className="list-arrow" />
+    </S.ListBox>
   );
 }
 

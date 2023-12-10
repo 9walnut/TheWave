@@ -1,42 +1,54 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    "address",
+    "payment",
     {
-      addreddId: {
+      paymentId: {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
       },
-      userNumber: {
+      orderId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "users",
-          key: "userNumber",
+          model: "orders",
+          key: "orderId",
         },
       },
-      address: {
-        type: DataTypes.STRING(200),
+      payPrice: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      payMethod: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      isPaid: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      isRefund: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
     },
     {
       sequelize,
-      tableName: "address",
+      tableName: "payment",
       timestamps: false,
       indexes: [
         {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "addreddId" }],
+          fields: [{ name: "paymentId" }],
         },
         {
-          name: "userNumber",
+          name: "orderId",
           using: "BTREE",
-          fields: [{ name: "userNumber" }],
+          fields: [{ name: "orderId" }],
         },
       ],
     }

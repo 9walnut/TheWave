@@ -1,8 +1,7 @@
-// SideBar.js
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import "../../components/adminPage/SideBar.css";
+import * as S from "../../styles/adminPage/SideBar.js";
 
 import ListItem from "../../shared/adminPage/components/ListItem";
 
@@ -15,82 +14,94 @@ function SideBar({ selectItem }) {
 
   //exact="true" : 경로가 정확히 일치할 때만 해당 링크 활성화
   return (
-    <div className="side-bar">
-      <ul className="nav-link">
+    <S.SideBarBox>
+      <S.NavLinksLayout>
         <NavLink
           to="/admin"
           exact="true"
           onClick={() => handleItemClick("mainDashboard")}
         >
-          <ListItem
-            icon="/adminPage/sidebar/out.svg"
-            arrow="/adminPage/sidebar/none.svg"
-          >
-            ADMIN
-          </ListItem>
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/out.svg"
+              arrow="/adminPage/sidebar/none.svg"
+            >
+              ADMIN
+            </ListItem>
+          </S.NavListItem>
         </NavLink>
-      </ul>
-      <ul className="nav-link">
+      </S.NavLinksLayout>
+      <S.NavLinksLayout>
         <NavLink
           to="/admin/dashboard"
           exact="true"
           onClick={() => handleItemClick("mainDashboard")}
         >
-          <ListItem
-            icon="/adminPage/sidebar/dashboard.svg"
-            arrow="/adminPage/sidebar/arrow.svg"
-          >
-            대시 보드
-          </ListItem>
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/dashboard.svg"
+              arrow="/adminPage/sidebar/arrow.svg"
+            >
+              대시 보드
+            </ListItem>
+          </S.NavListItem>
         </NavLink>
         <NavLink
           to="/admin/products"
           exact="true"
           onClick={() => handleItemClick("products")}
         >
-          <ListItem
-            icon="/adminPage/sidebar/products.svg"
-            arrow="/adminPage/sidebar/arrow.svg"
-          >
-            상품 관리
-          </ListItem>
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/products.svg"
+              arrow="/adminPage/sidebar/arrow.svg"
+            >
+              상품 관리
+            </ListItem>
+          </S.NavListItem>
         </NavLink>
         <NavLink
           to="/admin/orders"
           exact="true"
           onClick={() => handleItemClick("orders")}
         >
-          <ListItem
-            icon="/adminPage/sidebar/orders.svg"
-            arrow="/adminPage/sidebar/arrow.svg"
-          >
-            거래 내역 관리
-          </ListItem>
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/orders.svg"
+              arrow="/adminPage/sidebar/arrow.svg"
+            >
+              거래 내역 관리
+            </ListItem>
+          </S.NavListItem>
         </NavLink>
         <NavLink
           to="/admin/users"
           exact="true"
           onClick={() => handleItemClick("users")}
         >
-          <ListItem
-            icon="/adminPage/sidebar/users.svg"
-            arrow="/adminPage/sidebar/arrow.svg"
-          >
-            회원관리
-          </ListItem>
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/users.svg"
+              arrow="/adminPage/sidebar/arrow.svg"
+            >
+              회원관리
+            </ListItem>
+          </S.NavListItem>
         </NavLink>
-      </ul>
-      <ul className="nav-link">
+      </S.NavLinksLayout>
+      <S.NavLinksLayout>
         <NavLink to="/">
-          <ListItem
-            icon="/adminPage/sidebar/out.svg"
-            arrow="/adminPage/sidebar/none.svg"
-          >
-            나가기
-          </ListItem>
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/out.svg"
+              arrow="/adminPage/sidebar/none.svg"
+            >
+              나가기
+            </ListItem>
+          </S.NavListItem>
         </NavLink>
-      </ul>
-    </div>
+      </S.NavLinksLayout>
+    </S.SideBarBox>
   );
 }
 

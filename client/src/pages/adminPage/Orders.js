@@ -1,15 +1,65 @@
 import React from "react";
 
-import "../../components/adminPage/Orders.css";
+import * as S from "../../styles/adminPage/Orders.js";
 
 import Card from "../../shared/adminPage/components/Card";
+import DataTable from "../../shared/adminPage/components/DataTable";
+
+const header = [
+  {
+    text: "NO.",
+    value: "orderDetailNumber",
+  },
+  {
+    text: "주문자 (고객명)",
+    value: "userName",
+  },
+  {
+    text: "핸드폰 번호",
+    value: "phoneNumber",
+  },
+  {
+    text: "주소",
+    value: "addressID",
+  },
+  {
+    text: "결제 금액",
+    value: "totalPrice",
+  },
+  {
+    text: "배송 상태",
+    value: "deliveryStatus",
+  },
+];
+
+const DUMMY = [
+  {
+    orderDetailNumber: 1,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "배송중",
+  },
+];
 
 function Orders() {
   return (
     <>
       <Card>
-        <h3>Orders 거래내역</h3>
-        <h3>ddㅎㅎ</h3>
+        <h3>거래 내역 관리</h3>
+        <ol>
+          <li>
+            ✅체크박스로 상품 선택 가능하도록. 선택된 요소들 배송상태 변경 기능
+            필요 ("전체 선택", "배송중", "배송완료", "거래 취소")
+          </li>
+          <li>
+            ✅전체 주문 목록 페이지 내 "배송중", "배송완료", "거래 취소" button
+            필요(ex "상품준비중" 을 "배송중" or "배송완료"){" "}
+          </li>
+          <li>✅주문 목록 10개씩 보여주기, 이전 페이지, 다음페이지 구현</li>
+        </ol>
+        <DataTable headers={header} items={DUMMY} />
       </Card>
     </>
   );

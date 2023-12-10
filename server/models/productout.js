@@ -1,25 +1,25 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    "orders",
+    "productout",
     {
-      orderId: {
+      productOutId: {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
       },
-      userNumber: {
+      orderId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "users",
-          key: "userNumber",
+          model: "orders",
+          key: "orderId",
         },
       },
       cartId: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: "carts",
           key: "cartId",
@@ -33,59 +33,30 @@ module.exports = function (sequelize, DataTypes) {
           key: "productId",
         },
       },
-      orderQuantity: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      color: {
-        type: DataTypes.STRING(50),
-        allowNull: true,
-      },
-      size: {
-        type: DataTypes.STRING(50),
-        allowNull: true,
-      },
-      receiveName: {
-        type: DataTypes.STRING(10),
-        allowNull: true,
-      },
-      address: {
-        type: DataTypes.STRING(200),
-        allowNull: true,
-      },
-      deliveryRequest: {
+      outStatus: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      orderDate: {
-        type: DataTypes.DATEONLY,
-        allowNull: true,
-      },
-      orderStatus: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 1,
-      },
-      changeDate: {
+      outDate: {
         type: DataTypes.DATEONLY,
         allowNull: true,
       },
     },
     {
       sequelize,
-      tableName: "orders",
+      tableName: "productout",
       timestamps: false,
       indexes: [
         {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "orderId" }],
+          fields: [{ name: "productOutId" }],
         },
         {
-          name: "userNumber",
+          name: "orderId",
           using: "BTREE",
-          fields: [{ name: "userNumber" }],
+          fields: [{ name: "orderId" }],
         },
         {
           name: "cartId",

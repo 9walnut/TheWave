@@ -1,118 +1,133 @@
-create database thewave default character set utf8mb4 default collate utf8mb4_general_ci;
-use thewave;
-CREATE USER 'admin'@'%' IDENTIFIED BY '1q2w3e4r';
-GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
+	create database thewave default character set utf8mb4 default collate utf8mb4_general_ci;
+	use thewave;
+	CREATE USER 'admin'@'%' IDENTIFIED BY '1q2w3e4r';
+	GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+	FLUSH PRIVILEGES;
 
-drop database thewave;
+	drop database thewave;
 
-CREATE TABLE USERS 
-( userNumber   INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
-  userId    VARCHAR(12) NOT NULL,
-  password  VARCHAR(255) NOT NULL,
-  passwordSalt VARCHAR(255) NOT NULL,
-  userName  VARCHAR(20) NOT NULL, 
-  phoneNumber VARCHAR(11) NOT NULL, 
-  birthday DATE NOT NULL,
-  isAdmin CHAR(1) NOT NULL,
-  gender CHAR(1) NOT NULL
+	CREATE TABLE `USERS` (
+		`userNumber`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`userID`	VARCHAR(12)	NOT NULL,
+		`password`	VARCHAR(12)	NULL,
+		`passwordSalt`	VARCHAR(255)	NULL,
+		`userName`	VARCHAR(20)	NULL,
+		`phoneNumber`	VARCHAR(11)	NULL,
+		`birthday`	DATE	NULL,
+		`isAdmin`	CHAR(1)	NULL DEFAULT "N",
+		`gender`	CHAR(1)	NULL
+	);
+
+	CREATE TABLE `ADDRESS` (
+		`addreddId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`userNumber`	INT	NOT NULL,
+		`address`	VARCHAR(200)	NULL,
+		foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE
+	);
+
+	CREATE TABLE `CATEGORIES` (
+		`categoryId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`categoryName`	VARCHAR(20)	NULL
+	);
+
+	CREATE TABLE `PRODUCTS` (
+		`productId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`categoryId`	INT	NOT NULL,
+		`productName`	VARCHAR(20)	NULL,
+		`productPrice`	INT	NULL,
+		`productInfo`	VARCHAR(255)	NULL,
+		`productStatus`	VARCHAR(10)	NULL,
+		`thumbnailUrl`	VARCHAR(255)	NULL,
+		`detailUrls`	TEXT	NULL,
+		`isDeleted` BOOLEAN DEFAULT FALSE,
+		foreign key (categoryId) references CATEGORIES (categoryId)
+	);
+
+	CREATE TABLE `productOption` (
+		`productId`	INT	NOT NULL,
+		`color`	VARCHAR(50)	NULL,
+		`size`	VARCHAR(50)	NULL,
+		`deliveryHope`	VARCHAR(50)	NULL,
+		PRIMARY KEY (`productId`),
+		FOREIGN KEY (`productId`) REFERENCES `PRODUCTS` (`productId`)
+	);
+
+	CREATE TABLE `CARTS` (
+		`cartId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`userNumber`	INT	NOT NULL,
+		`productId`	INT	NOT NULL,
+		`cartQuantity`	INT	NULL,
+		`isChecked`	INT	NULL,
+		`isDeleted` BOOLEAN DEFAULT FALSE,
+		foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE,
+		foreign key (productId) references PRODUCTS (productId) ON DELETE CASCADE
+	);
+
+
+CREATE TABLE `ORDERS` (
+	`orderId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`userNumber`	INT	NOT NULL,
+	`cartId`	INT	 NULL,
+	`productId`	INT	NOT NULL,
+	`orderQuantity`	INT	NULL,
+	`color`	VARCHAR(50)	NULL,
+	`size`	VARCHAR(50)	NULL, 
+	`receiveName`	VARCHAR(10)	NULL,
+	`address`	VARCHAR(200)	NULL,
+	`deliveryRequest`	VARCHAR(255)	NULL,
+	`orderDate`	DATE	NULL,
+	`orderStatus`	INT	NULL DEFAULT 1,
+	`changeDate`	DATE	NULL,
+	FOREIGN KEY (userNumber) REFERENCES USERS (userNumber) ON DELETE CASCADE,
+	FOREIGN KEY (cartId) REFERENCES CARTS (cartId),
+	FOREIGN KEY (productId) REFERENCES PRODUCTS (productId)
 );
+	CREATE TABLE `PAYMENT` (
+		`paymentId`	INT	NOT NULL  AUTO_INCREMENT PRIMARY KEY,
+		`orderId`	INT	NOT NULL,
+		`payPrice`	INT	NULL,
+		`payMethod`	INT	NULL,
+		`isPaid`	INT	NULL,
+		`isRefund`	INT	NULL,
+		foreign key (orderId) references ORDERS (orderId) ON DELETE CASCADE
+	);
+
+	CREATE TABLE `productOut` (
+		`productOutId`	INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`orderId`	INT	NOT NULL,
+		`cartId`	INT	NOT NULL,
+		`productId`	INT	NOT NULL,
+		`outStatus`	VARCHAR(255)	NULL,
+		`outDate`	DATE	NULL,
+		FOREIGN KEY (orderId) REFERENCES ORDERS (orderId) ON DELETE CASCADE,
+		FOREIGN KEY (cartId) REFERENCES CARTS (cartId) ON DELETE CASCADE,
+		FOREIGN KEY (productId) REFERENCES PRODUCTS (productId) ON DELETE CASCADE
+	);
 
 
-CREATE TABLE ADDRESS
-( addressId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  userNumber INT NOT NULL,
-  address VARCHAR(200) NOT NULL,
-  foreign key (userNumber) references USERS (userNumber)
-);
+INSERT INTO USERS (userID, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender)
+VALUES ('testUser', 'testPassword', 'testSalt', 'Test Name', '01012345678', '1990-01-01', 'N', 'M');
 
-CREATE TABLE CATEGORIES 
-(
-categoryId INT NOT NULL auto_increment PRIMARY KEY,
-categoryName VARCHAR(20) NOT NULL
-);
+INSERT INTO ADDRESS (userNumber, address)
+VALUES (1, '서울특별시 강남구 테스트로 123');
 
-CREATE TABLE PRODUCTS
-(
-productId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-categoryId INT NOT NULL,
-productName VARCHAR(20) NOT NULL,
-productPrice INT NOT NULL,
-productInfo VARCHAR(255),
-productStatus VARCHAR(10),
-foreign key (categoryId) references CATEGORIES (categoryId)
-);
+INSERT INTO CATEGORIES (categoryName)
+VALUES ('레터링풍선');
 
-CREATE TABLE CARTS
-(
-  cartId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  userNumber INT NOT NULL,
-  productId INT NOT NULL,
-  cartQuantity INT NOT NULL,
-  foreign key (userNumber) references USERS (userNumber),
-  foreign key (productId) references PRODUCTS (productId)
-);
+INSERT INTO PRODUCTS (categoryId, productName, productPrice, productInfo, productStatus, thumbnailUrl, detailUrls, isDeleted)
+VALUES (1, 'Test Product', 10000, 'This is a test product', 'In Stock', 'http://test.com/image.jpg', 'http://test.com/detail.jpg', FALSE);
 
-CREATE TABLE ORDERS
-(
-orderId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-userNumber INT NOT NULL,
-productId INT NOT NULL,
-orderQuantity INT NOT NULL,
-foreign key (userNumber) references USERS (userNumber),
-foreign key (productId) references PRODUCTS (productId)
-);
+INSERT INTO productOption (productId, color, size, deliveryHope)
+VALUES (1, 'Red', 'M', 'Fast Delivery');
 
-CREATE TABLE ORDERDETAILS
-(
-orderDetailNumber INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-orderId INT NOT NULL,
-cartId INT NOT NULL,
-addressId INT NOT NULL,
-deliveryStatus VARCHAR(20),
-foreign key (orderId) references ORDERS (orderId),
-foreign key (cartId) references CARTS (cartId),
-foreign key (addressId) references ADDRESS (addressId)
-);
+INSERT INTO CARTS (userNumber, productId, cartQuantity, isChecked, isDeleted)
+VALUES (1, 1, 2, 1, FALSE);
 
-insert into USERS(userNumber, userId, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender) values 
-(1, "kguho9202", "qwer1234", "1234", "권구호", 01063219202, "1992-02-04",  "Y", "M"),
-(2, "kguho9202", "qwer1234", "2134", "권구호", 01063219202, "1992-02-04", "Y", "M"),
-(3, "kguho9202", "qwer1234", "1234", "권구호", 01063219202,"1992-02-04", "Y", "M"),
-(4, "kguho9202", "qwer1234", "1234", "권구호", 01063219202,"1992-02-04", "Y", "M"),
-(5, "kguho9202", "qwer1234", "1234", "권구호", 01063219202,"1992-02-04", "Y", "M");
+INSERT INTO ORDERS (userNumber, cartId, productId, orderQuantity, color, size, receiveName, address, deliveryRequest, orderDate, orderStatus, changeDate)
+VALUES (1, 1, 1, 2, 'Red', 'M', '권구호', '서울특별시 강남구 테스트로 123', 'Fast Delivery', CURDATE(), 1, CURDATE());
 
-insert into ADDRESS(addressId, userNumber, address) values
-(1, 1, "전북익산~~"),
-(2, 2, "경기도 고양★특례시★"),
-(3, 3, "서울특별시"),
-(4, 4, "경기도 고양★특례시★"),
-(5, 5, "전라남도 장성군");
+INSERT INTO PAYMENT (orderId, payPrice, payMethod, isPaid, isRefund)
+VALUES (1, 20000, 1, 1, 0);
 
-insert into CATEGORIES(categoryId, categoryName) values
-(1, "레터링풍선"),
-(2, "브라이덜샤워"),
-(3, "생일파티"),
-(4, "용돈풍선");
-
-
-
-insert into PRODUCTS (productId, categoryId, productName, productPrice, productInfo, productStatus) values
-(1, 1, "샤랄랄라풍선", 40000, "이거쩝니다", "판매중"),
-(2, 1, "샤랄랄라풍선", 35000, "이거 개쩝니다", "판매중"),
-(3, 3, "HBD 촛불", 4000, "이거 개쩝니다", "판매중"),
-(4, 1, "샤랄랄라풍선", 5000, "이거 개쩝니다", "판매중");
-
-insert into CARTS(cartId, userNumber, productId, cartQuantity) values
-(1, 1, 1, 1),
-(2, 2, 2, 2),
-(3, 3, 3, 3),
-(4, 4, 4, 4);
-
-insert into ORDERS (orderId, userNumber, productId, orderQuantity) values
-(1, 1, 1, 1);
-
-insert into ORDERDETAILS (orderDetailNumber, cartId, orderId, addressId, deliverystatus) values
-(1, 1, 1, 1, "배송완료");
-
-select * from ORDERDETAILS;
+INSERT INTO productOut (orderId, cartId, productId, outStatus, outDate)
+VALUES (1, 1, 1, 'Out for Delivery', CURDATE());
