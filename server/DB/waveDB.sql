@@ -8,8 +8,8 @@
 
 	CREATE TABLE `USERS` (
 		`userNumber`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		`userID`	VARCHAR(12)	NOT NULL,
-		`password`	VARCHAR(12)	NULL,
+		`userId`	VARCHAR(12)	NOT NULL,
+		`password`	VARCHAR(255)	NULL,
 		`passwordSalt`	VARCHAR(255)	NULL,
 		`userName`	VARCHAR(20)	NULL,
 		`phoneNumber`	VARCHAR(11)	NULL,
@@ -19,7 +19,7 @@
 	);
 
 	CREATE TABLE `ADDRESS` (
-		`addreddId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`addressId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`userNumber`	INT	NOT NULL,
 		`address`	VARCHAR(200)	NULL,
 		foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE

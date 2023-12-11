@@ -3,7 +3,7 @@ module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
     "address",
     {
-      addreddId: {
+      addressId: {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -31,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "addreddId" }],
+          fields: [{ name: "addressId" }],
         },
         {
           name: "userNumber",
