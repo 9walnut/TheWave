@@ -4,6 +4,7 @@ import * as S from "../../styles/adminPage/Users.js";
 
 import Card from "../../shared/adminPage/components/Card";
 import DataTable from "../../shared/adminPage/components/DataTable";
+import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 
 const header = [
   {
@@ -58,7 +59,8 @@ function Users() {
           <li>✅상세조회는 없음</li>
           <li>✅10명씩. 페이지네이션</li>
         </ol>
-        <DataTable headers={header} items={DUMMY} />
+        <DataTable keySet="usersTb_" headers={header} items={DUMMY} />
+        <AdminButtonGrey>선택 회원 삭제하기</AdminButtonGrey>
       </Card>
     </>
   );

@@ -65,7 +65,7 @@ function Products() {
     <>
       <Card>
         <h3>상품 관리</h3>
-        <DataTable headers={header} items={DUMMY} />
+        <DataTable keySet="productsTb_" headers={header} items={DUMMY} />
         <S.ButtonContainer>
           <AdminButtonGrey>선택 상품 삭제하기</AdminButtonGrey>
           <Link to="/admin/products/add">

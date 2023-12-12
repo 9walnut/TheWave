@@ -59,7 +59,7 @@ function Orders() {
           </li>
           <li>✅주문 목록 10개씩 보여주기, 이전 페이지, 다음페이지 구현</li>
         </ol>
-        <DataTable headers={header} items={DUMMY} />
+        <DataTable keySet="ordersTb_" headers={header} items={DUMMY} />
       </Card>
     </>
   );

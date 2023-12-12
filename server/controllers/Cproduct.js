@@ -48,33 +48,33 @@ exports.cartIn = async (req, res) => {
 };
 
 // 장바구니 > 비회원
-exports.noMemberCartIn = async (req, res) => {
-  try {
-    // 타임스탬프로 비회원 번호 생성
-    function randomGuestId() {
-      const timestamp = Date.now();
-      const guestId = "guest_" + timestamp;
-      return guestId;
-    }
+// exports.noMemberCartIn = async (req, res) => {
+//   try {
+//     // 타임스탬프로 비회원 번호 생성
+//     function randomGuestId() {
+//       const timestamp = Date.now();
+//       const guestId = "guest_" + timestamp;
+//       return guestId;
+//     }
 
-    localStorage.setItem("guest", randomGuestId()); // 비회원 번호를 로컬 스토리지에 저장..?
+//     localStorage.setItem("guest", randomGuestId()); // 비회원 번호를 로컬 스토리지에 저장..?
 
-    const guest = localStorage.getItem("guest");
-    console.log("비회원 번호", guest);
+//     const guest = localStorage.getItem("guest");
+//     console.log("비회원 번호", guest);
 
-    const productId = req.params.productId;
-    const cartQuantity = req.body.cartQuantity;
+//     const productId = req.params.productId;
+//     const cartQuantity = req.body.cartQuantity;
 
-    const cartIn = await db.carts.create({
-      productId: productId,
-      userNumber: guest,
-      cartQuantity: cartQuantity,
-    });
+//     const cartIn = await db.carts.create({
+//       productId: productId,
+//       userNumber: guest,
+//       cartQuantity: cartQuantity,
+//     });
 
-    if (cartIn) res.send({ result: true });
-    else res.send({ result: false });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("비회원 장바구니 담기 오류");
-  }
-};
+//     if (cartIn) res.send({ result: true });
+//     else res.send({ result: false });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("비회원 장바구니 담기 오류");
+//   }
+// };
