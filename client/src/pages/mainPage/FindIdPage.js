@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import "./MainPage.css";
-import Button from "../components/register/Button";
-import PageName from "../components/register/PageName";
-import PageInput from "../components/register/PageInput";
+import Button from "../../components/register/Button";
+import PageName from "../../components/register/PageName";
+import PageInput from "../../components/register/PageInput";
 
 function FindIdPage() {
   return (
     <>
-      <Navbar />
       <section>
         <div className="formBox">
           <PageName>아이디 찾기</PageName>
@@ -24,7 +23,6 @@ function FindIdPage() {
           <Button>아이디 찾기</Button>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

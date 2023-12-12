@@ -1,17 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import "./MainPage.css";
-import Button from "../components/register/Button";
-import PageName from "../components/register/PageName";
-import PageInput from "../components/register/PageInput";
+import Button from "../../components/register/Button";
+import PageName from "../../components/register/PageName";
+import PageInput from "../../components/register/PageInput";
 
 function LoginPage() {
   return (
     <>
-      <Navbar />
-
       <section>
         <div className="formBox">
           <PageName>Login</PageName>
@@ -35,7 +33,6 @@ function LoginPage() {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }
