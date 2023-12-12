@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import MainPage from "./pages/MainPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import FindIdPage from "./pages/FindIdPage";
-import FindPwPage from "./pages/FindPwPage";
-import NewPwPage from "./pages/NewPwPage";
+import MainPage from "./pages/mainPage/MainPage";
+import LoginPage from "./pages/mainPage/LoginPage";
+import RegisterPage from "./pages/mainPage/RegisterPage";
+import FindIdPage from "./pages/mainPage/FindIdPage";
+import FindPwPage from "./pages/mainPage/FindPwPage";
+import NewPwPage from "./pages/mainPage/NewPwPage";
 import AdminPageMain from "./pages/adminPage/AdminPageMain";
 // admin
 import MainDashBoard from "./pages/adminPage/MainDashBoard";
@@ -15,17 +15,19 @@ import ProductsAdd from "./pages/adminPage/ProductsAdd";
 import Orders from "./pages/adminPage/Orders";
 import Users from "./pages/adminPage/Users";
 import NotFound from "./shared/NotFound404";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/findId" element={<FindIdPage />} />
-        <Route path="/findPw" element={<FindPwPage />} />
-        <Route path="/findPw/newPw" element={<NewPwPage />} />
+        <Route path="/" element={<MainPage />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/findId" element={<FindIdPage />} />
+          <Route path="/findPw" element={<FindPwPage />} />
+          <Route path="/findPw/newPw" element={<NewPwPage />} />
+        </Route>
 
         {/* admin */}
         <Route path="/admin/*" element={<AdminPageMain />}>

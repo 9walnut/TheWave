@@ -1,16 +1,14 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import "./MainPage.css";
-import Button from "../components/register/Button";
-import PageName from "../components/register/PageName";
-import PageInput from "../components/register/PageInput";
+import Button from "../../components/register/Button";
+import PageName from "../../components/register/PageName";
+import PageInput from "../../components/register/PageInput";
 
 function Register() {
   return (
     <>
-      <Navbar />
-
       <section>
         <div className="formBox">
           <PageName>Register</PageName>
@@ -29,8 +27,6 @@ function Register() {
           <Button link={"/signUp"}>회원가입</Button>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }
