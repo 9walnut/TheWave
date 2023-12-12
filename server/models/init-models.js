@@ -20,33 +20,30 @@ function initModels(sequelize) {
   var products = _products(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
 
-  orders.belongsTo(carts, { as: "cart", foreignKey: "cartId" });
-  carts.hasMany(orders, { as: "orders", foreignKey: "cartId" });
-  productout.belongsTo(carts, { as: "cart", foreignKey: "cartId" });
-  carts.hasMany(productout, { as: "productouts", foreignKey: "cartId" });
-  products.belongsTo(categories, { as: "category", foreignKey: "categoryId" });
-  categories.hasMany(products, { as: "products", foreignKey: "categoryId" });
-  payment.belongsTo(orders, { as: "order", foreignKey: "orderId" });
-  orders.hasMany(payment, { as: "payments", foreignKey: "orderId" });
-  productout.belongsTo(orders, { as: "order", foreignKey: "orderId" });
-  orders.hasMany(productout, { as: "productouts", foreignKey: "orderId" });
-  carts.belongsTo(products, { as: "product", foreignKey: "productId" });
-  products.hasMany(carts, { as: "carts", foreignKey: "productId" });
-  orders.belongsTo(products, { as: "product", foreignKey: "productId" });
-  products.hasMany(orders, { as: "orders", foreignKey: "productId" });
-  productoption.belongsTo(products, { as: "product", foreignKey: "productId" });
-  products.hasOne(productoption, {
-    as: "productoption",
-    foreignKey: "productId",
-  });
-  productout.belongsTo(products, { as: "product", foreignKey: "productId" });
-  products.hasMany(productout, { as: "productouts", foreignKey: "productId" });
-  address.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber" });
-  users.hasMany(address, { as: "addresses", foreignKey: "userNumber" });
-  carts.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber" });
-  users.hasMany(carts, { as: "carts", foreignKey: "userNumber" });
-  orders.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber" });
-  users.hasMany(orders, { as: "orders", foreignKey: "userNumber" });
+  orders.belongsTo(carts, { as: "cart", foreignKey: "cartId"});
+  carts.hasMany(orders, { as: "orders", foreignKey: "cartId"});
+  productout.belongsTo(carts, { as: "cart", foreignKey: "cartId"});
+  carts.hasMany(productout, { as: "productouts", foreignKey: "cartId"});
+  products.belongsTo(categories, { as: "category", foreignKey: "categoryId"});
+  categories.hasMany(products, { as: "products", foreignKey: "categoryId"});
+  payment.belongsTo(orders, { as: "order", foreignKey: "orderId"});
+  orders.hasMany(payment, { as: "payments", foreignKey: "orderId"});
+  productout.belongsTo(orders, { as: "order", foreignKey: "orderId"});
+  orders.hasMany(productout, { as: "productouts", foreignKey: "orderId"});
+  carts.belongsTo(products, { as: "product", foreignKey: "productId"});
+  products.hasMany(carts, { as: "carts", foreignKey: "productId"});
+  orders.belongsTo(products, { as: "product", foreignKey: "productId"});
+  products.hasMany(orders, { as: "orders", foreignKey: "productId"});
+  productoption.belongsTo(products, { as: "product", foreignKey: "productId"});
+  products.hasOne(productoption, { as: "productoption", foreignKey: "productId"});
+  productout.belongsTo(products, { as: "product", foreignKey: "productId"});
+  products.hasMany(productout, { as: "productouts", foreignKey: "productId"});
+  address.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber"});
+  users.hasMany(address, { as: "addresses", foreignKey: "userNumber"});
+  carts.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber"});
+  users.hasMany(carts, { as: "carts", foreignKey: "userNumber"});
+  orders.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber"});
+  users.hasMany(orders, { as: "orders", foreignKey: "userNumber"});
 
   return {
     address,
