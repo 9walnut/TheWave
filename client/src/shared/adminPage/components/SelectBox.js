@@ -1,14 +1,13 @@
 function SelectBox() {
   return (
     <>
-      <h3>얘 어케넣을까</h3>
       <select name="aaaa">
-        <option value="ddd" disabled selected>
+        <option value="releaseStatus" disabled defaultValue>
           출고 상태 변경
         </option>
         <option value="payWait">결제 대기</option>
-        <option value="go">출고</option>
-        <option value="cal">취소</option>
+        <option value="deliveryStart">출고</option>
+        <option value="cancel">취소</option>
       </select>
     </>
   );

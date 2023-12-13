@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import SelectBox from "../../shared/adminPage/components/SelectBox.js";
 
 import * as S from "../../styles/adminPage/Orders.js";
 
 import Card from "../../shared/adminPage/components/Card";
 import DataTable from "../../shared/adminPage/components/DataTable";
+import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
+
+import SelectBox from "../../shared/adminPage/components/SelectBox.js";
 
 const header = [
   {
@@ -45,6 +48,10 @@ const DUMMY = [
 ];
 
 function Orders() {
+  const [selectDeliveryStatus, setSelectDeliveryStatus] = useState("");
+
+  const addSelectBox = () => {};
+
   return (
     <>
       <Card>
@@ -61,6 +68,7 @@ function Orders() {
           <li>✅주문 목록 10개씩 보여주기, 이전 페이지, 다음페이지 구현</li>
         </ol>
         <DataTable keySet="ordersTb_" headers={header} items={DUMMY} />
+        출고 상태 일괄 변경 :&nbsp;
         <SelectBox />
       </Card>
     </>
