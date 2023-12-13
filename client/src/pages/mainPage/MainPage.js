@@ -8,10 +8,12 @@ import Footer from "../../components/Footer";
 function MainPage() {
   return (
     <>
+      <Navbar />
       <section>
         <Carousel />
         <ProductCard />
       </section>
+      <Footer />
     </>
   );
 }

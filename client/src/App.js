@@ -21,13 +21,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />}>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/findId" element={<FindIdPage />} />
-          <Route path="/findPw" element={<FindPwPage />} />
-          <Route path="/findPw/newPw" element={<NewPwPage />} />
-        </Route>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/findId" element={<FindIdPage />} />
+        <Route path="/findPw" element={<FindPwPage />} />
+        <Route path="/findPw/newPw" element={<NewPwPage />} />
 
         {/* admin */}
         <Route path="/admin/*" element={<AdminPageMain />}>
