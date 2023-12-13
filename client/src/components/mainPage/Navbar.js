@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { useEffect, useState } from "react";
-import logo from "../assets/img/theWave.png";
-import search from "../assets/img/search.png";
-import menu from "../assets/img/menu.png";
-import basket from "../assets/img/basket.png";
-import mypage from "../assets/img/mypage.png";
+import logo from "../../assets/img/theWave.png";
+import search from "../../assets/img/search.png";
+import menu from "../../assets/img/menu.png";
+import basket from "../../assets/img/basket.png";
+import mypage from "../../assets/img/mypage.png";
 import React from "react";
 import "./Navbar.css";
 
@@ -78,7 +77,9 @@ function Navbar() {
             </div>
             <div>
               <a>
-                <img src={basket} />
+                <Link to="/cart">
+                  <img src={basket} />
+                </Link>
               </a>
             </div>
           </div>
@@ -97,13 +98,25 @@ function Navbar() {
                 <a href="#">Best</a>
               </li>
               <li>
-                <a href="#">커스텀 풍선</a>
+                <a href="#">캐릭터 풍선</a>
               </li>
               <li>
-                <a href="#">브라이덜 샤워</a>
+                <a href="#">daisy</a>
               </li>
               <li>
-                <a href="#">생화</a>
+                <a href="#">lettering</a>
+              </li>
+              <li>
+                <a href="#">용돈</a>
+              </li>
+              <li>
+                <a href="#">ombre</a>
+              </li>
+              <li>
+                <a href="#">rose</a>
+              </li>
+              <li>
+                <a href="#">tulip</a>
               </li>
             </ul>
           </nav>
