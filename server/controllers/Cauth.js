@@ -1,6 +1,7 @@
 const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
+const { generateAccessToken, verifyToken } = require("../middleware/jwt");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
@@ -22,12 +23,13 @@ exports.loginUser = async (req, res) => {
 
     if (userCheck) {
       const loginUser = await db.users.findOne({
-        where: { userId: userId },
+        where: {
+          userId: userId,
+        },
       });
 
-      req.session.userNumber = loginUser.userNumber; // 로그인 성공 시 session에 userNumber 저장
-      req.session.userId = loginUser.userId;
-      req.session.isAdmin = loginUser.isAdmin; // session에 isAdmin 값 저장
+      const accessToken = generateAccessToken(loginUser);
+      console.log("accessToken 로그인", accessToken);
 
       // 비회원 장바구니 동기화
       // if (cart && cart.length > 0) {
@@ -43,9 +45,9 @@ exports.loginUser = async (req, res) => {
 
       // isAdmin 값에 따라 페이지 이동
       if (loginUser.isAdmin === "Y") {
-        res.send({ result: true, isAdmin: true });
+        res.send({ result: true, isAdmin: true, accessToken: accessToken });
       } else {
-        res.send({ result: true, isAdmin: false });
+        res.send({ result: true, isAdmin: false, accessToken: accessToken });
       }
     } else res.send({ result: false });
   } catch (error) {
