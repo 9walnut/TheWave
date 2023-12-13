@@ -1,4 +1,5 @@
 import React from "react";
+import SelectBox from "../../shared/adminPage/components/SelectBox.js";
 
 import * as S from "../../styles/adminPage/Orders.js";
 
@@ -60,6 +61,7 @@ function Orders() {
           <li>✅주문 목록 10개씩 보여주기, 이전 페이지, 다음페이지 구현</li>
         </ol>
         <DataTable keySet="ordersTb_" headers={header} items={DUMMY} />
+        <SelectBox />
       </Card>
     </>
   );
