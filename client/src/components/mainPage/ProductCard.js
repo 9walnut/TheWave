@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./ProductCard.css";
 
@@ -55,16 +56,18 @@ function ProductCard() {
         {productList.map((value) => {
           return (
             <div key={value.productId} className="cardItemBox">
-              <div>
-                <img src={value.productImg} />
-              </div>
-              <div>
-                <ul>
-                  <li>{value.productName}</li>
-                  <li>{value.productInfo}</li>
-                  <li>{value.productPrice}원</li>
-                </ul>
-              </div>
+              <Link to={"/products"}>
+                <div>
+                  <img src={value.productImg} />
+                </div>
+                <div>
+                  <ul>
+                    <li>{value.productName}</li>
+                    <li>{value.productInfo}</li>
+                    <li>{value.productPrice}원</li>
+                  </ul>
+                </div>
+              </Link>
             </div>
           );
         })}

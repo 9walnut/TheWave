@@ -5,8 +5,12 @@ body {
 }
 
 section {
-  height: 1200px;
-  padding: 40px 250px;
+  height: 1400px;
+  padding: 40px 200px;
+}
+
+.productSection {
+  height: 1400px;
 }
 
 .formBox {
