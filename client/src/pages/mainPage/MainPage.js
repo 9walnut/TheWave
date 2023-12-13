@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./MainPage.css";
-import Navbar from "../../components/Navbar";
-import Carousel from "../../components/Carousel";
-import ProductCard from "../../components/ProductCard";
-import Footer from "../../components/Footer";
+import Navbar from "../../components/mainPage/Navbar";
+import Carousel from "../../components/mainPage/Carousel";
+import ProductCard from "../../components/mainPage/ProductCard";
+import Footer from "../../components/mainPage/Footer";
 
 function MainPage() {
   return (
