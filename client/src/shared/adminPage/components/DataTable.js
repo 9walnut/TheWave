@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // import "../components/DataTable.css";
 import * as S from "./DataTableStyle.js";
+import SelectBox from "./SelectBox.js";
 
 function DataTable({ keySet, headers, items }) {
   if (!headers || !headers.length) {
@@ -58,7 +59,9 @@ function DataTable({ keySet, headers, items }) {
               />
             </S.TableTd>
             {headers.map((header) => (
-              <S.TableHeader key={header.text}>{header.text}</S.TableHeader>
+              <S.TableHeader key={header.text}>
+                {header.value === "deliveryStatus" ? header.text : header.text}
+              </S.TableHeader>
             ))}
           </S.TableTr>
         </thead>
@@ -74,7 +77,7 @@ function DataTable({ keySet, headers, items }) {
               </S.TableTd>
               {headerList.map((value, columnIndex) => (
                 <S.TableTd key={`${keySet}_${index}_${columnIndex}`}>
-                  {item[value]}
+                  {value === "deliveryStatus" ? <SelectBox /> : item[value]}
                 </S.TableTd>
               ))}
             </S.TableTr>

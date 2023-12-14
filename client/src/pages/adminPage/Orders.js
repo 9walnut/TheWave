@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SelectBox from "../../shared/adminPage/components/SelectBox.js";
 
 import * as S from "../../styles/adminPage/Orders.js";
 
@@ -43,15 +42,19 @@ const DUMMY = [
     phoneNumber: "01048589333",
     addressID: 333,
     totalPrice: 12000,
-    deliveryStatus: "배송중",
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 1,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
   },
 ];
 
 function Orders() {
-  const [selectDeliveryStatus, setSelectDeliveryStatus] = useState("");
-
-  const addSelectBox = () => {};
-
   return (
     <>
       <Card>

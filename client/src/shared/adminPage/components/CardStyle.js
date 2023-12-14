@@ -9,5 +9,5 @@ export const CardBox = styled.div`
   border-radius: 4px;
   padding: 1rem;
   overflow: hidden;
-  height: 1000px;
+  height: 100%;
 `;
