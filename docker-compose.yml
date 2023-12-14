@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1q2w3e4r
+  client:
+    build: ./client
+    ports:
+      - 3000:3000
+  server:
+    build: ./server
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    links:
+      - db
