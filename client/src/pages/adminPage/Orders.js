@@ -55,10 +55,6 @@ const DUMMY = [
 ];
 
 function Orders() {
-  const [selectDeliveryStatus, setSelectDeliveryStatus] = useState("");
-
-  const addSelectBox = () => {};
-
   return (
     <>
       <Card>
