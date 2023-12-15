@@ -2,15 +2,19 @@ const {
   db,
   db: { Op },
 } = require("../models/index");
+const { decodeToken } = require("../middleware/jwt");
 
 // 장바구니 조회
 exports.getCart = async (req, res) => {
   try {
+    const accessToken = req.headers["authorization"];
+    const tokenCheck = decodeToken(accessToken);
+
     let cart;
-    if (req.session.userId) {
+    if (tokenCheck.userId) {
       // 회원인 경우
       cart = await db.carts.findAll({
-        where: { userNumber: req.session.userId },
+        where: { userNumber: tokenCheck.userId },
       });
     } else {
       // 비회원인 경우
