@@ -1,10 +1,14 @@
 const { db } = require("../models/index");
+const { decodeToken } = require("../middleware/jwt");
 
 // 결제하기(상품 상세 페이지에서 바로)
 exports.goPayment = async (req, res) => {
   try {
     const { orderQuantity } = req.body;
-    const userNumber = req.session.userNumber;
+    const accessToken = req.headers["authorization"];
+    const tokenCheck = decodeToken(accessToken);
+
+    const userNumber = tokenCheck.userNumber;
 
     const product = await db.products.findOne({
       where: { productId: req.params.productId },

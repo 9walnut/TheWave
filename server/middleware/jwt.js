@@ -24,4 +24,18 @@ function verifyToken(token) {
   return verified;
 }
 
-module.exports = { generateAccessToken, verifyToken };
+function decodeToken(accessToken) {
+  const tokenCut = accessToken.split(" ")[1];
+  const verify = verifyToken(tokenCut);
+
+  try {
+    if (verify) {
+      const decodedToken = jwt.decode(tokenCut);
+      return decodedToken;
+    } else return false;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+module.exports = { generateAccessToken, decodeToken };

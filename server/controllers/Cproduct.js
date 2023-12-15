@@ -1,4 +1,5 @@
 const { db } = require("../models/index");
+const { decodeToken } = require("../middleware/jwt");
 
 // 특정 상품 상세 페이지
 exports.productPage = async (req, res) => {
@@ -16,10 +17,11 @@ exports.productPage = async (req, res) => {
 // '장바구니 담기' 클릭
 exports.cartIn = async (req, res) => {
   try {
-    const userNumber = req.session.userNumber;
-    const guestId = req.body.guestId; // 클라이언트에서 넘어온 비회원 번호
+    const { guestId, cartQuantity } = req.body;
     const productId = req.params.productId;
-    const cartQuantity = req.body.cartQuantity;
+    const accessToken = req.headers["authorization"];
+    const tokenCheck = decodeToken(accessToken);
+    const userNumber = tokenCheck.userNumber;
 
     let userIdForCart;
 

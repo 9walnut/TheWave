@@ -1,7 +1,7 @@
 const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
-const { generateAccessToken, verifyToken } = require("../middleware/jwt");
+const { generateAccessToken, decodeToken } = require("../middleware/jwt");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
@@ -45,11 +45,11 @@ exports.loginUser = async (req, res) => {
 
       // isAdmin 값에 따라 페이지 이동
       if (loginUser.isAdmin === "Y") {
-        res.send({ result: true, isAdmin: true, accessToken: accessToken });
+        res.send({ result: true, isAdmin: true, token: accessToken });
       } else {
-        res.send({ result: true, isAdmin: false, accessToken: accessToken });
+        res.send({ result: true, isAdmin: false, token: accessToken });
       }
-    } else res.send({ result: false });
+    } else res.status(401).send({ result: false });
   } catch (error) {
     console.error(error);
     res.status(500).send("로그인 오류");

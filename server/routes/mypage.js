@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", controller.mypage);
 
 // 회원 정보 수정 페이지
-router.get("/info", controller.editInfo);
+router.get("/info", controller.editInfoPage);
 
 // 회원 정보 수정 페이지 > 비밀번호 인증
 router.post("/pwCheck", controller.editInfoPw);
