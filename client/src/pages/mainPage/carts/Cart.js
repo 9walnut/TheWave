@@ -1,4 +1,4 @@
-import * as S from "../../../styles/mainPage/CartPage";
+import * as S from "../../../styles/mainPage/cartPage";
 function Cart() {
   return (
     <>

@@ -10,6 +10,7 @@ import PageInput from "../../../components/register/PageInput";
 function LoginPage() {
   return (
     <>
+      <Navbar />
       <section>
         <div className="formBox">
           <PageName>Login</PageName>
@@ -33,6 +34,7 @@ function LoginPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

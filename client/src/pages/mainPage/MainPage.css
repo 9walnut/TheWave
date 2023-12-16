@@ -3,27 +3,27 @@ body {
   padding: 0;
   box-sizing: border-box;
   /* height: 100%; */
+  overflow-x: hidden;
 }
 
 section {
   box-sizing: border-box;
-  width: 100%;
-  /* width: auto; */
-  height: 1400px;
+  /* width: 100%; */
+  width: auto;
+  height: 100%;
   padding: 40px 10rem;
 }
 
-.productSection {
-  height: 1400px;
-}
-
 .formBox {
-  height: 80%;
+  padding: 200px 0px;
+  margin: auto;
   display: flex;
+  height: 100%;
+  width: 50%;
   flex-direction: column;
   box-sizing: border-box;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 /* https://d2.naver.com/helloworld/8540176 */

@@ -2,15 +2,16 @@ import styled from "styled-components";
 
 export const ProductLayout = styled.div`
   /* display: flex; */
-  margin-top: 50px;
-  width: 100%;
+  margin: 50px 60px;
+  width: auto;
   height: 100%;
 `;
 
 export const ProductImgBox = styled.div`
   width: 60%;
   padding: 40px;
-  border-right: 1px solid black;
+  /* border-color: #5a5a5a */
+  border-right: 1px solid #5a5a5a;
   img {
     width: 100%;
     object-fit: contain;
@@ -24,7 +25,7 @@ export const ProductInfoBox = styled.div`
 
 export const ProductTopBox = styled.div`
   display: flex;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #5a5a5a;
 `;
 
 export const ProductContentBox = styled.div`
@@ -37,7 +38,7 @@ export const ProductCountBox = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-  border: 1px solid black;
+  border: 1px solid rgb(90, 90, 90);
   height: 40px;
 
   button {

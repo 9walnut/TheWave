@@ -9,6 +9,7 @@ import PageInput from "../../../components/register/PageInput";
 function Register() {
   return (
     <>
+      <Navbar />
       <section>
         <div className="formBox">
           <PageName>Register</PageName>
@@ -27,6 +28,7 @@ function Register() {
           <Button link={"/signUp"}>회원가입</Button>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

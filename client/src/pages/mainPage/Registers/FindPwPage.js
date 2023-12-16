@@ -10,6 +10,7 @@ import PageInput from "../../../components/register/PageInput";
 function FindPwPage() {
   return (
     <>
+      <Navbar />
       <section>
         <div className="formBox">
           <PageName>비밀번호 찾기</PageName>
@@ -24,6 +25,7 @@ function FindPwPage() {
           </Link>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

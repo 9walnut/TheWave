@@ -10,6 +10,7 @@ import PageInput from "../../../components/register/PageInput";
 function newPwPage() {
   return (
     <>
+      <Navbar />
       <section>
         <div className="formBox">
           <PageName>비밀번호 찾기</PageName>
@@ -22,6 +23,7 @@ function newPwPage() {
           <Button>비밀번호 변경 완료</Button>
         </div>
       </section>
+      <Footer />
     </>
   );
 }
