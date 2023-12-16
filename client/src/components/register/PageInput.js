@@ -1,13 +1,14 @@
 import { styled } from "styled-components";
-import "./PageInput.css";
+// import "./PageInput.css";
 function PageInput(props) {
   const StyledInput = styled.input`
-    width: 600px;
+    width: 100%;
     padding: 15px 15px;
     margin-top: 10px;
     margin-bottom: 16px;
     border: 1px solid #d2d2d7;
   `;
+
   return (
     <>
       <div className="InputBox">

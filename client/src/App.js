@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import MainPage from "./pages/mainPage/MainPage";
-import LoginPage from "./pages/mainPage/LoginPage";
-import RegisterPage from "./pages/mainPage/RegisterPage";
-import FindIdPage from "./pages/mainPage/FindIdPage";
-import FindPwPage from "./pages/mainPage/FindPwPage";
-import NewPwPage from "./pages/mainPage/NewPwPage";
+import LoginPage from "./pages/mainPage/Registers/LoginPage";
+import RegisterPage from "./pages/mainPage/Registers/RegisterPage";
+import FindIdPage from "./pages/mainPage/Registers/FindIdPage";
+import FindPwPage from "./pages/mainPage/Registers/FindPwPage";
+import NewPwPage from "./pages/mainPage/Registers/NewPwPage";
 import AdminPageMain from "./pages/adminPage/AdminPageMain";
 // admin
 import MainDashBoard from "./pages/adminPage/MainDashBoard";
