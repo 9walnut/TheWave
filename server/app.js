@@ -2,16 +2,16 @@ const express = require("express");
 const app = express();
 
 // https 모듈 가져오기
-// const https = require("https");
-// const fs = require("fs");
+const https = require("https");
+const fs = require("fs");
 
 // certificate & private key 가져오기
 // 인증서 위치 config내 보관 예정
-// const sslOptions = {
-//   ca: fs.readFileSync("./config/ca.crt"),
-//   key: fs.readFileSync("./config/cert.key"),
-//   cert: fs.readFileSync("./config/cert.crt"),
-// };
+const sslOptions = {
+  // ca: fs.readFileSync("./config/ca.crt"),
+  key: fs.readFileSync("./config/cert.key"),
+  cert: fs.readFileSync("./config/cert.crt"),
+};
 
 const path = require("path");
 const session = require("express-session");
@@ -59,6 +59,6 @@ app.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
 });
 
-// https.createServer(sslOptions, app).listen(8080, () => {
-//   console.log(`Https Sever Open on port 8080`);
-// });
+https.createServer(sslOptions, app).listen(443, () => {
+  console.log(`Https Sever Open on port 443`);
+});
