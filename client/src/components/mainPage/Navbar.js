@@ -98,25 +98,25 @@ function Navbar() {
                 <a href="#">Best</a>
               </li>
               <li>
-                <a href="#">캐릭터 풍선</a>
+                <a href="#">캐릭터</a>
               </li>
               <li>
-                <a href="#">daisy</a>
+                <a href="#">데이지</a>
               </li>
               <li>
-                <a href="#">lettering</a>
+                <a href="#">레터링</a>
               </li>
               <li>
                 <a href="#">용돈</a>
               </li>
               <li>
-                <a href="#">ombre</a>
+                <a href="#">옴브레</a>
               </li>
               <li>
-                <a href="#">rose</a>
+                <a href="#">장미</a>
               </li>
               <li>
-                <a href="#">tulip</a>
+                <a href="#">튤립</a>
               </li>
             </ul>
           </nav>

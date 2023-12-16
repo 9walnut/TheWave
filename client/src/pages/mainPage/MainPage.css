@@ -1,12 +1,16 @@
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   /* height: 100%; */
 }
 
 section {
+  box-sizing: border-box;
+  width: 100%;
+  /* width: auto; */
   height: 1400px;
-  padding: 40px 200px;
+  padding: 40px 10rem;
 }
 
 .productSection {
@@ -17,7 +21,9 @@ section {
   height: 80%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
+/* https://d2.naver.com/helloworld/8540176 */

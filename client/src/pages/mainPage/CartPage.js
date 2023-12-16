@@ -1,6 +1,6 @@
 import Footer from "../../components/mainPage/Footer";
 import Navbar from "../../components/mainPage/Navbar";
-import * as S from "../../styles/mainPage/ProductDetails";
+import * as S from "../../styles/mainPage/ProductDetails.style";
 import styled from "styled-components";
 import "./MainPage.css";
 import ProductDetail from "./products/ProductDetail";
@@ -30,17 +30,17 @@ function CartPage() {
   return (
     <>
       <Navbar />
-      <section>
-        <CartLayout>
-          <CartLeftBox>
-            <Cart />
-          </CartLeftBox>
-          <CartRightBox></CartRightBox>
-          {/* 장바구니 */}
-          {/* 주문 정보 확인 */}
-          {/* 결제 */}
-        </CartLayout>
-      </section>
+      {/* <section> */}
+      <CartLayout>
+        <CartLeftBox>
+          <Cart />
+        </CartLeftBox>
+        <CartRightBox></CartRightBox>
+        {/* 장바구니 */}
+        {/* 주문 정보 확인 */}
+        {/* 결제 */}
+      </CartLayout>
+      {/* </section> */}
       <Footer />
     </>
   );
