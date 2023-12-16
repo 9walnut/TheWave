@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as S from "../../../styles/mainPage/ProductDetails.style";
+import * as S from "../../../styles/mainPage/productDetails.style";
 import Button from "../../../components/register/Button";
 
 function ProductDetail() {
@@ -41,7 +41,7 @@ function ProductDetail() {
           </S.ProductInfoBox>
         </S.ProductTopBox>
         {/* 상품 사진 ~ 내용 등 */}
-        <S.ProductContentBox>상품 사진 ~ ~ 내용</S.ProductContentBox>
+        <S.ProductContentBox>상품 사진 ~ ~ ~ 내용</S.ProductContentBox>
       </S.ProductLayout>
     </>
   );

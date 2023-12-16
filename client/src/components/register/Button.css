@@ -1,5 +1,5 @@
 .pageBtn {
-  width: 100%;
+  width: calc(100% + 30px);
   color: #ffffff;
   background-color: #000000;
   padding: 15px;

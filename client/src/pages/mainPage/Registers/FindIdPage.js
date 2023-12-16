@@ -10,6 +10,7 @@ import PageInput from "../../../components/register/PageInput";
 function FindIdPage() {
   return (
     <>
+      <Navbar />
       <section>
         <div className="formBox">
           <PageName>아이디 찾기</PageName>
@@ -23,6 +24,7 @@ function FindIdPage() {
           <Button>아이디 찾기</Button>
         </div>
       </section>
+      <Footer />
     </>
   );
 }
