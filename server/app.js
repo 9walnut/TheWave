@@ -1,21 +1,11 @@
 const express = require("express");
 const app = express();
-
-// https 모듈 가져오기
-const https = require("https");
-const fs = require("fs");
-
-// certificate & private key 가져오기
-// 인증서 위치 config내 보관 예정
-const sslOptions = {
-  // ca: fs.readFileSync("./config/ca.crt"),
-  key: fs.readFileSync("./config/cert.key"),
-  cert: fs.readFileSync("./config/cert.crt"),
-};
-
+const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const PORT = 8000;
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -57,8 +47,4 @@ app.use("/cart", cartRouter);
 
 app.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
-});
-
-https.createServer(sslOptions, app).listen(443, () => {
-  console.log(`Https Sever Open on port 443`);
 });
