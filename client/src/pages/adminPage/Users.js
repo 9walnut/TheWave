@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import * as S from "../../styles/adminPage/Users.js";
 
+import PageNation from "../../shared/PageNation.js";
 import Card from "../../shared/adminPage/components/Card";
 import DataTable from "../../shared/adminPage/components/DataTable";
 import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
@@ -50,17 +51,32 @@ const DUMMY = [
 ];
 
 function Users() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const oneOfPage = 10;
+
+  const indexOfLastItem = currentPage * oneOfPage;
+  const indexOfFirstItem = indexOfLastItem - oneOfPage;
+
+  const currentItems = DUMMY.slice(indexOfFirstItem, indexOfLastItem);
+
+  function handlePageClick(selectPage) {
+    setCurrentPage(selectPage);
+  }
   return (
     <>
       <Card>
         <h3>회원 관리</h3>
         <ol>
-          <li>✅체크박스로 선택 가능하도록 (전체선택, 회원삭제 버튼)</li>
-          <li>✅상세조회는 없음</li>
-          <li>✅10명씩. 페이지네이션</li>
+          <li>✅상세조회 없음</li>
         </ol>
-        <DataTable keySet="usersTb_" headers={header} items={DUMMY} />
+        <DataTable keySet="usersTb_" headers={header} items={currentItems} />
         <AdminButtonGrey>선택 회원 삭제하기</AdminButtonGrey>
+        <PageNation
+          total={DUMMY.length}
+          limit={oneOfPage}
+          page={currentPage}
+          setPage={handlePageClick}
+        />
       </Card>
     </>
   );

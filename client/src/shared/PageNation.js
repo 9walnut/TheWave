@@ -1,3 +1,5 @@
+import * as S from "./PageNationStyle.js";
+
 function PageNation({ total, limit, page, setPage }) {
   const totalPages = Math.ceil(total / limit);
 
@@ -11,25 +13,34 @@ function PageNation({ total, limit, page, setPage }) {
     const buttons = [];
     for (let i = 1; i <= totalPages; i++) {
       buttons.push(
-        <button key={i} active={i === page} onClick={() => handlePageClick(i)}>
+        <S.PageButton
+          key={i}
+          active={i === page}
+          onClick={() => handlePageClick(i)}
+        >
           {i}
-        </button>
+        </S.PageButton>
       );
     }
     return buttons;
   }
   return (
     <>
-      <button onClick={() => handlePageClick(page - 1)} disabled={page === 1}>
-        이전
-      </button>
-      {renderPageButtons()}
-      <button
-        onClick={() => handlePageClick(page + 1)}
-        disabled={page === totalPages}
-      >
-        다음
-      </button>
+      <S.PageNationWrapper>
+        <S.PageButton
+          onClick={() => handlePageClick(page - 1)}
+          disabled={page === 1}
+        >
+          이전
+        </S.PageButton>
+        {renderPageButtons()}
+        <S.PageButton
+          onClick={() => handlePageClick(page + 1)}
+          disabled={page === totalPages}
+        >
+          다음
+        </S.PageButton>
+      </S.PageNationWrapper>
     </>
   );
 }
