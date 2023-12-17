@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-// import "./PageInput.css";
+import "./PageInput.css";
 function PageInput(props) {
   const StyledInput = styled.input`
     width: 100%;
