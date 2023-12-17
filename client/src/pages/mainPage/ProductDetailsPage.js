@@ -1,6 +1,6 @@
 import Footer from "../../components/mainPage/Footer";
 import Navbar from "../../components/mainPage/Navbar";
-import * as S from "../../styles/mainPage/productDetails.style";
+import * as S from "../../styles/mainPage/ProductDetails.style.js";
 import styled from "styled-components";
 import "./MainPage.css";
 import ProductDetail from "./products/ProductDetail";
