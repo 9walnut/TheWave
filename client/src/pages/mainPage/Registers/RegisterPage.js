@@ -25,6 +25,7 @@ function Register() {
           </PageInput>
           <PageInput type={"text"}>성별</PageInput>
           <PageInput type={"text"}>주소</PageInput>
+          {/*도로명 주소 컴포넌트 여기에 넣어주세요 */}
           <Button link={"/signUp"}>회원가입</Button>
         </div>
       </section>
