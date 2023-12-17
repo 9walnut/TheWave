@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as S from "../../../styles/mainPage/productDetails.style";
+import * as S from "../../../styles/mainPage/ProductDetails.style.js";
 import Button from "../../../components/register/Button";
 
 function ProductDetail() {
