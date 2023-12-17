@@ -1,12 +1,12 @@
 import "./Carousel.css";
-function Carousel() {
+import { useState } from "react";
+
+function CarouselComponent() {
   return (
     <>
-      <div className="carouselBox">
-        <h4>캐러셀 좌르르르르륵</h4>
-      </div>
+      <div className="carouselBox">dd</div>
     </>
   );
 }
 
-export default Carousel;
+export default CarouselComponent;

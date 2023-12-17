@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./MainPage.css";
 import Navbar from "../../components/mainPage/Navbar";
-import Carousel from "../../components/mainPage/Carousel";
+import CarouselComponent from "../../components/mainPage/Carousel";
 import ProductCard from "../../components/mainPage/ProductCard";
 import Footer from "../../components/mainPage/Footer";
 
@@ -10,7 +10,7 @@ function MainPage() {
     <>
       <Navbar />
       <section>
-        <Carousel />
+        {/* <CarouselComponent /> */}
         <ProductCard />
       </section>
       <Footer />
