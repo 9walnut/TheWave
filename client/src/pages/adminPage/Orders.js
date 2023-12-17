@@ -7,6 +7,7 @@ import DataTable from "../../shared/adminPage/components/DataTable";
 import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 
 import SelectBox from "../../shared/adminPage/components/SelectBox.js";
+import PageNation from "../../shared/PageNation.js";
 
 const header = [
   {
@@ -45,7 +46,87 @@ const DUMMY = [
     deliveryStatus: "",
   },
   {
-    orderDetailNumber: 1,
+    orderDetailNumber: 2,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 3,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 4,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 5,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 6,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 7,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 8,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 9,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 10,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 11,
+    userName: "루돌프",
+    phoneNumber: "01048589333",
+    addressID: 333,
+    totalPrice: 12000,
+    deliveryStatus: "",
+  },
+  {
+    orderDetailNumber: 12,
     userName: "루돌프",
     phoneNumber: "01048589333",
     addressID: 333,
@@ -55,6 +136,18 @@ const DUMMY = [
 ];
 
 function Orders() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const oneOfPage = 10;
+
+  const indexOfLastItem = currentPage * oneOfPage;
+  const indexOfFirstItem = indexOfLastItem - oneOfPage;
+
+  const currentItems = DUMMY.slice(indexOfFirstItem, indexOfLastItem);
+
+  function handlePageClick(selectPage) {
+    setCurrentPage(selectPage);
+  }
+
   return (
     <>
       <Card>
@@ -70,9 +163,15 @@ function Orders() {
           </li>
           <li>✅주문 목록 10개씩 보여주기, 이전 페이지, 다음페이지 구현</li>
         </ol>
-        <DataTable keySet="ordersTb_" headers={header} items={DUMMY} />
+        <DataTable keySet="ordersTb_" headers={header} items={currentItems} />
         출고 상태 일괄 변경 :&nbsp;
         <SelectBox />
+        <PageNation
+          total={DUMMY.length}
+          limit={oneOfPage}
+          page={currentPage}
+          setPage={handlePageClick}
+        />
       </Card>
     </>
   );
