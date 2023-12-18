@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@actbase/react-daum-postcode": "^1.0.4",
+    "@nivo/core": "^0.84.0",
+    "@nivo/pie": "^0.84.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
