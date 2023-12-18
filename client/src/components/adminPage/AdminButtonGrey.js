@@ -1,12 +1,18 @@
 import * as S from "./AdminButtonGreyStyle.js";
 
-function AdminButtonGrey(props) {
+function AdminButtonGrey({ onClick, children }) {
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <>
-      <div>
-        <S.AdminButtonGreyStyle>{props.children}</S.AdminButtonGreyStyle>
-      </div>
-    </>
+    <div>
+      <S.AdminButtonGreyStyle onClick={handleClick}>
+        {children}
+      </S.AdminButtonGreyStyle>
+    </div>
   );
 }
 

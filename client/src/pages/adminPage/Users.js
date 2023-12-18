@@ -62,6 +62,10 @@ function Users() {
   function handlePageClick(selectPage) {
     setCurrentPage(selectPage);
   }
+
+  const [items, setItems] = useState(DUMMY);
+  console.log("바뀐 items 넘어오는거 확인", items);
+
   return (
     <>
       <Card>
@@ -69,8 +73,15 @@ function Users() {
         <ol>
           <li>✅상세조회 없음</li>
         </ol>
-        <DataTable keySet="usersTb_" headers={header} items={currentItems} />
-        <AdminButtonGrey>선택 회원 삭제하기</AdminButtonGrey>
+        <DataTable
+          keySet="usersTb_"
+          headers={header}
+          items={currentItems}
+          setItems={setItems}
+          setDelete="true"
+          btnMsg="회원 삭제하기"
+        />
+        {/* <AdminButtonGrey>선택 회원 삭제하기</AdminButtonGrey> */}
         <PageNation
           total={DUMMY.length}
           limit={oneOfPage}
