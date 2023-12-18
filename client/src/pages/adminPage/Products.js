@@ -164,23 +164,22 @@ function Products() {
     setCurrentPage(selectPage);
   }
   //---deleteProducts (진행중)
-  const [deleteProduct, setDeleteProduct] = useState(new Set());
-  function deleteProducts(item) {
-    const newCheckedLists = new Set(deleteProduct);
-    const checkedItem = currentItems.findIndex((i) => i === item);
-    if (newCheckedLists.has(checkedItem)) {
-      newCheckedLists.delete(checkedItem);
-    }
-  }
+  const [items, setItems] = useState(DUMMY);
+  console.log("바뀐 items 넘어오는거 확인", items);
+
   return (
     <>
       <Card>
         <h3>상품 관리</h3>
-        <DataTable keySet="productsTb_" headers={header} items={currentItems} />
+        <DataTable
+          keySet="productsTb_"
+          headers={header}
+          items={currentItems}
+          setItems={setItems}
+          setDelete="true"
+          btnMsg="전체 상품 삭제하기"
+        />
         <S.ButtonContainer>
-          <AdminButtonGrey onCliK={deleteProducts}>
-            선택 상품 삭제하기
-          </AdminButtonGrey>
           <Link to="/admin/products/add">
             <AdminButtonBlack>상품 등록하기</AdminButtonBlack>
           </Link>

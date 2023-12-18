@@ -3,12 +3,14 @@ import React, { useState } from "react";
 // import "../components/DataTable.css";
 import * as S from "./DataTableStyle.js";
 import SelectBox from "./SelectBox.js";
+import AdminButtonGrey from "../../../components/adminPage/AdminButtonGrey.js";
 
-function DataTable({ keySet, headers, items }) {
+function DataTable({ keySet, headers, items, setItems, setDelete, btnMsg }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
   const [selectedLists, setSelectedLists] = useState(new Set());
+  const [selectedStatus, setSelectedStatus] = useState("");
 
   const onChecked = (item) => {
     const newSelectedLists = new Set(selectedLists);
@@ -18,6 +20,11 @@ function DataTable({ keySet, headers, items }) {
     } else {
       newSelectedLists.add(checkedItem);
     }
+
+    const selectedStatus =
+      Array.from(newSelectedLists).length > 0 ? "your_selected_value" : "";
+    setSelectedStatus(selectedStatus);
+
     setSelectedLists(newSelectedLists);
 
     const selectedContents = Array.from(newSelectedLists).map(
@@ -43,6 +50,19 @@ function DataTable({ keySet, headers, items }) {
     );
 
     console.log("selectedAllContents", selectedAllContents);
+  };
+
+  const deleteChecked = () => {
+    const selectedIndexes = Array.from(selectedLists);
+    const updatedItems = items.filter(
+      (_, index) => !selectedIndexes.includes(index)
+    );
+    const deletedItems = selectedIndexes.map((index) => items[index]);
+    setItems(updatedItems);
+
+    console.log("삭제 전 배열", items);
+    console.log("뭐가 삭제될거니", deletedItems);
+    console.log("삭제 후 배열", updatedItems);
   };
 
   const headerList = headers.map((header) => header.value);
@@ -77,13 +97,23 @@ function DataTable({ keySet, headers, items }) {
               </S.TableTd>
               {headerList.map((value, columnIndex) => (
                 <S.TableTd key={`${keySet}_${index}_${columnIndex}`}>
-                  {value === "deliveryStatus" ? <SelectBox /> : item[value]}
+                  {value === "deliveryStatus" ? (
+                    <SelectBox
+                      value={selectedStatus}
+                      onChange={(e) => setSelectedStatus(e.target.value)}
+                    />
+                  ) : (
+                    item[value]
+                  )}
                 </S.TableTd>
               ))}
             </S.TableTr>
           ))}
         </tbody>
       </S.Table>
+      {setDelete === "true" && (
+        <AdminButtonGrey onClick={deleteChecked}>{btnMsg}</AdminButtonGrey>
+      )}
     </>
   );
 }
