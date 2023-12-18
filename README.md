@@ -129,9 +129,13 @@ $ node .\app.js
 <img src="https://img.shields.io/badge/Jenkins-%23D24939?style=for-the-badge&logo=Jenkins&logoColor=white"> <img src="https://img.shields.io/badge/Docker-%232496ED?style=for-the-badge&logo=docker&logoColor=white">
 <br />
 
-<details markdown="1">
+<details>
+<summary>
+  
+## 📌 커밋 컨벤션
 
-<summary> <h2> 📌 커밋 컨벤션  </h2> </summary>
+</summary>
+
 | Emoji | Code                          | 기능     | Description              |
 | ----- | ----------------------------- | -------- | ------------------------ |
 | ✨    | `:sparkles:`                  | Feat     | 새 기능                  |
@@ -149,3 +153,4 @@ $ node .\app.js
 | 🚀    | `:rocket:`                    | Deploy   | 배포                     |
 
 </details>
+
