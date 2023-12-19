@@ -13,6 +13,8 @@ ADD ./build ./build
 # nginx 의 default.conf 를 삭제
 RUN rm /etc/nginx/conf.d/default.conf
 
+# host pc의 nginx.conf 파일을 Docker 이미지의 /etc/nginx/nginx.conf 위치로 복사
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # 80 포트 오픈
 EXPOSE 80 443
