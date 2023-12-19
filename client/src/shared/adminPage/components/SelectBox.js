@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+//{ value, onChange } 를 받아서 셀렉트박스에서 사용해야하나....
+
 function SelectBox() {
   const [releaseStatus, setReleaseStatus] = useState("");
 

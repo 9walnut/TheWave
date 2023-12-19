@@ -13,8 +13,8 @@ ADD ./build ./build
 # nginx 의 default.conf 를 삭제
 RUN rm /etc/nginx/conf.d/default.conf
 
-# host pc의 SSL 인증서 파일을 nginx가 참조할 수 있는 경로로 복사
-COPY ./letsencrypt/live/thewavemarket.com/ /etc/letsencrypt/live/thewavemarket.com/
+# host pc의 nginx.conf 파일을 Docker 이미지의 /etc/nginx/nginx.conf 위치로 복사
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # 80 포트 오픈
 EXPOSE 80 443
