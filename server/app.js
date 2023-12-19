@@ -1,9 +1,13 @@
+const http = require("http");
 const express = require("express");
 const app = express();
+const server = http.createServer(app);
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const PORT = 8000;
+
+const io = require("socket.io")(server);
 
 app.use(cors());
 
@@ -45,6 +49,8 @@ app.use("/admin", adminRouter);
 const cartRouter = require("./routes/cart");
 app.use("/cart", cartRouter);
 
-app.listen(PORT, function () {
+io.on("connection", (socket) => {});
+
+server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
 });
