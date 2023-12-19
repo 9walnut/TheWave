@@ -1,45 +1,37 @@
 version: "3.3"
 services:
-  db:
-    image: mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=1q2w3e4r
   nginx:
-    networks:
-      - app-tier
-    build:
-      context: ./client
-      dockerfile: ./Dockerfile
-    container_name: thewavefe
-    volumes:
-      - /app/node_modules
-      - ./frontend:/app
-      - ../certbot/conf:/etc/letsencrypt # 추가
-      - ../certbot/www:/var/www/certbot # 추가
-    restart: always
+    image: nginx:latest
+    container_name: nginx
     ports:
       - "80:80"
       - "443:443"
-    expose:
-      - "80"
-      - "443"
-    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
-
-  certbot: # certbot 서비스 추가
-    image: certbot/certbot
-    container_name: certbot_service
     volumes:
-      - ../certbot/conf:/etc/letsencrypt
-      - ../certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./build:/usr/share/nginx/html
+      - ./certs:/etc/letsencrypt
+    depends_on:
+      - server
 
   server:
     build: ./server
     ports:
       - 8000:8000
-    environment:
-      PORT: 3000
     depends_on:
-      - db
-    links:
-      - db
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql_new
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: qwer1234!
+      MYSQL_DATABASE: thewave
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1q2w3e4r
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
