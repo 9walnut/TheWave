@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import * as S from "../../styles/adminPage/Users.js";
-
-import PageNation from "../../shared/PageNation.js";
 import Card from "../../shared/adminPage/components/Card";
+
 import DataTable from "../../shared/adminPage/components/DataTable";
-import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
+import PageNation from "../../shared/PageNation.js";
+import PageNationFunc from "../../shared/PageNationFunc.js";
 
 const header = [
   {
@@ -51,17 +51,8 @@ const DUMMY = [
 ];
 
 function Users() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const oneOfPage = 10;
-
-  const indexOfLastItem = currentPage * oneOfPage;
-  const indexOfFirstItem = indexOfLastItem - oneOfPage;
-
-  const currentItems = DUMMY.slice(indexOfFirstItem, indexOfLastItem);
-
-  function handlePageClick(selectPage) {
-    setCurrentPage(selectPage);
-  }
+  const { currentPage, oneOfPage, currentItems, handlePageClick } =
+    PageNationFunc(DUMMY);
 
   const [items, setItems] = useState(DUMMY);
   console.log("바뀐 items 넘어오는거 확인", items);

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
 import * as S from "../../styles/adminPage/Orders.js";
-
 import Card from "../../shared/adminPage/components/Card";
-import DataTable from "../../shared/adminPage/components/DataTable";
-import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 
-import SelectBox from "../../shared/adminPage/components/SelectBox.js";
+import DataTable from "../../shared/adminPage/components/DataTable";
 import PageNation from "../../shared/PageNation.js";
+import PageNationFunc from "../../shared/PageNationFunc.js";
+import SelectBox from "../../shared/adminPage/components/SelectBox.js";
 
 const header = [
   {
@@ -136,17 +135,8 @@ const DUMMY = [
 ];
 
 function Orders() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const oneOfPage = 10;
-
-  const indexOfLastItem = currentPage * oneOfPage;
-  const indexOfFirstItem = indexOfLastItem - oneOfPage;
-
-  const currentItems = DUMMY.slice(indexOfFirstItem, indexOfLastItem);
-
-  function handlePageClick(selectPage) {
-    setCurrentPage(selectPage);
-  }
+  const { currentPage, oneOfPage, currentItems, handlePageClick } =
+    PageNationFunc(DUMMY);
 
   return (
     <>

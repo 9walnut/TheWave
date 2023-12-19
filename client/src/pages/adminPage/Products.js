@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import * as S from "../../styles/adminPage/Products.js";
+import Card from "../../shared/adminPage/components/Card";
+import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 
 import PageNation from "../../shared/PageNation.js";
-import Card from "../../shared/adminPage/components/Card";
+import PageNationFunc from "../../shared/PageNationFunc.js";
 import DataTable from "../../shared/adminPage/components/DataTable";
-import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
-import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 
 const header = [
   {
@@ -151,18 +151,10 @@ const DUMMY = [
   },
 ];
 function Products() {
-  //---PageNation
-  const [currentPage, setCurrentPage] = useState(1);
-  const oneOfPage = 10;
+  //---해체 할당. return 된 객체에서 원하는 속성 추출, 변수로 사용
+  const { currentPage, oneOfPage, currentItems, handlePageClick } =
+    PageNationFunc(DUMMY);
 
-  const indexOfLastItem = currentPage * oneOfPage;
-  const indexOfFirstItem = indexOfLastItem - oneOfPage;
-
-  const currentItems = DUMMY.slice(indexOfFirstItem, indexOfLastItem);
-
-  function handlePageClick(selectPage) {
-    setCurrentPage(selectPage);
-  }
   //---deleteProducts (진행중)
   const [items, setItems] = useState(DUMMY);
   console.log("바뀐 items 넘어오는거 확인", items);
@@ -177,7 +169,7 @@ function Products() {
           items={currentItems}
           setItems={setItems}
           setDelete="true"
-          btnMsg="전체 상품 삭제하기"
+          btnMsg="선택 상품 삭제하기"
         />
         <S.ButtonContainer>
           <Link to="/admin/products/add">
