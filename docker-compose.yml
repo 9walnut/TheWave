@@ -22,7 +22,7 @@ services:
 
   mysql:
     image: mysql:latest
-    container_name: mysql_new
+    container_name: mysql_latest
     ports:
       - "3306:3306"
     environment:
