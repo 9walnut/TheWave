@@ -114,7 +114,7 @@ exports.register = async (req, res) => {
       address: address,
     });
 
-    res.send({ userInfo, userAddress, result: true });
+    res.send({ userInfo, userAddress, result: true, msg: "하이헬로우" });
   } catch (error) {
     console.error(error);
     res.status(500).send("회원가입 오류");

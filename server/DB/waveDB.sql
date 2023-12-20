@@ -5,7 +5,8 @@
 	FLUSH PRIVILEGES;
 
 	drop database thewave;
-
+    
+    
 	CREATE TABLE `USERS` (
 		`userNumber`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`userId`	VARCHAR(12)	NOT NULL,
