@@ -16,12 +16,6 @@ import Users from "./pages/adminPage/Users";
 import NotFound from "./shared/NotFound404";
 import ProductDetailsPage from "./pages/mainPage/ProductDetailsPage";
 import CartPage from "./pages/mainPage/CartPage";
-// chatbot
-import Chatbot from "react-chatbot-kit";
-import "react-chatbot-kit/build/main.css";
-import config from "../bot/config.js";
-import MessageParser from "../bot/MessageParser.js";
-import ActionProvider from "../bot/ActionProvider.js";
 
 function App() {
   return (
@@ -35,12 +29,7 @@ function App() {
         <Route path="/findPw/newPw" element={<NewPwPage />} />
         <Route path="/products" element={<ProductDetailsPage />} />
         <Route path="/cart" element={<CartPage />} />
-        {/* ChatBot */}
-        <Chatbot
-          config={config}
-          messageParser={MessageParser}
-          actionProvider={ActionProvider}
-        />
+
         {/* admin */}
         <Route path="/admin/*" element={<AdminPageMain />}>
           <Route path="dashboard" element={<MainDashBoard />} />
