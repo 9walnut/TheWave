@@ -11,6 +11,9 @@ router.get("/login", controller.loginPage);
 // '로그인' 버튼 클릭 시
 router.post("/login", controller.loginUser);
 
+// '로그아웃' 버튼 클릭 시
+router.get("/logout", controller.logout);
+
 // '아이디 중복 확인' 버튼 클릭시
 router.post("/register/idCheck", controller.idCheck);
 

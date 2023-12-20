@@ -1,18 +1,20 @@
 const { db } = require("../models/index");
 const { comparePw } = require("../middleware/pw");
-const { decodeToken } = require("../middleware/jwt");
+const { verifyToken } = require("../middleware/jwt");
 
 // 회원 마이페이지(마이페이지 렌더 시 바로 주문 내역 노출)
 exports.mypage = async (req, res) => {
   try {
-    const accessToken = req.headers["authorization"]; // 헤더에서 토큰값 받아오기
+    const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
+    const refreshToken = req.headers["refresh"]; // 헤더에서 refresh 토큰값 받아오기
     console.log("accessToken", accessToken);
+    console.log("refreshToken", refreshToken);
 
-    const tokenCheck = decodeToken(accessToken); // 토큰 검증 및 디코딩
+    const tokenCheck = verifyToken(accessToken, refreshToken); // 토큰 검증 및 디코딩
 
     if (tokenCheck) {
       const orderList = await db.orders.findAll({
-        where: { userNumber: tokenCheck.userNumber },
+        where: { userNumber: tokenCheck.userInfo.userNumber },
         attributes: [
           "productId",
           "orderDate",
@@ -41,15 +43,18 @@ exports.editInfoPage = (req, res) => {
 exports.editInfoPw = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
-    const tokenCheck = decodeToken(accessToken);
-
+    const refreshToken = req.headers["refresh"];
+    const tokenCheck = verifyToken(accessToken, refreshToken);
     console.log("tokenCheck", tokenCheck);
 
-    const pwCheck = await comparePw(tokenCheck.userId, req.body.password);
+    const pwCheck = await comparePw(
+      tokenCheck.userInfo.userId,
+      req.body.password
+    );
 
     if (pwCheck) {
       const userInfo = await db.users.findOne({
-        where: { userNumber: tokenCheck.userNumber },
+        where: { userNumber: tokenCheck.userInfo.userNumber },
       });
       res.json(userInfo);
     } else res.send({ result: false });
@@ -63,10 +68,11 @@ exports.editInfoPw = async (req, res) => {
 exports.editInfo = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
-    const tokenCheck = decodeToken(accessToken);
+    const refreshToken = req.headers["refresh"];
+    const tokenCheck = verifyToken(accessToken, refreshToken);
 
     const editInfo = await db.users.update(req.body, {
-      where: { userNumber: tokenCheck.userNumber },
+      where: { userNumber: tokenCheck.userInfo.userNumber },
     });
     if (editInfo) res.send({ result: true });
     else res.send({ result: false });
@@ -80,13 +86,17 @@ exports.editInfo = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
-    const tokenCheck = decodeToken(accessToken);
+    const refreshToken = req.headers["refresh"];
+    const tokenCheck = verifyToken(accessToken, refreshToken);
 
-    const pwCheck = await comparePw(tokenCheck.userId, req.body.password);
+    const pwCheck = await comparePw(
+      tokenCheck.userInfo.userId,
+      req.body.password
+    );
     if (pwCheck) {
       await db.users.destroy({
         where: {
-          userNumber: tokenCheck.userNumber,
+          userNumber: tokenCheck.userInfo.userNumber,
         },
       });
       res.send({ result: true });
