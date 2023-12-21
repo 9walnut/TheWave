@@ -34,8 +34,6 @@ exports.loginUser = async (req, res) => {
       console.log("accessToken", accessToken);
       console.log("refreshToken", refreshToken);
 
-      redisClient.set(userId, refreshToken); // redis에 refresh 토큰 저장
-
       // 비회원 장바구니 동기화
       // if (cart && cart.length > 0) {
       //   for (const item of cart) {
@@ -48,22 +46,31 @@ exports.loginUser = async (req, res) => {
       //   }
       // }
 
-      // isAdmin 값에 따라 페이지 이동
-      if (loginUser.isAdmin === "Y") {
-        res.send({
-          result: true,
-          isAdmin: true,
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        });
-      } else {
-        res.send({
-          result: true,
-          isAdmin: false,
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        });
-      }
+      redisClient.set(userId, refreshToken, (err, reply) => {
+        if (err) {
+          console.error("Redis set failed:", err);
+          res.status(500).send("로그인 오류");
+        } else {
+          console.log("Redis set succeeded:", reply);
+
+          // isAdmin 값에 따라 페이지 이동
+          if (loginUser.isAdmin === "Y") {
+            res.send({
+              result: true,
+              isAdmin: true,
+              accessToken: accessToken,
+              refreshToken: refreshToken,
+            });
+          } else {
+            res.send({
+              result: true,
+              isAdmin: false,
+              accessToken: accessToken,
+              refreshToken: refreshToken,
+            });
+          }
+        }
+      });
     } else res.status(401).send({ result: false });
   } catch (error) {
     console.error(error);

@@ -1,8 +1,8 @@
+require("dotenv").config();
+const secret = process.env.SECRET_KEY;
 const redis = require("redis");
 const redisClient = redis.createClient(process.env.REDIS_PORT);
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
-const secret = process.env.SECRET_KEY;
 const { promisify } = require("util");
 
 // 토큰 생성 함수(access, refresh 토큰 반환)
