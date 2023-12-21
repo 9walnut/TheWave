@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import * as S from "../../styles/adminPage/Products.js";
 import Card from "../../shared/adminPage/components/Card";
@@ -158,6 +159,23 @@ function Products() {
   //---deleteProducts (진행중)
   const [items, setItems] = useState(DUMMY);
   console.log("바뀐 items 넘어오는거 확인", items);
+
+  //---axios
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/admin/products");
+        console.log("response", response.data);
+
+        setProducts(response.data);
+      } catch (error) {
+        console.error("에러", error.response.data);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
