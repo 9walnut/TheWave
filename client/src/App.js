@@ -29,6 +29,7 @@ function App() {
         <Route path="/findPw/newPw" element={<NewPwPage />} />
         <Route path="/products" element={<ProductDetailsPage />} />
         <Route path="/cart" element={<CartPage />} />
+
         {/* admin */}
         <Route path="/admin/*" element={<AdminPageMain />}>
           <Route path="dashboard" element={<MainDashBoard />} />
