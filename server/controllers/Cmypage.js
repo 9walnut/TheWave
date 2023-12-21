@@ -1,18 +1,24 @@
 const { db } = require("../models/index");
 const { comparePw } = require("../middleware/pw");
-const { decodeToken } = require("../middleware/jwt");
+const { verifyToken } = require("../middleware/jwt");
+const jwt = require("jsonwebtoken");
 
 // 회원 마이페이지(마이페이지 렌더 시 바로 주문 내역 노출)
 exports.mypage = async (req, res) => {
   try {
-    const accessToken = req.headers["authorization"]; // 헤더에서 토큰값 받아오기
-    console.log("accessToken", accessToken);
+    const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
 
-    const tokenCheck = decodeToken(accessToken); // 토큰 검증 및 디코딩
+    const tokenCheck = await verifyToken(accessToken); // 토큰 검증 및 디코딩
+    console.log("tokenCheck", tokenCheck);
 
-    if (tokenCheck) {
+    if (
+      tokenCheck.result !== "no token" &&
+      tokenCheck.result !== "signin again"
+    ) {
+      const decodedToken = jwt.decode(tokenCheck.accessToken);
+
       const orderList = await db.orders.findAll({
-        where: { userNumber: tokenCheck.userNumber },
+        where: { userNumber: decodedToken.userNumber },
         attributes: [
           "productId",
           "orderDate",
@@ -21,10 +27,11 @@ exports.mypage = async (req, res) => {
         ],
       });
 
-      if (orderList) res.json(orderList);
-      else res.send({ result: true }); // 주문 내역 없는 경우
+      if (orderList)
+        res.json({ orderList: orderList, accessToken: tokenCheck.accessToken });
+      else res.send({ result: true, accessToken: tokenCheck.accessToken }); // 주문 내역 없는 경우
     } else {
-      res.send({ result: false }); // 토큰 검증 실패
+      res.send({ result: tokenCheck.result }); // 토큰 검증 실패
     }
   } catch (error) {
     console.error(error);
@@ -41,17 +48,17 @@ exports.editInfoPage = (req, res) => {
 exports.editInfoPw = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
-    const tokenCheck = decodeToken(accessToken);
+    const tokenCheck = await verifyToken(accessToken);
+    const decodedToken = jwt.decode(tokenCheck.accessToken);
+    console.log("decodedToken", decodedToken);
 
-    console.log("tokenCheck", tokenCheck);
-
-    const pwCheck = await comparePw(tokenCheck.userId, req.body.password);
+    const pwCheck = await comparePw(decodedToken.userId, req.body.password);
 
     if (pwCheck) {
       const userInfo = await db.users.findOne({
-        where: { userNumber: tokenCheck.userNumber },
+        where: { userNumber: decodedToken.userNumber },
       });
-      res.json(userInfo);
+      res.json({ result: true });
     } else res.send({ result: false });
   } catch (error) {
     console.error(error);
@@ -63,10 +70,11 @@ exports.editInfoPw = async (req, res) => {
 exports.editInfo = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
-    const tokenCheck = decodeToken(accessToken);
+    const tokenCheck = await verifyToken(accessToken);
+    const decodedToken = jwt.decode(tokenCheck.accessToken);
 
     const editInfo = await db.users.update(req.body, {
-      where: { userNumber: tokenCheck.userNumber },
+      where: { userNumber: decodedToken.userNumber },
     });
     if (editInfo) res.send({ result: true });
     else res.send({ result: false });
@@ -80,13 +88,14 @@ exports.editInfo = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
-    const tokenCheck = decodeToken(accessToken);
+    const tokenCheck = await verifyToken(accessToken);
+    const decodedToken = jwt.decode(tokenCheck.accessToken);
 
-    const pwCheck = await comparePw(tokenCheck.userId, req.body.password);
+    const pwCheck = await comparePw(decodedToken.userId, req.body.password);
     if (pwCheck) {
       await db.users.destroy({
         where: {
-          userNumber: tokenCheck.userNumber,
+          userNumber: decodedToken.userNumber,
         },
       });
       res.send({ result: true });

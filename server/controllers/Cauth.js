@@ -2,6 +2,7 @@ const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
 const { generateAccessToken, decodeToken } = require("../middleware/jwt");
+const redisClient = require("../middleware/redis");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
@@ -28,8 +29,11 @@ exports.loginUser = async (req, res) => {
         },
       });
 
-      const accessToken = generateAccessToken(loginUser);
-      console.log("accessToken 로그인", accessToken);
+      const { accessToken, refreshToken } = generateAccessToken(loginUser);
+      console.log("accessToken", accessToken);
+      console.log("refreshToken", refreshToken);
+
+      await redisClient.set(userId, refreshToken);
 
       // 비회원 장바구니 동기화
       // if (cart && cart.length > 0) {
@@ -45,9 +49,17 @@ exports.loginUser = async (req, res) => {
 
       // isAdmin 값에 따라 페이지 이동
       if (loginUser.isAdmin === "Y") {
-        res.send({ result: true, isAdmin: true, token: accessToken });
+        res.send({
+          result: true,
+          isAdmin: true,
+          accessToken: accessToken,
+        });
       } else {
-        res.send({ result: true, isAdmin: false, token: accessToken });
+        res.send({
+          result: true,
+          isAdmin: false,
+          accessToken: accessToken,
+        });
       }
     } else res.status(401).send({ result: false });
   } catch (error) {
@@ -55,6 +67,9 @@ exports.loginUser = async (req, res) => {
     res.status(500).send("로그인 오류");
   }
 };
+
+// 로그아웃
+exports.logout = (req, res) => {};
 
 // 회원가입 페이지 렌더
 exports.registerPage = (req, res) => {
