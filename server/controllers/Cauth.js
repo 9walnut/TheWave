@@ -1,9 +1,8 @@
-const redis = require("redis");
-const redisClient = redis.createClient(process.env.REDIS_PORT);
 const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
 const { generateAccessToken, decodeToken } = require("../middleware/jwt");
+const redisClient = require("../middleware/redis");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
@@ -34,6 +33,8 @@ exports.loginUser = async (req, res) => {
       console.log("accessToken", accessToken);
       console.log("refreshToken", refreshToken);
 
+      await redisClient.set(userId, refreshToken);
+
       // 비회원 장바구니 동기화
       // if (cart && cart.length > 0) {
       //   for (const item of cart) {
@@ -46,31 +47,20 @@ exports.loginUser = async (req, res) => {
       //   }
       // }
 
-      redisClient.set(userId, refreshToken, (err, reply) => {
-        if (err) {
-          console.error("Redis set failed:", err);
-          res.status(500).send("로그인 오류");
-        } else {
-          console.log("Redis set succeeded:", reply);
-
-          // isAdmin 값에 따라 페이지 이동
-          if (loginUser.isAdmin === "Y") {
-            res.send({
-              result: true,
-              isAdmin: true,
-              accessToken: accessToken,
-              refreshToken: refreshToken,
-            });
-          } else {
-            res.send({
-              result: true,
-              isAdmin: false,
-              accessToken: accessToken,
-              refreshToken: refreshToken,
-            });
-          }
-        }
-      });
+      // isAdmin 값에 따라 페이지 이동
+      if (loginUser.isAdmin === "Y") {
+        res.send({
+          result: true,
+          isAdmin: true,
+          accessToken: accessToken,
+        });
+      } else {
+        res.send({
+          result: true,
+          isAdmin: false,
+          accessToken: accessToken,
+        });
+      }
     } else res.status(401).send({ result: false });
   } catch (error) {
     console.error(error);

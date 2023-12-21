@@ -1,9 +1,8 @@
 require("dotenv").config();
 const secret = process.env.SECRET_KEY;
-const redis = require("redis");
-const redisClient = redis.createClient(process.env.REDIS_PORT);
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
+const redisClient = require("../middleware/redis");
 
 // 토큰 생성 함수(access, refresh 토큰 반환)
 function generateAccessToken(loginUser) {
@@ -27,61 +26,41 @@ function generateAccessToken(loginUser) {
   }
 }
 
-// refresh 토큰 검증
-const refreshVerify = async (token, userId) => {
+// 토큰 검증 및 디코딩
+const verifyToken = async (accessToken) => {
   const getAsync = promisify(redisClient.get).bind(redisClient); //redis 모듈에게서 promise 반환받기
 
+  // 토큰이 없는 경우
+  if (!accessToken) {
+    return { result: "no token" };
+  }
+
+  const token = accessToken.split(" ")[1];
+
   try {
-    const data = await getAsync(userId); //userId로 refresh 토큰 가져오기
-    try {
-      if (token == data) {
-        jwt.verify(token, secret);
-        return true;
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    jwt.verify(token, secret); // access 토큰 검증
+    return { accessToken: token }; // access 토큰이 만료되지 않은 경우, 토큰 다시 반환
   } catch (error) {
-    console.error(error);
+    // access 토큰이 만료된 경우
+    const decodedToken = jwt.decode(token);
+    const refreshToken = await getAsync(decodedToken.userId);
+
+    try {
+      jwt.verify(refreshToken, secret); // refresh 토큰 검증
+
+      const payload = {
+        userId: decodedToken.userId,
+        userNumber: decodedToken.userNumber,
+      };
+      const newAccessToken = jwt.sign(payload, secret, {
+        expiresIn: "1h",
+      });
+      return { accessToken: newAccessToken }; // 새 access 토큰 반환
+    } catch (error) {
+      // refresh 토큰이 만료된 경우
+      return { result: "signin again" };
+    }
   }
 };
-
-// 토큰 검증 및 디코딩
-async function verifyToken(accessToken, refreshToken) {
-  if (accessToken && refreshToken) {
-    const token = accessToken.split(" ")[1];
-
-    let verified;
-    try {
-      verified = jwt.verify(token, secret);
-
-      const decodedToken = jwt.decode(token);
-      const refreshResult = await refreshVerify(
-        refreshToken,
-        decodedToken.userId
-      );
-
-      // access 토큰이 만료된 상태일 때
-      if (!verified) {
-        // refresh 토큰도 만료된 경우
-        if (!refreshResult) {
-          return { result: "재로그인하세요." };
-        } else {
-          // refresh 토큰은 만료되지 않은 경우(새 access 토큰 발급)
-          const payload = {
-            userId: decodedToken.userId,
-            userNumber: decodedToken.userNumber,
-          };
-          const newAccessToken = jwt.sign(payload, secret, {
-            expiresIn: "1h",
-          });
-          return { accessToken: newAccessToken, refreshToken: refreshToken };
-        }
-      } else return { result: "access 토큰 유효함", userInfo: decodedToken };
-    } catch (error) {
-      console.error(error);
-    }
-  }
-}
 
 module.exports = { generateAccessToken, verifyToken };
