@@ -4,6 +4,7 @@ function CheckBoxHandlerChecked({
   setSelectedLists,
   setSelectedStatus,
   items,
+  onSelectionChange,
 }) {
   const newSelectedLists = new Set(selectedLists);
   const checkedItem = items.findIndex((i) => i === item);
@@ -29,6 +30,8 @@ function CheckBoxHandlerChecked({
 
   console.log("selectedContents", selectedContents);
   console.log("selectedProductId", selectedProductId);
+
+  onSelectionChange(selectedProductId);
 
   return null;
 }

@@ -19,10 +19,6 @@ const header = [
     text: "상품명",
     value: "productName",
   },
-  // {
-  //   text: "카테고리아이디",
-  //   value: "categoryID",
-  // },
   {
     text: "카테고리",
     value: "categoryName",
@@ -41,141 +37,71 @@ const header = [
   },
 ];
 
-const DUMMY = [
-  {
-    productID: 1,
-    productName: "루돌프풍선",
-    // categoryID: 2,
-    categoryName: "커스텀풍선",
-    productPrice: 17000,
-    productStatus: "판매중",
-    productInfo: "이렇다",
-  },
-  {
-    productID: 2,
-    productName: "곰돌이풍선",
-    // categoryID: 3,
-    categoryName: "용돈풍선",
-    productPrice: 17000,
-    productStatus: "재고없음",
-    productInfo: "저렇다",
-  },
-  {
-    productID: 3,
-    productName: "루돌프풍선",
-    // categoryID: 2,
-    categoryName: "커스텀풍선",
-    productPrice: 17000,
-    productStatus: "판매중",
-    productInfo: "이렇다",
-  },
-  {
-    productID: 4,
-    productName: "곰돌이풍선",
-    // categoryID: 3,
-    categoryName: "용돈풍선",
-    productPrice: 17000,
-    productStatus: "재고없음",
-    productInfo: "저렇다",
-  },
-  {
-    productID: 5,
-    productName: "루돌프풍선",
-    // categoryID: 2,
-    categoryName: "커스텀풍선",
-    productPrice: 17000,
-    productStatus: "판매중",
-    productInfo: "이렇다",
-  },
-  {
-    productID: 6,
-    productName: "곰돌이풍선",
-    // categoryID: 3,
-    categoryName: "용돈풍선",
-    productPrice: 17000,
-    productStatus: "재고없음",
-    productInfo: "저렇다",
-  },
-  {
-    productID: 7,
-    productName: "루돌프풍선",
-    // categoryID: 2,
-    categoryName: "커스텀풍선",
-    productPrice: 17000,
-    productStatus: "판매중",
-    productInfo: "이렇다",
-  },
-  {
-    productID: 8,
-    productName: "곰돌이풍선",
-    // categoryID: 3,
-    categoryName: "용돈풍선",
-    productPrice: 17000,
-    productStatus: "재고없음",
-    productInfo: "저렇다",
-  },
-  {
-    productID: 9,
-    productName: "루돌프풍선",
-    // categoryID: 2,
-    categoryName: "커스텀풍선",
-    productPrice: 17000,
-    productStatus: "판매중",
-    productInfo: "이렇다",
-  },
-  {
-    productID: 10,
-    productName: "곰돌이풍선",
-    // categoryID: 3,
-    categoryName: "용돈풍선",
-    productPrice: 17000,
-    productStatus: "재고없음",
-    productInfo: "저렇다",
-  },
-  {
-    productID: 11,
-    productName: "루돌프풍선",
-    // categoryID: 2,
-    categoryName: "커스텀풍선",
-    productPrice: 17000,
-    productStatus: "판매중",
-    productInfo: "이렇다",
-  },
-  {
-    productID: 12,
-    productName: "곰돌이풍선",
-    // categoryID: 3,
-    categoryName: "용돈풍선",
-    productPrice: 17000,
-    productStatus: "재고없음",
-    productInfo: "저렇다",
-  },
-];
 function Products() {
-  //---해체 할당. return 된 객체에서 원하는 속성 추출, 변수로 사용
-  const { currentPage, oneOfPage, currentItems, handlePageClick } =
-    PageNationFunc(DUMMY);
-
-  //---deleteProducts (진행중)
-  const [items, setItems] = useState(DUMMY);
-  console.log("바뀐 items 넘어오는거 확인", items);
-
-  //---axios
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/admin/products");
-        console.log("response", response.data);
+  //---axios get
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/admin/products");
+      console.log("response", response.data);
 
-        setProducts(response.data);
-      } catch (error) {
-        console.error("에러", error.response.data);
-      }
-    };
+      const filteredData = response.data.filter(
+        (product) => !product.isDeleted
+      );
+
+      const modifiedData = filteredData.map((product) => ({
+        productID: product.productId,
+        productName: product.productName,
+        categoryName: product.category.categoryname,
+        productPrice: product.productPrice,
+        productStatus: product.productStatus,
+        productInfo: product.productInfo,
+      }));
+
+      setProducts(modifiedData);
+      console.log(products);
+    } catch (error) {
+      console.error("에러", error.response.data);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, []);
+
+  //---PageNation 해체 할당. return 된 객체에서 원하는 속성 추출, 변수로 사용
+  const { currentPage, oneOfPage, currentItems, handlePageClick } =
+    PageNationFunc(products);
+  //---axios delete
+  const [selectedProductIds, setSelectedProductIds] = useState([]);
+
+  const onSelectionChange = (selectedProductId) => {
+    setSelectedProductIds(selectedProductId);
+    console.log("onSelectionChange 호출됨:", selectedProductId); // 오고있음
+  };
+
+  const deleteProducts = async () => {
+    console.log("deleteProducts 함수 호출되냐");
+    console.log("삭제할 제품 ID:", selectedProductIds);
+
+    try {
+      const response = await axios.delete("/admin/products", {
+        data: { productId: selectedProductIds },
+      });
+      console.log("서버 응답 왜 안되니", response.data);
+
+      if (response.data) {
+        console.log(
+          "상품 삭제 완료. 삭제되면1(isDeleted: true), 아니면 0(isDeleted: false)"
+        );
+        await fetchData();
+      } else {
+        console.error("상품 삭제 실패");
+      }
+    } catch (error) {
+      console.error("에러", error.response.data);
+    }
+  };
 
   return (
     <>
@@ -185,17 +111,18 @@ function Products() {
           keySet="productsTb_"
           headers={header}
           items={currentItems}
-          setItems={setItems}
-          setDelete="true"
-          btnMsg="선택 상품 삭제하기"
+          onSelectionChange={onSelectionChange}
         />
         <S.ButtonContainer>
+          <AdminButtonBlack onClick={deleteProducts}>
+            상품 삭제하기
+          </AdminButtonBlack>
           <Link to="/admin/products/add">
             <AdminButtonBlack>상품 등록하기</AdminButtonBlack>
           </Link>
         </S.ButtonContainer>
         <PageNation
-          total={DUMMY.length}
+          total={products.length}
           limit={oneOfPage}
           page={currentPage}
           setPage={handlePageClick}
