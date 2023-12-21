@@ -1,12 +1,28 @@
 const http = require("http");
+// const https = require("https");
 const express = require("express");
 const app = express();
-const server = http.createServer(app);
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const PORT = 8000;
+// const https_port = 8001;
+
+// const options = {
+//   key: fs.readFileSync("./rootca.key"),
+//   cert: fs.readFileSync("./rootca.crt"),
+// };
+const server = http.createServer(app);
+// const https_server = https.createServer(options, app);
+
 const io = require("socket.io")(server);
+// const io_https = require("socket.io")(https_server);
+
+// 실시간 채팅 미들웨어
+const { liveChat } = require("./middleware/liveChat");
+
+liveChat(io);
+// socketHandler(io_https);
 
 app.use(cors());
 app.use(express.json());
@@ -47,8 +63,18 @@ app.use("/admin", adminRouter);
 const cartRouter = require("./routes/cart");
 app.use("/cart", cartRouter);
 
-io.on("connection", (socket) => {});
+io.on("connection", (socket) => {
+  console.log("New connection via HTTP");
+});
+
+// io_https.on("connection", (socket) => {
+//   console.log("New connection via HTTPS");
+// });
 
 server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
 });
+
+// https_server.listen(https_port, function () {
+//   console.log(`HTTPS Server Open: ${https_port}`);
+// });

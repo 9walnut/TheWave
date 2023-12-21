@@ -21,12 +21,12 @@ services:
       - mysql
 
   mysql:
-    image: mysql:latest
+    image: mysql:8
     container_name: mysql_latest
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: qwer1234!
+      MYSQL_ROOT_PASSWORD: 1q2w3e4r
       MYSQL_DATABASE: thewave
       MYSQL_USER: admin
       MYSQL_PASSWORD: 1q2w3e4r
