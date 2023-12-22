@@ -85,23 +85,24 @@ function Products() {
   const deleteProducts = async () => {
     console.log("deleteProducts 함수 호출되냐");
     console.log("삭제할 제품 ID:", selectedProductIds);
+    if (window.confirm("정말 상품을 삭제하시겠습니까?")) {
+      try {
+        const response = await axios.delete("/admin/products", {
+          data: { productId: selectedProductIds.selectedProductId },
+        });
+        console.log("서버 응답 왜 안되니", response.data);
 
-    try {
-      const response = await axios.delete("/admin/products", {
-        data: { productId: selectedProductIds },
-      });
-      console.log("서버 응답 왜 안되니", response.data);
-
-      if (response.data) {
-        console.log(
-          "상품 삭제 완료. 삭제되면1(isDeleted: true), 아니면 0(isDeleted: false)"
-        );
-        await fetchData();
-      } else {
-        console.error("상품 삭제 실패");
+        if (response.data) {
+          console.log(
+            "상품 삭제 완료. 삭제되면1(isDeleted: true), 아니면 0(isDeleted: false)"
+          );
+          await fetchData();
+        } else {
+          console.error("상품 삭제 실패");
+        }
+      } catch (error) {
+        console.error("에러", error.response.data);
       }
-    } catch (error) {
-      console.error("에러", error.response.data);
     }
   };
 
