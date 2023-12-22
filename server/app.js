@@ -2,6 +2,12 @@ const http = require("http");
 // const https = require("https");
 const express = require("express");
 const app = express();
+const redis = require("redis");
+const client = redis.createClient({
+  host: process.env.REDIS_HOST, // 'redis-19442.c323.us-east-1-2.ec2.cloud.redislabs.com'
+  port: process.env.REDIS_PORT, // '19442'
+  // 필요하다면 사용자 이름과 비밀번호도 추가
+});
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
