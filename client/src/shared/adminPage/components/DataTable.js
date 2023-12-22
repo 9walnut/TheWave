@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 
 import * as S from "./DataTableStyle.js";
-import AdminButtonGrey from "../../../components/adminPage/AdminButtonGrey.js";
 
 import SelectBox from "./SelectBox.js";
 import CheckBox from "./CheckBox.js";
 import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
-import CheckBoxHandlerDelete from "./CheckBoxHandlerDelete.js";
 
-function DataTable({ keySet, headers, items, setItems, setDelete, btnMsg }) {
+function DataTable({ keySet, headers, items, onSelectionChange }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
@@ -23,15 +21,12 @@ function DataTable({ keySet, headers, items, setItems, setDelete, btnMsg }) {
       setSelectedLists,
       setSelectedStatus,
       items,
+      onSelectionChange,
     });
   };
 
   const SelectAll = () => {
     CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists });
-  };
-
-  const deleteChecked = () => {
-    CheckBoxHandlerDelete({ selectedLists, items, setItems });
   };
 
   const headerList = headers.map((header) => header.value);
@@ -79,9 +74,6 @@ function DataTable({ keySet, headers, items, setItems, setDelete, btnMsg }) {
           ))}
         </tbody>
       </S.Table>
-      {setDelete === "true" && (
-        <AdminButtonGrey onClick={deleteChecked}>{btnMsg}</AdminButtonGrey>
-      )}
     </>
   );
 }

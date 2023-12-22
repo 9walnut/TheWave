@@ -14,4 +14,19 @@ module.exports = function (app) {
   //     changeOrigin: true,
   //   })
   // );
+
+  //-----------------admin-----------------
+  app.use(
+    createProxyMiddleware("/admin/products", {
+      target: "http://localhost:8000",
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/admin/users", {
+      target: "http://localhost:8000",
+      changeOrigin: true,
+    })
+  );
 };
