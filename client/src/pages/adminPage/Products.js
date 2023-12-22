@@ -4,6 +4,8 @@ import axios from "axios";
 
 import * as S from "../../styles/adminPage/Products.js";
 import Card from "../../shared/adminPage/components/Card";
+
+import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 
 import PageNation from "../../shared/PageNation.js";
@@ -114,9 +116,9 @@ function Products() {
           onSelectionChange={onSelectionChange}
         />
         <S.ButtonContainer>
-          <AdminButtonBlack onClick={deleteProducts}>
+          <AdminButtonGrey onClick={deleteProducts}>
             상품 삭제하기
-          </AdminButtonBlack>
+          </AdminButtonGrey>
           <Link to="/admin/products/add">
             <AdminButtonBlack>상품 등록하기</AdminButtonBlack>
           </Link>

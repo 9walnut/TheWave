@@ -24,14 +24,28 @@ function CheckBoxHandlerChecked({
   const selectedContents = Array.from(newSelectedLists).map(
     (index) => items[index]
   );
+
+  selectedContents.forEach((content) => {
+    if (content.hasOwnProperty("userNumber")) {
+      console.log("userNumber", content.userNumber);
+    }
+  });
+
   const selectedProductId = Array.from(newSelectedLists).map(
     (index) => items[index].productID
+  );
+  const selectedUserNumber = Array.from(newSelectedLists).map(
+    (index) => items[index].userNumber
   );
 
   console.log("selectedContents", selectedContents);
   console.log("selectedProductId", selectedProductId);
+  console.log("selectedUserNumber", selectedUserNumber);
 
-  onSelectionChange(selectedProductId);
+  onSelectionChange({
+    selectedProductId,
+    selectedUserNumber,
+  });
 
   return null;
 }
