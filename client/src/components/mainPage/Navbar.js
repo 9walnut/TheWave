@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/img/theWave.png";
 import search from "../../assets/img/search.png";
 import menu from "../../assets/img/menu.png";
 import basket from "../../assets/img/basket.png";
 import mypage from "../../assets/img/mypage.png";
-import React from "react";
 import "./Navbar.css";
 
 function Navbar() {
@@ -37,6 +36,9 @@ function Navbar() {
     setMenuVisible(false);
   };
 
+  const isLogin = false;
+  const isAdmin = false;
+
   return (
     <>
       <header>
@@ -60,20 +62,34 @@ function Navbar() {
               >
                 <img src={mypage} />
               </a>
-              {isMenuVisible && (
-                <div className="myPageMenu">
-                  <div>
-                    <a className="menuItem">
-                      <Link to="/login">Login</Link>
-                    </a>
+              {isMenuVisible &&
+                (isLogin ? (
+                  <div className="myPageMenu">
+                    <div>
+                      <a className="menuItem">
+                        <Link to="#">Logout</Link>
+                      </a>
+                    </div>
+                    <div>
+                      <a className="menuItem">
+                        <Link to="#">MyPage</Link>
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <a className="menuItem">
-                      <Link to="/register">SignUp</Link>
-                    </a>
+                ) : (
+                  <div className="myPageMenu">
+                    <div>
+                      <a className="menuItem">
+                        <Link to="/login">login</Link>
+                      </a>
+                    </div>
+                    <div>
+                      <a className="menuItem">
+                        <Link to="/register">SignUp</Link>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              )}
+                ))}
             </div>
             <div>
               <a>

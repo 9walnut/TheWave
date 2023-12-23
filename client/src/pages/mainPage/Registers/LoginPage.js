@@ -1,37 +1,51 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../../components/mainPage/Navbar";
 import Footer from "../../../components/mainPage/Footer";
+import axios from "axios";
 import "../MainPage.css";
-import Button from "../../../components/register/Button";
-import PageName from "../../../components/register/PageName";
-import PageInput from "../../../components/register/PageInput";
 
 function LoginPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onUserIdHandler = (e) => {
+    setUserId(userId);
+  };
+
+  const onPasswordHandler = (e) => {
+    setPassword(password);
+  };
+
+  const handleEnter = (e) => {
+    if (e.key == "Enter") {
+      if (userId == "" || password == "") {
+        alert("아이디 또는 패스워드를 입력해주세요.");
+      } else {
+        alert("엔터");
+        // login();
+      }
+    }
+  };
+
+  const login = () => {
+    //로그인
+  };
+
   return (
     <>
       <Navbar />
       <section>
         <div className="formBox">
-          <PageName>Login</PageName>
-          <PageInput
-            type={"text"}
-            placeholder={"아이디를 입력해주세요"}
-          ></PageInput>
-          <PageInput
-            type={"password"}
-            placeholder={"비밀번호를 입력해주세요"}
-          ></PageInput>
-          <Button link={"/login"}>로그인</Button>
-          <Link to={"/register"}>
-            <Button>회원가입</Button>
-          </Link>
-          <div style={{ color: "#808080", marginTop: "10px" }}>
-            <Link to={"/findId"} style={{ marginRight: "15px" }}>
-              아이디 찾기
-            </Link>
-            <Link to={"/findPw"}>비밀번호 찾기</Link>
-          </div>
+          <form onKeyDown={handleEnter}>
+            <input type="text" onChange={onUserIdHandler} />
+            <input type="text" onChange={onPasswordHandler} />
+            <button onClick={login}></button>
+          </form>
         </div>
       </section>
       <Footer />

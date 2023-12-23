@@ -14,6 +14,7 @@ code {
 
 * {
   font-family: "Noto Sans CJK KR";
+  box-sizing: border-box;
 }
 
 @font-face {
