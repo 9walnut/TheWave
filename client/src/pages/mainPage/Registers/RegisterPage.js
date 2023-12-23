@@ -5,6 +5,7 @@ import Navbar from "../../../components/mainPage/Navbar";
 import Footer from "../../../components/mainPage/Footer";
 import "../MainPage.css";
 import axios from "axios";
+import AddressSearch from "../../../components/AddressSearch";
 
 function Register() {
   const navigate = useNavigate();
@@ -34,10 +35,6 @@ function Register() {
       <Navbar />
       <section>
         <div className="formBox">
-          <h4>react form 페이지</h4>
-          {/* handleSubmit(onValid[, onInvaild]) */}
-          {/* onVaild : 폼을 정상적으로 제출할 수 있는 상태일 떄, 실행시킬 수 있는 함수 */}
-          {/* onInvalid : (선택값) 폼을 정상적으로 제출할 수 있는 상태일 때, 실행시킬 함수 */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <label>
               아이디:
@@ -97,6 +94,7 @@ function Register() {
             </label>
             <br />
             <label>
+              <AddressSearch />
               주소:
               <input
                 {...register("address", { required: "주소를 입력하세요" })}

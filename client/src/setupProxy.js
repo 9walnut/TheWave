@@ -8,14 +8,6 @@ module.exports = function (app) {
     })
   );
 
-  // app.use(
-  //   createProxyMiddleware("/", {
-  //     target: "http://localhost:8000",
-  //     changeOrigin: true,
-  //   })
-  // );
-
-  //-----------------admin-----------------
   app.use(
     createProxyMiddleware("/admin/products", {
       target: "http://localhost:8000",
