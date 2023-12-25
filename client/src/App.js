@@ -1,11 +1,13 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
+import { useSelector } from "react-redux";
 import MainPage from "./pages/mainPage/MainPage";
 import LoginPage from "./pages/mainPage/Registers/LoginPage";
 import RegisterPage from "./pages/mainPage/Registers/RegisterPage";
 import FindIdPage from "./pages/mainPage/Registers/FindIdPage";
 import FindPwPage from "./pages/mainPage/Registers/FindPwPage";
 import NewPwPage from "./pages/mainPage/Registers/NewPwPage";
+import MyPage from "./pages/mainPage/mypage/MyPage";
 import AdminPageMain from "./pages/adminPage/AdminPageMain";
 // admin
 import MainDashBoard from "./pages/adminPage/MainDashBoard";
@@ -26,10 +28,12 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/findId" element={<FindIdPage />} />
         <Route path="/findPw" element={<FindPwPage />} />
-        <Route path="/findPw/newPw" element={<NewPwPage />} />
-        <Route path="/products" element={<ProductDetailsPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        {/* <Route path="/mypage/info" element={<MyPageInfo />} />
+        <Route path="/category/:categoryID" element={<CategoryPage />} />
+        <Route path="/products/:productID" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
-
+        <Route path="/cart/checkout" element={<CheckoutPage />} /> */}
         {/* admin */}
         <Route path="/admin/*" element={<AdminPageMain />}>
           <Route path="dashboard" element={<MainDashBoard />} />
