@@ -6,21 +6,21 @@ const redisClient = require("../middleware/redis");
 
 // 메인 페이지 렌더
 exports.main = (req, res) => {
-  res.send({ result: true });
+  // res.send({ result: true });
 };
 
 // 로그인 페이지 랜더
 exports.loginPage = (req, res) => {
-  res.send({ result: true });
+  // res.send({ result: true });
 };
 
 // '로그인' 버튼 클릭 시
 exports.loginUser = async (req, res) => {
   try {
     const { userId, password } = req.body;
-
     const userCheck = await comparePw(userId, password);
     console.log("userCheck", userCheck);
+    console.log("req.body", req.body);
 
     if (userCheck) {
       const loginUser = await db.users.findOne({

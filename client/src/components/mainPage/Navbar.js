@@ -6,10 +6,23 @@ import menu from "../../assets/img/menu.png";
 import basket from "../../assets/img/basket.png";
 import mypage from "../../assets/img/mypage.png";
 import "./Navbar.css";
+import { useDispatch, useSelector } from "react-redux";
+import { resetUser } from "../../redux/reducers/userSlice";
 
 function Navbar() {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(resetUser());
+  };
+
   const [screenSize, setScreenSize] = useState(window.innerWidth <= 582);
   const [isMenuVisible, setMenuVisible] = useState(false);
+
+  const user = useSelector((state) => state.user);
+  const isLogin = user.user.accessToken ? true : false;
+  // console.log(isLogin);
+  // console.log(user.user);
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,9 +48,6 @@ function Navbar() {
   const handleMouseContainer = () => {
     setMenuVisible(false);
   };
-
-  const isLogin = false;
-  const isAdmin = false;
 
   return (
     <>
@@ -66,13 +76,13 @@ function Navbar() {
                 (isLogin ? (
                   <div className="myPageMenu">
                     <div>
-                      <a className="menuItem">
+                      <a className="menuItem" onClick={handleLogout}>
                         <Link to="#">Logout</Link>
                       </a>
                     </div>
                     <div>
                       <a className="menuItem">
-                        <Link to="#">MyPage</Link>
+                        <Link to="/mypage">MyPage</Link>
                       </a>
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { setUser } from "../../../redux/reducers/userSlice";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../../components/mainPage/Navbar";
 import Footer from "../../../components/mainPage/Footer";
@@ -14,26 +15,53 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   const onUserIdHandler = (e) => {
-    setUserId(userId);
+    setUserId(e.target.value);
   };
 
   const onPasswordHandler = (e) => {
-    setPassword(password);
+    setPassword(e.target.value);
   };
 
   const handleEnter = (e) => {
-    if (e.key == "Enter") {
-      if (userId == "" || password == "") {
+    if (e.key === "Enter") {
+      if (userId === "" || password === "") {
         alert("아이디 또는 패스워드를 입력해주세요.");
       } else {
-        alert("엔터");
-        // login();
+        // alert("엔터");
+        handleLogin();
       }
     }
   };
 
-  const login = () => {
-    //로그인
+  const handleLogin = async () => {
+    const data = {
+      userId: userId,
+      password: password,
+    };
+    try {
+      const res = await axios.post("/login", data);
+      if (res.data.result) {
+        const { isAdmin, accessToken } = res.data;
+        console.log(res.data);
+        const user = {
+          accessToken,
+          isAdmin,
+        };
+
+        dispatch(setUser(user));
+
+        if (isAdmin === "Y") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      } else {
+        console.log("로그인 실패");
+      }
+    } catch (error) {
+      // 에러 처리
+      console.log("에러에러", error);
+    }
   };
 
   return (
@@ -42,9 +70,12 @@ function LoginPage() {
       <section>
         <div className="formBox">
           <form onKeyDown={handleEnter}>
+            ID
             <input type="text" onChange={onUserIdHandler} />
-            <input type="text" onChange={onPasswordHandler} />
-            <button onClick={login}></button>
+            <br />
+            PW
+            <input type="password" onChange={onPasswordHandler} />
+            <button onClick={handleLogin}>로그인</button>
           </form>
         </div>
       </section>

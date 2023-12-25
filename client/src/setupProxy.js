@@ -9,6 +9,20 @@ module.exports = function (app) {
   );
 
   app.use(
+    createProxyMiddleware("/login", {
+      target: "http://localhost:8000",
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/mypage", {
+      target: "http://localhost:8000",
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
     createProxyMiddleware("/admin/products", {
       target: "http://localhost:8000",
       changeOrigin: true,
