@@ -1,7 +1,7 @@
 const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
-const { generateAccessToken, decodeToken } = require("../middleware/jwt");
+const { generateAccessToken, deleteToken } = require("../middleware/jwt");
 const redisClient = require("../middleware/redis");
 
 // 메인 페이지 렌더
@@ -37,8 +37,6 @@ exports.loginUser = async (req, res) => {
   try {
     const { userId, password } = req.body;
     const userCheck = await comparePw(userId, password);
-    console.log("userCheck", userCheck);
-    console.log("req.body", req.body);
 
     if (userCheck) {
       const loginUser = await db.users.findOne({
@@ -48,10 +46,14 @@ exports.loginUser = async (req, res) => {
       });
 
       const { accessToken, refreshToken } = generateAccessToken(loginUser);
-      console.log("accessToken", accessToken);
-      console.log("refreshToken", refreshToken);
 
-      await redisClient.set(userId, refreshToken);
+      await redisClient.set(userId, refreshToken, (err, reply) => {
+        if (err) {
+          console.error("redis 저장 오류 ;ㅁ;", err);
+        } else {
+          console.log("redis 저장 성공!", reply);
+        }
+      }); //userId를 키로 refresh 토큰 저장
 
       // 비회원 장바구니 동기화
       // if (cart && cart.length > 0) {
@@ -86,8 +88,21 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-// 로그아웃
-exports.logout = (req, res) => {};
+// 로그아웃(access 토큰 받아 해당 사용자의 refresh 토큰 삭제)
+exports.logout = async (req, res) => {
+  try {
+    const accessToken = req.headers["authorization"];
+    const logoutCheck = await deleteToken(accessToken);
+
+    if (logoutCheck) {
+      res.send({ result: true });
+      console.log(logoutCheck.result);
+    } else res.send({ result: false });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("로그아웃 오류");
+  }
+};
 
 // 회원가입 페이지 렌더
 exports.registerPage = (req, res) => {
