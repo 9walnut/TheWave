@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const UploadThumbnail = () => {
@@ -10,7 +10,12 @@ const UploadThumbnail = () => {
     setSelectedFile(file);
 
     console.log("Selected File:", file); //찍힘
+    console.log("Selected File2:", selectedFile); //ㄴㄴ
   };
+  useEffect(() => {
+    console.log("Selected File3:", selectedFile); //찍힘
+    // handleUpload();
+  }, [selectedFile]); // selectedFile이 업데이트될 때만 실행
 
   const handleUpload = async () => {
     if (!selectedFile) {
@@ -24,7 +29,7 @@ const UploadThumbnail = () => {
 
       console.log("FormData:", formData);
 
-      const response = await axios.post("/products/thumbnail", formData, {
+      const response = await axios.post("/admin/products/thumbnail", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
