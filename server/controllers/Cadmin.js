@@ -113,7 +113,15 @@ exports.getAdminMain = async (req, res) => {
 // 회원 조회
 exports.getAdminUsers = async (req, res) => {
   try {
-    const users = await db.users.findAll();
+    const users = await db.users.findAll({
+      include: [
+        {
+          model: db.address,
+          as: "addresses",
+          required: false,
+        },
+      ],
+    });
     return res.send(users);
   } catch (error) {
     console.error(error);

@@ -25,15 +25,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     cartQuantity: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     isChecked: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
-      allowNull: true,
+      allowNull: false,
       defaultValue: 0
     }
   }, {

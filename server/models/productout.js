@@ -32,12 +32,12 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     outStatus: {
-      type: DataTypes.STRING(255),
-      allowNull: true
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     outDate: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: false
     }
   }, {
     sequelize,
