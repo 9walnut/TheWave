@@ -8,6 +8,9 @@ router.get("/:productId", controller.productPage);
 // '장바구니 담기' 클릭 시
 router.post("/:productId", controller.cartIn);
 
+// 찜하기
+router.post("/wish/:productId", controller.wish);
+
 // 장바구니 > '비회원으로 이용' 클릭 시
 // router.post("/:productId/N", controller.noMemberCartIn);
 

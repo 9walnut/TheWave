@@ -14,6 +14,12 @@ exports.productPage = async (req, res) => {
   }
 };
 
+// exports.wish = async (req, res) => {
+//   try {
+
+//   }
+// }
+
 // '장바구니 담기' 클릭
 exports.cartIn = async (req, res) => {
   try {

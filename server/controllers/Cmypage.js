@@ -39,6 +39,9 @@ exports.mypage = async (req, res) => {
   }
 };
 
+// 위시리스트(찜한 상품)
+exports.wishList = (req, res) => {};
+
 // 회원 정보 수정 페이지
 exports.editInfoPage = (req, res) => {
   res.send({ result: true });
