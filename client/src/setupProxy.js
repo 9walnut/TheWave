@@ -1,7 +1,7 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
-  const apiURL = process.env.REACT_APP_API_URL;
+  const apiURL = process.env.REACT_APP_BACKEND_URL;
   app.use(
     createProxyMiddleware("/register", {
       target: apiURL,
