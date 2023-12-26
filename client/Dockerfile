@@ -11,10 +11,10 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # ARG 지시문을 사용하여 빌드 인자로 백엔드 서버의 URL을 받아옴
-ARG REACT_APP_BACKEND_URL
+# ARG REACT_APP_BACKEND_URL
 
 # ENV 지시문을 사용하여 환경 변수로 설정
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+# ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
 # 80 포트 오픈
 EXPOSE 80 443
