@@ -5,12 +5,10 @@ const jwt = require("jsonwebtoken");
 
 // 회원 마이페이지(마이페이지 렌더 시 바로 주문 내역 노출)
 exports.mypage = async (req, res) => {
+  const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
+  const tokenCheck = await verifyToken(accessToken); // 토큰 검증 및 디코딩
+  console.log("tokenCheck", tokenCheck);
   try {
-    const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
-
-    const tokenCheck = await verifyToken(accessToken); // 토큰 검증 및 디코딩
-    console.log("tokenCheck", tokenCheck);
-
     if (
       tokenCheck.result !== "no token" &&
       tokenCheck.result !== "signin again"
@@ -36,6 +34,39 @@ exports.mypage = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("마이페이지 렌더 오류");
+  }
+};
+
+// 위시리스트(찜한 상품)
+exports.wishList = async (req, res) => {
+  const accessToken = req.headers["authorization"];
+  const tokenCheck = await verifyToken(accessToken);
+  try {
+    if (
+      tokenCheck.result !== "no token" &&
+      tokenCheck.result !== "signin again"
+    ) {
+      const decodedToken = jwt.decode(tokenCheck.accessToken);
+      const wishList = await db.wishlist.findAll({
+        where: { userNumber: decodedToken.userNumber },
+        include: [
+          {
+            model: db.products,
+            as: "product",
+            attributes: [
+              "productName",
+              "productPrice",
+              "thumbnailUrl",
+              "productStatus",
+              "isDeleted",
+            ],
+          },
+        ],
+      });
+      res.json(wishList);
+    } else res.send({ result: false }); // 찜한 목록 없는 경우
+  } catch (error) {
+    console.error(error);
   }
 };
 

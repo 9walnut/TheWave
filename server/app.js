@@ -1,5 +1,6 @@
 const http = require("http");
 // const https = require("https");
+// const fs = require("fs");
 const express = require("express");
 const app = express();
 const redis = require("redis");
@@ -18,16 +19,23 @@ const PORT = 8000;
 //   key: fs.readFileSync("./rootca.key"),
 //   cert: fs.readFileSync("./rootca.crt"),
 // };
+
+// const options = {
+//   key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.com/privkey.pem"),
+//   cert: fs.readFileSync(
+//     "/etc/letsencrypt/live/thewavemarket.com/fullchain.pem"
+//   ),
+// };
 const server = http.createServer(app);
 // const https_server = https.createServer(options, app);
 
-const io = require("socket.io")(server);
+// const io = require("socket.io")(server);
 // const io_https = require("socket.io")(https_server);
 
 // 실시간 채팅 미들웨어
-const { liveChat } = require("./middleware/liveChat");
+// const { liveChat } = require("./middleware/liveChat");
 
-liveChat(io);
+// liveChat(io);
 // socketHandler(io_https);
 
 app.use(cors());
@@ -69,9 +77,9 @@ app.use("/admin", adminRouter);
 const cartRouter = require("./routes/cart");
 app.use("/cart", cartRouter);
 
-io.on("connection", (socket) => {
-  console.log("New connection via HTTP");
-});
+// io.on("connection", (socket) => {
+//   console.log("New connection via HTTP");
+// });
 
 // io_https.on("connection", (socket) => {
 //   console.log("New connection via HTTPS");

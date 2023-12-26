@@ -1,5 +1,6 @@
 const { db } = require("../models/index");
-const { decodeToken } = require("../middleware/jwt");
+const { decodeToken, verifyToken } = require("../middleware/jwt");
+const jwt = require("jsonwebtoken");
 
 // 특정 상품 상세 페이지
 exports.productPage = async (req, res) => {
@@ -11,6 +12,33 @@ exports.productPage = async (req, res) => {
   } catch (error) {
     console.error(err);
     res.status(500).send("상품 상세 페이지 오류");
+  }
+};
+
+// 찜하기
+exports.wish = async (req, res) => {
+  const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
+  const tokenCheck = await verifyToken(accessToken);
+  let decodedToken;
+
+  if (
+    tokenCheck.result !== "no token" &&
+    tokenCheck.result !== "signin again"
+  ) {
+    decodedToken = jwt.decode(tokenCheck.accessToken);
+  } else res.send({ result: false }); // 토큰이 유효하지 않음
+
+  try {
+    const wishListIn = await db.wishlist.create({
+      productId: req.params.productId,
+      userNumber: decodedToken.userNumber,
+    });
+
+    if (wishListIn) res.send({ result: true });
+    else res.send({ result: false });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("찜하기 오류");
   }
 };
 

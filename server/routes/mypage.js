@@ -5,6 +5,9 @@ const router = express.Router();
 // 회원 마이페이지
 router.get("/", controller.mypage);
 
+// 위시리스트(찜한 상품) 조회
+router.get("/wishList", controller.wishList);
+
 // 회원 정보 수정 페이지
 router.get("/info", controller.editInfoPage);
 
