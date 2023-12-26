@@ -29,13 +29,13 @@ const options = {
 const server = http.createServer(app);
 const https_server = https.createServer(options, app);
 
-const io = require("socket.io")(server);
-const io_https = require("socket.io")(https_server);
+// const io = require("socket.io")(server);
+// const io_https = require("socket.io")(https_server);
 
 // 실시간 채팅 미들웨어
-const { liveChat } = require("./middleware/liveChat");
+// const { liveChat } = require("./middleware/liveChat");
 
-liveChat(io);
+// liveChat(io);
 // socketHandler(io_https);
 
 app.use(cors());
