@@ -13,32 +13,32 @@ module.exports = function(sequelize, DataTypes) {
     },
     password: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
     passwordSalt: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
     userName: {
       type: DataTypes.STRING(20),
-      allowNull: true
+      allowNull: false
     },
     phoneNumber: {
       type: DataTypes.STRING(11),
-      allowNull: true
+      allowNull: false
     },
     birthday: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: false
     },
     isAdmin: {
       type: DataTypes.CHAR(1),
-      allowNull: true,
+      allowNull: false,
       defaultValue: "N"
     },
     gender: {
       type: DataTypes.CHAR(1),
-      allowNull: true
+      allowNull: false
     }
   }, {
     sequelize,
