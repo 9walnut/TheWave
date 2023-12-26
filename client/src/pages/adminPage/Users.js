@@ -66,7 +66,7 @@ function Users() {
         phoneNumber: user.phoneNumber,
         birthday: user.birthday,
         gender: user.gender,
-        // address: 몰라용,
+        address: user.addresses.map((address) => address.address),
       }));
       setUsers(modifiedData);
       console.log("user 데이터 들어왔나", users);
