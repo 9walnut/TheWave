@@ -5,8 +5,26 @@ const { generateAccessToken, decodeToken } = require("../middleware/jwt");
 const redisClient = require("../middleware/redis");
 
 // 메인 페이지 렌더
-exports.main = (req, res) => {
-  // res.send({ result: true });
+exports.main = async (req, res) => {
+  try {
+    const productsInfo = await db.products.findAll({
+      where: { isDeleted: false },
+      attributes: [
+        "productId",
+        "categoryId",
+        "productName",
+        "productPrice",
+        "productInfo",
+        "productStatus",
+        "thumbnailUrl",
+      ],
+    });
+    console.log(productsInfo);
+    res.json(productsInfo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("상품 정보 불러오기 오류");
+  }
 };
 
 // 로그인 페이지 랜더
