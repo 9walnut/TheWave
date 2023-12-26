@@ -8,6 +8,7 @@ var _productoption = require("./productoption");
 var _productout = require("./productout");
 var _products = require("./products");
 var _users = require("./users");
+var _wishlist = require("./wishlist");
 
 function initModels(sequelize) {
   var address = _address(sequelize, DataTypes);
@@ -19,7 +20,10 @@ function initModels(sequelize) {
   var productout = _productout(sequelize, DataTypes);
   var products = _products(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
+  var wishlist = _wishlist(sequelize, DataTypes);
 
+  products.belongsToMany(users, { as: 'userNumber_users', through: wishlist, foreignKey: "productId", otherKey: "userNumber" });
+  users.belongsToMany(products, { as: 'productId_products', through: wishlist, foreignKey: "userNumber", otherKey: "productId" });
   orders.belongsTo(carts, { as: "cart", foreignKey: "cartId"});
   carts.hasMany(orders, { as: "orders", foreignKey: "cartId"});
   productout.belongsTo(carts, { as: "cart", foreignKey: "cartId"});
@@ -38,12 +42,16 @@ function initModels(sequelize) {
   products.hasOne(productoption, { as: "productoption", foreignKey: "productId"});
   productout.belongsTo(products, { as: "product", foreignKey: "productId"});
   products.hasMany(productout, { as: "productouts", foreignKey: "productId"});
+  wishlist.belongsTo(products, { as: "product", foreignKey: "productId"});
+  products.hasMany(wishlist, { as: "wishlists", foreignKey: "productId"});
   address.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber"});
   users.hasMany(address, { as: "addresses", foreignKey: "userNumber"});
   carts.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber"});
   users.hasMany(carts, { as: "carts", foreignKey: "userNumber"});
   orders.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber"});
   users.hasMany(orders, { as: "orders", foreignKey: "userNumber"});
+  wishlist.belongsTo(users, { as: "userNumber_user", foreignKey: "userNumber"});
+  users.hasMany(wishlist, { as: "wishlists", foreignKey: "userNumber"});
 
   return {
     address,
@@ -55,6 +63,7 @@ function initModels(sequelize) {
     productout,
     products,
     users,
+    wishlist,
   };
 }
 module.exports = initModels;

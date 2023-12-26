@@ -105,6 +105,14 @@ CREATE TABLE `ORDERS` (
 		FOREIGN KEY (productId) REFERENCES PRODUCTS (productId) ON DELETE CASCADE
 	);
 
+    CREATE TABLE `WISHLIST` (
+		`productId`	INT	NOT NULL,
+    `userNumber` INT NOT NULL, 
+    PRIMARY KEY (productId, userNumber),
+    FOREIGN KEY (productId) REFERENCES PRODUCTS (productId),
+    FOREIGN KEY (userNumber) REFERENCES USERS (userNumber) ON DELETE CASCADE
+    );
+
 
 INSERT INTO USERS (userID, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender)
 VALUES 
