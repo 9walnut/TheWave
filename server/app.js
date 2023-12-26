@@ -18,11 +18,18 @@ const PORT = 8000;
 //   key: fs.readFileSync("./rootca.key"),
 //   cert: fs.readFileSync("./rootca.crt"),
 // };
+
+const options = {
+  key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.com/privkey.pem"),
+  cert: fs.readFileSync(
+    "/etc/letsencrypt/live/thewavemarket.com/fullchain.pem"
+  ),
+};
 const server = http.createServer(app);
-// const https_server = https.createServer(options, app);
+const https_server = https.createServer(options, app);
 
 const io = require("socket.io")(server);
-// const io_https = require("socket.io")(https_server);
+const io_https = require("socket.io")(https_server);
 
 // 실시간 채팅 미들웨어
 const { liveChat } = require("./middleware/liveChat");
@@ -81,6 +88,6 @@ server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
 });
 
-// https_server.listen(https_port, function () {
-//   console.log(`HTTPS Server Open: ${https_port}`);
-// });
+https_server.listen(https_port, function () {
+  console.log(`HTTPS Server Open: ${https_port}`);
+});
