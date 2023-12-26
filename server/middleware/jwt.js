@@ -63,4 +63,8 @@ const verifyToken = async (accessToken) => {
   }
 };
 
-module.exports = { generateAccessToken, verifyToken };
+const deleteToken = async (accessToken) => {
+  const getAsync = promisify(redisClient.get).bind(redisClient);
+};
+
+module.exports = { generateAccessToken, verifyToken, deleteToken };

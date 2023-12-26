@@ -1,8 +1,10 @@
 const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
-const { generateAccessToken, decodeToken } = require("../middleware/jwt");
+const { generateAccessToken, deleteToken } = require("../middleware/jwt");
 const redisClient = require("../middleware/redis");
+const { access } = require("fs");
+const { log } = require("console");
 
 // 메인 페이지 렌더
 exports.main = async (req, res) => {
@@ -87,7 +89,18 @@ exports.loginUser = async (req, res) => {
 };
 
 // 로그아웃
-exports.logout = (req, res) => {};
+exports.logout = async (req, res) => {
+  try {
+    const accessToken = req.headers["authorization"];
+    const logoutCheck = await deleteToken(accessToken);
+
+    if (logoutCheck) res.send({ result: true });
+    else res.send({ result: false });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("로그아웃 오류");
+  }
+};
 
 // 회원가입 페이지 렌더
 exports.registerPage = (req, res) => {
