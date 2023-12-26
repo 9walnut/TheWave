@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-//{ value, onChange } 를 받아서 셀렉트박스에서 사용해야하나....
-
-function SelectBox() {
+function SelectBoxCategory() {
   const [releaseStatus, setReleaseStatus] = useState("");
 
   function handleChangeStatus(e) {
@@ -22,14 +20,18 @@ function SelectBox() {
         value={releaseStatus}
       >
         <option disabled defaultValue>
-          출고 상태 변경
+          카테고리 선택
         </option>
-        <option value="payWait">결제 대기</option>
-        <option value="deliveryStart">출고</option>
-        <option value="cancel">취소</option>
+        <option value="1">캐릭터</option>
+        <option value="2">데이지</option>
+        <option value="3">레터링</option>
+        <option value="4">용돈</option>
+        <option value="5">옴브레</option>
+        <option value="6">장미</option>
+        <option value="7">튤립</option>
       </select>
     </>
   );
 }
 
-export default SelectBox;
+export default SelectBoxCategory;

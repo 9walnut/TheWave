@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import * as S from "./DataTableStyle.js";
 
-import SelectBox from "./SelectBox.js";
+import SelectBoxDelivery from "./SelectBoxDelivery.js";
 import CheckBox from "./CheckBox.js";
 import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
@@ -61,7 +61,7 @@ function DataTable({ keySet, headers, items, onSelectionChange }) {
               {headerList.map((value, columnIndex) => (
                 <S.TableTd key={`${keySet}_${index}_${columnIndex}`}>
                   {value === "deliveryStatus" ? (
-                    <SelectBox
+                    <SelectBoxDelivery
                       value={selectedStatus}
                       onChange={(e) => setSelectedStatus(e.target.value)}
                     />
