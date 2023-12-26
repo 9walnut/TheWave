@@ -1,6 +1,6 @@
 const http = require("http");
-const https = require("https");
-const fs = require("fs");
+// const https = require("https");
+// const fs = require("fs");
 const express = require("express");
 const app = express();
 const redis = require("redis");
@@ -13,21 +13,21 @@ const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const PORT = 8000;
-const https_port = 8001;
+// const https_port = 8001;
 
 // const options = {
 //   key: fs.readFileSync("./rootca.key"),
 //   cert: fs.readFileSync("./rootca.crt"),
 // };
 
-const options = {
-  key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.com/privkey.pem"),
-  cert: fs.readFileSync(
-    "/etc/letsencrypt/live/thewavemarket.com/fullchain.pem"
-  ),
-};
+// const options = {
+//   key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.com/privkey.pem"),
+//   cert: fs.readFileSync(
+//     "/etc/letsencrypt/live/thewavemarket.com/fullchain.pem"
+//   ),
+// };
 const server = http.createServer(app);
-const https_server = https.createServer(options, app);
+// const https_server = https.createServer(options, app);
 
 // const io = require("socket.io")(server);
 // const io_https = require("socket.io")(https_server);
@@ -89,6 +89,6 @@ server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
 });
 
-https_server.listen(https_port, function () {
-  console.log(`HTTPS Server Open: ${https_port}`);
-});
+// https_server.listen(https_port, function () {
+//   console.log(`HTTPS Server Open: ${https_port}`);
+// });
