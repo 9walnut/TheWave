@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 
-function SelectBoxCategory() {
+function SelectBoxCategory({ value, onChange }) {
   const [releaseStatus, setReleaseStatus] = useState("");
 
   function handleChangeStatus(e) {
     const selectedValue = e.target.value;
     setReleaseStatus(selectedValue);
-    console.log("뭐골랐니", selectedValue);
+    console.log("카테고리 select", selectedValue);
+    onChange(selectedValue);
   }
 
   useEffect(() => {
@@ -17,9 +18,9 @@ function SelectBoxCategory() {
       <select
         name="releaseStatusCheck"
         onChange={handleChangeStatus}
-        value={releaseStatus}
+        value={value}
       >
-        <option disabled defaultValue>
+        <option disabled value="" selected>
           카테고리 선택
         </option>
         <option value="1">캐릭터</option>

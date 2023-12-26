@@ -1,26 +1,30 @@
 import { useState, useEffect } from "react";
 
-function SelectBoxProduct() {
+function SelectBoxProduct({ value, onChange }) {
   const [releaseStatus, setReleaseStatus] = useState("");
 
   function handleChangeStatus(e) {
     const selectedValue = e.target.value;
     setReleaseStatus(selectedValue);
-    console.log("뭐골랐니", selectedValue);
+    console.log("상품 상태 select", selectedValue);
+
+    // onChange prop으로 전달된 함수를 호출하여 값을 부모 컴포넌트로 전달
+    onChange(selectedValue);
   }
 
   useEffect(() => {
     console.log("select 변경 시 render", releaseStatus);
   }, [releaseStatus]);
+
   return (
     <>
       <select
         name="releaseStatusCheck"
         onChange={handleChangeStatus}
-        value={releaseStatus}
+        value={value}
       >
-        <option disabled defaultValue>
-          카테고리 선택
+        <option disabled value="" selected>
+          상품 상태 선택
         </option>
         <option value="판매중">판매 중</option>
         <option value="상품준비중">상품 준비 중</option>

@@ -11,6 +11,7 @@ import SelectBoxProduct from "../../shared/adminPage/components/SelectBoxProduct
 import SelectBoxCategory from "../../shared/adminPage/components/SelectBoxCategory";
 import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import axios from "axios";
+import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
 
 function ProductsAdd() {
   const textAreaStyle = {
@@ -22,6 +23,8 @@ function ProductsAdd() {
   const [productPrice, setProductPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [productStatus, setProductStatus] = useState("");
+
+  console.log("dddd", productStatus);
 
   const sendData = async () => {
     try {
@@ -95,6 +98,9 @@ function ProductsAdd() {
         <hr />
         <h3>이미지 정보</h3>
         <h3>얘도 문제군</h3>
+        <h3>thumbnailUpload</h3>
+        <UploadThumbnail />
+        <h3>detailUpload</h3>
         <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
       </Card>
     </>
