@@ -1,18 +1,30 @@
 import React, { useState } from "react";
-
 import * as S from "./DataTableStyle.js";
 
 import SelectBoxDelivery from "./SelectBoxDelivery.js";
 import CheckBox from "./CheckBox.js";
 import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
+import { useNavigate } from "react-router-dom";
+const useRowClick = (onItemClick) => {
+  const navigate = useNavigate();
 
-function DataTable({ keySet, headers, items, onSelectionChange }) {
+  const onRowClick = (item) => {
+    if (onItemClick) {
+      onItemClick(item.productID);
+      navigate(`/admin/products/${item.productID}`);
+    }
+  };
+
+  return onRowClick;
+};
+function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
   const [selectedLists, setSelectedLists] = useState(new Set());
   const [selectedStatus, setSelectedStatus] = useState("");
+  const onRowClick = useRowClick(onItemClick);
 
   const onChecked = (item) => {
     CheckBoxHandlerChecked({
@@ -51,7 +63,10 @@ function DataTable({ keySet, headers, items, onSelectionChange }) {
         </thead>
         <tbody>
           {items.map((item, index) => (
-            <S.TableTr key={`${keySet}_${index}`}>
+            <S.TableTr
+              key={`${keySet}_${index}`}
+              onClick={() => onRowClick(item)}
+            >
               <S.TableTd>
                 <CheckBox
                   onChange={() => onChecked(item)}
