@@ -22,6 +22,8 @@ function initModels(sequelize) {
   var users = _users(sequelize, DataTypes);
   var wishlist = _wishlist(sequelize, DataTypes);
 
+  products.belongsToMany(users, { as: 'userNumber_users', through: wishlist, foreignKey: "productId", otherKey: "userNumber" });
+  users.belongsToMany(products, { as: 'productId_products', through: wishlist, foreignKey: "userNumber", otherKey: "productId" });
   orders.belongsTo(carts, { as: "cart", foreignKey: "cartId"});
   carts.hasMany(orders, { as: "orders", foreignKey: "cartId"});
   productout.belongsTo(carts, { as: "cart", foreignKey: "cartId"});

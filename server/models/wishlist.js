@@ -1,15 +1,10 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('wishlist', {
-    wishNumber: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
     productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'products',
         key: 'productId'
@@ -18,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     userNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'users',
         key: 'userNumber'
@@ -33,14 +29,8 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "wishNumber" },
-        ]
-      },
-      {
-        name: "productId",
-        using: "BTREE",
-        fields: [
           { name: "productId" },
+          { name: "userNumber" },
         ]
       },
       {

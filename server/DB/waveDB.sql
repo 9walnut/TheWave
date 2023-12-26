@@ -106,9 +106,9 @@ CREATE TABLE `ORDERS` (
 	);
 
     CREATE TABLE `WISHLIST` (
-    `wishNumber` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`productId`	INT	NOT NULL,
     `userNumber` INT NOT NULL, 
+    PRIMARY KEY (productId, userNumber),
     FOREIGN KEY (productId) REFERENCES PRODUCTS (productId),
     FOREIGN KEY (userNumber) REFERENCES USERS (userNumber) ON DELETE CASCADE
     );
