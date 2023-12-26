@@ -1,38 +1,38 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
-  const apiURL = process.env.REACT_APP_BACKEND_URL;
+  // const apiURL = process.env.REACT_APP_BACKEND_URL;
   app.use(
     createProxyMiddleware("/register", {
-      target: apiURL,
+      target: "http://localhost:8000",
       changeOrigin: true,
     })
   );
 
   app.use(
     createProxyMiddleware("/login", {
-      target: apiURL,
+      target: "http://localhost:8000",
       changeOrigin: true,
     })
   );
 
   app.use(
     createProxyMiddleware("/mypage", {
-      target: apiURL,
+      target: "http://localhost:8000",
       changeOrigin: true,
     })
   );
 
   app.use(
     createProxyMiddleware("/admin/products", {
-      target: apiURL,
+      target: "http://localhost:8000",
       changeOrigin: true,
     })
   );
 
   app.use(
     createProxyMiddleware("/admin/users", {
-      target: apiURL,
+      target: "http://localhost:8000",
       changeOrigin: true,
     })
   );
