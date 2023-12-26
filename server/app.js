@@ -1,5 +1,5 @@
 const http = require("http");
-// const https = require("https");
+const https = require("https");
 const express = require("express");
 const app = express();
 const redis = require("redis");
@@ -12,7 +12,7 @@ const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const PORT = 8000;
-// const https_port = 8001;
+const https_port = 8001;
 
 // const options = {
 //   key: fs.readFileSync("./rootca.key"),
