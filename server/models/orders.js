@@ -33,40 +33,40 @@ module.exports = function(sequelize, DataTypes) {
     },
     orderQuantity: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     color: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: false
     },
     size: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: false
     },
     receiveName: {
       type: DataTypes.STRING(10),
-      allowNull: true
+      allowNull: false
     },
     address: {
       type: DataTypes.STRING(200),
-      allowNull: true
+      allowNull: false
     },
     deliveryRequest: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
     orderDate: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: false
     },
     orderStatus: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       defaultValue: 1
     },
     changeDate: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: false
     }
   }, {
     sequelize,

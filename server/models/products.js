@@ -17,31 +17,31 @@ module.exports = function(sequelize, DataTypes) {
     },
     productName: {
       type: DataTypes.STRING(20),
-      allowNull: true
+      allowNull: false
     },
     productPrice: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     productInfo: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
     productStatus: {
       type: DataTypes.STRING(10),
-      allowNull: true
+      allowNull: false
     },
     thumbnailUrl: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
     detailUrls: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: false
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
-      allowNull: true,
+      allowNull: false,
       defaultValue: 0
     }
   }, {

@@ -17,19 +17,19 @@ module.exports = function(sequelize, DataTypes) {
     },
     payPrice: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     payMethod: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     isPaid: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     isRefund: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     }
   }, {
     sequelize,
