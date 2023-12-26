@@ -77,9 +77,9 @@ app.use("/admin", adminRouter);
 const cartRouter = require("./routes/cart");
 app.use("/cart", cartRouter);
 
-io.on("connection", (socket) => {
-  console.log("New connection via HTTP");
-});
+// io.on("connection", (socket) => {
+//   console.log("New connection via HTTP");
+// });
 
 // io_https.on("connection", (socket) => {
 //   console.log("New connection via HTTPS");
