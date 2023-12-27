@@ -310,6 +310,9 @@ exports.editAdminProduct = async (req, res) => {
 exports.uploadThumbnail = async (req, res) => {
   try {
     const thumbnailUrl = req.file.location;
+    const productId = req.body.productId; // 상품 ID를 받아옵니다.
+
+    await db.products.update({ thumbnailUrl }, { where: { productId } });
     res.send({ thumbnailUrl });
   } catch (error) {
     console.error(error);
@@ -321,6 +324,12 @@ exports.uploadThumbnail = async (req, res) => {
 exports.uploadDetails = async (req, res) => {
   try {
     const detailUrls = req.files.map((file) => file.location);
+    const productId = req.body.productId; // 상품 ID를 받아옵니다.
+
+    await db.products.update(
+      { detailUrls: detailUrls.join() },
+      { where: { productId } }
+    );
     res.send({ detailUrls });
   } catch (error) {
     console.error(error);
