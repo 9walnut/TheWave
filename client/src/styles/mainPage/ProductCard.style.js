@@ -8,7 +8,7 @@ export const ProductContentBox = styled.div`
 `;
 
 export const CardItemBox = styled.div`
-  width: calc(25% - 10px);
+  width: calc(25% - 24px);
   margin-bottom: 20px;
   box-sizing: border-box;
   border: 1px solid black;

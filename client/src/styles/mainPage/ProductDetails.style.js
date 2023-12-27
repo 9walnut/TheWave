@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ProductLayout = styled.div`
   /* display: flex; */
-  margin: 50px 60px;
+  margin: 30px 40px;
   width: auto;
   height: 100%;
 `;
@@ -14,13 +14,27 @@ export const ProductImgBox = styled.div`
   border-right: 1px solid #5a5a5a;
   img {
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 `;
 
 export const ProductInfoBox = styled.div`
   width: 40%;
   padding: 40px;
+  .categoryInfo {
+    font-size: 16px;
+    a {
+      cursor: pointer;
+      font-weight: 500;
+    }
+    span {
+      color: #808080;
+    }
+  }
+  .productName {
+    margin: 10px 0;
+    font-size: 24px;
+  }
 `;
 
 export const ProductTopBox = styled.div`

@@ -121,28 +121,44 @@ function Navbar() {
                 </a>
               </li>
               <li>
-                <a href="#">Best</a>
+                <Link to={`/category`}>
+                  <a href="#">Best</a>
+                </Link>
               </li>
               <li>
-                <a href="#">캐릭터</a>
+                <Link to={`/category`}>
+                  <a href="#">캐릭터</a>
+                </Link>
               </li>
               <li>
-                <a href="#">데이지</a>
+                <Link to={`/category`}>
+                  <a href="#">데이지</a>
+                </Link>
               </li>
               <li>
-                <a href="#">레터링</a>
+                <Link to={`/category`}>
+                  <a href="#">레터링</a>
+                </Link>
               </li>
               <li>
-                <a href="#">용돈</a>
+                <Link to={`/category`}>
+                  <a href="#">용돈</a>
+                </Link>
               </li>
               <li>
-                <a href="#">옴브레</a>
+                <Link to={`/category`}>
+                  <a href="#">옴브레</a>
+                </Link>
               </li>
               <li>
-                <a href="#">장미</a>
+                <Link to={`/category`}>
+                  <a href="#">장미</a>
+                </Link>
               </li>
               <li>
-                <a href="#">튤립</a>
+                <Link to={`/category`}>
+                  <a href="#">튤립</a>
+                </Link>
               </li>
             </ul>
           </nav>
