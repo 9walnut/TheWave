@@ -24,12 +24,12 @@ function ProductCard() {
   return (
     <>
       <S.ProductContentBox>
-        {products.map((product) => {
+        {products.slice(0, 8).map((product) => {
           return (
             <S.CardItemBox>
               <Link to={`/products/${product.productId}`}>
                 <div>
-                  <img src={product.PrductImg} />
+                  <img src={product.thumbnailUrl} />
                 </div>
                 <div>
                   <ul>

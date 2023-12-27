@@ -18,6 +18,7 @@ import Orders from "./pages/adminPage/Orders";
 import Users from "./pages/adminPage/Users";
 import NotFound from "./shared/NotFound404";
 import ProductsDetail from "./pages/adminPage/ProductsDetail";
+import ProductDetailsPage from "./pages/mainPage/ProductDetailsPage";
 function App() {
   return (
     <BrowserRouter>

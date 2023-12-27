@@ -53,7 +53,8 @@ exports.loginUser = async (req, res) => {
         } else {
           console.log("redis 저장 성공!", reply);
         }
-      }); //userId를 키로 refresh 토큰 저장
+      });
+      //userId를 키로 refresh 토큰 저장
 
       // 비회원 장바구니 동기화
       // if (cart && cart.length > 0) {
