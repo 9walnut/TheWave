@@ -106,6 +106,10 @@ function Products() {
     }
   };
 
+  const tableClick = (productId) => {
+    console.log("클릭한 테이블 productId:", productId);
+  };
+
   return (
     <>
       <Card>
@@ -115,6 +119,9 @@ function Products() {
           headers={header}
           items={currentItems}
           onSelectionChange={onSelectionChange}
+          onItemClick={(productId) => {
+            console.log("클릭한 productId:", productId);
+          }}
         />
         <S.ButtonContainer>
           <AdminButtonGrey onClick={deleteProducts}>

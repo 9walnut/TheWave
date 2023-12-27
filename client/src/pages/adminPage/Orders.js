@@ -6,7 +6,7 @@ import Card from "../../shared/adminPage/components/Card";
 import DataTable from "../../shared/adminPage/components/DataTable";
 import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
-import SelectBox from "../../shared/adminPage/components/SelectBox.js";
+import SelectBoxDelivery from "../../shared/adminPage/components/SelectBoxDelivery.js";
 
 const header = [
   {
@@ -144,7 +144,7 @@ function Orders() {
         <h3>거래 내역 관리</h3>
         <DataTable keySet="ordersTb_" headers={header} items={currentItems} />
         출고 상태 일괄 변경 :&nbsp;
-        <SelectBox />
+        <SelectBoxDelivery />
         <PageNation
           total={DUMMY.length}
           limit={oneOfPage}
