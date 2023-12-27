@@ -10,13 +10,12 @@ const UploadThumbnail = ({ onFileChange }) => {
     setSelectedFile(file);
 
     console.log("Selected File1:", file); //찍힘
-    console.log("Selected File2:", selectedFile); //ㄴㄴ
 
     handleUpload(file);
   };
   useEffect(() => {
     console.log("Selected File3:", selectedFile); //찍힘
-    onFileChange(selectedFile);
+    // onFileChange(selectedFile);
   }, [selectedFile, onFileChange]); // selectedFile이 업데이트될 때만 실행
 
   const handleUpload = async (file) => {
@@ -36,6 +35,11 @@ const UploadThumbnail = ({ onFileChange }) => {
           "Content-Type": "multipart/form-data",
         },
       });
+      // 서버 응답에서 thumbnailUrl 추출
+      const thumbnailUrl = response.data.thumbnailUrl;
+
+      // 추출한 thumbnailUrl을 활용하여 원하는 작업 수행
+      console.log("Thumbnail URL:", thumbnailUrl);
 
       console.log("이미지 업로드 성공", response.data);
       console.log("Thumbnail URL:", response.data.thumbnailUrl);
@@ -44,7 +48,8 @@ const UploadThumbnail = ({ onFileChange }) => {
       setThumbnailUrl(response.data.thumbnailUrl);
       onFileChange(response.data.thumbnailUrl);
     } catch (error) {
-      console.error("이미지 업로드 실패", error.response.data);
+      console.error("response.data이미지 업로드 실패", error.response.data);
+      console.error("response 이미지 업로드 실패", error.response);
     }
   };
 
