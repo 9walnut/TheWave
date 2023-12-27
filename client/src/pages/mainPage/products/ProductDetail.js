@@ -1,31 +1,61 @@
-import { useState } from "react";
-import * as S from "../../../styles/mainPage/ProductDetails.style.js";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import * as S from "../../../styles/mainPage/ProductDetails.style";
 import Button from "../../../components/register/Button";
+import axios from "axios";
+import SeperatedPrice from "../../../hooks/SeparatedPrice";
 
 function ProductDetail() {
+  const [product, setProduct] = useState([]);
+  const { productID } = useParams();
+  console.log("상품 아이디", productID);
+
+  const getProductDetail = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8000/product/${productID}`);
+      console.log(res.data);
+      setProduct(res.data);
+    } catch (error) {
+      console.log("상품 불러오기 에러", error);
+    }
+  };
+
+  useEffect(() => {
+    getProductDetail();
+  }, []);
+
+  const [value, displayValue, setValue] = SeperatedPrice(0);
   const [productCount, setProductCount] = useState(0);
+
   const plusBtn = () => {
     setProductCount(productCount + 1);
+    setValue(value + product.productPrice);
   };
+
   const minusBtn = () => {
     setProductCount(productCount - 1);
+    setValue(value - product.productPrice);
   };
   return (
     <>
       <S.ProductLayout>
         <S.ProductTopBox>
           <S.ProductImgBox>
-            <img src="/characterBalloon12.jpg" />
+            <img src={product.thumbnailUrl} />
           </S.ProductImgBox>
           <S.ProductInfoBox>
-            <div>풍선 꽃다발</div>
-            <div>
-              설명
-              주저저리주저맂러ㅣ저맂러저맂러ㅣ절주저저리주저맂러ㅣ저맂러저맂러ㅣ절주저저리주저맂러ㅣ저맂러저맂러ㅣ절주저저리주저맂러ㅣ저맂러저맂러ㅣ절
+            <div className="categoryInfo">
+              <Link to={`/category/${product.categoryId}`}>
+                <a>{product.categoryId} / </a>
+              </Link>
+              <span className="miniProductName"> {product.productName}</span>
             </div>
+            <div className="productName">{product.productName}</div>
+            <div>{product.productInfo}</div>
             <div>
               <span>가격 : </span>
-              <span>13,000</span>
+              <span>{product.productPrice}</span>
             </div>
             <S.ProductCountBox>
               <button onClick={minusBtn}>
@@ -36,12 +66,16 @@ function ProductDetail() {
                 <img src="/assets/plus.svg" />
               </button>
             </S.ProductCountBox>
+            <div>
+              <span>결제 금액: </span>
+              <span>{displayValue}</span>
+            </div>
             <Button>구매하기</Button>
             <Button>장바구니</Button>
           </S.ProductInfoBox>
         </S.ProductTopBox>
         {/* 상품 사진 ~ 내용 등 */}
-        <S.ProductContentBox>상품 사진 ~ ~ ~ 내용</S.ProductContentBox>
+        <S.ProductContentBox>{product.productInfo}</S.ProductContentBox>
       </S.ProductLayout>
     </>
   );

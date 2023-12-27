@@ -12,7 +12,7 @@ function ProductsDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/products/${productId.productId}`);
+        const response = await axios.get(`/products/${productId}`);
         // const response = await axios.get("/products/3");
         console.log("response", response.data);
         // const modifiedData = response.data.find(

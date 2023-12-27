@@ -14,7 +14,7 @@ const useRowClick = (onItemClick) => {
 
     if (onItemClick) {
       onItemClick(item.productID);
-      navigate(`/admin/products/${item.productID}`);
+      navigate(`/admin/products/${item.productId}`);
     }
   };
 
