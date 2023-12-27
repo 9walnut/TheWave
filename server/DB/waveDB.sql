@@ -1,13 +1,13 @@
 	create database thewave default character set utf8mb4 default collate utf8mb4_general_ci;
 	use thewave;
-	CREATE USER 'admin'@'%' IDENTIFIED BY '1q2w3e4r';
+	create USER 'admin'@'%' IDENTIFIED with mysql_native_password by'1q2w3e4r';
 	GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
 	FLUSH PRIVILEGES;
 
 	drop database thewave;
     
     
-	CREATE TABLE `USERS` (
+	CREATE TABLE `users` (
 		`userNumber`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`userId`	VARCHAR(12)	NOT NULL,
 		`password`	VARCHAR(255) NOT NULL,
@@ -19,19 +19,19 @@
 		`gender`	CHAR(1)	 NOT NULL
 	);
 
-	CREATE TABLE `ADDRESS` (
+	CREATE TABLE `address` (
 		`addressId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`userNumber`	INT	NOT NULL,
 		`address`	VARCHAR(200) NOT NULL,
-		foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE
+		foreign key (userNumber) references users (userNumber) ON DELETE CASCADE
 	);
 
-	CREATE TABLE `CATEGORIES` (
+	CREATE TABLE `categories` (
 		`categoryId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`categoryName`	VARCHAR(20)	 NOT NULL
 	);
 
-	CREATE TABLE `PRODUCTS` (
+	CREATE TABLE `products` (
 		`productId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`categoryId`	INT	NOT NULL,
 		`productName`	VARCHAR(20) NOT	NULL,
@@ -41,31 +41,31 @@
 		`thumbnailUrl`	VARCHAR(255) NOT NULL,
 		`detailUrls`	TEXT	NOT NULL,
 		`isDeleted` BOOLEAN DEFAULT FALSE NOT NULL,
-		foreign key (categoryId) references CATEGORIES (categoryId)
+		foreign key (categoryId) references categories (categoryId)
 	);
 
-	CREATE TABLE `productOption` (
+	CREATE TABLE `productoption` (
 		`productId`	INT	NOT NULL,
 		`color`	VARCHAR(50)	NOT NULL,
 		`size`	VARCHAR(50)	 NOT NULL,
 		`deliveryHope`	VARCHAR(50)	 NOT NULL,
 		PRIMARY KEY (`productId`),
-		FOREIGN KEY (`productId`) REFERENCES `PRODUCTS` (`productId`)
+		FOREIGN KEY (`productId`) REFERENCES `products` (`productId`)
 	);
 
-	CREATE TABLE `CARTS` (
+	CREATE TABLE `carts` (
 		`cartId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`userNumber`	INT	NOT NULL,
 		`productId`	INT	NOT NULL,
 		`cartQuantity`	INT NOT NULL,
 		`isChecked`	INT	NOT NULL,
 		`isDeleted` BOOLEAN DEFAULT FALSE NOT NULL,
-		foreign key (userNumber) references USERS (userNumber) ON DELETE CASCADE,
-		foreign key (productId) references PRODUCTS (productId) ON DELETE CASCADE
+		foreign key (userNumber) references users (userNumber) ON DELETE CASCADE,
+		foreign key (productId) references products (productId) ON DELETE CASCADE
 	);
 
 
-CREATE TABLE `ORDERS` (
+CREATE TABLE `orders` (
 	`orderId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`userNumber`	INT	NOT NULL,
 	`cartId`	INT	NULL,
@@ -79,42 +79,42 @@ CREATE TABLE `ORDERS` (
 	`orderDate`	DATE	NOT NULL,
 	`orderStatus`	INT	NOT NULL DEFAULT 1,
 	`changeDate`	DATE NOT NULL,
-	FOREIGN KEY (userNumber) REFERENCES USERS (userNumber) ON DELETE CASCADE,
-	FOREIGN KEY (cartId) REFERENCES CARTS (cartId),
-	FOREIGN KEY (productId) REFERENCES PRODUCTS (productId)
+	FOREIGN KEY (userNumber) REFERENCES users (userNumber) ON DELETE CASCADE,
+	FOREIGN KEY (cartId) REFERENCES carts (cartId),
+	FOREIGN KEY (productId) REFERENCES products (productId)
 );
-	CREATE TABLE `PAYMENT` (
+	CREATE TABLE `payment` (
 		`paymentId`	INT	NOT NULL  AUTO_INCREMENT PRIMARY KEY,
 		`orderId`	INT	NOT NULL,
 		`payPrice`	INT	NOT NULL,
 		`payMethod`	INT	NOT NULL,
 		`isPaid`	INT	NOT NULL,
 		`isRefund`	INT	NOT NULL,
-		foreign key (orderId) references ORDERS (orderId) ON DELETE CASCADE
+		foreign key (orderId) references orders (orderId) ON DELETE CASCADE
 	);
 
-	CREATE TABLE `productOut` (
+	CREATE TABLE `productout` (
 		`productOutId`	INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`orderId`	INT	NOT NULL,
 		`cartId`	INT	NOT NULL,
 		`productId`	INT	NOT NULL,
 		`outStatus`	INT	NOT NULL,
 		`outDate`	DATE	NOT NULL,
-		FOREIGN KEY (orderId) REFERENCES ORDERS (orderId) ON DELETE CASCADE,
-		FOREIGN KEY (cartId) REFERENCES CARTS (cartId) ON DELETE CASCADE,
-		FOREIGN KEY (productId) REFERENCES PRODUCTS (productId) ON DELETE CASCADE
+		FOREIGN KEY (orderId) REFERENCES orders (orderId) ON DELETE CASCADE,
+		FOREIGN KEY (cartId) REFERENCES carts (cartId) ON DELETE CASCADE,
+		FOREIGN KEY (productId) REFERENCES products (productId) ON DELETE CASCADE
 	);
 
-    CREATE TABLE `WISHLIST` (
+    CREATE TABLE `wishlist` (
 		`productId`	INT	NOT NULL,
     `userNumber` INT NOT NULL, 
     PRIMARY KEY (productId, userNumber),
-    FOREIGN KEY (productId) REFERENCES PRODUCTS (productId),
-    FOREIGN KEY (userNumber) REFERENCES USERS (userNumber) ON DELETE CASCADE
+    FOREIGN KEY (productId) REFERENCES products (productId),
+    FOREIGN KEY (userNumber) REFERENCES users (userNumber) ON DELETE CASCADE
     );
 
 
-INSERT INTO USERS (userID, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender)
+INSERT INTO users (userID, password, passwordSalt, userName, phoneNumber, birthday, isAdmin, gender)
 VALUES 
   ('user1', 'password1', 'salt1', '홍길동', '01011112222', '1995-02-15', 'N', 'M'),
   ('user2', 'password2', 'salt2', '이순신', '01022223333', '1988-07-20', 'N', 'F'),
@@ -149,7 +149,7 @@ VALUES
 
 
 
-INSERT INTO ADDRESS (userNumber, address)
+INSERT INTO address (userNumber, address)
 VALUES 
   (1, '서울특별시 강남구 테스트로 123'),
   (2, '부산광역시 해운대구 샘플로 456'),
@@ -182,7 +182,7 @@ VALUES
   (29, '충청북도 청주시 더미로 2626'),
   (30, '충청남도 아산시 테스트길 2727');
 
-INSERT INTO CATEGORIES (categoryName)
+INSERT INTO categories (categoryName)
 VALUES 
   ('캐릭터'),
   ('데이지'),
@@ -193,7 +193,7 @@ VALUES
   ('장미'),
   ('튤립');
 
-INSERT INTO PRODUCTS (categoryId, productName, productPrice, productInfo, productStatus, thumbnailUrl, detailUrls, isDeleted)
+INSERT INTO products (categoryId, productName, productPrice, productInfo, productStatus, thumbnailUrl, detailUrls, isDeleted)
 VALUES 
   (1, '상품1', 20000, '이 상품은 테스트 상품입니다.', '판매중', 'http://test.com/image1.jpg', '["https://thewave-market.s3.ap-southeast-2.amazonaws.com/details/roseBallon03.jpg","https://thewave-market.s3.ap-southeast-2.amazonaws.com/thumbnails/rose_detail/roseDetail01.jpg","https://thewave-market.s3.ap-southeast-2.amazonaws.com/thumbnails/rose_detail/roseDetail02.jpg"]', FALSE),
   (2, '상품2', 25000, '이 상품은 데이지 향기가 나는 상품입니다.', '상품준비중', 'http://test.com/image2.jpg', '["https://thewave-market.s3.ap-southeast-2.amazonaws.com/details/roseBallon03.jpg","https://thewave-market.s3.ap-southeast-2.amazonaws.com/thumbnails/rose_detail/roseDetail01.jpg","https://thewave-market.s3.ap-southeast-2.amazonaws.com/thumbnails/rose_detail/roseDetail02.jpg"]', FALSE),
@@ -212,7 +212,7 @@ VALUES
   (7, '상품15', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매중', 'http://test.com/image15.jpg', '["https://thewave-market.s3.ap-southeast-2.amazonaws.com/details/roseBallon03.jpg","https://thewave-market.s3.ap-southeast-2.amazonaws.com/thumbnails/rose_detail/roseDetail01.jpg","https://thewave-market.s3.ap-southeast-2.amazonaws.com/thumbnails/rose_detail/roseDetail02.jpg"]', FALSE);
 
 
-INSERT INTO productOption (productId, color, size, deliveryHope)
+INSERT INTO productoption (productId, color, size, deliveryHope)
 VALUES
 	(1, '빨강', 'M', '문 앞에 놔주세요'),
 	(2, '파랑', 'M', '문 앞에 놔주세요'),
@@ -231,7 +231,7 @@ VALUES
 	(15, '흰색', 'M', '직접 수령');
 
     
-INSERT INTO CARTS (userNumber, productId, cartQuantity, isChecked, isDeleted)
+INSERT INTO carts (userNumber, productId, cartQuantity, isChecked, isDeleted)
 VALUES 
   (2, 2, 3, 1, FALSE),
   (3, 3, 1, 0, FALSE),
@@ -250,7 +250,7 @@ VALUES
   (16, 1, 2, 1, FALSE);
 
 
-INSERT INTO ORDERS (userNumber, cartId, productId, orderQuantity, color, size, receiveName, address, deliveryRequest, orderDate, orderStatus, changeDate)
+INSERT INTO orders (userNumber, cartId, productId, orderQuantity, color, size, receiveName, address, deliveryRequest, orderDate, orderStatus, changeDate)
 VALUES 
   (1, 1, 1, 2, 'Red', 'M', '권구호', '서울특별시 강남구 테스트로 123', 'Fast Delivery', CURDATE(), 1, CURDATE()),
   (2, 2, 2, 3, 'Blue', 'L', '이지은', '서울특별시 강북구 테스트로 456', 'Standard Delivery', CURDATE(), 2, CURDATE()),
@@ -286,7 +286,7 @@ VALUES
 
 
 
-INSERT INTO PAYMENT (orderId, payPrice, payMethod, isPaid, isRefund)
+INSERT INTO payment (orderId, payPrice, payMethod, isPaid, isRefund)
 VALUES 
   (1, 20000, 1, 1, 0),
   (2, 25000, 2, 1, 0),
@@ -320,7 +320,7 @@ VALUES
   (30, 18000, 2, 1, 0);
 
 
-INSERT INTO productOut (orderId, cartId, productId, outStatus, outDate)
+INSERT INTO productout (orderId, cartId, productId, outStatus, outDate)
 VALUES 
   (2, 2, 2, 1, CURDATE()),
   (3, 3, 3, 1, CURDATE()),
