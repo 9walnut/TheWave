@@ -18,6 +18,7 @@ import Orders from "./pages/adminPage/Orders";
 import Users from "./pages/adminPage/Users";
 import NotFound from "./shared/NotFound404";
 import ProductsDetail from "./pages/adminPage/ProductsDetail";
+import ProductDetailsPage from "./pages/mainPage/ProductDetailsPage";
 function App() {
   return (
     <BrowserRouter>
@@ -27,12 +28,12 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/findId" element={<FindIdPage />} />
         <Route path="/findPw" element={<FindPwPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-        {/* <Route path="/mypage/info" element={<MyPageInfo />} />
-        <Route path="/category/:categoryID" element={<CategoryPage />} />
-        <Route path="/products/:productID" element={<ProductDetailPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/cart/checkout" element={<CheckoutPage />} /> */}
+        {/* <Route path="/mypage" element={<MyPage />} /> */}
+        {/* <Route path="/mypage/info" element={<MyPageInfo />} /> */}
+        {/* <Route path="/category/:categoryID" element={<CategoryPage />} /> */}
+        <Route path="/products/:productID" element={<ProductDetailsPage />} />
+        {/* <Route path="/cart" element={<CartPage />} /> */}
+        {/* <Route path="/cart/checkout" element={<CheckoutPage />} /> */}
         {/* admin */}
         <Route path="/admin/*" element={<AdminPageMain />}>
           <Route path="dashboard" element={<MainDashBoard />} />
