@@ -4,59 +4,42 @@ import axios from "axios";
 import * as S from "../../styles/adminPage/ProductsDetail.js";
 import Card from "../../shared/adminPage/components/Card";
 
-function ProductsDetail() {
-  const productId = useParams();
-  console.log("찍히나나나", productId);
-  const [productData, setProductData] = useState(null);
+function ProductsDetail({ products }) {
+  const [product, setProduct] = useState({});
+  const { productId } = useParams();
+  // console.log("상품 아이디", productId);
+
+  const getProductsDetail = async () => {
+    try {
+      const response = await axios.get(`/admin/products/${productId}`);
+      console.log("응답오나", response.data);
+      setProduct(response.data);
+    } catch (error) {
+      console.error("상품 불러오기 에러", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/products/${productId}`);
-        // const response = await axios.get("/products/3");
-        console.log("response", response.data);
-        // const modifiedData = response.data.find(
-        //   (product) => product.productId == productId
-        // );
-        // setProductData(modifiedData);
-      } catch (error) {
-        console.error("제품 데이터를 불러오는 중 오류 발생", error);
-      }
-    };
-
-    fetchData();
+    getProductsDetail();
   }, [productId]);
 
-  if (!productData) {
+  if (!product || Object.keys(product).length === 0) {
     return <p>상품을 찾을 수 없습니다.</p>;
   }
-
-  const {
-    productName,
-    productPrice,
-    productInfo,
-    productStatus,
-    thumbnailUrl,
-    detailUrls,
-  } = productData;
 
   return (
     <>
       <Card>
         <h3>상품 상세 페이지</h3>
-        <img src={thumbnailUrl} alt={productName} />
-        <p>{productName}</p>
-        <p>가격: {productPrice}원</p>
-        <p>설명: {productInfo}</p>
-        <p>상태: {productStatus}</p>
-        {detailUrls && detailUrls.length > 0 && (
-          <div>
-            <h4>상세 이미지들:</h4>
-            {detailUrls.map((url, index) => (
-              <img key={index} src={url} alt={`Detail ${index + 1}`} />
-            ))}
-          </div>
-        )}
+        <div>
+          이미지자리
+          <img src={product.thumbnailUrl} alt={product.productName} />
+        </div>
+        <p>상품이름: {product.productName}</p>
+        <p>가격: {product.productPrice}원</p>
+        <p>설명: {product.productInfo}</p>
+        <p>상태: {product.productStatus}</p>
+        <p>상세이미지자리</p>
       </Card>
     </>
   );

@@ -10,11 +10,9 @@ const useRowClick = (onItemClick) => {
   const navigate = useNavigate();
 
   const onRowClick = (item) => {
-    // const { item.productID } = useParams();
-
     if (onItemClick) {
       onItemClick(item.productID);
-      navigate(`/admin/products/${item.productId}`);
+      //   navigate(`/admin/products/${item.productId}`);
     }
   };
 
