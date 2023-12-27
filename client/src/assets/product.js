@@ -41,5 +41,19 @@ const productList = [
     productPrice: 10000,
     productInfo: "풍선입니다",
   },
+  {
+    productId: 7,
+    productImg: "csp6.jpg",
+    productName: "풍선 7",
+    productPrice: 10000,
+    productInfo: "풍선입니다",
+  },
+  {
+    productId: 8,
+    productImg: "csp6.jpg",
+    productName: "풍선 8",
+    productPrice: 10000,
+    productInfo: "풍선입니다",
+  },
 ];
 export default productList;
