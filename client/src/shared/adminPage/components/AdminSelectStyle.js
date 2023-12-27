@@ -16,10 +16,3 @@ export const AdminInputText = styled.div`
   margin-bottom: 25px;
   color: black;
 `;
-
-// // input 기본 스타일 속성
-// export const StyledInput = styled.input`
-//   border: none;
-//   outline: none;
-//   width: 590px;
-// `;
