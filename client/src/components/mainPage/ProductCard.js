@@ -1,33 +1,48 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import * as S from "../../styles/mainPage/ProductCard.style";
 import prList from "../../assets/product";
-import "./ProductCard.css";
+import axios from "axios";
 
 function ProductCard() {
-  const [productList, setProductList] = useState(prList);
+  // const [productList, setProductList] = useState(prList);
+  const [products, setProducts] = useState([]);
+
+  const getProduct = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/");
+      setProducts(res.data);
+    } catch (error) {
+      console.log("불러오기 에러");
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
 
   return (
     <>
-      <div className="productCardBox">
-        {productList.map((value) => {
+      <S.ProductContentBox>
+        {products.slice(0, 8).map((product) => {
           return (
-            <div key={value.productId} className="cardItemBox">
-              <Link to={"/products"}>
+            <S.CardItemBox>
+              <Link to={`/products/${product.productId}`}>
                 <div>
-                  <img src={value.productImg} />
+                  <img src={product.thumbnailUrl} />
                 </div>
                 <div>
                   <ul>
-                    <li>{value.productName}</li>
-                    <li>{value.productInfo}</li>
-                    <li>{value.productPrice}원</li>
+                    <li>{product.productName}</li>
+                    <li>{product.productInfo}</li>
+                    <li>{product.productPrice}원</li>
                   </ul>
                 </div>
               </Link>
-            </div>
+            </S.CardItemBox>
           );
         })}
-      </div>
+      </S.ProductContentBox>
     </>
   );
 }

@@ -69,7 +69,12 @@ function LoginPage() {
       <Navbar />
       <section>
         <div className="formBox">
-          <form onKeyDown={handleEnter}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+            onKeyDown={handleEnter}
+          >
             ID
             <input type="text" onChange={onUserIdHandler} />
             <br />

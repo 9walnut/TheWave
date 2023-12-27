@@ -61,8 +61,8 @@ exports.noMemberPay = async (req, res) => {
 
     // 주문 내역에 상품 추가
     await db.orders.create({
-      orderID: newOrder.orderId,
-      productID: product.productId,
+      orderId: newOrder.orderId,
+      productId: product.productId,
       orderQuantity: orderQuantity,
     });
 
