@@ -12,6 +12,7 @@ import SelectBoxCategory from "../../shared/adminPage/components/SelectBoxCatego
 import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import axios from "axios";
 import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
+import UploadThumbnailTest from "../../shared/adminPage/components/UploadThumbnailTest";
 
 function ProductsAdd() {
   const textAreaStyle = {
@@ -21,12 +22,18 @@ function ProductsAdd() {
   const [productName, setProductName] = useState("");
   const [productInfo, setProductInfo] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const [categoryName, setCategoryName] = useState("");
   const [productStatus, setProductStatus] = useState("");
+  const [thumbnailUrl, setThumbnailUrl] = useState("");
 
   console.log("dddd", productStatus);
 
-  const sendData = async () => {
+  const getImageData = (selectedFile) => {
+    setThumbnailUrl(selectedFile);
+    console.log("왔니", thumbnailUrl);
+  };
+
+  const sendData = async (getImageData) => {
     try {
       // const productName = productName;
       // const productInfo = productInfo;
@@ -38,8 +45,9 @@ function ProductsAdd() {
         productName,
         productInfo,
         productPrice,
-        categoryId,
+        categoryName,
         productStatus,
+        thumbnailUrl,
       };
 
       const response = await axios.post("/admin/products", data);
@@ -88,7 +96,7 @@ function ProductsAdd() {
         </AdminInput>
 
         <AdminSelect title="상품 카테고리">
-          <SelectBoxCategory value={categoryId} onChange={setCategoryId} />
+          <SelectBoxCategory value={categoryName} onChange={setCategoryName} />
         </AdminSelect>
 
         <AdminSelect title="상품 상태">
@@ -97,12 +105,12 @@ function ProductsAdd() {
 
         <hr />
         <h3>이미지 정보</h3>
-        <h3>얘도 문제군</h3>
         <h3>thumbnailUpload</h3>
-        <UploadThumbnail />
+        <UploadThumbnail onFileChange={getImageData} />
         <h3>detailUpload</h3>
         <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
       </Card>
+      <UploadThumbnailTest />
     </>
   );
 }

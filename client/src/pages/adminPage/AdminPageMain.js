@@ -30,7 +30,7 @@ function AdminPageMain() {
           <Route path="dashboard" element={<MainDashBoard />} />
           <Route path="products" element={<Products />} />
           <Route path="products/add" element={<ProductsAdd />} />
-          <Route path="products/:productsId" element={<ProductsDetail />} />
+          <Route path="products/:productId" element={<ProductsDetail />} />
           <Route path="orders" element={<Orders />} />
           <Route path="users" element={<Users />} />
         </Routes>

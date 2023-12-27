@@ -5,19 +5,20 @@ import * as S from "../../styles/adminPage/ProductsDetail.js";
 import Card from "../../shared/adminPage/components/Card";
 
 function ProductsDetail() {
-  const { productId } = useParams();
+  const productId = useParams();
+  console.log("찍히나나나", productId);
   const [productData, setProductData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get(`/products/${productId}`);
-        const response = await axios.get("/products/3");
+        const response = await axios.get(`/products/${productId.productId}`);
+        // const response = await axios.get("/products/3");
         console.log("response", response.data);
-        const modifiedData = response.data.find(
-          (product) => product.productId == productId
-        );
-        setProductData(modifiedData);
+        // const modifiedData = response.data.find(
+        //   (product) => product.productId == productId
+        // );
+        // setProductData(modifiedData);
       } catch (error) {
         console.error("제품 데이터를 불러오는 중 오류 발생", error);
       }
