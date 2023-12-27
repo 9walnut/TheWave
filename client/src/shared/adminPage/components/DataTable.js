@@ -5,11 +5,13 @@ import SelectBoxDelivery from "./SelectBoxDelivery.js";
 import CheckBox from "./CheckBox.js";
 import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const useRowClick = (onItemClick) => {
   const navigate = useNavigate();
 
   const onRowClick = (item) => {
+    // const { item.productID } = useParams();
+
     if (onItemClick) {
       onItemClick(item.productID);
       navigate(`/admin/products/${item.productID}`);
