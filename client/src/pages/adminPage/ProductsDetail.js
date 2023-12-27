@@ -6,7 +6,7 @@ import Card from "../../shared/adminPage/components/Card";
 
 function ProductsDetail() {
   const productId = useParams();
-  console.log("찍히나", productId);
+  console.log("찍히나나나", productId);
   const [productData, setProductData] = useState(null);
 
   useEffect(() => {
