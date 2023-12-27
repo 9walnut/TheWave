@@ -44,4 +44,10 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    createProxyMiddleware("/admin/products/thumbnail", {
+      target: "http://localhost:8000",
+      changeOrigin: true,
+    })
+  );
 };

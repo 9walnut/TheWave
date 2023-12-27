@@ -8,17 +8,16 @@ import FindIdPage from "./pages/mainPage/Registers/FindIdPage";
 import FindPwPage from "./pages/mainPage/Registers/FindPwPage";
 import NewPwPage from "./pages/mainPage/Registers/NewPwPage";
 import MyPage from "./pages/mainPage/mypage/MyPage";
-import AdminPageMain from "./pages/adminPage/AdminPageMain";
+import CartPage from "./pages/mainPage/CartPage";
 // admin
+import AdminPageMain from "./pages/adminPage/AdminPageMain";
 import MainDashBoard from "./pages/adminPage/MainDashBoard";
 import Products from "./pages/adminPage/Products";
 import ProductsAdd from "./pages/adminPage/ProductsAdd";
 import Orders from "./pages/adminPage/Orders";
 import Users from "./pages/adminPage/Users";
 import NotFound from "./shared/NotFound404";
-import ProductDetailsPage from "./pages/mainPage/ProductDetailsPage";
-import CartPage from "./pages/mainPage/CartPage";
-
+import ProductsDetail from "./pages/adminPage/ProductsDetail";
 function App() {
   return (
     <BrowserRouter>
@@ -39,6 +38,7 @@ function App() {
           <Route path="dashboard" element={<MainDashBoard />} />
           <Route path="products" element={<Products />} />
           <Route path="products/add" element={<ProductsAdd />} />
+          <Route path="products/:productId" element={<ProductsDetail />} />
           <Route path="orders" element={<Orders />} />
           <Route path="users" element={<Users />} />
         </Route>
