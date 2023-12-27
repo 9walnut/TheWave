@@ -45,6 +45,12 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  // app.use(
+  //   createProxyMiddleware("/admin/products/:productId", {
+  //     target: "http://localhost:8000",
+  //     changeOrigin: true,
+  //   })
+  // );
 
   app.use(
     createProxyMiddleware("/admin/users", {

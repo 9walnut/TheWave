@@ -8,7 +8,7 @@ function PageNationFunc(data) {
   const indexOfFirstItem = indexOfLastItem - oneOfPage;
 
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  console.log("currentItems", currentItems); // 로그 추가
+  // console.log("currentItems", currentItems);
 
   function handlePageClick(selectPage) {
     setCurrentPage(selectPage);

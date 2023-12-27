@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { Route, Routes, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
 
 import * as S from "../../styles/adminPage/Products.js";
@@ -11,6 +11,7 @@ import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
 import DataTable from "../../shared/adminPage/components/DataTable";
+import ProductsDetail from "./ProductsDetail.js";
 
 const header = [
   {
@@ -41,12 +42,13 @@ const header = [
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   //---axios get
   const fetchData = async () => {
     try {
       const response = await axios.get("/admin/products");
-      console.log("response", response.data);
+      // console.log("response", response.data);
 
       const filteredData = response.data.filter(
         (product) => !product.isDeleted
@@ -62,7 +64,8 @@ function Products() {
       }));
 
       setProducts(modifiedData);
-      console.log(products);
+      // console.log(products);
+      // console.log(modifiedData);
     } catch (error) {
       console.error("에러", error.response.data);
     }
@@ -106,10 +109,6 @@ function Products() {
     }
   };
 
-  const tableClick = (productId) => {
-    console.log("클릭한 테이블 productId:", productId);
-  };
-
   return (
     <>
       <Card>
@@ -119,8 +118,13 @@ function Products() {
           headers={header}
           items={currentItems}
           onSelectionChange={onSelectionChange}
-          onItemClick={(productId) => {
+          onItemClick={(productId, e) => {
             console.log("클릭한 productId:", productId);
+
+            // if (selectedProductIds.includes(productId)) {
+            //   return;
+            // }
+            navigate(`/admin/products/${productId}`);
           }}
         />
         <S.ButtonContainer>
@@ -138,6 +142,9 @@ function Products() {
           setPage={handlePageClick}
         />
       </Card>
+      <Routes>
+        <Route path="/products/:productId" element={<ProductsDetail />} />
+      </Routes>
     </>
   );
 }
