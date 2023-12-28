@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as S from "../../../styles/mainPage/ProductDetails.style";
@@ -14,11 +14,10 @@ function ProductDetail() {
 
   const getProductDetail = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/product/${productId}`);
+      const res = await axios.get(`api/product/${productId}`);
       console.log(res.data);
       setProduct(res.data.productDetail);
       setCategoryName(res.data.categoryName.categoryName);
-      console.log(categoryName);
     } catch (error) {
       console.log("상품 불러오기 에러", error);
     }

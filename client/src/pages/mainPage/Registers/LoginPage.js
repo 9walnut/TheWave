@@ -39,7 +39,7 @@ function LoginPage() {
       password: password,
     };
     try {
-      const res = await axios.post("http://localhost:8000/login", data);
+      const res = await axios.post("api/login", data);
       if (res.data.result) {
         localStorage.setItem("accessToken", res.data.accessToken);
         const headers = {

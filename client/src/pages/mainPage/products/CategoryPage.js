@@ -4,12 +4,16 @@ import "../MainPage.css";
 import CategoryProducts from "./CategoryProducts";
 
 function CategoryPage() {
-  <>
-    <Navbar />
-    <section>
-      <CategoryProducts />
-    </section>
-    <Footer />
-  </>;
+  console.log("하이하이 니ㅏ는 카테고리 페이지");
+
+  return (
+    <>
+      <Navbar />
+      <section>
+        <CategoryProducts />
+      </section>
+      <Footer />
+    </>
+  );
 }
 export default CategoryPage;

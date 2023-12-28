@@ -17,7 +17,7 @@ function Register() {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("/register", data);
+      const res = await axios.post("api/register", data);
       console.log("Signup Successful:", res.data.result);
       if (res.data.result) {
         alert("회원가입 성공 ~~");
