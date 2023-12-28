@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useStat, useRef, useState } from "react";
 import * as S from "./DataTableStyle.js";
 
 import SelectBoxDelivery from "./SelectBoxDelivery.js";
@@ -7,7 +7,7 @@ import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 import { useNavigate, useParams } from "react-router-dom";
 const useRowClick = (onItemClick) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onRowClick = (item) => {
     if (onItemClick) {
@@ -18,7 +18,15 @@ const useRowClick = (onItemClick) => {
 
   return onRowClick;
 };
-function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
+
+function DataTable({
+  keySet,
+  headers,
+  items,
+  onSelectionChange,
+  onItemClick,
+  inputHover,
+}) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
@@ -41,7 +49,24 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
     CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists });
   };
 
+  const inputRef = useRef(null);
+  const [isMouseOverInput, setIsMouseOverInput] = useState(false);
+  const handleMouseMove = (e) => {
+    const inputRect = inputRef.current.getBoundingClientRect();
+    const isOverInput =
+      e.clientX >= inputRect.left &&
+      e.clientX <= inputRect.right &&
+      e.clientY >= inputRect.top &&
+      e.clientY <= inputRect.bottom;
+
+    setIsMouseOverInput(isOverInput);
+    inputHover(isOverInput);
+
+    // console.log("마우스 input?", isOverInput);
+  };
+
   const headerList = headers.map((header) => header.value);
+
   return (
     <>
       <S.Table>
@@ -50,7 +75,9 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
             <S.TableTd>
               <input
                 type="checkbox"
+                // ref={inputRef}
                 onChange={SelectAll}
+                // onMouseMove={handleMouseMove}
                 checked={selectedLists.size === items.length}
               />
             </S.TableTd>
@@ -68,7 +95,14 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
               onClick={() => onRowClick(item)}
             >
               <S.TableTd>
-                <CheckBox
+                {/* <CheckBox
+                  onChange={() => onChecked(item)}
+                  checked={selectedLists.has(index)}
+                /> */}
+                <input
+                  type="checkbox"
+                  ref={inputRef}
+                  onMouseMove={handleMouseMove}
                   onChange={() => onChecked(item)}
                   checked={selectedLists.has(index)}
                 />
