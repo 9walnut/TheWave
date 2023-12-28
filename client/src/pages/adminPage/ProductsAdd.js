@@ -56,7 +56,7 @@ function ProductsAdd() {
       };
       console.log("ㅎㅎㅎㅎ", detailUrls);
 
-      const response = await axios.post("/admin/products/add", data);
+      const response = await axios.post("/api/admin/products/add", data);
       console.log("전송 성공", response.data.result);
       if (response.data.result) {
         console.log("되었다");

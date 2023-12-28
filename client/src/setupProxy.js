@@ -24,7 +24,7 @@ module.exports = function (app) {
   );
 
   app.use(
-    createProxyMiddleware("/api//login", {
+    createProxyMiddleware("/api/login", {
       target: apiURL,
       changeOrigin: true,
       pathRewrite: {
@@ -34,7 +34,7 @@ module.exports = function (app) {
   );
 
   app.use(
-    createProxyMiddleware("/api//mypage", {
+    createProxyMiddleware("/api/mypage", {
       target: apiURL,
       changeOrigin: true,
       pathRewrite: {
@@ -44,7 +44,7 @@ module.exports = function (app) {
   );
 
   app.use(
-    createProxyMiddleware("/api//products", {
+    createProxyMiddleware("/api/products", {
       target: apiURL,
       changeOrigin: true,
       pathRewrite: {
@@ -55,7 +55,7 @@ module.exports = function (app) {
 
   // ------------------- admin ----------------------
   app.use(
-    createProxyMiddleware("/api//admin/products", {
+    createProxyMiddleware("/api/admin/products", {
       target: apiURL,
       changeOrigin: true,
       pathRewrite: {
@@ -65,7 +65,7 @@ module.exports = function (app) {
   );
 
   app.use(
-    createProxyMiddleware("/api//admin/products/:productId", {
+    createProxyMiddleware("/api/admin/products/:productId", {
       target: apiURL,
       changeOrigin: true,
       pathRewrite: {

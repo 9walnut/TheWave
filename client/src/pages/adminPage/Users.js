@@ -56,7 +56,7 @@ function Users() {
   //---axios get
   const fetchData = async () => {
     try {
-      const response = await axios.get("/admin/users");
+      const response = await axios.get("/api/admin/users");
       console.log("response", response.data);
 
       const modifiedData = response.data.map((user) => ({
@@ -97,7 +97,7 @@ function Users() {
 
     if (window.confirm("정말 회원을 삭제하시겠습니까?")) {
       try {
-        const response = await axios.delete("/admin/users", {
+        const response = await axios.delete("/api/admin/users", {
           data: { userNumber: selectedUserNumbers.selectedUserNumber },
         });
         console.log("서버 응답 확인", response.data);

@@ -46,7 +46,7 @@ function Products() {
   //---axios get
   const fetchData = async () => {
     try {
-      const response = await axios.get("/admin/products");
+      const response = await axios.get("/api/admin/products");
       // console.log("response", response.data);
 
       const filteredData = response.data.filter(
@@ -89,7 +89,7 @@ function Products() {
     console.log("삭제할 제품 ID:", selectedProductIds);
     if (window.confirm("정말 상품을 삭제하시겠습니까?")) {
       try {
-        const response = await axios.delete("/admin/products", {
+        const response = await axios.delete("/api/admin/products", {
           data: { productId: selectedProductIds.selectedProductId },
         });
         console.log("서버 응답 왜 안되니", response.data);
