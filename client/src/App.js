@@ -29,7 +29,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/findId" element={<FindIdPage />} />
         <Route path="/findPw" element={<FindPwPage />} />
-        {/* <Route path="/mypage" element={<MyPage />} /> */}
+        <Route path="/mypage" element={<MyPage />} />
         {/* <Route path="/mypage/info" element={<MyPageInfo />} /> */}
         {/* <Route path="/category/:categoryID" element={<CategoryPage />} /> */}
         <Route path="/products/:productID" element={<ProductDetailsPage />} />

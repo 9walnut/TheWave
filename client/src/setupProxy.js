@@ -24,12 +24,12 @@ module.exports = function (app) {
     })
   );
 
-  app.use(
-    createProxyMiddleware("/mypage", {
-      target: "http://localhost:8000",
-      changeOrigin: true,
-    })
-  );
+  // app.use(
+  //   createProxyMiddleware("/mypage", {
+  //     target: "http://localhost:8000",
+  //     changeOrigin: true,
+  //   })
+  // );
 
   // app.use(
   //   createProxyMiddleware("/products", {
