@@ -8,9 +8,16 @@ exports.productPage = async (req, res) => {
     const productDetail = await db.products.findOne({
       where: { productId: req.params.productId },
     });
-    res.json(productDetail);
+
+    const categoryName = await db.categories.findOne({
+      where: { categoryId: productDetail.categoryId },
+      attributes: ["categoryName"],
+    });
+
+    res.json({ productDetail, categoryName });
+    console.log(categoryName);
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).send("상품 상세 페이지 오류");
   }
 };
