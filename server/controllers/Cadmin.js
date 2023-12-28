@@ -224,7 +224,11 @@ exports.createAdminProduct = async (req, res) => {
 
 // 사진 등록 - 썸네일
 exports.uploadThumbnail = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("썸네일 파일이 업로드되지 않았습니다.");
+  }
   try {
+    // s3의 파일 url
     const thumbnailUrl = req.file.location;
     res.send({ thumbnailUrl });
   } catch (error) {
@@ -235,6 +239,9 @@ exports.uploadThumbnail = async (req, res) => {
 
 // 사진 등록 - 상세 사진
 exports.uploadDetails = async (req, res) => {
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).send("상세 사진 파일이 업로드되지 않았습니다.");
+  }
   try {
     const detailUrls = req.files.map((file) => file.location);
     res.send({ detailUrls });
@@ -306,36 +313,36 @@ exports.editAdminProduct = async (req, res) => {
   }
 };
 
-// 썸네일 사진 수정
-exports.uploadThumbnail = async (req, res) => {
-  try {
-    const thumbnailUrl = req.file.location;
-    const productId = req.body.productId; // 상품 ID를 받아옵니다.
+// // 썸네일 사진 수정
+// exports.uploadThumbnail = async (req, res) => {
+//   try {
+//     const thumbnailUrl = req.file.location;
+//     const productId = req.body.productId; // 상품 ID를 받아옵니다.
 
-    await db.products.update({ thumbnailUrl }, { where: { productId } });
-    res.send({ thumbnailUrl });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("썸네일 수정 오류");
-  }
-};
+//     await db.products.update({ thumbnailUrl }, { where: { productId } });
+//     res.send({ thumbnailUrl });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("썸네일 수정 오류");
+//   }
+// };
 
-// 상세 사진 수정
-exports.uploadDetails = async (req, res) => {
-  try {
-    const detailUrls = req.files.map((file) => file.location);
-    const productId = req.body.productId; // 상품 ID를 받아옵니다.
+// // 상세 사진 수정
+// exports.uploadDetails = async (req, res) => {
+//   try {
+//     const detailUrls = req.files.map((file) => file.location);
+//     const productId = req.body.productId; // 상품 ID를 받아옵니다.
 
-    await db.products.update(
-      { detailUrls: detailUrls.join() },
-      { where: { productId } }
-    );
-    res.send({ detailUrls });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("상세 사진 수정 오류");
-  }
-};
+//     await db.products.update(
+//       { detailUrls: detailUrls.join() },
+//       { where: { productId } }
+//     );
+//     res.send({ detailUrls });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("상세 사진 수정 오류");
+//   }
+// };
 
 // 등록 상품 삭제
 exports.deleteAdminProduct = async (req, res) => {
