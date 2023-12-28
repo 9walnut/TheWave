@@ -30,11 +30,15 @@ const UploadThumbnail = ({ onFileChange }) => {
 
       console.log("FormData:", formData);
 
-      const response = await axios.post("/admin/products/thumbnail", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "/admin/products/add/thumbnail",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       // 서버 응답에서 thumbnailUrl 추출
       const thumbnailUrl = response.data.thumbnailUrl;
 
