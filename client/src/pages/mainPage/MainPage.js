@@ -12,7 +12,6 @@ function MainPage() {
       <Navbar />
       <section>
         {/* <Carousel /> */}
-        {/* <Slider /> */}
         <ProductCard />
       </section>
       <Footer />
