@@ -119,15 +119,11 @@ function Products() {
           onSelectionChange={onSelectionChange}
           onItemClick={(productId) => {
             console.log("클릭한 productId:", productId);
-
-            // if (selectedProductIds.includes(productId)) {
-            //   return;
-            // }
             navigate(`/admin/products/${productId}`);
           }}
-          inputHover={(isOverInput) => {
-            console.log("hover왔냐", isOverInput);
-          }}
+          // onMouseInput={(isMouseOverInput) => {
+          //   console.log("넘어오니?");
+          // }}
         />
         <S.ButtonContainer>
           <AdminButtonGrey onClick={deleteProducts}>

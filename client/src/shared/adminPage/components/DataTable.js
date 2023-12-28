@@ -25,7 +25,8 @@ function DataTable({
   items,
   onSelectionChange,
   onItemClick,
-  inputHover,
+  // onMouseInput,
+  // inputHover,
 }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
@@ -49,21 +50,31 @@ function DataTable({
     CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists });
   };
 
-  const inputRef = useRef(null);
-  const [isMouseOverInput, setIsMouseOverInput] = useState(false);
-  const handleMouseMove = (e) => {
-    const inputRect = inputRef.current.getBoundingClientRect();
-    const isOverInput =
-      e.clientX >= inputRect.left &&
-      e.clientX <= inputRect.right &&
-      e.clientY >= inputRect.top &&
-      e.clientY <= inputRect.bottom;
+  // const inputRef = useRef(null);
+  // const [isMouseOverInput, setIsMouseOverInput] = useState(false);
+  // const handleMouseMove = (e) => {
+  //   const inputRect = inputRef.current.getBoundingClientRect();
+  //   const isOverInput =
+  //     e.clientX >= inputRect.left &&
+  //     e.clientX <= inputRect.right &&
+  //     e.clientY >= inputRect.top &&
+  //     e.clientY <= inputRect.bottom;
 
-    setIsMouseOverInput(isOverInput);
-    inputHover(isOverInput);
+  //   setIsMouseOverInput(isOverInput);
+  //   inputHover(isOverInput);
 
-    // console.log("마우스 input?", isOverInput);
-  };
+  //   console.log("마우스 input?", isOverInput);
+  // };
+  // const handleMouseEnter = () => {
+  //   setIsMouseOverInput(true);
+  //   console.log("마우스 input 위에 있음?", true);
+  //   onMouseInput(isMouseOverInput);
+  // };
+
+  // const handleMouseLeave = () => {
+  //   setIsMouseOverInput(false);
+  //   console.log("마우스 input 위에 있음?", false);
+  // };
 
   const headerList = headers.map((header) => header.value);
 
@@ -101,8 +112,13 @@ function DataTable({
                 /> */}
                 <input
                   type="checkbox"
-                  ref={inputRef}
-                  onMouseMove={handleMouseMove}
+                  // ref={inputRef}
+                  // onMouseEnter={handleMouseEnter}
+                  // onMouseLeave={handleMouseLeave}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  // onMouseMove={handleMouseMove}
                   onChange={() => onChecked(item)}
                   checked={selectedLists.has(index)}
                 />
