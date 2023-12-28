@@ -45,14 +45,14 @@ router.patch("/products/:productId", controller.editAdminProduct);
 router.patch(
   "/products/:productId/thumbnail",
   thumbnailUpload.array("thumbnailUrl"),
-  controller.uploadThumbnail
+  controller.editThumbnail
 );
 
 // 상세 사진 수정
 router.patch(
   "/products/:productId/detail",
   detailUpload.array("detailUrls"),
-  controller.uploadDetails
+  controller.editDetails
 );
 
 // 등록 상품 삭제 - 상세 조회 페이지 내부
@@ -68,6 +68,6 @@ router.get("/orders/:orderId", controller.getAdminOrder);
 router.patch("/orders/:orderId", controller.updateOutStatus);
 
 // 거래 취소 - 삭제
-router.delete("/orders/:orderId", controller.deleteAdminOrder);
+// router.delete("/orders/:orderId", controller.deleteAdminOrder);
 
 module.exports = router;
