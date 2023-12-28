@@ -12,7 +12,7 @@ import SelectBoxCategory from "../../shared/adminPage/components/SelectBoxCatego
 import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import axios from "axios";
 import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
-import UploadThumbnailTest from "../../shared/adminPage/components/UploadThumbnailTest";
+import UploadDetail from "../../shared/adminPage/components/UploadDetail";
 
 function ProductsAdd() {
   const textAreaStyle = {
@@ -25,15 +25,19 @@ function ProductsAdd() {
   const [categoryName, setCategoryName] = useState("");
   const [productStatus, setProductStatus] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [detailUrls, setDetailUrls] = useState(null);
 
   console.log("dddd", productStatus);
 
-  const getImageData = (selectedFile) => {
-    setThumbnailUrl(selectedFile);
-    console.log("왔니", thumbnailUrl);
+  const getImageDataThumbnail = (thumbnailUrl) => {
+    setThumbnailUrl(thumbnailUrl);
+    console.log("썸네일왔니", thumbnailUrl); //왔다!
   };
-
-  const sendData = async (getImageData) => {
+  const getImageDataDetail = (detailUrls) => {
+    setDetailUrls(detailUrls);
+    console.log("디테일왔니", detailUrls); //왔다!
+  };
+  const sendData = async () => {
     try {
       // const productName = productName;
       // const productInfo = productInfo;
@@ -48,9 +52,11 @@ function ProductsAdd() {
         categoryName,
         productStatus,
         thumbnailUrl,
+        detailUrls,
       };
+      console.log("ㅎㅎㅎㅎ", detailUrls);
 
-      const response = await axios.post("/admin/products", data);
+      const response = await axios.post("/admin/products/add", data);
       console.log("전송 성공", response.data.result);
       if (response.data.result) {
         console.log("되었다");
@@ -106,11 +112,12 @@ function ProductsAdd() {
         <hr />
         <h3>이미지 정보</h3>
         <h3>thumbnailUpload</h3>
-        <UploadThumbnail onFileChange={getImageData} />
+        <UploadThumbnail onFileChange={getImageDataThumbnail} />
         <h3>detailUpload</h3>
+        <UploadDetail onFileChange={getImageDataDetail} />
+        <hr />
         <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
       </Card>
-      <UploadThumbnailTest />
     </>
   );
 }

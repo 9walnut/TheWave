@@ -4,6 +4,7 @@
 	GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
 	FLUSH PRIVILEGES;
 
+select * from products;
 	drop database thewave;
     
     
@@ -39,7 +40,7 @@
 		`productInfo`	VARCHAR(255) NOT NULL,
 		`productStatus`	VARCHAR(10)	NOT NULL,
 		`thumbnailUrl`	VARCHAR(255) NOT NULL,
-		`detailUrls`	TEXT	NOT NULL,
+		`detailUrls`	JSON	NOT NULL,
 		`isDeleted` BOOLEAN DEFAULT FALSE NOT NULL,
 		foreign key (categoryId) references categories (categoryId)
 	);

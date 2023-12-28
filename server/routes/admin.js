@@ -19,19 +19,19 @@ router.get("/products", controller.getAdminAllProducts);
 router.delete("/products", controller.deleteAdminProductsChecked);
 
 // 상품 등록
-router.post("/products", controller.createAdminProduct);
+router.post("/products/add", controller.createAdminProduct);
 
 // 상품 등록 - 썸네일 사진 등록
 router.post(
-  "/products/thumbnail",
-  thumbnailUpload.array("thumbnailUrl"),
+  "/products/add/thumbnail",
+  thumbnailUpload.single("thumbnailUrl"),
   controller.uploadThumbnail
 );
 
 // 상품 등록 - 상세 사진 등록
 router.post(
-  "/products/detail",
-  detailUpload.array("detailUrls"),
+  "/products/add/detail",
+  detailUpload.array("detailUrls", 10),
   controller.uploadDetails
 );
 
