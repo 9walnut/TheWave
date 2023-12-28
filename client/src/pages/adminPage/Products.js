@@ -121,9 +121,6 @@ function Products() {
             console.log("클릭한 productId:", productId);
             navigate(`/admin/products/${productId}`);
           }}
-          // onMouseInput={(isMouseOverInput) => {
-          //   console.log("넘어오니?");
-          // }}
         />
         <S.ButtonContainer>
           <AdminButtonGrey onClick={deleteProducts}>

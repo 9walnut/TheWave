@@ -1,7 +1,14 @@
 function CheckBox({ onChange, checked }) {
   return (
     <>
-      <input type="checkbox" onChange={onChange} checked={checked} />
+      <input
+        type="checkbox"
+        onChange={onChange}
+        checked={checked}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      />
     </>
   );
 }
