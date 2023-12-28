@@ -8,14 +8,17 @@ import SeperatedPrice from "../../../hooks/SeparatedPrice";
 
 function ProductDetail() {
   const [product, setProduct] = useState([]);
-  const { productID } = useParams();
-  console.log("상품 아이디", productID);
+  const { productId } = useParams();
+  const [categoryName, setCategoryName] = useState();
+  console.log("상품 아이디", productId);
 
   const getProductDetail = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/product/${productID}`);
+      const res = await axios.get(`http://localhost:8000/product/${productId}`);
       console.log(res.data);
-      setProduct(res.data);
+      setProduct(res.data.productDetail);
+      setCategoryName(res.data.categoryName.categoryName);
+      console.log(categoryName);
     } catch (error) {
       console.log("상품 불러오기 에러", error);
     }
@@ -47,7 +50,7 @@ function ProductDetail() {
           <S.ProductInfoBox>
             <div className="categoryInfo">
               <Link to={`/category/${product.categoryId}`}>
-                <a>{product.categoryId} / </a>
+                <a>{categoryName} / </a>
               </Link>
               <span className="miniProductName"> {product.productName}</span>
             </div>

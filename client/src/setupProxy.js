@@ -24,12 +24,14 @@ module.exports = function (app) {
     })
   );
 
+
   app.use(
     createProxyMiddleware("/mypage", {
       target: apiURL,
       changeOrigin: true,
     })
   );
+
 
   // app.use(
   //   createProxyMiddleware("/products", {

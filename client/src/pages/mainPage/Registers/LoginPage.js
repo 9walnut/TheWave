@@ -39,9 +39,16 @@ function LoginPage() {
       password: password,
     };
     try {
-      const res = await axios.post("/login", data);
+      const res = await axios.post("http://localhost:8000/login", data);
       if (res.data.result) {
+        localStorage.setItem("accessToken", res.data.accessToken);
+        const headers = {
+          Authorization: `${localStorage.getItem("accessToken")}`,
+        };
+        console.log("토큰값입니다", headers);
+
         const { isAdmin, accessToken } = res.data;
+
         console.log(res.data);
         const user = {
           accessToken,
