@@ -11,7 +11,7 @@ function ProductsDetail({ products }) {
 
   const getProductsDetail = async () => {
     try {
-      const response = await axios.get(`/admin/products/${productId}`);
+      const response = await axios.get(`/api/admin/products/${productId}`);
       console.log("응답오나", response.data);
       setProduct(response.data);
     } catch (error) {
