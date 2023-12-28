@@ -10,7 +10,7 @@ function ProductCard() {
 
   const getProduct = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/");
+      const res = await axios.get("/api");
       setProducts(res.data);
     } catch (error) {
       console.log("불러오기 에러");
