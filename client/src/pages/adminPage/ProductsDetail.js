@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import * as S from "../../styles/adminPage/ProductsDetail.js";
 import Card from "../../shared/adminPage/components/Card";
-
+import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
+import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 function ProductsDetail({ products }) {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
@@ -40,6 +41,10 @@ function ProductsDetail({ products }) {
         <p>설명: {product.productInfo}</p>
         <p>상태: {product.productStatus}</p>
         <p>상세이미지자리</p>
+        <S.ButtonContainer>
+          <AdminButtonGrey>수정</AdminButtonGrey>
+          <AdminButtonBlack>삭제</AdminButtonBlack>
+        </S.ButtonContainer>
       </Card>
     </>
   );
