@@ -14,7 +14,7 @@ function ProductDetail() {
 
   const getProductDetail = async () => {
     try {
-      const res = await axios.get(`api/product/${productId}`);
+      const res = await axios.get(`/api/product/${productId}`);
       console.log(res.data);
       setProduct(res.data.productDetail);
       setCategoryName(res.data.categoryName.categoryName);

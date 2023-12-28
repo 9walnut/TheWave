@@ -14,7 +14,7 @@ function CategoryProducts() {
 
   const getCategoryProduct = async () => {
     try {
-      const res = await axios.get(`api/category/${categoryId}`);
+      const res = await axios.get(`/api/category/${categoryId}`);
       console.log("카테고리 상품", res.data);
       setProducts(res.data);
     } catch (error) {
