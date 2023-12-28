@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-//{ value, onChange } 를 받아서 셀렉트박스에서 사용해야하나....
+//✅ onChange로 선택 값 바뀌면 그거 가져와서 수정요청 되도록?
+//피그마 페이지 확인
+//데이터 받아올 때 status 값에 따라 select value 적용되도록 세팅?
 
 function SelectBoxDelivery() {
   const [releaseStatus, setReleaseStatus] = useState("");
