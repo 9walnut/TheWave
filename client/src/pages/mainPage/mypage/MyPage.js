@@ -15,7 +15,7 @@ function MyPage() {
         const headers = {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         };
-        const res = await axios.get("http://localhost:8000/mypage", {
+        const res = await axios.get("api/mypage", {
           headers,
         });
 
