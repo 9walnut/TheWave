@@ -1,36 +1,19 @@
-import { useParams } from "react-router";
-import Navbar from "../../../components/mainPage/Navbar";
 import Footer from "../../../components/mainPage/Footer";
+import Navbar from "../../../components/mainPage/Navbar";
 import "../MainPage.css";
-import { useEffect, useState } from "react";
+import CategoryProducts from "./CategoryProducts";
 
 function CategoryPage() {
-  const [products, setProducts] = useState([]);
-  const { categortId } = useParams();
-  console.log("카테고리 아이디", categortId);
-
-  const getCategoryProduct = async () => {
-    try {
-      const res = await axios.get(
-        `http://localhost:8000/category/${categortId}`
-      );
-      console.log("카테고리 상품", res.data);
-      setProducts(res.data);
-    } catch (error) {
-      console.log("카테고리 불러오기 에러", error);
-    }
-  };
-  useEffect(() => {
-    getCategoryProduct();
-  }, []);
+  console.log("하이하이 니ㅏ는 카테고리 페이지");
 
   return (
     <>
       <Navbar />
-      <section></section>
+      <section>
+        <CategoryProducts />
+      </section>
       <Footer />
     </>
   );
 }
-
 export default CategoryPage;

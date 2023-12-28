@@ -19,6 +19,7 @@ import Users from "./pages/adminPage/Users";
 import NotFound from "./shared/NotFound404";
 import ProductsDetail from "./pages/adminPage/ProductsDetail";
 import ProductDetailsPage from "./pages/mainPage/products/ProductDetailsPage";
+import CategoryPage from "./pages/mainPage/products/CategoryPage";
 
 function App() {
   return (
@@ -29,10 +30,10 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/findId" element={<FindIdPage />} />
         <Route path="/findPw" element={<FindPwPage />} />
-        {/* <Route path="/mypage" element={<MyPage />} /> */}
+        <Route path="/mypage" element={<MyPage />} />
         {/* <Route path="/mypage/info" element={<MyPageInfo />} /> */}
-        {/* <Route path="/category/:categoryID" element={<CategoryPage />} /> */}
-        <Route path="/products/:productID" element={<ProductDetailsPage />} />
+        <Route path="/category/:categoryId" element={<CategoryPage />} />
+        <Route path="/products/:productId" element={<ProductDetailsPage />} />
         {/* <Route path="/cart" element={<CartPage />} /> */}
         {/* <Route path="/cart/checkout" element={<CheckoutPage />} /> */}
         {/* admin */}

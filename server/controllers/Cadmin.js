@@ -314,10 +314,10 @@ exports.editAdminProduct = async (req, res) => {
 };
 
 // 썸네일 사진 수정
-exports.uploadThumbnail = async (req, res) => {
+exports.editThumbnail = async (req, res) => {
   try {
     const thumbnailUrl = req.file.location;
-    const productId = req.body.productId; // 상품 ID를 받아옵니다.
+    const productId = req.body.productId;
 
     await db.products.update({ thumbnailUrl }, { where: { productId } });
     res.send({ thumbnailUrl });
@@ -328,10 +328,10 @@ exports.uploadThumbnail = async (req, res) => {
 };
 
 // 상세 사진 수정
-exports.uploadDetails = async (req, res) => {
+exports.editDetails = async (req, res) => {
   try {
     const detailUrls = req.files.map((file) => file.location);
-    const productId = req.body.productId; // 상품 ID를 받아옵니다.
+    const productId = req.body.productId;
 
     await db.products.update(
       { detailUrls: detailUrls.join() },
@@ -455,16 +455,16 @@ exports.updateOutStatus = async (req, res) => {
 };
 
 // 거래 취소 - 삭제
-exports.deleteAdminOrder = async (req, res) => {
-  try {
-    console.log(req.body);
-    const { orderId } = req.params;
-    const isDeleted = await db.products.destroy({ where: { orderId } });
-    console.log(isDeleted);
-    if (isDeleted) return res.send(true);
-    else return res.send(false);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("거래 취소 오류");
-  }
-};
+// exports.deleteAdminOrder = async (req, res) => {
+//   try {
+//     console.log(req.body);
+//     const { orderId } = req.params;
+//     const isDeleted = await db.products.destroy({ where: { orderId } });
+//     console.log(isDeleted);
+//     if (isDeleted) return res.send(true);
+//     else return res.send(false);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("거래 취소 오류");
+//   }
+// };

@@ -4,8 +4,8 @@
 <br /><br />
 
 ## 🗓️ 프로젝트 기간
-2023.11.24 ~ 진행 중
 
+2023.11.24 ~ 진행 중
 
 ## 📌 버전 기록
 
@@ -21,7 +21,7 @@
 
 1. 일반 사용자(회원/비회원)
 
-- 상품 탐색 및 구매: 다양한 카테고리별로 분류된 상품들을 쉽게 검색하고 확인할 수 있습니다. 마음에 드는 상품을 선택하여 장바구니에 담은 후, 간편하게 주문 요청을 할 수 있습니다. <br />
+- 상품 탐색 및 구매: 카테고리별로 분류된 상품들을 쉽게 확인할 수 있습니다. 마음에 드는 상품을 선택하여 장바구니에 담은 후, 간편하게 주문 요청을 할 수 있습니다. <br />
 - 정보 관리: (회원 전용) 마이페이지를 통해 개인 정보를 업데이트하거나, 필요한 경우 회원 탈퇴를 진행할 수 있습니다. <br />
 
 2. 관리자
@@ -120,7 +120,7 @@ $ node .\app.js
 
 ### Back-end
 
-<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white" /> <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white" /> <img alt="Sequelize" src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white" /> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
+<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white" /> <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white" /> <img alt="Sequelize" src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white" /> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" /> <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" /> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" /> <img src="https://img.shields.io/badge/jsonwebtokens-#000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" />
 <br />
 
 ### DevOps Tools
@@ -152,4 +152,3 @@ $ node .\app.js
 | 🚀    | `:rocket:`                    | Deploy   | 배포                     |
 
 </details>
-

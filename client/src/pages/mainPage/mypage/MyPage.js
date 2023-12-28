@@ -4,31 +4,33 @@ import axios from "axios";
 
 function MyPage() {
   const { isAdmin, accessToken } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [orderList, setOrderList] = useState([]);
 
   useEffect(() => {
-    if (accessToken) {
-      const getData = async () => {
-        try {
-          const headers = {
-            Authorization: `Bearer ${accessToken}`,
-          };
+    const getData = async () => {
+      try {
+        console.log("try중입니다");
 
-          const res = await axios.get("/mypage", { headers });
-          if (res.data.orderList) {
-            setOrderList(res.data.orderList);
-          }
+        const headers = {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        };
+        const res = await axios.get("api/mypage", {
+          headers,
+        });
 
-          console.log(res.data);
-        } catch (error) {
-          console.error(error);
+        if (res.data.orderList) {
+          console.log("res.data입니다.", res.data);
+          setOrderList(res.data.orderList);
         }
-      };
 
-      getData();
-    }
-  }, [accessToken]);
+        console.log(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getData();
+  }, []);
 
   return (
     <div>

@@ -44,17 +44,6 @@ const UploadDetail = ({ onFileChange }) => {
       );
 
       const detailUrls = response.data.detailUrls;
-      //--------------------------------
-      // 배열을 객체로 변환
-      // const detailUrlsArray = response.data.detailUrls;
-
-      // const detailUrlsObject = detailUrlsArray.reduce((acc, url, index) => {
-      //   acc[`detailUrl${index + 1}`] = url;
-      //   return acc;
-      // }, {});
-
-      // console.log(detailUrlsObject);
-      //--------------------------------
 
       console.log("Detail URL 멀로 오니:", detailUrls);
       // console.log("Detail URL detailUrlObject멀로 오니:", detailUrlObject);

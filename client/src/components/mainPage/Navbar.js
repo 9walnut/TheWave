@@ -8,19 +8,33 @@ import mypage from "../../assets/img/mypage.png";
 import "./Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUser } from "../../redux/reducers/userSlice";
+import getAccessToken from "../../hooks/getAcessToken";
+import axios from "axios";
 
 function Navbar() {
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    dispatch(resetUser());
+  const handleLogout = async () => {
+    const headers = getAccessToken();
+
+    try {
+      const res = await axios.get("api/logout", { headers });
+      if (res.data) {
+        dispatch(resetUser());
+        localStorage.removeItem("accessToken");
+      } else {
+        alert("로그아웃 실패 ");
+      }
+    } catch (error) {
+      console.log("에러요", error);
+    }
   };
 
   const [screenSize, setScreenSize] = useState(window.innerWidth <= 582);
   const [isMenuVisible, setMenuVisible] = useState(false);
 
   const user = useSelector((state) => state.user);
-  const isLogin = user.user.accessToken ? true : false;
+  const isLogin = getAccessToken() ? true : false;
   // console.log(isLogin);
   // console.log(user.user);
 
@@ -115,49 +129,49 @@ function Navbar() {
         {screenSize ? null : (
           <nav>
             <ul>
-              <li>
+              {/* <li>
                 <a href="#" style={{ fontWeight: "bold" }}>
                   All Products
                 </a>
-              </li>
+              </li> */}
               <li>
-                <Link to={`/category`}>
-                  <a href="#">Best</a>
+                <Link to={`/category/best`} style={{ fontWeight: "bold" }}>
+                  <a>Best</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">캐릭터</a>
+                <Link to={`/category/1`}>
+                  <a>캐릭터</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">데이지</a>
+                <Link to={`/category/2`}>
+                  <a>데이지</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">레터링</a>
+                <Link to={`/category/3`}>
+                  <a>레터링</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">용돈</a>
+                <Link to={`/category/4`}>
+                  <a>용돈</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">옴브레</a>
+                <Link to={`/category/5`}>
+                  <a>옴브레</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">장미</a>
+                <Link to={`/category/6`}>
+                  <a>장미</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">튤립</a>
+                <Link to={`/category/7`}>
+                  <a>튤립</a>
                 </Link>
               </li>
             </ul>

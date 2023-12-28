@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as S from "../../styles/mainPage/ProductCard.style";
-import prList from "../../assets/product";
+// import prList from "../../assets/product";
 import axios from "axios";
 
 function ProductCard() {
@@ -10,7 +10,7 @@ function ProductCard() {
 
   const getProduct = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/");
+      const res = await axios.get("/api");
       setProducts(res.data);
     } catch (error) {
       console.log("불러오기 에러");

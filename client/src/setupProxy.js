@@ -1,67 +1,96 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
-  // const apiURL = process.env.REACT_APP_BACKEND_URL;
-
-  // app.use(
-  //   createProxyMiddleware("/", {
-  //     target: "http://localhost:8000",
-  //     changeOrigin: true,
-  //   })
-  // );
+  const apiURL = process.env.REACT_APP_BACKEND_URL;
 
   app.use(
-    createProxyMiddleware("/register", {
-      target: "http://localhost:8000",
+    createProxyMiddleware("/api", {
+      target: apiURL,
       changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
     })
   );
 
   app.use(
-    createProxyMiddleware("/login", {
-      target: "http://localhost:8000",
+    createProxyMiddleware("/api/register", {
+      target: apiURL,
       changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
     })
   );
 
   app.use(
-    createProxyMiddleware("/mypage", {
-      target: "http://localhost:8000",
+    createProxyMiddleware("/api//login", {
+      target: apiURL,
       changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
     })
   );
 
-  // app.use(
-  //   createProxyMiddleware("/products", {
-  //     target: "http://localhost:8000",
-  //     changeOrigin: true,
-  //   })
-  // );
+  app.use(
+    createProxyMiddleware("/api//mypage", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/api//products", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
 
   // ------------------- admin ----------------------
   app.use(
-    createProxyMiddleware("/admin/products", {
-      target: "http://localhost:8000",
+    createProxyMiddleware("/api//admin/products", {
+      target: apiURL,
       changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
     })
   );
-  // app.use(
-  //   createProxyMiddleware("/admin/products/:productId", {
-  //     target: "http://localhost:8000",
-  //     changeOrigin: true,
-  //   })
-  // );
+
+  app.use(
+    createProxyMiddleware("/api//admin/products/:productId", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
 
   app.use(
     createProxyMiddleware("/admin/users", {
-      target: "http://localhost:8000",
+      target: apiURL,
       changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
     })
   );
+
   app.use(
-    createProxyMiddleware("/admin/products/thumbnail", {
-      target: "http://localhost:8000",
+    createProxyMiddleware("/api/admin/products/thumbnail", {
+      target: apiURL,
       changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
     })
   );
 };
