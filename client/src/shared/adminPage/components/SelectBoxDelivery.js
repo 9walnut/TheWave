@@ -24,12 +24,20 @@ function SelectBoxDelivery() {
         <option disabled defaultValue>
           출고 상태 변경
         </option>
-        <option value="payWait">결제 대기</option>
-        <option value="deliveryStart">출고</option>
-        <option value="cancel">취소</option>
+        <option value="1">결제 대기</option>
+        <option value="2">출고 대기</option>
+        <option value="3">출고</option>
+        <option value="4">취소</option>
       </select>
     </>
   );
 }
 
 export default SelectBoxDelivery;
+
+{
+  /* <option value="payWait">결제 대기</option>
+<option value="deliveryWait">출고 대기</option>
+<option value="deliveryStart">출고</option>
+<option value="cancel">취소</option> */
+}
