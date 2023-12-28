@@ -8,6 +8,7 @@ export const AdminButtonGreyStyle = styled.button`
   width: 152px;
   height: 48px;
   padding: 12px;
+  margin: 5px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
