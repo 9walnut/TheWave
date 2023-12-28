@@ -7,6 +7,8 @@ exports.categoryPage = async (req, res) => {
 
     const categoryPage = await db.categories.findAll({
       where: { categoryId: req.params.categoryId },
+      attributes: ["categoryName"],
+
       include: {
         model: db.products,
         as: "products",
@@ -20,6 +22,7 @@ exports.categoryPage = async (req, res) => {
       },
     });
     res.json(categoryPage);
+    console.log(categoryPage);
   } catch (error) {
     console.error(error);
     res.status(500).send("카테고리 페이지 오류");
