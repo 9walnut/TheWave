@@ -43,10 +43,8 @@ const UploadDetail = ({ onFileChange }) => {
         }
       );
 
-      // 서버 응답에서 detailUrls 추출
       const detailUrls = response.data.detailUrls;
       //--------------------------------
-
       // 배열을 객체로 변환
       // const detailUrlsArray = response.data.detailUrls;
 
