@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as S from "../../styles/mainPage/ProductCard.style";
-import prList from "../../assets/product";
+// import prList from "../../assets/product";
 import axios from "axios";
 
 function ProductCard() {

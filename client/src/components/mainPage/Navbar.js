@@ -129,49 +129,49 @@ function Navbar() {
         {screenSize ? null : (
           <nav>
             <ul>
-              <li>
+              {/* <li>
                 <a href="#" style={{ fontWeight: "bold" }}>
                   All Products
                 </a>
-              </li>
+              </li> */}
               <li>
-                <Link to={`/category`}>
-                  <a href="#">Best</a>
+                <Link to={`/category/best`} style={{ fontWeight: "bold" }}>
+                  <a>Best</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">캐릭터</a>
+                <Link to={`/category/1`}>
+                  <a>캐릭터</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">데이지</a>
+                <Link to={`/category/2`}>
+                  <a>데이지</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">레터링</a>
+                <Link to={`/category/3`}>
+                  <a>레터링</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">용돈</a>
+                <Link to={`/category/4`}>
+                  <a>용돈</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">옴브레</a>
+                <Link to={`/category/5`}>
+                  <a>옴브레</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">장미</a>
+                <Link to={`/category/6`}>
+                  <a>장미</a>
                 </Link>
               </li>
               <li>
-                <Link to={`/category`}>
-                  <a href="#">튤립</a>
+                <Link to={`/category/7`}>
+                  <a>튤립</a>
                 </Link>
               </li>
             </ul>
