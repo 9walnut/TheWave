@@ -8,19 +8,33 @@ import mypage from "../../assets/img/mypage.png";
 import "./Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUser } from "../../redux/reducers/userSlice";
+import getAccessToken from "../../hooks/getAcessToken";
+import axios from "axios";
 
 function Navbar() {
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    dispatch(resetUser());
+  const handleLogout = async () => {
+    const headers = getAccessToken();
+
+    try {
+      const res = await axios.get("http://localhost:8000/logout", { headers });
+      if (res.data) {
+        dispatch(resetUser());
+        localStorage.removeItem("accessToken");
+      } else {
+        alert("로그아웃 실패 ");
+      }
+    } catch (error) {
+      console.log("에러요", error);
+    }
   };
 
   const [screenSize, setScreenSize] = useState(window.innerWidth <= 582);
   const [isMenuVisible, setMenuVisible] = useState(false);
 
   const user = useSelector((state) => state.user);
-  const isLogin = user.user.accessToken ? true : false;
+  const isLogin = getAccessToken() ? true : false;
   // console.log(isLogin);
   // console.log(user.user);
 

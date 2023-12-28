@@ -11,6 +11,7 @@ function generateAccessToken(loginUser) {
       userId: loginUser.userId,
       userNumber: loginUser.userNumber,
     };
+
     console.log("payload", payload);
 
     const accessToken = jwt.sign(payload, secret, {
@@ -20,6 +21,7 @@ function generateAccessToken(loginUser) {
     const refreshToken = jwt.sign(payload, secret, {
       expiresIn: "14d",
     });
+
     return { accessToken: accessToken, refreshToken: refreshToken };
   } catch (error) {
     console.error(error);

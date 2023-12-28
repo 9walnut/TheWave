@@ -44,7 +44,6 @@ exports.loginUser = async (req, res) => {
           userId: userId,
         },
       });
-
       const { accessToken, refreshToken } = generateAccessToken(loginUser);
 
       await redisClient.set(userId, refreshToken, (err, reply) => {
