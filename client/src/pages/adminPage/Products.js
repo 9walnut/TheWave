@@ -119,8 +119,7 @@ function Products() {
           onSelectionChange={onSelectionChange}
           onItemClick={(productId) => {
             console.log("클릭한 productId:", productId);
-            // console.log("hover왔ㅇㅇㅇ냐", isMouseOverInput);
-            // isOverInout &&{}
+
             // if (selectedProductIds.includes(productId)) {
             //   return;
             // }
