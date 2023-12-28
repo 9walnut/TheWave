@@ -18,7 +18,7 @@ function Navbar() {
     const headers = getAccessToken();
 
     try {
-      const res = await axios.get("http://localhost:8000/logout", { headers });
+      const res = await axios.get("api/logout", { headers });
       if (res.data) {
         dispatch(resetUser());
         localStorage.removeItem("accessToken");
