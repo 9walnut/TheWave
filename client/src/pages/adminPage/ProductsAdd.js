@@ -54,6 +54,7 @@ function ProductsAdd() {
         thumbnailUrl,
         detailUrls,
       };
+      console.log("ㅎㅎㅎㅎ", detailUrls);
 
       const response = await axios.post("/admin/products/add", data);
       console.log("전송 성공", response.data.result);
