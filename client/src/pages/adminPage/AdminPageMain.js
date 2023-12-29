@@ -11,6 +11,7 @@ import Orders from "./Orders";
 import Users from "./Users";
 import ProductsAdd from "./ProductsAdd.js";
 import ProductsDetail from "./ProductsDetail.js";
+import OrdersDetail from "./OrdersDetail.js";
 
 import * as S from "../../styles/adminPage/StyleAdminPageMain.js";
 
@@ -28,10 +29,11 @@ function AdminPageMain() {
         <Routes>
           <Route path="/" element={<MainDashBoard />} />
           <Route path="dashboard" element={<MainDashBoard />} />
-          <Route path="products" element={<Products />} />
+          <Route path="products/*" element={<Products />} />
           <Route path="products/add" element={<ProductsAdd />} />
           <Route path="products/:productId" element={<ProductsDetail />} />
-          <Route path="orders" element={<Orders />} />
+          <Route path="orders/*" element={<Orders />} />
+          <Route path="orders/:orderId" element={<OrdersDetail />} />
           <Route path="users" element={<Users />} />
         </Routes>
       </S.RightBox>

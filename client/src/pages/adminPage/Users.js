@@ -38,18 +38,6 @@ const header = [
     value: "address",
   },
 ];
-//
-const DUMMY = [
-  {
-    userNumber: 1,
-    userId: "che",
-    userName: "내이름",
-    phoneNumber: "01000000000",
-    birthday: "1995-08-11",
-    gender: "여",
-    address: "서울시 구로구 ",
-  },
-];
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -83,14 +71,14 @@ function Users() {
   const { currentPage, oneOfPage, currentItems, handlePageClick } =
     PageNationFunc(users);
 
-  //---axios delete
+  //---체크 된 값 가져오기
   const [selectedUserNumbers, setSelectedUserNumbers] = useState([]);
-
   const onSelectionChange = (selectedUserNumber) => {
     setSelectedUserNumbers(selectedUserNumber);
     console.log("onSelectionChange 호출됨:", selectedUserNumber); // 오고있음
   };
 
+  //---axios delete
   const deleteUsers = async () => {
     console.log("deleteUsers 함수 호출되냐");
     console.log("삭제할 UserNumber:", selectedUserNumbers.selectedUserNumber);
@@ -126,6 +114,7 @@ function Users() {
         <h3>회원 관리</h3>
         <ol>
           <li>✅상세조회 없음</li>
+          <li>검색기능?</li>
         </ol>
         <DataTable
           keySet="usersTb_"
