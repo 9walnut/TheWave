@@ -7,9 +7,12 @@ import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 const useRowClick = (onItemClick) => {
   const onRowClick = (item) => {
-    if (onItemClick) {
-      onItemClick(item.productID);
-    }
+    console.log("item", item.orderId);
+    if (onItemClick)
+      onItemClick({
+        productId: item.productID,
+        orderId: item.orderId,
+      });
   };
 
   return onRowClick;

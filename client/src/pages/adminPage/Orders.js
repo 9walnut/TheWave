@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Route, Routes, Link, useNavigate } from "react-router-dom";
 
 import * as S from "../../styles/adminPage/Orders.js";
 import Card from "../../shared/adminPage/components/Card";
@@ -8,6 +9,7 @@ import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
 import SelectBoxDelivery from "../../shared/adminPage/components/SelectBoxDelivery.js";
 import axios from "axios";
+import OrdersDetail from "./OrdersDetail.js";
 
 const header = [
   {
@@ -40,6 +42,8 @@ const header = [
 
 function Orders() {
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
+
   //---axios get
   const fetchData = async () => {
     try {
@@ -89,6 +93,11 @@ function Orders() {
           headers={header}
           items={currentItems}
           onSelectionChange={onSelectionChange}
+          onItemClick={(item) => {
+            const orderId = item.orderId;
+            console.log("클릭한 orderId:", orderId);
+            navigate(`/admin/orders/${orderId}`);
+          }}
         />
         출고 상태 일괄 변경 :&nbsp; 대기
         {/* <SelectBoxDelivery /> */}
@@ -99,6 +108,9 @@ function Orders() {
           setPage={handlePageClick}
         />
       </Card>
+      <Routes>
+        <Route path="/orders/:orderId" element={<OrdersDetail />} />
+      </Routes>
     </>
   );
 }

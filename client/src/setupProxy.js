@@ -102,4 +102,13 @@ module.exports = function (app) {
       },
     })
   );
+  app.use(
+    createProxyMiddleware("/api/admin/orders/:orderId", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
 };
