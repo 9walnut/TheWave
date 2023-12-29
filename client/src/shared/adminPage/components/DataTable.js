@@ -6,13 +6,20 @@ import CheckBox from "./CheckBox.js";
 import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 const useRowClick = (onItemClick) => {
-  const onRowClick = (item) => {
+  const onRowClick = (item, event) => {
     console.log("item", item.orderId);
-    if (onItemClick)
-      onItemClick({
+    // if (onItemClick)
+    //   onItemClick({
+    //     productId: item.productID,
+    //     orderId: item.orderId,
+    //   });
+
+    if (event && event.target.tagName !== "SELECT") {
+      onItemClick?.({
         productId: item.productID,
         orderId: item.orderId,
       });
+    }
   };
 
   return onRowClick;
@@ -72,7 +79,7 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
           {items.map((item, index) => (
             <S.TableTr
               key={`${keySet}_${index}`}
-              onClick={() => onRowClick(item)}
+              onClick={(event) => onRowClick(item, event)}
             >
               <S.TableTd>
                 <CheckBox
@@ -86,7 +93,11 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
                     <SelectBoxDelivery
                       value={selectedStatus}
                       // selectedValues={selectedValues()}
-                      onChange={(e) => setSelectedStatus(e.target.value)}
+                      onChange={(e) => {
+                        e.stopPropagation(); // 이벤트 전파 중단
+                        setSelectedStatus(e.target.value);
+                      }}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   ) : (
                     item[value]

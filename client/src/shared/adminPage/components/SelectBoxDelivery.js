@@ -5,6 +5,7 @@ function SelectBoxDelivery({ selectedValues }) {
   const [releaseStatus, setReleaseStatus] = useState("");
 
   function handleChangeStatus(e) {
+    e.preventDefault();
     const selectedValue = e.target.value;
     setReleaseStatus(selectedValue);
     console.log("뭐골랐니", selectedValue);
