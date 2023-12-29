@@ -34,6 +34,13 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
     });
   };
 
+  //orders에서 받아온 데이터 가공, selectbox로 orderstatus 보내주기
+  // const selectedValues = () => {
+  //   const selectedValue = items.map((item) => item.orderStatus);
+  //   console.log("orderStatus 확인", selectedValue);
+  //   return selectedValue;
+  // };
+
   const SelectAll = () => {
     CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists });
   };
@@ -72,9 +79,10 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
               </S.TableTd>
               {headerList.map((value, columnIndex) => (
                 <S.TableTd key={`${keySet}_${index}_${columnIndex}`}>
-                  {value === "deliveryStatus" ? (
+                  {value === "orderStatus" ? (
                     <SelectBoxDelivery
                       value={selectedStatus}
+                      // selectedValues={selectedValues()}
                       onChange={(e) => setSelectedStatus(e.target.value)}
                     />
                   ) : (
