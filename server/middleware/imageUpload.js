@@ -7,12 +7,9 @@ const path = require("path");
 dotenv.config();
 
 AWS.config.update({
-  region: "ap-northeast-2", // region 값
-  // region: process.env.AWS_REGION, // region 값
-  accessKeyId: "AKIA6FD5HWZ6243X6SHZ", // accessKeyId
-  // accessKeyId: process.env.AWS_ACCESS_KEY_ID, // accessKeyId
-  secretAccessKey: "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", // secretAccessKey
-  // secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, // secretAccessKey
+  region: process.env.AWS_REGION, // region 값
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID, // accessKeyId
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, // secretAccessKey
 });
 
 const s3 = new AWS.S3();
