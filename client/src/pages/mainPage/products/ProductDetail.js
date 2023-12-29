@@ -39,6 +39,37 @@ function ProductDetail() {
     setProductCount(productCount - 1);
     setValue(value - product.productPrice);
   };
+
+  // 장바구니
+  const cartIn = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      };
+      const data = { cartQuantity: productCount };
+      const res = await axios.post(`/api/product/${productId}`, data, {
+        headers,
+      });
+
+      // 비회원일 때
+      if (res.data.result === "guest") {
+        const guestCart = {
+          productId: `${productId}`,
+          cartQuantity: productCount,
+        };
+        let guestCartArr = JSON.parse(localStorage.getItem("cart")) || [];
+        guestCartArr.push(guestCart);
+        localStorage.setItem("cart", JSON.stringify(guestCartArr)); // 로컬스토리지에 비회원 장바구니 담은 목록 저장
+
+        localStorage.getItem("cart");
+      } else {
+        // 회원일 때
+        console.log("장바구니 담음", res.data.cart);
+      }
+    } catch (error) {
+      console.log("장바구니 담기 에러", error);
+    }
+  };
   return (
     <>
       <S.ProductLayout>
@@ -73,7 +104,8 @@ function ProductDetail() {
               <span>{displayValue}</span>
             </div>
             <Button>구매하기</Button>
-            <Button>장바구니</Button>
+            {/* <Button>장바구니</Button> */}
+            <button onClick={cartIn}>장바구니</button>
           </S.ProductInfoBox>
         </S.ProductTopBox>
         {/* 상품 사진 ~ 내용 등 */}
