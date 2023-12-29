@@ -23,6 +23,7 @@ function OrdersDetail({ orders }) {
     getOrdersDetail();
   }, [orderId]);
 
+  //✅얘는 왜 뜨다가 안뜨다가 할까
   // const address = order.userNumber_user.addresses[0].address;
   // console.log(address); //부산광역시 해운대구 샘플로 456
 
