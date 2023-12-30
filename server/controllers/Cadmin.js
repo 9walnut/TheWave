@@ -403,7 +403,7 @@ exports.getAdminOrder = async (req, res) => {
         {
           model: db.users,
           as: "userNumber_user",
-          attributes: ["userName"],
+          attributes: ["userName", "phoneNumber"],
           include: [
             {
               model: db.address,
