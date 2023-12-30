@@ -97,14 +97,14 @@ exports.getAdminMain = async (req, res) => {
     const deliveryReadyOrders = await getDeliveryReadyOrders();
     const totalProducts = await getTotalProducts();
     const categoryCount = await getCategoryCount();
-    res.send(
+    res.send({
       totalOrders,
       totalOrderPrices,
       deliveryCompleteOrders,
       deliveryReadyOrders,
       totalProducts,
-      categoryCount
-    );
+      categoryCount,
+    });
   } catch (error) {
     res.status(500).send("관리페이지 오류");
   }
