@@ -8,12 +8,9 @@ const jwt = require("jsonwebtoken");
 // 장바구니 조회
 exports.getCart = async (req, res) => {
   try {
-    const accessToken = req.headers["authorization"];
-
-    let cart;
-
     // 회원인 경우
-    if (accessToken) {
+    if (req.query.result == true) {
+      const accessToken = req.headers["authorization"];
       const tokenCheck = await verifyToken(accessToken);
       const decodedToken = jwt.decode(tokenCheck.accessToken);
 
@@ -23,6 +20,7 @@ exports.getCart = async (req, res) => {
       console.log("cart", cart);
     } else {
       // 비회원인 경우
+      console.log("넌 비회원");
       cart = req.body.cart || [];
     }
     return res.send(cart);
