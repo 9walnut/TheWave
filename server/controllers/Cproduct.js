@@ -51,67 +51,38 @@ exports.wish = async (req, res) => {
 
 // '장바구니 담기' 클릭
 exports.cartIn = async (req, res) => {
+  const { cartQuantity } = req.body;
+  const productId = req.params.productId;
+  const accessToken = req.headers["authorization"];
+  console.log("accessToken임", accessToken);
+
   try {
-    const { guestId, cartQuantity } = req.body;
-    const productId = req.params.productId;
-    const accessToken = req.headers["authorization"];
-    const tokenCheck = decodeToken(accessToken);
-    const userNumber = tokenCheck.userNumber;
-
-    let userIdForCart;
-
-    // 비회원인 상태로 장바구니 담을 경우
-    if (guestId) {
-      userIdForCart = guestId;
-    } else if (userNumber) {
-      // 로그인한 회원일 경우
-      userIdForCart = userNumber;
+    if (accessToken === "Bearer null") {
+      return res.send({ result: "guest" }); // 토큰값 없음(==비회원)
     } else {
-      res.send({ result: "notMember" });
-      return;
-    }
+      const tokenCheck = await verifyToken(accessToken);
 
-    const cartIn = await db.carts.create({
-      productId: productId,
-      userNumber: userIdForCart,
-      cartQuantity: cartQuantity,
-    });
-    if (cartIn) res.send({ result: true });
-    else res.send({ result: false });
+      let decodedToken;
+
+      if (
+        tokenCheck.result !== "no token" &&
+        tokenCheck.result !== "signin again"
+      ) {
+        decodedToken = jwt.decode(tokenCheck.accessToken);
+      } else res.send({ result: false }); // 토큰이 유효하지 않음
+
+      const userNumber = decodedToken.userNumber;
+
+      const cartIn = await db.carts.create({
+        productId: productId,
+        userNumber: userNumber,
+        cartQuantity: cartQuantity,
+        isChecked: "0",
+      });
+      res.json({ result: true, cart: cartIn });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("장바구니 담기 오류");
   }
 };
-
-// 장바구니 > 비회원
-// exports.noMemberCartIn = async (req, res) => {
-//   try {
-//     // 타임스탬프로 비회원 번호 생성
-//     function randomGuestId() {
-//       const timestamp = Date.now();
-//       const guestId = "guest_" + timestamp;
-//       return guestId;
-//     }
-
-//     localStorage.setItem("guest", randomGuestId()); // 비회원 번호를 로컬 스토리지에 저장..?
-
-//     const guest = localStorage.getItem("guest");
-//     console.log("비회원 번호", guest);
-
-//     const productId = req.params.productId;
-//     const cartQuantity = req.body.cartQuantity;
-
-//     const cartIn = await db.carts.create({
-//       productId: productId,
-//       userNumber: guest,
-//       cartQuantity: cartQuantity,
-//     });
-
-//     if (cartIn) res.send({ result: true });
-//     else res.send({ result: false });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("비회원 장바구니 담기 오류");
-//   }
-// };
