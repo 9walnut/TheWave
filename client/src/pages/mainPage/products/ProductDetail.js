@@ -59,7 +59,7 @@ function ProductDetail() {
         };
         let guestCartArr = JSON.parse(localStorage.getItem("cart")) || [];
         guestCartArr.push(guestCart);
-        localStorage.setItem("cart", JSON.stringify(guestCartArr)); // 로컬스토리지에 비회원 장바구니 담은 목록 저장
+        localStorage.setItem("cart", JSON.stringify(guestCartArr)); // 로컬스토리지에 장바구니 정보 저장
 
         localStorage.getItem("cart");
       } else {
