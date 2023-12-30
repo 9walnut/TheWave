@@ -65,20 +65,15 @@ const verifyToken = async (accessToken) => {
 // 로그아웃 시 refresh 토큰 삭제
 const deleteToken = async (accessToken) => {
   const token = accessToken.split(" ")[1];
-  console.log("token", token);
-  const decodedeToken = jwt.verify(token, secret);
-  console.log("decodedeToken", decodedeToken);
+  const decodedeToken = jwt.decode(token);
 
   try {
-    const decodedeToken = jwt.verify(token, secret);
-    // const refreshToken = await getAsync(decodedeToken.userId);
     const refreshToken = await redisClient.get(decodedeToken.userId);
     console.log("refreshToken", refreshToken);
 
     try {
       jwt.verify(refreshToken, secret);
       await redisClient.del(decodedeToken.userId); // access 토큰의 userId에 해당하는 refresh 토큰 삭제
-      // await delAsync(decodedeToken.userId);
       return { result: "true" };
     } catch (error) {
       console.error(error);
