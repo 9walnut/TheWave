@@ -5,8 +5,11 @@ import * as S from "../../../styles/mainPage/ProductDetails.style";
 import Button from "../../../components/register/Button";
 import axios from "axios";
 import SeperatedPrice from "../../../hooks/SeparatedPrice";
+import getAccessToken from "../../../hooks/getAcessToken";
 
 function ProductDetail() {
+  const navigate = useNavigate();
+
   const [product, setProduct] = useState([]);
   const { productId } = useParams();
   const [categoryName, setCategoryName] = useState();
@@ -28,15 +31,15 @@ function ProductDetail() {
   }, []);
 
   const [value, displayValue, setValue] = SeperatedPrice(0);
-  const [productCount, setProductCount] = useState(0);
+  const [orderQuantity, SetOrderQuantity] = useState(0);
 
   const plusBtn = () => {
-    setProductCount(productCount + 1);
+    SetOrderQuantity(orderQuantity + 1);
     setValue(value + product.productPrice);
   };
 
   const minusBtn = () => {
-    setProductCount(productCount - 1);
+    SetOrderQuantity(orderQuantity - 1);
     setValue(value - product.productPrice);
   };
 
@@ -46,7 +49,7 @@ function ProductDetail() {
       const headers = {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       };
-      const data = { cartQuantity: productCount };
+      const data = { cartQuantity: orderQuantity };
       const res = await axios.post(`/api/product/${productId}`, data, {
         headers,
       });
@@ -55,7 +58,7 @@ function ProductDetail() {
       if (res.data.result === "guest") {
         const guestCart = {
           productId: `${productId}`,
-          cartQuantity: productCount,
+          cartQuantity: orderQuantity,
         };
         let guestCartArr = JSON.parse(localStorage.getItem("cart")) || [];
         guestCartArr.push(guestCart);
@@ -68,6 +71,27 @@ function ProductDetail() {
       }
     } catch (error) {
       console.log("장바구니 담기 에러", error);
+    }
+  };
+
+  // 구매하기
+  const goPayment = async () => {
+    try {
+      // 넘길 데이터는
+      const headers = getAccessToken();
+      const res = await axios.post(
+        `/api/payment/${productId}`,
+        { orderQuantity },
+        {
+          headers,
+        }
+      );
+      // 개수 (orderQuantity)
+      // 토큰 (accessToken)
+      //
+      console.log("결제버튼", res.data);
+    } catch (error) {
+      console.log("결제에러", error);
     }
   };
   return (
@@ -94,7 +118,7 @@ function ProductDetail() {
               <button onClick={minusBtn}>
                 <img src="/assets/minus.svg" />
               </button>
-              <div>{productCount}</div>
+              <div>{orderQuantity}</div>
               <button onClick={plusBtn}>
                 <img src="/assets/plus.svg" />
               </button>
@@ -103,7 +127,8 @@ function ProductDetail() {
               <span>결제 금액: </span>
               <span>{displayValue}</span>
             </div>
-            <Button>구매하기</Button>
+            <button onClick={goPayment}>구매하기</button>
+            {/* <Button>구매하기</Button> */}
             {/* <Button>장바구니</Button> */}
             <button onClick={cartIn}>장바구니</button>
           </S.ProductInfoBox>
