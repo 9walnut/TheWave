@@ -69,17 +69,34 @@ exports.cartIn = async (req, res) => {
         tokenCheck.result !== "signin again"
       ) {
         decodedToken = jwt.decode(tokenCheck.accessToken);
-      } else res.send({ result: false }); // 토큰이 유효하지 않음
+      } else return res.send({ result: false }); // 토큰이 유효하지 않음
 
       const userNumber = decodedToken.userNumber;
-
-      const cartIn = await db.carts.create({
-        productId: productId,
-        userNumber: userNumber,
-        cartQuantity: cartQuantity,
-        isChecked: "0",
+      const sameProduct = await db.carts.findOne({
+        where: { productId: productId },
+        attributes: ["cartQuantity"],
       });
-      res.json({ result: true, cart: cartIn });
+      console.log("sameProduct.cartQuantity", sameProduct.cartQuantity);
+
+      if (sameProduct) {
+        const cartIn = await db.carts.update(
+          {
+            cartQuantity: sameProduct.cartQuantity + cartQuantity,
+          },
+          {
+            where: { productId: productId },
+          }
+        );
+        res.json({ result: true, cart: cartIn });
+      } else {
+        const cartIn = await db.carts.create({
+          productId: productId,
+          userNumber: userNumber,
+          cartQuantity: cartQuantity,
+          isChecked: "0",
+        });
+        res.json({ result: true, cart: cartIn });
+      }
     }
   } catch (error) {
     console.error(error);

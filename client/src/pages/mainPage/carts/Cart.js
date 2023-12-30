@@ -8,14 +8,15 @@ function Cart() {
   const getCartProduct = async () => {
     try {
       const headers = getAccessToken();
-      console.log(headers);
+      console.log("headers값임!!!", headers);
       if (headers) {
         // 토큰 값이 있을 때
         console.log("토큰 있따");
         const data = {
           result: true,
         };
-        const res = await axios.get("/api/cart", { params: data }, { headers });
+        // const res = await axios.get("/api/cart", { params: data }, { headers });
+        const res = await axios.get("/api/cart", { params: data, headers });
       } else {
         // 없을 때
         console.log("토큰 업ㅆ따");
