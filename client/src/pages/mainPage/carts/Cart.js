@@ -15,8 +15,8 @@ function Cart() {
         const data = {
           result: true,
         };
-        // const res = await axios.get("/api/cart", { params: data }, { headers });
         const res = await axios.get("/api/cart", { params: data, headers });
+        console.log("장바구니에는 이렇다", res.data);
       } else {
         // 없을 때
         console.log("토큰 업ㅆ따");

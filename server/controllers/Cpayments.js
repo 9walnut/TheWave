@@ -11,6 +11,7 @@ exports.goPayment = async (req, res) => {
     const decodedToken = jwt.decode(tokenCheck.accessToken);
 
     const userNumber = decodedToken.userNumber;
+    console.log("유저넘버", userNumber);
 
     const product = await db.products.findOne({
       where: { productId: req.params.productId },
