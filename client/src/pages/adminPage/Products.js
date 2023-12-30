@@ -66,7 +66,7 @@ function Products() {
       // console.log(products);
       // console.log(modifiedData);
     } catch (error) {
-      console.error("에러", error.response.data);
+      console.error("에러", error);
     }
   };
   useEffect(() => {
@@ -103,7 +103,7 @@ function Products() {
           console.error("상품 삭제 실패");
         }
       } catch (error) {
-        console.error("에러", error.response.data);
+        console.error("에러", error);
       }
     }
   };

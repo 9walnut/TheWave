@@ -40,7 +40,7 @@ function DataTable({
   items,
   onSelectionChange,
   onItemClick,
-  onSelectClick,
+  // onSelectClick,
 }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
@@ -111,7 +111,7 @@ function DataTable({
                       value={selectedStatus}
                       // selectedValues={selectedValues()}
                       onChange={(e) => {
-                        selectClick(e.target.value);
+                        // selectClick(e.target.value);
                         e.stopPropagation();
                         setSelectedStatus(e.target.value);
                       }}

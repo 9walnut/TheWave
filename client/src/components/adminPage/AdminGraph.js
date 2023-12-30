@@ -7,7 +7,7 @@ import { ResponsivePie } from "@nivo/pie";
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const AdminGraph = () => {
+const AdminGraph = ({ getData }) => {
   const handle = {
     padClick: (data) => {
       console.log(data);
@@ -20,16 +20,19 @@ const AdminGraph = () => {
 
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
-    <div style={{ width: "700px", height: "400px", margin: "-110px auto" }}>
+    <div style={{ width: "644px", height: "364px", margin: "-110px auto" }}>
       <ResponsivePie
         /**
          * chart에 사용될 데이터
          */
-        data={[
-          { id: "커스텀풍선", value: 324 },
-          { id: "브라이덜샤워", value: 88 },
-          { id: "생일파티", value: 221 },
-        ]}
+        //----원래꺼-----
+        // data={[
+        //   { id: "커스텀풍선", value: 324 },
+        //   { id: "브라이덜샤워", value: 88 },
+        //   { id: "생일파티", value: 221 },
+        // ]}
+        //-------------
+        data={getData}
         /**
          * chart margin
          */
@@ -37,7 +40,7 @@ const AdminGraph = () => {
         /**
          * chart 중간 빈공간 반지름
          */
-        innerRadius={0.5}
+        innerRadius={0.6}
         /**
          * pad 간격
          */
@@ -50,11 +53,11 @@ const AdminGraph = () => {
          * chart 색상
          */
         //colors={["olive", "brown", "orange"]} // 커스터하여 사용할 때
-        colors={{ scheme: "nivo" }} // nivo에서 제공해주는 색상 조합 사용할 때
+        colors={{ scheme: "blues" }} // nivo에서 제공해주는 색상 조합 사용할 때
         /**
          * pad border 두께 설정
          */
-        borderWidth={2}
+        borderWidth={0.5}
         /**
          * link label skip할 기준 각도
          */

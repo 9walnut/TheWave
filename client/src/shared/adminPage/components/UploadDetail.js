@@ -55,8 +55,8 @@ const UploadDetail = ({ onFileChange }) => {
       setDetailUrls(response.data.detailUrls);
       onFileChange(detailUrls);
     } catch (error) {
-      console.error("response.data이미지 업로드 실패", error.response.data);
-      console.error("response 이미지 업로드 실패", error.response);
+      console.error("response.data이미지 업로드 실패", error);
+      console.error("response 이미지 업로드 실패", error);
     }
   };
 

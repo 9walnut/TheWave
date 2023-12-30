@@ -81,7 +81,14 @@ const getCategoryCount = async () => {
     const categoryBirth = await db.categories.count({
       where: { categoryName: "생일용품" },
     });
-    return { categoryCustom, categoryMoney, categoryBridal, categoryBirth };
+    return {
+      categoryCustom,
+      categoryMoney,
+      categoryBridal,
+      categoryBirth,
+    };
+
+    // return categoryCustom, categoryMoney, categoryBridal, categoryBirth;
   } catch (error) {
     console.error("배송완료 주문 수 오류", error);
     throw error;
