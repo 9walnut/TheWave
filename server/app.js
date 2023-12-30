@@ -49,7 +49,10 @@ app.use(
 app.use((req, res, next) => {
   if (!req.secure) {
     // HTTP 요청을 HTTPS로 리디렉션
-    return res.redirect(`https://${req.headers.host}${req.url}`);
+    const redirectUrl = `https://${req.headers.host.replace(":8000", ":8001")}${
+      req.url
+    }`;
+    return res.redirect(redirectUrl);
   }
   next();
 });
