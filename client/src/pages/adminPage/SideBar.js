@@ -32,9 +32,9 @@ function SideBar({ selectItem }) {
         </NavLink>
       </S.NavLinksLayout>
       <S.NavLinksLayout>
-        <NavLink
+        <S.StyledNavLink
           to="/admin/dashboard"
-          exact="true"
+          exact={true}
           onClick={() => handleItemClick("mainDashboard")}
         >
           <S.NavListItem className="nav-link">
@@ -45,11 +45,11 @@ function SideBar({ selectItem }) {
               대시 보드
             </ListItem>
           </S.NavListItem>
-        </NavLink>
-        <NavLink
+        </S.StyledNavLink>
+        <S.StyledNavLink
           to="/admin/products"
-          exact="true"
-          onClick={() => handleItemClick("products")}
+          exact={true}
+          activeClassName="active"
         >
           <S.NavListItem className="nav-link">
             <ListItem
@@ -59,12 +59,8 @@ function SideBar({ selectItem }) {
               상품 관리
             </ListItem>
           </S.NavListItem>
-        </NavLink>
-        <NavLink
-          to="/admin/orders"
-          exact="true"
-          onClick={() => handleItemClick("orders")}
-        >
+        </S.StyledNavLink>
+        <S.StyledNavLink to="/admin/orders" exact={true}>
           <S.NavListItem className="nav-link">
             <ListItem
               icon="/adminPage/sidebar/orders.svg"
@@ -73,10 +69,10 @@ function SideBar({ selectItem }) {
               거래 내역 관리
             </ListItem>
           </S.NavListItem>
-        </NavLink>
-        <NavLink
+        </S.StyledNavLink>
+        <S.StyledNavLink
           to="/admin/users"
-          exact="true"
+          exact={true}
           onClick={() => handleItemClick("users")}
         >
           <S.NavListItem className="nav-link">
@@ -87,7 +83,7 @@ function SideBar({ selectItem }) {
               회원관리
             </ListItem>
           </S.NavListItem>
-        </NavLink>
+        </S.StyledNavLink>
       </S.NavLinksLayout>
       <S.NavLinksLayout>
         <NavLink to="/">

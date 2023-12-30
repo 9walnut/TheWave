@@ -117,7 +117,9 @@ function Products() {
           headers={header}
           items={currentItems}
           onSelectionChange={onSelectionChange}
-          onItemClick={(productId) => {
+          onItemClick={(item) => {
+            const productId = item.productId;
+
             console.log("클릭한 productId:", productId);
             navigate(`/admin/products/${productId}`);
           }}

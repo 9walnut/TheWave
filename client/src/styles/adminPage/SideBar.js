@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const NavLinksLayout = styled.ul`
   &.nav-link {
@@ -12,31 +13,31 @@ export const SideBarBox = styled.div`
   background-color: #363740;
 `;
 
-/* 활성화 되어 있는 상태 */
-export const NavLinkList = styled.a`
-  &.active {
-    background: #dbdade;
-    /* opacity: 0.08; */
-    border: none;
-    color: cornflowerblue;
-    text-decoration: none;
-  }
-  /* 그냥 있을 때 */
-  &:not(.active) {
-    background: none;
-    border: none;
-    text-decoration: none;
-    color: whitesmoke;
-  }
-`;
-
 export const NavListItem = styled.li`
   &.nav-link {
     list-style-type: none;
     color: whitesmoke;
   }
-
+  &.active {
+    font-weight: bold;
+    font-size: larger;
+  }
   &.nav-link {
     padding: 30px;
+  }
+  &.nav-link:active {
+    padding: 30px;
+    background-color: #515362;
+
+    /* background: blue; */
+  }
+`;
+export const StyledNavLink = styled(NavLink)`
+  color: #000;
+  &.active {
+    font-weight: bold;
+    & li {
+      background-color: #515362;
+    }
   }
 `;

@@ -30,6 +30,11 @@ function CheckBoxHandlerChecked({
       console.log("userNumber", content.userNumber);
     }
   });
+  selectedContents.forEach((content) => {
+    if (content.hasOwnProperty("OrderId")) {
+      console.log("OrderId", content.OrderId);
+    }
+  });
 
   const selectedProductId = Array.from(newSelectedLists).map(
     (index) => items[index].productID
@@ -37,14 +42,20 @@ function CheckBoxHandlerChecked({
   const selectedUserNumber = Array.from(newSelectedLists).map(
     (index) => items[index].userNumber
   );
+  const selectedOrderId = Array.from(newSelectedLists).map(
+    (index) => items[index].orderId
+  );
 
   console.log("selectedContents", selectedContents);
+
   console.log("selectedProductId", selectedProductId);
   console.log("selectedUserNumber", selectedUserNumber);
+  console.log("selectedOrderId", selectedOrderId);
 
   onSelectionChange({
     selectedProductId,
     selectedUserNumber,
+    selectedOrderId,
   });
 
   return null;

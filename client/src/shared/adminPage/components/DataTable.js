@@ -6,9 +6,19 @@ import CheckBox from "./CheckBox.js";
 import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 const useRowClick = (onItemClick) => {
-  const onRowClick = (item) => {
-    if (onItemClick) {
-      onItemClick(item.productID);
+  const onRowClick = (item, event) => {
+    console.log("item", item.orderId);
+    // if (onItemClick)
+    //   onItemClick({
+    //     productId: item.productID,
+    //     orderId: item.orderId,
+    //   });
+
+    if (event && event.target.tagName !== "SELECT") {
+      onItemClick?.({
+        productId: item.productID,
+        orderId: item.orderId,
+      });
     }
   };
 
@@ -33,6 +43,13 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
       onSelectionChange,
     });
   };
+
+  //orders에서 받아온 데이터 가공, selectbox로 orderstatus 보내주기
+  // const selectedValues = () => {
+  //   const selectedValue = items.map((item) => item.orderStatus);
+  //   console.log("orderStatus 확인", selectedValue);
+  //   return selectedValue;
+  // };
 
   const SelectAll = () => {
     CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists });
@@ -62,7 +79,7 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
           {items.map((item, index) => (
             <S.TableTr
               key={`${keySet}_${index}`}
-              onClick={() => onRowClick(item)}
+              onClick={(event) => onRowClick(item, event)}
             >
               <S.TableTd>
                 <CheckBox
@@ -72,10 +89,15 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
               </S.TableTd>
               {headerList.map((value, columnIndex) => (
                 <S.TableTd key={`${keySet}_${index}_${columnIndex}`}>
-                  {value === "deliveryStatus" ? (
+                  {value === "orderStatus" ? (
                     <SelectBoxDelivery
                       value={selectedStatus}
-                      onChange={(e) => setSelectedStatus(e.target.value)}
+                      // selectedValues={selectedValues()}
+                      onChange={(e) => {
+                        e.stopPropagation(); // 이벤트 전파 중단
+                        setSelectedStatus(e.target.value);
+                      }}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   ) : (
                     item[value]

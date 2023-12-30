@@ -75,7 +75,7 @@ module.exports = function (app) {
   );
 
   app.use(
-    createProxyMiddleware("/admin/users", {
+    createProxyMiddleware("/api/admin/products/thumbnail", {
       target: apiURL,
       changeOrigin: true,
       pathRewrite: {
@@ -85,7 +85,25 @@ module.exports = function (app) {
   );
 
   app.use(
-    createProxyMiddleware("/api/admin/products/thumbnail", {
+    createProxyMiddleware("/api/admin/users", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
+  app.use(
+    createProxyMiddleware("/api/admin/orders", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
+  app.use(
+    createProxyMiddleware("/api/admin/orders/:orderId", {
       target: apiURL,
       changeOrigin: true,
       pathRewrite: {
