@@ -31,7 +31,7 @@ const UploadThumbnail = ({ onFileChange }) => {
       console.log("FormData:", formData);
 
       const response = await axios.post(
-        "/admin/products/add/thumbnail",
+        "/api/admin/products/add/thumbnail",
         formData,
         {
           headers: {

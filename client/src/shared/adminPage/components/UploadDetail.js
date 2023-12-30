@@ -33,7 +33,7 @@ const UploadDetail = ({ onFileChange }) => {
       console.log("FormData:", formData);
 
       const response = await axios.post(
-        "/admin/products/add/detail",
+        "/api/admin/products/add/detail",
         formData,
         {
           headers: {
