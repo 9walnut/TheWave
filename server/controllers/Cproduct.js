@@ -53,6 +53,8 @@ exports.wish = async (req, res) => {
 exports.cartIn = async (req, res) => {
   const { cartQuantity } = req.body;
   const productId = req.params.productId;
+
+  console.log("productId", productId);
   const accessToken = req.headers["authorization"];
   console.log("accessToken임", accessToken);
 
@@ -73,7 +75,7 @@ exports.cartIn = async (req, res) => {
 
       const userNumber = decodedToken.userNumber;
       const sameProduct = await db.carts.findOne({
-        where: { productId: productId },
+        where: { userNumber: userNumber, productId: productId },
         attributes: ["cartQuantity"],
       });
       console.log("sameProduct.cartQuantity", sameProduct.cartQuantity);
@@ -84,10 +86,11 @@ exports.cartIn = async (req, res) => {
             cartQuantity: sameProduct.cartQuantity + cartQuantity,
           },
           {
-            where: { productId: productId },
+            where: { userNumber: userNumber, productId: productId },
           }
         );
         res.json({ result: true, cart: cartIn });
+        console.log("cartIn 1111111", cartIn);
       } else {
         const cartIn = await db.carts.create({
           productId: productId,
@@ -96,6 +99,7 @@ exports.cartIn = async (req, res) => {
           isChecked: "0",
         });
         res.json({ result: true, cart: cartIn });
+        console.log("cartIn 2222222", cartIn);
       }
     }
   } catch (error) {
