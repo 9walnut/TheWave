@@ -9,15 +9,18 @@ const jwt = require("jsonwebtoken");
 exports.getCart = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
-    const tokenCheck = await verifyToken(accessToken);
-    const decodedToken = jwt.decode(tokenCheck.accessToken);
 
     let cart;
-    if (decodedToken.userId) {
-      // 회원인 경우
+
+    // 회원인 경우
+    if (accessToken) {
+      const tokenCheck = await verifyToken(accessToken);
+      const decodedToken = jwt.decode(tokenCheck.accessToken);
+
       cart = await db.carts.findAll({
-        where: { userNumber: decodedToken.userId },
+        where: { userNumber: decodedToken.userNumber },
       });
+      console.log("cart", cart);
     } else {
       // 비회원인 경우
       cart = req.body.cart || [];

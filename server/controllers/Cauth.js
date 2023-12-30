@@ -35,7 +35,7 @@ exports.loginPage = (req, res) => {
 // '로그인' 버튼 클릭 시
 exports.loginUser = async (req, res) => {
   try {
-    const { userId, password } = req.body;
+    const { userId, password, cart } = req.body;
     const userCheck = await comparePw(userId, password);
 
     if (userCheck) {
@@ -56,16 +56,17 @@ exports.loginUser = async (req, res) => {
       //userId를 키로 refresh 토큰 저장
 
       // 비회원 장바구니 동기화
-      // if (cart && cart.length > 0) {
-      //   for (const item of cart) {
-      //     const { productId, cartQuantity } = item;
-      //     await db.carts.create({
-      //       userNumber: loginUser.userNumber,
-      //       productId,
-      //       cartQuantity,
-      //     });
-      //   }
-      // }
+      if (cart && cart.length > 0) {
+        for (const item of cart) {
+          const { productId, cartQuantity } = item;
+          await db.carts.create({
+            userNumber: loginUser.userNumber,
+            productId,
+            cartQuantity,
+            isChecked: 0,
+          });
+        }
+      }
 
       // isAdmin 값에 따라 페이지 이동
       if (loginUser.isAdmin === "Y") {
