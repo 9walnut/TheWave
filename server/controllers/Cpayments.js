@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 // 결제하기(상품 상세 페이지에서 바로)
 exports.goPayment = async (req, res) => {
   try {
-    const { orderQuantity } = req.body;
+    const { orderQuantity, color, size } = req.body;
     const accessToken = req.headers["authorization"];
     const tokenCheck = await verifyToken(accessToken);
     const decodedToken = jwt.decode(tokenCheck.accessToken);
@@ -26,6 +26,8 @@ exports.goPayment = async (req, res) => {
     // 주문 생성
     const newOrder = await db.orders.create({
       userNumber: userNumber,
+      color: color,
+      size: size,
       totalPrice: product.productPrice * orderQuantity,
       addressId: address.addressId,
       productId: product.productId,

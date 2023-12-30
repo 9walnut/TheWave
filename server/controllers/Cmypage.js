@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 // 회원 마이페이지(마이페이지 렌더 시 바로 주문 내역 노출)
 exports.mypage = async (req, res) => {
   const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
+  console.log("accessToken", accessToken);
   const tokenCheck = await verifyToken(accessToken); // 토큰 검증 및 디코딩
   console.log("tokenCheck", tokenCheck);
   try {
