@@ -8,6 +8,6 @@ RUN apk add --no-cache mysql-client
 
 RUN npm install
 
-EXPOSE 8000
+EXPOSE 8000 8001
 
 CMD ["node", "app"]
