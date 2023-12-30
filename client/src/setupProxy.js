@@ -55,6 +55,15 @@ module.exports = function (app) {
 
   // ------------------- admin ----------------------
   app.use(
+    createProxyMiddleware("/api/admin", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
+  app.use(
     createProxyMiddleware("/api/admin/products", {
       target: apiURL,
       changeOrigin: true,

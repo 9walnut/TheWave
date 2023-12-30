@@ -50,8 +50,8 @@ const UploadThumbnail = ({ onFileChange }) => {
       setThumbnailUrl(response.data.thumbnailUrl);
       onFileChange(thumbnailUrl);
     } catch (error) {
-      console.error("response.data이미지 업로드 실패", error.response.data);
-      console.error("response 이미지 업로드 실패", error.response);
+      console.error("response.data이미지 업로드 실패", error);
+      console.error("response 이미지 업로드 실패", error);
     }
   };
 

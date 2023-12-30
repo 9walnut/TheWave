@@ -62,7 +62,7 @@ function Orders() {
       setOrders(modifiedData);
       console.log(orders);
     } catch (error) {
-      console.log("에러", error.response);
+      console.log("에러", error);
     }
   };
 
@@ -80,7 +80,7 @@ function Orders() {
   //     fetchData();
   //   }
   //   catch(error){
-  //     console.log("patch에러", error.response)
+  //     console.log("patch에러", error)
   //   }
   // }
 
@@ -112,9 +112,9 @@ function Orders() {
             console.log("클릭한 orderId:", orderId);
             navigate(`/admin/orders/${orderId}`);
           }}
-          onSelectClick={(e) => {
-            console.log("오는지확인");
-          }}
+          // onSelectClick={(e) => {
+          //   console.log("오는지확인");
+          // }}
         />
         출고 상태 일괄 변경 :&nbsp; 대기
         {/* <SelectBoxDelivery /> */}

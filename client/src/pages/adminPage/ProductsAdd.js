@@ -64,7 +64,7 @@ function ProductsAdd() {
         console.log("안보내짐");
       }
     } catch (error) {
-      console.log("에러", error.response.data);
+      console.log("에러", error);
     }
   };
 

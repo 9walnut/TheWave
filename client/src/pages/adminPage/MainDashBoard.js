@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import MonthlyOrder from "../../components/adminPage/MonthlyOrder.js";
 import CurrentProductStatus from "../../components/adminPage/CurrentProductStatus.js";
@@ -10,18 +11,59 @@ import * as S from "../../styles/adminPage/MainDashBoard.js";
 import Card from "../../shared/adminPage/components/Card";
 
 function MainDashBoard() {
+  //---axios get
+  const [totalOrders, setTotalOrders] = useState("");
+  const [totalOrderPrices, setTotalOrderPrices] = useState("");
+  const [deliveryCompleteOrders, setDeliveryCompleteOrders] = useState("");
+  const [deliveryReadyOrders, setDeliveryReadyOrders] = useState("");
+  const [totalProducts, setTotalProducts] = useState("");
+  const [categoryCount, setCategoryCount] = useState("");
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/admin");
+
+      console.log("response.data", response.data);
+
+      setTotalOrders(response.data.totalOrders);
+      setTotalOrderPrices(response.data.totalOrderPrices);
+      setDeliveryCompleteOrders(response.data.deliveryCompleteOrders);
+      setDeliveryReadyOrders(response.data.deliveryReadyOrders);
+      setTotalProducts(response.data.totalProducts);
+      setCategoryCount(response.data.categoryCount);
+    } catch (error) {
+      console.log("에러", error);
+    }
+  };
+
+  console.log("totalOrders", totalOrders);
+  console.log("totalOrderPrices", totaalOrderPrices);
+  console.log("deliveryCompleteOrders", deliveryCompleteOrders);
+  console.log("deliveryReadyOrders", deliveryReadyOrders);
+  console.log("totalProducts", totalProducts);
+  console.log("categoryCount", categoryCount);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <Card>
         <S.AdminPageMainLayout>
           <S.StyledCard>
-            <MonthlyOrder />
+            <MonthlyOrder
+              totalOrders={totalOrders}
+              totalOrderPrices={totalOrderPrices}
+              deliveryCompleteOrders={deliveryCompleteOrders}
+              deliveryReadyOrders={deliveryReadyOrders}
+            />
           </S.StyledCard>
           <S.StyledCard>
-            <CurrentProductStatus />
+            <CurrentProductStatus totalProducts={totalProducts} />
           </S.StyledCard>
           <S.StyledCard>
-            <OrderCategory />
+            <OrderCategory categoryCount={categoryCount} />
           </S.StyledCard>
           <S.StyledCard>
             <CategorySales />

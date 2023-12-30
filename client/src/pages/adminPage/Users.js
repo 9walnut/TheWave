@@ -59,7 +59,7 @@ function Users() {
       setUsers(modifiedData);
       console.log("user 데이터 들어왔나", users);
     } catch (error) {
-      console.log("에러", error.response);
+      console.log("에러", error);
     }
   };
 
@@ -97,14 +97,7 @@ function Users() {
           console.error("유저 삭제 실패");
         }
       } catch (error) {
-        console.error(
-          "에러",
-          error.response.status,
-          error.response.statusText,
-          error.response.data
-        );
-
-        console.error("에러", error.response.data);
+        console.error("에러", error);
       }
     }
   };

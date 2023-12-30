@@ -16,8 +16,8 @@ export const StyledCard = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 1rem;
-  margin: 5px;
-  width: 600px;
-  height: 320px;
+  margin: 7px;
+  width: 710px;
+  height: 375px;
   overflow: hidden;
 `;

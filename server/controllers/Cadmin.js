@@ -81,7 +81,14 @@ const getCategoryCount = async () => {
     const categoryBirth = await db.categories.count({
       where: { categoryName: "생일용품" },
     });
-    return categoryCustom, categoryMoney, categoryBridal, categoryBirth;
+    return {
+      categoryCustom,
+      categoryMoney,
+      categoryBridal,
+      categoryBirth,
+    };
+
+    // return categoryCustom, categoryMoney, categoryBridal, categoryBirth;
   } catch (error) {
     console.error("배송완료 주문 수 오류", error);
     throw error;
@@ -97,14 +104,14 @@ exports.getAdminMain = async (req, res) => {
     const deliveryReadyOrders = await getDeliveryReadyOrders();
     const totalProducts = await getTotalProducts();
     const categoryCount = await getCategoryCount();
-    res.send(
+    res.send({
       totalOrders,
       totalOrderPrices,
       deliveryCompleteOrders,
       deliveryReadyOrders,
       totalProducts,
-      categoryCount
-    );
+      categoryCount,
+    });
   } catch (error) {
     res.status(500).send("관리페이지 오류");
   }

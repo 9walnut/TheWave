@@ -1,6 +1,12 @@
 import ListItem from "../../shared/adminPage/components/ListItem";
+import * as S from "./MonthlyOrderStyle";
 
-function MonthlyOrder() {
+function MonthlyOrder({
+  totalOrders,
+  totalOrderPrices,
+  deliveryCompleteOrders,
+  deliveryReadyOrders,
+}) {
   return (
     <>
       <h3>이번달 거래 현황</h3>
@@ -8,25 +14,26 @@ function MonthlyOrder() {
         icon="/adminPage/dashBoard/orderAll.svg"
         arrow="/adminPage/sidebar/none.svg"
       >
-        거래 수
+        총 주문 수 {totalOrders}
       </ListItem>
-      <ListItem
-        icon="/adminPage/dashBoard/orderCancel.svg"
-        arrow="/adminPage/sidebar/none.svg"
-      >
-        거래 취소 수
-      </ListItem>
+
       <ListItem
         icon="/adminPage/dashBoard/orderConfirm.svg"
         arrow="/adminPage/sidebar/none.svg"
       >
-        거래 확정 수
+        총 판매 금액 {totalOrderPrices}
       </ListItem>
       <ListItem
         icon="/adminPage/dashBoard/deliveryOk.svg"
         arrow="/adminPage/sidebar/none.svg"
       >
-        배송 완료 수
+        배송 완료 수 {deliveryCompleteOrders}
+      </ListItem>
+      <ListItem
+        icon="/adminPage/dashBoard/orderCancel.svg"
+        arrow="/adminPage/sidebar/none.svg"
+      >
+        배송 준비 수{deliveryReadyOrders}
       </ListItem>
     </>
   );
