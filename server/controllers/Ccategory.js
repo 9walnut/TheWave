@@ -18,6 +18,7 @@ exports.categoryPage = async (req, res) => {
           "productPrice",
           "productInfo",
           "productStatus",
+          "thumbnailUrl",
         ],
       },
     });

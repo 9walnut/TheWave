@@ -53,6 +53,26 @@ module.exports = function (app) {
     })
   );
 
+  app.use(
+    createProxyMiddleware("/api/cart", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/api/payment/:productId", {
+      target: apiURL,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "", // URL ^/api -> 공백 변경
+      },
+    })
+  );
+
   // ------------------- admin ----------------------
   app.use(
     createProxyMiddleware("/api/admin", {

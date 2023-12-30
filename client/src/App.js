@@ -34,7 +34,7 @@ function App() {
         {/* <Route path="/mypage/info" element={<MyPageInfo />} /> */}
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/products/:productId" element={<ProductDetailsPage />} />
-        {/* <Route path="/cart" element={<CartPage />} /> */}
+        <Route path="/cart" element={<CartPage />} />
         {/* <Route path="/cart/checkout" element={<CheckoutPage />} /> */}
         {/* admin */}
         <Route path="/admin/*" element={<AdminPageMain />}>
