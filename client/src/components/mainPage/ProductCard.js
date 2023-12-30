@@ -9,7 +9,8 @@ function ProductCard() {
   const getProduct = async () => {
     try {
       const res = await axios.get("/api");
-      setProducts(res.data);
+      console.log(res);
+      // setProducts(res.data);
     } catch (error) {
       console.log("불러오기 에러");
     }
@@ -22,7 +23,7 @@ function ProductCard() {
   return (
     <>
       <S.ProductContentBox>
-        {products.slice(0, 8).map((product) => {
+        {products.map((product) => {
           return (
             <S.CardItemBox>
               <Link to={`/products/${product.productId}`}>
