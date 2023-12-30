@@ -8,7 +8,7 @@ function Cart() {
   const getCartProduct = async () => {
     try {
       const headers = getAccessToken();
-      console.log(headers);
+      console.log("headers값임!!!", headers);
       if (headers) {
         // 토큰 값이 있을 때
         console.log("토큰 있따");
