@@ -18,7 +18,7 @@ const allowedExtensions = [".png", ".jpg", ".jpeg", ".bmp"];
 const thumbnailUpload = multer({
   storage: multer3({
     s3: s3,
-    bucket: "thewave-market", // bucket-name
+    bucket: "thewave-bucket", // bucket-name
     key: (req, file, callback) => {
       const uploadDirectory = "thumbnails";
       const extension = path.extname(file.originalname);
@@ -35,7 +35,7 @@ const thumbnailUpload = multer({
 const detailUpload = multer({
   storage: multer3({
     s3: s3,
-    bucket: "thewave-market", // bucket-name
+    bucket: "thewave-bucket", // bucket-name
     key: (req, file, callback) => {
       const uploadDirectory = "details";
       const extension = path.extname(file.originalname);
