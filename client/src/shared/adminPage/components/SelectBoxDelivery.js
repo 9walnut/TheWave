@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react";
 
 // function SelectBoxDelivery({ selectedValues }) {
-function SelectBoxDelivery({ selectedValues }) {
+function SelectBoxDelivery({ onOrderIdChange }) {
   const [releaseStatus, setReleaseStatus] = useState("");
 
   function handleChangeStatus(e) {
-    e.preventDefault();
     const selectedValue = e.target.value;
     setReleaseStatus(selectedValue);
     console.log("뭐골랐니", selectedValue);
+
+    // onOrderIdChange && onOrderIdChange(selectedValue);
+  }
+
+  function handleOnSelect() {
+    if (typeof onOrderIdChange === "function") {
+      console.log("SelectBoxDelivery 클릭한 orderId", onOrderIdChange());
+    }
   }
 
   useEffect(() => {
@@ -20,14 +27,15 @@ function SelectBoxDelivery({ selectedValues }) {
         name="releaseStatusCheck"
         onChange={handleChangeStatus}
         value={releaseStatus}
+        onClick={handleOnSelect}
       >
         <option disabled defaultValue>
           출고 상태 변경
         </option>
-        <option value="1">결제 대기</option>
-        <option value="2">출고 대기</option>
-        <option value="3">출고</option>
-        <option value="4">취소</option>
+        <option value="결제대기">결제 대기</option>
+        <option value="출고대기">출고 대기</option>
+        <option value="출고">출고</option>
+        <option value="취소">취소</option>
       </select>
     </>
   );

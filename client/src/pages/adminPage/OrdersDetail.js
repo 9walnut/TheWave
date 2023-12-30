@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+
 import * as S from "../../styles/adminPage/OrdersDetail.js";
 import Card from "../../shared/adminPage/components/Card";
 
@@ -23,41 +24,34 @@ function OrdersDetail({ orders }) {
     getOrdersDetail();
   }, [orderId]);
 
-  //✅얘는 왜 뜨다가 안뜨다가 할까
-  // const address = order.userNumber_user.addresses[0].address;
-  // console.log(address); //부산광역시 해운대구 샘플로 456
-
+  //✅ 데이터테이블에 있는것만 보여주면됨.
   return (
     <>
       <Card>
-        <h3>거래 내역 상세 페이지</h3>
-        <div>orderId: {order.orderId}</div>
-
-        <hr />
-
-        <h3>주문 상품 정보</h3>
-        {/* <div>주문 상품: {order.product.productName}</div> */}
-        <div>주문 수량: {order.orderQuantity}</div>
-        <div>주문 상품 디테일 color: {order.color}</div>
-        <div>주문 상품 디테일 size: {order.size}</div>
-        <hr />
-
-        <h3>배송 정보</h3>
-        <div>수령자 성함: {order.receiveName}</div>
-        <div>주소: {order.address}</div>
-        <div>배송 요청사항: {order.deliveryRequest}</div>
-        <hr />
-
-        <h3>구매자 정보</h3>
-        {/* <div>주문 고객 성함: {order.userNumber_user.userName}</div> */}
-        {/* <div>주문 고객 주소: {address}</div> */}
-        {/* <div>주문 고객 주소: {order.userNumber_user.addresses[0].address}</div> */}
-        <hr />
-
-        <h3>거래 정보</h3>
-        <div>주문 날짜: {order.orderDate}</div>
-        <div>orderStatus: {order.orderStatus}</div>
-        <hr />
+        {order.product && order.userNumber_user && (
+          <>
+            <h3>거래 내역 상세 페이지</h3>
+            <div>orderId: {order.orderId}</div>
+            <hr />
+            <h3>주문 상품 정보</h3>
+            <div>주문 상품명: {order.product.productName}</div>
+            <div>주문 수량: {order.orderQuantity}</div>
+            <div>주문 상품 디테일 color: {order.color}</div>
+            <div>주문 상품 디테일 size: {order.size}</div>
+            <hr />
+            <h3>배송 정보</h3>
+            <div>수령자 성함: {order.userNumber_user.userName}</div>
+            <div>수령자 연락처: {order.userNumber_user.phoneNumber}</div>
+            <div>주소: {order.userNumber_user.addresses[0].address}</div>
+            <div>배송 요청사항: {order.deliveryRequest}</div>
+            <hr />
+            <h3>거래 정보</h3>
+            <div>주문 날짜: {order.orderDate}</div>
+            <div>orderStatus: {order.orderStatus}</div>
+            <div>출고 날짜(changeDate): {order.changeDate}</div>
+            <hr />
+          </>
+        )}
       </Card>
     </>
   );

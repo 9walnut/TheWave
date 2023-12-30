@@ -39,6 +39,7 @@ const header = [
 ];
 
 //✅ onChange로 선택 값 바뀌면 그거 가져와서 수정요청 되도록?
+//✅ selectBox 클릭할 떄 orderId, status 가져와야한다.
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -48,12 +49,12 @@ function Orders() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/admin/orders");
-      console.log("response", response.data);
+      console.log("orders response", response.data);
 
       const modifiedData = response.data.map((order) => ({
         orderId: order.orderId,
         userName: order.userNumber_user.userName,
-        // phoneNumber: , 어딨지
+        // phoneNumber: order.phoneNumber,
         address: order.address,
         orderDate: order.orderDate,
         orderStatus: order.orderStatus,
@@ -68,6 +69,20 @@ function Orders() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  //---axios patch
+  // const [selectBoxOrderId, setSelectBoxOrderId] = useState([]);
+
+  // const updateData = async ()=>{
+  //   try{
+  //     const orderId = "셀렉트클릭해서 담은거, status는 어케"
+  //     await axios.patch(`/api/admin/orders/${orderId}`, { outStatus: '출고' });
+  //     fetchData();
+  //   }
+  //   catch(error){
+  //     console.log("patch에러", error.response)
+  //   }
+  // }
 
   //---PageNation
   const { currentPage, oneOfPage, currentItems, handlePageClick } =
@@ -96,6 +111,9 @@ function Orders() {
             const orderId = item.orderId;
             console.log("클릭한 orderId:", orderId);
             navigate(`/admin/orders/${orderId}`);
+          }}
+          onSelectClick={(e) => {
+            console.log("오는지확인");
           }}
         />
         출고 상태 일괄 변경 :&nbsp; 대기
