@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains="thewavemarket.com"
+domains="thewavemarket.co.kr"
 rsa_key_size=4096
 data_path="../certbot"
 email="kguho9202@naver.com" # Adding a valid address is strongly recommended
