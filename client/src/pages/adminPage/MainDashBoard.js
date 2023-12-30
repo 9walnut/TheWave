@@ -37,7 +37,7 @@ function MainDashBoard() {
   };
 
   console.log("totalOrders", totalOrders);
-  console.log("totalOrderPrices", totaalOrderPrices);
+  console.log("totalOrderPrices", totalOrderPrices);
   console.log("deliveryCompleteOrders", deliveryCompleteOrders);
   console.log("deliveryReadyOrders", deliveryReadyOrders);
   console.log("totalProducts", totalProducts);
