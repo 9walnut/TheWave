@@ -31,7 +31,7 @@ const useRowClick = (onItemClick) => {
 // };
 
 const selectClick = (e) => {
-  console.log("DataTable 클릭", e.target.value);
+  console.log("DataTable 셀릭트박스클릭", e.target.value);
 };
 
 function DataTable({

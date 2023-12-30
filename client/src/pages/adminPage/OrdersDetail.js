@@ -28,7 +28,7 @@ function OrdersDetail({ orders }) {
   return (
     <>
       <Card>
-        {order.product && (
+        {order.product && order.userNumber_user && (
           <>
             <h3>거래 내역 상세 페이지</h3>
             <div>orderId: {order.orderId}</div>
@@ -40,8 +40,9 @@ function OrdersDetail({ orders }) {
             <div>주문 상품 디테일 size: {order.size}</div>
             <hr />
             <h3>배송 정보</h3>
-            <div>수령자 성함: {order.receiveName}</div>
-            <div>주소: {order.address}</div>
+            <div>수령자 성함: {order.userNumber_user.userName}</div>
+            <div>수령자 연락처: {order.userNumber_user.phoneNumber}</div>
+            <div>주소: {order.userNumber_user.addresses[0].address}</div>
             <div>배송 요청사항: {order.deliveryRequest}</div>
             <hr />
             <h3>거래 정보</h3>

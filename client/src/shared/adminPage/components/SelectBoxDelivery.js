@@ -12,8 +12,10 @@ function SelectBoxDelivery({ onOrderIdChange }) {
     // onOrderIdChange && onOrderIdChange(selectedValue);
   }
 
-  function handleOnSelect(e) {
-    console.log("SelectBoxDelivery 클릭한 orderId", onOrderIdChange);
+  function handleOnSelect() {
+    if (typeof onOrderIdChange === "function") {
+      console.log("SelectBoxDelivery 클릭한 orderId", onOrderIdChange());
+    }
   }
 
   useEffect(() => {

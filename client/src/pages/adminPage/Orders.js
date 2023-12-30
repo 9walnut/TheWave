@@ -49,12 +49,12 @@ function Orders() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/admin/orders");
-      console.log("response", response.data);
+      console.log("orders response", response.data);
 
       const modifiedData = response.data.map((order) => ({
         orderId: order.orderId,
         userName: order.userNumber_user.userName,
-        // phoneNumber: , 어딨지
+        // phoneNumber: order.phoneNumber,
         address: order.address,
         orderDate: order.orderDate,
         orderStatus: order.orderStatus,
