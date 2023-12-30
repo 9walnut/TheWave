@@ -7,7 +7,7 @@ import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 const useRowClick = (onItemClick) => {
   const onRowClick = (item, event) => {
-    console.log("item", item.orderId);
+    console.log("DataTable 클릭한 orderId", item.orderId);
     // if (onItemClick)
     //   onItemClick({
     //     productId: item.productID,
@@ -25,13 +25,30 @@ const useRowClick = (onItemClick) => {
   return onRowClick;
 };
 
-function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
+// const useSelectClick = (onSelectClick) => {
+//   const selectClick = (e) => console.log("select 고른거",e.target.value);
+//   return selectClick;
+// };
+
+const selectClick = (e) => {
+  console.log("DataTable 클릭", e.target.value);
+};
+
+function DataTable({
+  keySet,
+  headers,
+  items,
+  onSelectionChange,
+  onItemClick,
+  onSelectClick,
+}) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
   const [selectedLists, setSelectedLists] = useState(new Set());
   const [selectedStatus, setSelectedStatus] = useState("");
   const onRowClick = useRowClick(onItemClick);
+  // const selectClick = useSelectClick(onSelectClick);
 
   const onChecked = (item) => {
     CheckBoxHandlerChecked({
@@ -94,10 +111,12 @@ function DataTable({ keySet, headers, items, onSelectionChange, onItemClick }) {
                       value={selectedStatus}
                       // selectedValues={selectedValues()}
                       onChange={(e) => {
-                        e.stopPropagation(); // 이벤트 전파 중단
+                        selectClick(e.target.value);
+                        e.stopPropagation();
                         setSelectedStatus(e.target.value);
                       }}
                       onClick={(e) => e.stopPropagation()}
+                      onOrderIdChange={item.orderId}
                     />
                   ) : (
                     item[value]
