@@ -7,7 +7,6 @@ import OrderCategory from "../../components/adminPage/OrderCategory.js";
 import CategorySales from "../../components/adminPage/CategorySales.js";
 
 import * as S from "../../styles/adminPage/MainDashBoard.js";
-
 import Card from "../../shared/adminPage/components/Card";
 
 function MainDashBoard() {
