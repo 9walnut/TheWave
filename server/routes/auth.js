@@ -3,7 +3,7 @@ const controller = require("../controllers/Cauth");
 const router = express.Router();
 
 // 메인 페이지
-router.get("/api", controller.main);
+router.get("/", controller.main);
 
 // 로그인 페이지
 router.get("/login", controller.loginPage);
