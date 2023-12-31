@@ -95,11 +95,16 @@ function Orders() {
     console.log("onSelectionChange 호출됨:", selectedOrderId); // 오고있음
   };
 
+  //---셀렉트 박스 내용 가져오기
+  const handleStatusChange = (selectBoxStatus) => {
+    console.log("Orders 컴포넌트에서 selectBoxStatus:", selectBoxStatus);
+  };
+
   return (
     <>
       <Card>
         <p>✅출고상태변경 수정요청</p>
-        <p>✅출고상태변경 일괄변경.. 위에 </p>
+        {/* <p>✅출고상태변경 일괄변경.. 위에 </p> */}
         <p>✅주문상태, 날짜 필터링? </p>
         <h3>거래 내역 관리</h3>
         <DataTable
@@ -112,12 +117,9 @@ function Orders() {
             console.log("클릭한 orderId:", orderId);
             navigate(`/admin/orders/${orderId}`);
           }}
-          // onSelectClick={(e) => {
-          //   console.log("오는지확인");
-          // }}
+          onStatusChange={handleStatusChange}
         />
-        출고 상태 일괄 변경 :&nbsp; 대기
-        {/* <SelectBoxDelivery /> */}
+
         <PageNation
           total={orders.length}
           limit={oneOfPage}
