@@ -10,7 +10,7 @@ function ProductCard() {
     try {
       const res = await axios.get("/api");
       console.log(res);
-      // setProducts(res.data);
+      setProducts(res.data);
     } catch (error) {
       console.log("불러오기 에러");
     }
