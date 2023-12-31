@@ -8,7 +8,7 @@ function ProductCard() {
 
   const getProduct = async () => {
     try {
-      const res = await axios.get("/api");
+      const res = await axios.get("/");
       console.log(res);
       setProducts(res.data);
     } catch (error) {
