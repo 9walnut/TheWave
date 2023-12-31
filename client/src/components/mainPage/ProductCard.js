@@ -8,7 +8,7 @@ function ProductCard() {
 
   const getProduct = async () => {
     try {
-      const res = await axios.get("/");
+      const res = await axios.get("/api");
       console.log(res);
       setProducts(res.data);
     } catch (error) {
@@ -28,7 +28,7 @@ function ProductCard() {
             <S.CardItemBox>
               <Link to={`/products/${product.productId}`}>
                 <div>
-                  <img src={product.thumbnailUrl} />
+                  <img src={product.thumbnailUrl} alt="사진" />
                 </div>
                 <div>
                   <ul>
