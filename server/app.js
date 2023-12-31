@@ -58,25 +58,25 @@ app.use(
 // });
 
 const authRouter = require("./routes/auth");
-app.use("/", authRouter);
+app.use("/api", authRouter);
 
 const mypageRouter = require("./routes/mypage");
-app.use("/mypage", mypageRouter);
+app.use("/api/mypage", mypageRouter);
 
 const categoryRouter = require("./routes/category");
-app.use("/category", categoryRouter);
+app.use("/api/category", categoryRouter);
 
 const productRouter = require("./routes/product");
-app.use("/product", productRouter);
+app.use("/api/product", productRouter);
 
 const paymentRouter = require("./routes/payment");
-app.use("/payment", paymentRouter);
+app.use("/api/payment", paymentRouter);
 
 const adminRouter = require("./routes/admin");
-app.use("/admin", adminRouter);
+app.use("/api/admin", adminRouter);
 
 const cartRouter = require("./routes/cart");
-app.use("/cart", cartRouter);
+app.use("/api/cart", cartRouter);
 
 server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
