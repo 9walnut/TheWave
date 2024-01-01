@@ -77,7 +77,9 @@ function ProductsDetail({ products }) {
             수정
           </AdminButtonGrey>
 
-          <AdminButtonBlack onClick={deleteProduct}>삭제</AdminButtonBlack>
+          <AdminButtonBlack onClick={deleteProduct}>
+            상품 삭제하기
+          </AdminButtonBlack>
         </S.ButtonContainer>
       </Card>
       <Routes>
