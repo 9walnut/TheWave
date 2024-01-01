@@ -11,8 +11,8 @@ const client = redis.createClient({
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
-const PORT = 8000;
-// const https_port = 8001;
+const PORT = 8001;
+// const https_port = 8000;
 
 // const options = {
 //   key: fs.readFileSync("./rootca.key"),
@@ -59,24 +59,31 @@ app.use(
 
 const authRouter = require("./routes/auth");
 app.use("/", authRouter);
+// app.use("/api", authRouter);
 
 const mypageRouter = require("./routes/mypage");
 app.use("/mypage", mypageRouter);
+// app.use("/api/mypage", mypageRouter);
 
 const categoryRouter = require("./routes/category");
 app.use("/category", categoryRouter);
+// app.use("/api/category", categoryRouter);
 
 const productRouter = require("./routes/product");
 app.use("/product", productRouter);
+// app.use("/api/product", productRouter);
 
 const paymentRouter = require("./routes/payment");
 app.use("/payment", paymentRouter);
+// app.use("/api/payment", paymentRouter);
 
 const adminRouter = require("./routes/admin");
 app.use("/admin", adminRouter);
+// app.use("/api/admin", adminRouter);
 
 const cartRouter = require("./routes/cart");
 app.use("/cart", cartRouter);
+// app.use("/api/cart", cartRouter);
 
 server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
