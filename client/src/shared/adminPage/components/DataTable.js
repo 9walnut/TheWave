@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as S from "./DataTableStyle.js";
 
 import SelectBoxDelivery from "./SelectBoxDelivery.js";
@@ -6,12 +6,7 @@ import CheckBox from "./CheckBox.js";
 import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 
-let newSelectedValue;
-const onStatusChange = ({ selectBox }) => {
-  newSelectedValue = selectBox;
-};
-
-const useRowClick = (onItemClick, setSelectBoxId, onStatusChange) => {
+const useRowClick = (onItemClick, onStatusChange) => {
   const onRowClick = (item, event) => {
     console.log("DataTable 클릭한 orderId", item.orderId);
 
@@ -23,7 +18,8 @@ const useRowClick = (onItemClick, setSelectBoxId, onStatusChange) => {
     }
 
     onStatusChange?.({
-      selectBoxId: item.orderId,
+      outStatus: item.selectedStatus,
+      orderId: item.orderId,
     });
   };
 
@@ -41,13 +37,14 @@ function DataTable({
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
+
   const [selectedLists, setSelectedLists] = useState(new Set());
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [newSelectedValue, setNewSelectedValue] = useState("");
+  const [selectBox, setSelectBox] = useState("");
+  const [selectBoxId, setSelectBoxId] = useState("");
 
-  const [selectBox, setSelectBox] = useState(""); //**
-  const [selectBoxId, setSelectBoxId] = useState(""); //**
-
-  const onRowClick = useRowClick(onItemClick, setSelectBoxId, onStatusChange);
+  const onRowClick = useRowClick(onItemClick, onStatusChange);
 
   const onChecked = (item) => {
     CheckBoxHandlerChecked({
@@ -63,6 +60,7 @@ function DataTable({
   const SelectAll = () => {
     CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists });
   };
+
   const headerList = headers.map((header) => header.value);
 
   return (
@@ -101,17 +99,19 @@ function DataTable({
                   {value === "orderStatus" ? (
                     <SelectBoxDelivery
                       value={selectedStatus}
-                      // selectedValues={selectedValues()}
                       onChange={(e) => {
                         e.stopPropagation();
                         setSelectedStatus(e.target.value);
                       }}
                       onClick={(e) => e.stopPropagation()}
                       onOrderIdChange={(selectedValue) => {
+                        setNewSelectedValue(selectedValue);
                         onStatusChange({
-                          selectBox: selectedValue,
+                          outStatus: selectedValue,
+                          orderId: item.orderId,
                         });
                       }}
+                      onOrderIdValue={item.orderId}
                     />
                   ) : (
                     item[value]

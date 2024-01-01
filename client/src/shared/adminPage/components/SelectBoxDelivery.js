@@ -1,25 +1,26 @@
 // SelectBoxDelivery.js
 import { useState, useEffect } from "react";
 
-// function SelectBoxDelivery({ onOrderIdChange, onStatusChange }) {
-function SelectBoxDelivery({ onOrderIdChange }) {
+function SelectBoxDelivery({ onOrderIdChange, onOrderIdValue }) {
   const [releaseStatus, setReleaseStatus] = useState("");
 
+  // 현재 페이지에서 orderId가 변경될 때마다 값 변경 (셀렉트박스 값 리셋)
+  useEffect(() => {
+    setReleaseStatus(onOrderIdValue);
+  }, [onOrderIdValue]);
+
   function handleChangeStatus(e) {
+    onOrderIdChange?.(e.target.value);
+    console.log("SelectBoxDelivery 클릭한 orderId:", onOrderIdValue);
+
     const selectedValue = e.target.value;
     setReleaseStatus(selectedValue);
-    // console.log("SelectBoxDelivery 클릭한 Select:", selectedValue);
+    console.log("SelectBoxDelivery 클릭한 Select:", selectedValue);
 
     if (typeof onOrderIdChange === "function") {
       onOrderIdChange(selectedValue);
     }
-    // onStatusChange 함수인지 확인한 후 호출
-    // onStatusChange && onStatusChange(selectedValue);
   }
-
-  // function selectClick() {
-  //   console.log("SelectBoxDelivery 클릭한 orderId:");
-  // }
 
   useEffect(() => {
     console.log("select 변경 시 render");
@@ -31,7 +32,6 @@ function SelectBoxDelivery({ onOrderIdChange }) {
         name="releaseStatusCheck"
         onChange={handleChangeStatus}
         value={releaseStatus}
-        // onClick={selectClick}
       >
         <option disabled defaultValue>
           출고 상태 변경
