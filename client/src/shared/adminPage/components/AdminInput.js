@@ -15,6 +15,7 @@ function AdminInput(props) {
             type={props.type}
             placeholder={props.placeholder}
             style={props.style}
+            value={props.value}
             onChange={handleChange}
           />
         </S.InputBox>

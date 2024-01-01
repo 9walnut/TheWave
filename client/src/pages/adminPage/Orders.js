@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, Link, useNavigate } from "react-router-dom";
+import { Route, Routes, Link, useNavigate, useParams } from "react-router-dom";
 
 import * as S from "../../styles/adminPage/Orders.js";
 import Card from "../../shared/adminPage/components/Card";
@@ -44,6 +44,8 @@ const header = [
 function Orders() {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
+  const [selectedOrderId, setSelectedOrderId] = useState(null); //*
+  const params = useParams(); //*
 
   //---axios get
   const fetchData = async () => {
@@ -70,36 +72,51 @@ function Orders() {
     fetchData();
   }, []);
 
-  //---axios patch
-  // const [selectBoxOrderId, setSelectBoxOrderId] = useState([]);
-
-  // const updateData = async ()=>{
-  //   try{
-  //     const orderId = "셀렉트클릭해서 담은거, status는 어케"
-  //     await axios.patch(`/api/admin/orders/${orderId}`, { outStatus: '출고' });
-  //     fetchData();
-  //   }
-  //   catch(error){
-  //     console.log("patch에러", error)
-  //   }
-  // }
-
   //---PageNation
   const { currentPage, oneOfPage, currentItems, handlePageClick } =
     PageNationFunc(orders);
 
   //---체크 된 값 가져오기
-  const [selectedOrderId, setSelectedOrderId] = useState([]);
-  const onSelectionChange = (selectedOrderId) => {
-    setSelectedOrderId(selectedOrderId);
-    console.log("onSelectionChange 호출됨:", selectedOrderId); // 오고있음
+  const [checkedOrderId, setCheckedOrderId] = useState([]);
+  const onSelectionChange = (checkedOrderId) => {
+    setCheckedOrderId(checkedOrderId);
+    console.log("onSelectionChange 호출됨:", checkedOrderId); // 오고있음
+  };
+
+  //---셀렉트 박스 내용 가져오기
+  const [selectBoxStatus, setSelectBoxStatus] = useState({});
+
+  const handleStatusChange = (selectBoxStatus) => {
+    console.log("Orders 컴포넌트 - selectBoxStatus:", selectBoxStatus);
+    const { orderId, outStatus } = selectBoxStatus;
+    if (orderId && outStatus) {
+      updateData(orderId, outStatus);
+    }
+  };
+
+  //---axios patch
+
+  const updateData = async (orderId, outStatus) => {
+    if (outStatus === "출고") {
+      try {
+        const response = await axios.patch(`/api/admin/orders/${orderId}`, {
+          outStatus,
+        });
+        console.log("patch응답 성공 (response)", response);
+        console.log("patch응답 성공 (response.data)", response.data);
+        fetchData();
+        setSelectBoxStatus({});
+      } catch (error) {
+        console.log("patch에러", error);
+      }
+    }
   };
 
   return (
     <>
       <Card>
         <p>✅출고상태변경 수정요청</p>
-        <p>✅출고상태변경 일괄변경.. 위에 </p>
+        {/* <p>✅출고상태변경 일괄변경.. 위에 </p> */}
         <p>✅주문상태, 날짜 필터링? </p>
         <h3>거래 내역 관리</h3>
         <DataTable
@@ -109,15 +126,13 @@ function Orders() {
           onSelectionChange={onSelectionChange}
           onItemClick={(item) => {
             const orderId = item.orderId;
+            setSelectedOrderId(orderId); //*
             console.log("클릭한 orderId:", orderId);
             navigate(`/admin/orders/${orderId}`);
           }}
-          // onSelectClick={(e) => {
-          //   console.log("오는지확인");
-          // }}
+          onStatusChange={handleStatusChange}
         />
-        출고 상태 일괄 변경 :&nbsp; 대기
-        {/* <SelectBoxDelivery /> */}
+
         <PageNation
           total={orders.length}
           limit={oneOfPage}

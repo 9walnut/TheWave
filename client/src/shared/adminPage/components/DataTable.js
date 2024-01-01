@@ -1,18 +1,14 @@
-import React, { useStat, useRef, useState } from "react";
+import React, { useState } from "react";
 import * as S from "./DataTableStyle.js";
 
 import SelectBoxDelivery from "./SelectBoxDelivery.js";
 import CheckBox from "./CheckBox.js";
 import CheckBoxHandlerChecked from "./CheckBoxHandlerChecked.js";
 import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
-const useRowClick = (onItemClick) => {
+
+const useRowClick = (onItemClick, onStatusChange) => {
   const onRowClick = (item, event) => {
     console.log("DataTable 클릭한 orderId", item.orderId);
-    // if (onItemClick)
-    //   onItemClick({
-    //     productId: item.productID,
-    //     orderId: item.orderId,
-    //   });
 
     if (event && event.target.tagName !== "SELECT") {
       onItemClick?.({
@@ -20,18 +16,14 @@ const useRowClick = (onItemClick) => {
         orderId: item.orderId,
       });
     }
+
+    onStatusChange?.({
+      outStatus: item.selectedStatus,
+      orderId: item.orderId,
+    });
   };
 
   return onRowClick;
-};
-
-// const useSelectClick = (onSelectClick) => {
-//   const selectClick = (e) => console.log("select 고른거",e.target.value);
-//   return selectClick;
-// };
-
-const selectClick = (e) => {
-  console.log("DataTable 셀릭트박스클릭", e.target.value);
 };
 
 function DataTable({
@@ -40,15 +32,19 @@ function DataTable({
   items,
   onSelectionChange,
   onItemClick,
-  // onSelectClick,
+  onStatusChange,
 }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
+
   const [selectedLists, setSelectedLists] = useState(new Set());
   const [selectedStatus, setSelectedStatus] = useState("");
-  const onRowClick = useRowClick(onItemClick);
-  // const selectClick = useSelectClick(onSelectClick);
+  const [newSelectedValue, setNewSelectedValue] = useState("");
+  const [selectBox, setSelectBox] = useState("");
+  const [selectBoxId, setSelectBoxId] = useState("");
+
+  const onRowClick = useRowClick(onItemClick, onStatusChange);
 
   const onChecked = (item) => {
     CheckBoxHandlerChecked({
@@ -61,16 +57,10 @@ function DataTable({
     });
   };
 
-  //orders에서 받아온 데이터 가공, selectbox로 orderstatus 보내주기
-  // const selectedValues = () => {
-  //   const selectedValue = items.map((item) => item.orderStatus);
-  //   console.log("orderStatus 확인", selectedValue);
-  //   return selectedValue;
-  // };
-
   const SelectAll = () => {
     CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists });
   };
+
   const headerList = headers.map((header) => header.value);
 
   return (
@@ -109,14 +99,19 @@ function DataTable({
                   {value === "orderStatus" ? (
                     <SelectBoxDelivery
                       value={selectedStatus}
-                      // selectedValues={selectedValues()}
                       onChange={(e) => {
-                        // selectClick(e.target.value);
                         e.stopPropagation();
                         setSelectedStatus(e.target.value);
                       }}
                       onClick={(e) => e.stopPropagation()}
-                      onOrderIdChange={item.orderId}
+                      onOrderIdChange={(selectedValue) => {
+                        setNewSelectedValue(selectedValue);
+                        onStatusChange({
+                          outStatus: selectedValue,
+                          orderId: item.orderId,
+                        });
+                      }}
+                      onOrderIdValue={item.orderId}
                     />
                   ) : (
                     item[value]
