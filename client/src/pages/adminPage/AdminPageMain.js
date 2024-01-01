@@ -12,6 +12,7 @@ import Users from "./Users";
 import ProductsAdd from "./ProductsAdd.js";
 import ProductsDetail from "./ProductsDetail.js";
 import OrdersDetail from "./OrdersDetail.js";
+import ProductsEdit from "./ProductsEdit.js";
 
 import * as S from "../../styles/adminPage/StyleAdminPageMain.js";
 
@@ -31,7 +32,8 @@ function AdminPageMain() {
           <Route path="dashboard" element={<MainDashBoard />} />
           <Route path="products/*" element={<Products />} />
           <Route path="products/add" element={<ProductsAdd />} />
-          <Route path="products/:productId" element={<ProductsDetail />} />
+          <Route path="products/:productId/*" element={<ProductsDetail />} />
+          <Route path="products/edit/:productId/*" element={<ProductsEdit />} />
           <Route path="orders/*" element={<Orders />} />
           <Route path="orders/:orderId" element={<OrdersDetail />} />
           <Route path="users" element={<Users />} />
