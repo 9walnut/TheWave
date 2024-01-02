@@ -1,8 +1,6 @@
 import React from "react";
 
-function ModifiedPhoneNumber(props) {
-  const phoneNumber = props.phoneNumber;
-
+function ModifiedPhoneNumber({ phoneNumber }) {
   const formattedPhoneNumber = phoneNumber
     ? [
         phoneNumber.slice(0, 3),
