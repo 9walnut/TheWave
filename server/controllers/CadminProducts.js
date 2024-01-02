@@ -54,6 +54,8 @@ exports.createAdminProduct = async (req, res) => {
       productStatus,
       thumbnailUrl,
       detailUrls,
+      color,
+      size,
     } = req.body;
     // 카테고리 이름으로 categoryId 찾기
     const category = await db.categories.findOne({ where: { categoryName } });
@@ -71,6 +73,12 @@ exports.createAdminProduct = async (req, res) => {
       productStatus,
       thumbnailUrl,
       detailUrls,
+    });
+
+    await db.productoption.create({
+      productId: newProduct.productId, // 상품 ID
+      color, // 색상
+      size, // 사이즈
     });
 
     res.send(newProduct);
@@ -175,7 +183,7 @@ exports.editAdminProduct = async (req, res) => {
 exports.editThumbnail = async (req, res) => {
   try {
     const thumbnailUrl = req.file.location;
-    const productId = req.body.productId;
+    const productId = req.params.productId;
 
     await db.products.update({ thumbnailUrl }, { where: { productId } });
     res.send({ thumbnailUrl });
@@ -189,7 +197,7 @@ exports.editThumbnail = async (req, res) => {
 exports.editDetails = async (req, res) => {
   try {
     const detailUrls = req.files.map((file) => file.location);
-    const productId = req.body.productId;
+    const productId = req.params.productId;
 
     await db.products.update(
       { detailUrls: detailUrls.join() },
