@@ -4,6 +4,7 @@ import axios from "axios";
 
 import * as S from "../../styles/adminPage/OrdersDetail.js";
 import Card from "../../shared/adminPage/components/Card";
+import ModifiedPhoneNumber from "../../shared/ModifiedPhoneNumber.js";
 
 function OrdersDetail({ orders }) {
   const [order, setOrder] = useState({});
@@ -25,6 +26,23 @@ function OrdersDetail({ orders }) {
   }, [orderId]);
 
   //✅ 데이터테이블에 있는것만 보여주면됨.
+
+  //orderStatus switch
+  const getOrderStatus = (status) => {
+    switch (status) {
+      case 1:
+        return "주문";
+      case 2:
+        return "교환";
+      case 3:
+        return "환불";
+      case 4:
+        return "취소";
+      default:
+        return "알 수 없음";
+    }
+  };
+
   return (
     <>
       <Card>
@@ -41,13 +59,22 @@ function OrdersDetail({ orders }) {
             <hr />
             <h3>배송 정보</h3>
             <div>수령자 성함: {order.userNumber_user.userName}</div>
-            <div>수령자 연락처: {order.userNumber_user.phoneNumber}</div>
+
+            {order.userNumber_user.phoneNumber && (
+              <div>
+                수령자 연락처:{" "}
+                <ModifiedPhoneNumber
+                  phoneNumber={order.userNumber_user.phoneNumber}
+                />
+              </div>
+            )}
+
             <div>주소: {order.userNumber_user.addresses[0].address}</div>
             <div>배송 요청사항: {order.deliveryRequest}</div>
             <hr />
             <h3>거래 정보</h3>
             <div>주문 날짜: {order.orderDate}</div>
-            <div>orderStatus: {order.orderStatus}</div>
+            <div>orderStatus: {getOrderStatus(order.orderStatus)}</div>
             <div>출고 날짜(changeDate): {order.changeDate}</div>
             <hr />
           </>

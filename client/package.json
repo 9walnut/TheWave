@@ -5,6 +5,7 @@
   "dependencies": {
     "@actbase/react-daum-postcode": "^1.0.4",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@nivo/bar": "^0.84.0",
     "@nivo/core": "^0.84.0",
     "@nivo/pie": "^0.84.0",
     "@reduxjs/toolkit": "^2.0.1",

@@ -12,6 +12,7 @@ import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
 import DataTable from "../../shared/adminPage/components/DataTable";
 import ProductsDetail from "./ProductsDetail.js";
+import ModifiedPrice from "../../shared/ModifiedPrice.js";
 
 const header = [
   {
@@ -43,6 +44,13 @@ const header = [
 function Products() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
+  //------내림차순 정렬 여기
+  const descendingData = (a, b) => {
+    return b.productID - a.productID;
+  };
+  //------------------------------------
+
   //---axios get
   const fetchData = async () => {
     try {
@@ -57,10 +65,14 @@ function Products() {
         productID: product.productId,
         productName: product.productName,
         categoryName: product.category.categoryname,
-        productPrice: product.productPrice,
+        productPrice: <ModifiedPrice number={product.productPrice} />,
         productStatus: product.productStatus,
         productInfo: product.productInfo,
       }));
+
+      //------내림차순 정렬 여기
+      modifiedData.sort(descendingData);
+      //------------------------------------
 
       setProducts(modifiedData);
       // console.log(products);

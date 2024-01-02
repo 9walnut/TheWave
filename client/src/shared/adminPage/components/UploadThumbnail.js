@@ -11,22 +11,22 @@ const UploadThumbnail = ({ onFileChange }) => {
 
     console.log("Selected File1:", file); //찍힘
 
-    handleUpload(file);
+    // handleUpload(file);
   };
-  useEffect(() => {
-    console.log("Selected File3:", selectedFile); //찍힘
-    // onFileChange(selectedFile);
-  }, [selectedFile, onFileChange]);
+  // useEffect(() => {
+  //   console.log("Selected File3:", selectedFile); //찍힘
+  // onFileChange(selectedFile);
+  // }, [selectedFile, onFileChange]);
 
-  const handleUpload = async (file) => {
-    if (!file) {
+  const handleUpload = async () => {
+    if (!selectedFile) {
       console.log("이미지를 선택하세요."); //찍힘
       return;
     }
 
     try {
       const formData = new FormData();
-      formData.append("thumbnailUrl", file);
+      formData.append("thumbnailUrl", selectedFile);
 
       console.log("FormData:", formData);
 
@@ -55,10 +55,14 @@ const UploadThumbnail = ({ onFileChange }) => {
     }
   };
 
+  useEffect(() => {
+    console.log("Selected File3:", selectedFile);
+  }, [selectedFile]);
+
   return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      {/* <button onClick={handleUpload}>이미지 업로드</button> */}
+      <button onClick={handleUpload}>썸네일 등록🌀</button>
 
       {thumbnailUrl && (
         <div>
