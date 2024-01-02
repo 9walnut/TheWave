@@ -11,23 +11,23 @@ const UploadDetailEdit = ({ onFileChange, productId }) => {
 
     console.log("Selected Files:", files); //찍힘
 
-    handleUpload(files);
+    // handleUpload(files);
   };
-  useEffect(() => {
-    console.log("Selected File3:", selectedFiles); //찍힘
-    // onFileChange(selectedFile);
-  }, [selectedFiles, onFileChange]);
+  // useEffect(() => {
+  //   console.log("Selected File3:", selectedFiles); //찍힘
+  // onFileChange(selectedFile);
+  // }, [selectedFiles, onFileChange]);
 
-  const handleUpload = async (files) => {
-    if (!files) {
+  const handleUpload = async () => {
+    if (!selectedFiles) {
       console.log("상세 이미지를 선택하세요."); //찍힘
       return;
     }
 
     try {
       const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        formData.append("detailUrls", files[i]);
+      for (let i = 0; i < selectedFiles.length; i++) {
+        formData.append("detailUrls", selectedFiles[i]);
       }
 
       console.log("FormData:", formData);
@@ -59,6 +59,9 @@ const UploadDetailEdit = ({ onFileChange, productId }) => {
       console.error("response 이미지 업로드 실패", error);
     }
   };
+  useEffect(() => {
+    console.log("Selected File3:", selectedFiles);
+  }, [selectedFiles]);
 
   return (
     <div>
@@ -66,7 +69,7 @@ const UploadDetailEdit = ({ onFileChange, productId }) => {
       <br />
       <p>✅디테일 이미지 수정하기 (변경 될 상세 이미지 선택)</p>
       <input type="file" onChange={handleFileChange} multiple />
-      {/* <button onClick={handleUpload}>이미지 업로드</button> */}
+      <button onClick={handleUpload}>상세이미지 수정🌀</button>
 
       {/* <p>변경 디테일이미지 미리보기:</p> */}
       {/* {detailUrls && (

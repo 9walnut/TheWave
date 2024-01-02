@@ -11,23 +11,19 @@ const UploadDetail = ({ onFileChange }) => {
 
     console.log("Selected Files:", files); //찍힘
 
-    handleUpload(files);
+    // handleUpload(files);
   };
-  useEffect(() => {
-    console.log("Selected File3:", selectedFiles); //찍힘
-    // onFileChange(selectedFile);
-  }, [selectedFiles, onFileChange]);
 
-  const handleUpload = async (files) => {
-    if (!files) {
+  const handleUpload = async () => {
+    if (!selectedFiles) {
       console.log("상세 이미지를 선택하세요."); //찍힘
       return;
     }
 
     try {
       const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        formData.append("detailUrls", files[i]);
+      for (let i = 0; i < selectedFiles.length; i++) {
+        formData.append("detailUrls", selectedFiles[i]);
       }
 
       console.log("FormData:", formData);
@@ -59,11 +55,13 @@ const UploadDetail = ({ onFileChange }) => {
       console.error("response 이미지 업로드 실패", error);
     }
   };
-
+  useEffect(() => {
+    console.log("Selected File3:", selectedFiles);
+  }, [selectedFiles]);
   return (
     <div>
       <input type="file" onChange={handleFileChange} multiple />
-      {/* <button onClick={handleUpload}>이미지 업로드</button> */}
+      <button onClick={handleUpload}>상세이미지 등록🌀</button>
 
       {detailUrls && (
         <div>

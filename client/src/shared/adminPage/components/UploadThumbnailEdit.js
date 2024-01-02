@@ -13,24 +13,24 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
 
     console.log("Selected File1:", file); //찍힘
 
-    handleUpload(file);
+    // handleUpload(file);
   };
-  useEffect(() => {
-    console.log("Selected File3:", selectedFile); //찍힘
-    // onFileChange(selectedFile);
-  }, [selectedFile, onFileChange]);
+  // useEffect(() => {
+  //   console.log("Selected File3:", selectedFile); //찍힘
+  // onFileChange(selectedFile);
+  // }, [selectedFile, onFileChange]);
 
-  const handleUpload = async (file) => {
-    console.log(productId);
+  const handleUpload = async () => {
+    // console.log(productId);
 
-    if (!file) {
+    if (!selectedFile) {
       console.log("이미지를 선택하세요."); //찍힘
       return;
     }
 
     try {
       const formData = new FormData();
-      formData.append("thumbnailUrl", file);
+      formData.append("thumbnailUrl", selectedFile);
       // formData.append("productId", productId);
 
       console.log("FormData:", formData);
@@ -61,28 +61,19 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
       console.error("response 이미지 업로드 실패", error);
     }
   };
+
   useEffect(() => {
     if (thumbnailUrl) {
       onFileChange(thumbnailUrl);
     }
   }, [thumbnailUrl, onFileChange]);
-
   return (
     <div>
       <br />
       <br />
       <p>✅썸네일 수정하기 (변경 될 썸네일 선택)</p>
       <input type="file" onChange={handleFileChange} />
-      {/* <p>변경 썸네일 미리보기:</p>
-      {thumbnailUrl && (
-        <div>
-          <img
-            src={thumbnailUrl}
-            alt="Thumbnail"
-            style={{ width: "100px", height: "100px" }}
-          />
-        </div>
-      )} */}
+      <button onClick={handleUpload}>썸네일 수정🌀</button>
     </div>
   );
 };

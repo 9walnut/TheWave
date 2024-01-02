@@ -139,9 +139,15 @@ function ProductsAdd() {
         </AdminInput>
         <hr />
         <h3>이미지 정보</h3>
+        <hr />
+
         <h3>thumbnailUpload</h3>
+        <p>파일 선택 후 등록 버튼을 꼭 눌러주세요❗️</p>
         <UploadThumbnail onFileChange={getImageDataThumbnail} />
+        <hr />
+
         <h3>detailUpload</h3>
+        <p>파일 선택 후 등록 버튼을 꼭 눌러주세요❗️</p>
         <UploadDetail onFileChange={getImageDataDetail} />
         <hr />
         <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
