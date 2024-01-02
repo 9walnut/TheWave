@@ -3,11 +3,6 @@ const https = require("https");
 const fs = require("fs");
 const express = require("express");
 const app = express();
-const redis = require("redis");
-const client = redis.createClient({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-});
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
@@ -16,18 +11,17 @@ const https_port = 8000;
 
 // https - ssl 인증서 참조
 // ------------여기 주석-------------
-// const options = {
-//   key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
-//   cert: fs.readFileSync(
-//     "/etc/letsencrypt/live/thewavemarket.co.kr/fullchain.pem"
-//   ),
-// };
+const options = {
+  key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
+  cert: fs.readFileSync(
+    "/etc/letsencrypt/live/thewavemarket.co.kr/fullchain.pem"
+  ),
+};
 // -----------------------
 
 const server = http.createServer(app);
-
 // ------------여기 주석-------------
-// const https_server = https.createServer(options, app);
+const https_server = https.createServer(options, app);
 // --------------------------------
 
 app.use(cors());
@@ -59,11 +53,6 @@ const adminUsersRouter = require("./routes/adminUsers");
 const adminProductsRouter = require("./routes/adminProducts");
 const adminOrdersRouter = require("./routes/adminOrders");
 
-// http 서버 오픈
-server.listen(PORT, function () {
-  console.log(`Sever Open: ${PORT}`);
-});
-
 app.use("/api", authRouter);
 app.use("/api/mypage", mypageRouter);
 app.use("/api/category", categoryRouter);
@@ -75,9 +64,14 @@ app.use("/api/admin/users", adminUsersRouter);
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/orders", adminOrdersRouter);
 
+// http 서버 오픈
+server.listen(PORT, function () {
+  console.log(`Sever Open: ${PORT}`);
+});
+
 // https 서버 오픈
 //------------여기 주석-------------
-// https_server.listen(https_port, function () {
-//   console.log(`HTTPS Server Open: ${https_port}`);
-// });
+https_server.listen(https_port, function () {
+  console.log(`HTTPS Server Open: ${https_port}`);
+});
 // -----------------------

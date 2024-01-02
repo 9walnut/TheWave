@@ -49,7 +49,7 @@ exports.goPayment = async (req, res) => {
   }
 };
 
-// 주문 정보 > 결제하기
+// 상품 상세 페이지 > 주문 정보 > 결제하기
 exports.payment = async (req, res) => {
   const { orderQuantity, color, size, address, receiveName, deliveryRequest } =
     req.body;
@@ -61,14 +61,26 @@ exports.payment = async (req, res) => {
     const userNumber = decodedToken.userNumber;
     console.log("유저넘버", userNumber);
 
+    const product = await db.products.findOne({
+      where: { productId: req.params.productId },
+    });
+    console.log("product", product);
+
+    // 장바구니 담지 않고 바로 구매이므로 cartId 없음
     const newOrder = await db.orders.create({
       userNumber: userNumber,
+      productId: req.params.productId,
+      orderQuantity: orderQuantity,
       color: color,
       size: size,
+      receiveName: receiveName,
+      address: address,
+      deliveryRequest: deliveryRequest,
       totalPrice: product.productPrice * orderQuantity,
-      addressId: address.addressId,
       productId: product.productId,
       orderQuantity: orderQuantity,
+      orderDate: new Date(),
+      changeDate: new Date(),
     });
 
     if (newOrder) res.send(newOrder);
