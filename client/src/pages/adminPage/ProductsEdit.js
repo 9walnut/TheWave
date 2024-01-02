@@ -13,7 +13,7 @@ import SelectBoxProduct from "../../shared/adminPage/components/SelectBoxProduct
 import SelectBoxCategory from "../../shared/adminPage/components/SelectBoxCategory";
 import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import axios from "axios";
-import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
+import UploadThumbnailEdit from "../../shared/adminPage/components/UploadThumbnailEdit";
 import UploadDetail from "../../shared/adminPage/components/UploadDetail";
 
 function ProductsEdit() {
@@ -137,27 +137,37 @@ function ProductsEdit() {
 
         <hr />
         <h3>이미지 정보</h3>
-        <h3>✅이미지 수정 요청 해야함</h3>
+        <hr />
         <h3>thumbnailUpload</h3>
-        <p>✅선택된 썸네일 이미지</p>
+        <p>- 선택된 썸네일 이미지</p>
         <img
           src={newThumbnailUrl}
           alt="thumbnail"
           style={{ width: "100px", height: "100px" }}
         />
-        <UploadThumbnail onFileChange={getImageDataThumbnail} />
+        <UploadThumbnailEdit
+          onFileChange={getImageDataThumbnail}
+          productId={productId}
+        />
+        <hr />
+
         <h3>detailUpload</h3>
-        <p>✅선택된 디테일 이미지</p>
-        {newDetailUrls &&
-          JSON.parse(newDetailUrls).map((url, index) => (
-            <img
-              key={index}
-              src={url}
-              alt={`detail-${index}`}
-              style={{ width: "100px", height: "100px" }}
-            />
-          ))}
-        <UploadDetail onFileChange={getImageDataDetail} />
+        <p>- 선택된 디테일 이미지</p>
+        {newDetailUrls && newDetailUrls.length > 0 && (
+          <>
+            {newDetailUrls.map((url, index) => (
+              <div key={index}>
+                <img
+                  src={url}
+                  alt={`Detail ${index}`}
+                  style={{ width: "100px", height: "100px" }}
+                />
+              </div>
+            ))}
+            <UploadDetail onFileChange={getImageDataDetail} />
+          </>
+        )}
+
         <hr />
         {/* <AdminButtonBlack onClick={sendData}>상품 수정하기</AdminButtonBlack> */}
       </Card>
