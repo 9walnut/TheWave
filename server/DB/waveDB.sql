@@ -71,6 +71,7 @@ CREATE TABLE `orders` (
 	`orderQuantity`	INT NOT 	NULL,
 	`color`	VARCHAR(50) NOT 	NULL,
 	`size`	VARCHAR(50)	NOT NULL, 
+  `totalPrice` INT NOT NULL,
 	`receiveName`	VARCHAR(10)	NOT NULL,
 	`address`	VARCHAR(200)	NOT NULL,
 	`deliveryRequest`	VARCHAR(255)	NOT NULL,
@@ -211,21 +212,21 @@ VALUES
 
 INSERT INTO productoption (productId, color, size)
 VALUES
-	(1, '빨강', 'M'),
-	(2, '파랑', 'M'),
-	(3, '노랑', 'L'),
-	(4, '검정', 'S'),
-	(5, '초록', 'XL'),
-	(6, '주황', 'S'),
-	(7, '분홍', 'M'),
-	(8, '흰색', 'L'),
-	(9, '파랑', 'XL'),
-	(10, '빨강', 'S'),
-	(11, '검정', 'M'),
-	(12, '초록', 'L'),
-	(13, '주황', 'XL'),
-	(14, '분홍', 'S'),
-	(15, '흰색', 'M');
+	(1, '["빨강"]', '["M"]'),
+	(2, '["파랑"]', '["M"]'),
+	(3, '["노랑"]', '["L"]'),
+	(4, '["검정"]', '["S"]'),
+	(5, '["초록"]', '["XL"]'),
+	(6, '["주황"]', '["S"]'),
+	(7, '["분홍"]', '["M"]'),
+	(8, '["흰색"]', '["L"]'),
+	(9, '["파랑"]', '["XL"]'),
+	(10, '["빨강"]', '["S"]'),
+	(11, '["검정"]', '["M"]'),
+	(12, '["초록"]', '["L"]'),
+	(13, '["주황"]', '["XL"]'),
+	(14, '["분홍"]', '["S"]'),
+	(15, '["흰색"]', '["M"]');
 
     
 INSERT INTO carts (userNumber, productId, cartQuantity, isChecked, isDeleted)
@@ -247,39 +248,38 @@ VALUES
   (16, 1, 2, 1, FALSE);
 
 
-INSERT INTO orders (userNumber, cartId, productId, orderQuantity, color, size, receiveName, address, deliveryRequest, orderDate, orderStatus, changeDate)
+INSERT INTO orders (userNumber, cartId, productId, orderQuantity, color, size, totalPrice, receiveName, address, deliveryRequest, orderDate, orderStatus, changeDate)
 VALUES 
-  (1, 1, 1, 2, 'Red', 'M', '권구호', '서울특별시 강남구 테스트로 123', 'Fast Delivery', CURDATE(), 1, CURDATE()),
-  (2, 2, 2, 3, 'Blue', 'L', '이지은', '서울특별시 강북구 테스트로 456', 'Standard Delivery', CURDATE(), 2, CURDATE()),
-  (3, null, 3, 1, 'Yellow', 'XL', '김민수', '서울특별시 서초구 테스트로 789', 'Express Delivery', CURDATE(), 1, CURDATE()),
-  (4, null, 4, 2, 'Black', 'S', '박지영', '서울특별시 송파구 테스트로 101', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (5, null, 5, 1, 'Green', 'M', '정민우', '서울특별시 동작구 테스트로 111', 'Standard Delivery', CURDATE(), 2, CURDATE()),
-  (6, null, 6, 2, 'Orange', 'S', '김수현', '서울특별시 강동구 테스트로 222', 'Express Delivery', CURDATE(), 1, CURDATE()),
-  (7, null, 7, 1, 'Pink', 'L', '이재현', '서울특별시 마포구 테스트로 333', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (8, null, 8, 3, 'White', 'XL', '박영희', '서울특별시 강서구 테스트로 444', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (9, null, 9, 2, 'Blue', 'S', '김현우', '서울특별시 영등포구 테스트로 555', 'Express Delivery', CURDATE(), 3, CURDATE()),
-  (10, null, 10, 1, 'Red', 'M', '이미란', '서울특별시 구로구 테스트로 666', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (11, null, 11, 2, 'Black', 'L', '박승현', '서울특별시 동대문구 테스트로 777', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (12, null, 12, 3, 'Green', 'XL', '윤지수', '서울특별시 중랑구 테스트로 888', 'Express Delivery', CURDATE(), 2, CURDATE()),
-  (13, null, 13, 1, 'Orange', 'S', '임정희', '서울특별시 강북구 테스트로 999', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (14, null, 14, 2, 'Pink', 'M', '이동욱', '서울특별시 서초구 테스트로 1010', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (15, null, 15, 1, 'White', 'L', '김수진', '서울특별시 강남구 테스트로 1111', 'Express Delivery', CURDATE(), 2, CURDATE()),
-  (16, null, 1, 2, 'Red', 'M', '정재호', '서울특별시 송파구 테스트로 1212', 'Fast Delivery', CURDATE(), 1, CURDATE()),
-  (17, null, 2, 3, 'Blue', 'L', '이정민', '서울특별시 마포구 테스트로 1313', 'Standard Delivery', CURDATE(), 2, CURDATE()),
-  (18, null, 3, 1, 'Yellow', 'XL', '김재현', '서울특별시 강서구 테스트로 1414', 'Express Delivery', CURDATE(), 1, CURDATE()),
-  (19, null, 4, 2, 'Black', 'S', '박소연', '서울특별시 동작구 테스트로 1515', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (20, null, 5, 1, 'Green', 'M', '이수진', '서울특별시 강동구 테스트로 1616', 'Standard Delivery', CURDATE(), 2, CURDATE()),
-  (21, null, 6, 2, 'Orange', 'S', '김민재', '서울특별시 중랑구 테스트로 1717', 'Express Delivery', CURDATE(), 1, CURDATE()),
-  (22, null, 7, 1, 'Pink', 'L', '정민지', '서울특별시 영등포구 테스트로 1818', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (23, null, 8, 3, 'White', 'XL', '김재원', '서울특별시 구로구 테스트로 1919', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (24, null, 9, 2, 'Blue', 'S', '김수민', '서울특별시 동대문구 테스트로 2020', 'Express Delivery', CURDATE(), 3, CURDATE()),
-  (25, null, 10, 1, 'Red', 'M', '이지은', '서울특별시 중랑구 테스트로 2121', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (26, null, 11, 2, 'Black', 'L', '박민성', '서울특별시 서초구 테스트로 2222', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (27, null, 12, 3, 'Green', 'XL', '임다영', '서울특별시 강남구 테스트로 2323', 'Express Delivery', CURDATE(), 2, CURDATE()),
-  (28, null, 13, 1, 'Orange', 'S', '정유진', '서울특별시 강북구 테스트로 2424', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (29, null, 14, 2, 'Pink', 'M', '이동훈', '서울특별시 서초구 테스트로 2525', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (30, null, 15, 1, 'White', 'L', '박민지', '서울특별시 강동구 테스트로 2626', 'Express Delivery', CURDATE(), 2, CURDATE());
-  
+  (1, 1, 1, 2, 'Red', 'M', 50000, '권구호', '서울특별시 강남구 테스트로 123', 'Fast Delivery', CURDATE(), 1, CURDATE()),
+  (2, 2, 2, 3, 'Blue', 'L', 75000, '이지은', '서울특별시 강북구 테스트로 456', 'Standard Delivery', CURDATE(), 2, CURDATE()),
+  (3, null, 3, 1, 'Yellow', 'XL', 30000, '김민수', '서울특별시 서초구 테스트로 789', 'Express Delivery', CURDATE(), 1, CURDATE()),
+  (4, null, 4, 2, 'Black', 'S', 60000, '박지영', '서울특별시 송파구 테스트로 101', 'Fast Delivery', CURDATE(), 3, CURDATE()),
+  (5, null, 5, 1, 'Green', 'M', 40000, '정민우', '서울특별시 동작구 테스트로 111', 'Standard Delivery', CURDATE(), 2, CURDATE()),
+  (6, null, 6, 2, 'Orange', 'S', 55000, '김수현', '서울특별시 강동구 테스트로 222', 'Express Delivery', CURDATE(), 1, CURDATE()),
+  (7, null, 7, 1, 'Pink', 'L', 45000, '이재현', '서울특별시 마포구 테스트로 333', 'Fast Delivery', CURDATE(), 2, CURDATE()),
+  (8, null, 8, 3, 'White', 'XL', 90000, '박영희', '서울특별시 강서구 테스트로 444', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (9, null, 9, 2, 'Blue', 'S', 70000, '김현우', '서울특별시 영등포구 테스트로 555', 'Express Delivery', CURDATE(), 3, CURDATE()),
+  (10, null, 10, 1, 'Red', 'M', 35000, '이미란', '서울특별시 구로구 테스트로 666', 'Fast Delivery', CURDATE(), 2, CURDATE()),
+  (11, null, 11, 2, 'Black', 'L', 65000, '박승현', '서울특별시 동대문구 테스트로 777', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (12, null, 12, 3, 'Green', 'XL', 80000, '윤지수', '서울특별시 중랑구 테스트로 888', 'Express Delivery', CURDATE(), 2, CURDATE()),
+  (13, null, 13, 1, 'Orange', 'S', 45000, '임정희', '서울특별시 강북구 테스트로 999', 'Fast Delivery', CURDATE(), 3, CURDATE()),
+  (14, null, 14, 2, 'Pink', 'M', 55000, '이동욱', '서울특별시 서초구 테스트로 1010', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (15, null, 15, 1, 'White', 'L', 60000, '김수진', '서울특별시 강남구 테스트로 1111', 'Express Delivery', CURDATE(), 2, CURDATE()),
+  (16, null, 1, 2, 'Red', 'M', 50000, '정재호', '서울특별시 송파구 테스트로 1212', 'Fast Delivery', CURDATE(), 1, CURDATE()),
+  (17, null, 2, 3, 'Blue', 'L', 75000, '이정민', '서울특별시 마포구 테스트로 1313', 'Standard Delivery', CURDATE(), 2, CURDATE()),
+  (18, null, 3, 1, 'Yellow', 'XL', 30000, '김재현', '서울특별시 강서구 테스트로 1414', 'Express Delivery', CURDATE(), 1, CURDATE()),
+  (19, null, 4, 2, 'Black', 'S', 60000, '박소연', '서울특별시 동작구 테스트로 1515', 'Fast Delivery', CURDATE(), 3, CURDATE()),
+  (20, null, 5, 1, 'Green', 'M', 40000, '이수진', '서울특별시 강동구 테스트로 1616', 'Standard Delivery', CURDATE(), 2, CURDATE()),
+  (21, null, 6, 2, 'Orange', 'S', 55000, '김민재', '서울특별시 중랑구 테스트로 1717', 'Express Delivery', CURDATE(), 1, CURDATE()),
+  (22, null, 7, 1, 'Pink', 'L', 45000, '정민지', '서울특별시 영등포구 테스트로 1818', 'Fast Delivery', CURDATE(), 2, CURDATE()),
+  (23, null, 8, 3, 'White', 'XL', 90000, '김재원', '서울특별시 구로구 테스트로 1919', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (24, null, 9, 2, 'Blue', 'S', 70000, '김수민', '서울특별시 동대문구 테스트로 2020', 'Express Delivery', CURDATE(), 3, CURDATE()),
+  (25, null, 10, 1, 'Red', 'M', 35000, '이지은', '서울특별시 중랑구 테스트로 2121', 'Fast Delivery', CURDATE(), 2, CURDATE()),
+  (26, null, 11, 2, 'Black', 'L', 65000, '박민성', '서울특별시 서초구 테스트로 2222', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (27, null, 12, 3, 'Green', 'XL', 80000, '임다영', '서울특별시 강남구 테스트로 2323', 'Express Delivery', CURDATE(), 2, CURDATE()),
+  (28, null, 13, 1, 'Orange', 'S', 45000, '정유진', '서울특별시 강북구 테스트로 2424', 'Fast Delivery', CURDATE(), 3, CURDATE()),
+  (29, null, 14, 2, 'Pink', 'M', 55000, '이동훈', '서울특별시 서초구 테스트로 2525', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (30, null, 15, 1, 'White', 'L', 60000, '박민지', '서울특별시 강동구 테스트로 2626', 'Express Delivery', CURDATE(), 2, CURDATE());
 
 
 
