@@ -148,15 +148,16 @@ function ProductsEdit() {
         <UploadThumbnail onFileChange={getImageDataThumbnail} />
         <h3>detailUpload</h3>
         <p>✅선택된 디테일 이미지</p>
-        {newDetailUrls &&
-          JSON.parse(newDetailUrls).map((url, index) => (
+        {newDetailUrls.map((url, index) => (
+          <div key={index}>
             <img
-              key={index}
               src={url}
-              alt={`detail-${index}`}
+              alt={`Detail ${index}`}
               style={{ width: "100px", height: "100px" }}
+              // style={{ maxWidth: "100%" }}
             />
-          ))}
+          </div>
+        ))}
         <UploadDetail onFileChange={getImageDataDetail} />
         <hr />
         {/* <AdminButtonBlack onClick={sendData}>상품 수정하기</AdminButtonBlack> */}

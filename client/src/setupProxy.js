@@ -93,7 +93,7 @@ module.exports = function (app) {
     })
   );
   app.use(
-    createProxyMiddleware("/api/admin/products/edit/:productId", {
+    createProxyMiddleware("/api/admin/products/:productId/edit", {
       target: apiURL,
       changeOrigin: true,
       // pathRewrite: {
