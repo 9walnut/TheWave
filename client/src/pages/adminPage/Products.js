@@ -12,6 +12,7 @@ import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
 import DataTable from "../../shared/adminPage/components/DataTable";
 import ProductsDetail from "./ProductsDetail.js";
+import ModifiedPrice from "../../shared/ModifiedPrice.js";
 
 const header = [
   {
@@ -64,7 +65,7 @@ function Products() {
         productID: product.productId,
         productName: product.productName,
         categoryName: product.category.categoryname,
-        productPrice: product.productPrice,
+        productPrice: <ModifiedPrice number={product.productPrice} />,
         productStatus: product.productStatus,
         productInfo: product.productInfo,
       }));

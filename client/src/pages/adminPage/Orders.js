@@ -10,6 +10,7 @@ import PageNationFunc from "../../shared/PageNationFunc.js";
 import SelectBoxDelivery from "../../shared/adminPage/components/SelectBoxDelivery.js";
 import axios from "axios";
 import OrdersDetail from "./OrdersDetail.js";
+import ModifiedPhoneNumber from "../../shared/ModifiedPhoneNumber.js";
 
 const header = [
   {
@@ -56,7 +57,11 @@ function Orders() {
       const modifiedData = response.data.map((order) => ({
         orderId: order.orderId,
         userName: order.userNumber_user.userName,
-        phoneNumber: order.userNumber_user.phoneNumber,
+        phoneNumber: (
+          <ModifiedPhoneNumber
+            phoneNumber={order.userNumber_user.phoneNumber}
+          />
+        ),
         address: order.address,
         orderDate: order.orderDate,
         orderStatus: order.orderStatus,

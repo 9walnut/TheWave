@@ -7,6 +7,7 @@ import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import DataTable from "../../shared/adminPage/components/DataTable";
 import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
+import ModifiedPhoneNumber from "../../shared/ModifiedPhoneNumber.js";
 
 const header = [
   {
@@ -51,7 +52,7 @@ function Users() {
         userNumber: user.userNumber,
         userId: user.userId,
         userName: user.userName,
-        phoneNumber: user.phoneNumber,
+        phoneNumber: <ModifiedPhoneNumber phoneNumber={user.phoneNumber} />,
         birthday: user.birthday,
         gender: user.gender,
         address: user.addresses.map((address) => address.address),

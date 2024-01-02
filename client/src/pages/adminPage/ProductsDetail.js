@@ -8,6 +8,8 @@ import Card from "../../shared/adminPage/components/Card";
 import ProductsEdit from "./ProductsEdit.js";
 import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
+import ModifiedPrice from "../../shared/ModifiedPrice.js";
+
 function ProductsDetail({ products }) {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
@@ -67,7 +69,10 @@ function ProductsDetail({ products }) {
 
         <p>상품이름: {product.productName}</p>
         <p>상품 카테고리: {product.category.categoryName}</p>
-        <p>가격: {product.productPrice}원</p>
+        <div>
+          가격:
+          <ModifiedPrice number={product.productPrice} /> 원
+        </div>
         <p>설명: {product.productInfo}</p>
         <p>상태: {product.productStatus}</p>
         <h3>상품 디테일 페이지</h3>
