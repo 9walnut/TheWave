@@ -71,7 +71,7 @@ function ProductsDetail({ products }) {
         <S.ButtonContainer>
           <AdminButtonGrey
             onClick={() => {
-              navigate(`/admin/products/edit/${productId}`);
+              navigate(`/admin/products/${productId}/edit`);
             }}
           >
             수정
@@ -84,7 +84,7 @@ function ProductsDetail({ products }) {
       </Card>
       <Routes>
         <Route
-          path="/products/edit/:productId"
+          path="/products/:productId/edit"
           element={<ProductsEdit product={product} />}
         />
       </Routes>
