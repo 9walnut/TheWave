@@ -68,6 +68,7 @@ function ProductsDetail({ products }) {
         <p>설명: {product.productInfo}</p>
         <p>상태: {product.productStatus}</p>
         <p>상세이미지자리</p>
+        <p>✅ 상품옵션 들어와야함</p>
         <S.ButtonContainer>
           <AdminButtonGrey
             onClick={() => {

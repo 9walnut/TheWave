@@ -134,6 +134,7 @@ function ProductsEdit() {
             onChange={setNewProductStatus}
           />
         </AdminSelect>
+        <p>✅ 상품옵션 들어와야함</p>
 
         <hr />
         <h3>이미지 정보</h3>
