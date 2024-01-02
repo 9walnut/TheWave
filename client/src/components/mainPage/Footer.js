@@ -79,7 +79,7 @@ function Footer() {
         </FooterBox>
         <FooterBox>
           <div>법인명: 더웨이브</div>
-          <div>사업자등록번호: 0000000</div>
+          <div>사업자등록번호: 2910102479</div>
           <div>주소: 서울특별시 양천구 목동중앙남로 83</div>
         </FooterBox>
       </FooterLayout>

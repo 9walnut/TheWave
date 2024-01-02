@@ -190,6 +190,28 @@ const getCategoryCount = async () => {
   }
 };
 
+// 4번 대시보드
+// 일자별 판매량
+const getDailyOutStatus = async (req, res) => {
+  try {
+    // outStatus가 3인 데이터를 outDate 별로 그룹화
+    const result = await db.productout.findAll({
+      where: { outStatus: 3 },
+      attributes: [
+        "outDate",
+        [db.Sequelize.fn("count", db.Sequelize.col("outDate")), "count"],
+      ],
+      group: ["outDate"],
+      order: [["outDate", "DESC"]],
+    });
+
+    res.send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("데이터 조회 오류");
+  }
+};
+
 // 관리 페이지 렌더링
 exports.getAdminMain = async (req, res) => {
   try {
@@ -199,6 +221,7 @@ exports.getAdminMain = async (req, res) => {
     const deliveryReadyOrders = await getDeliveryReadyOrders();
     const totalProducts = await getTotalProducts();
     const categoryCount = await getCategoryCount();
+    const dailyOutStatus = await getDailyOutStatus();
     res.send({
       totalOrders,
       totalOrderPrices,
@@ -206,23 +229,9 @@ exports.getAdminMain = async (req, res) => {
       deliveryReadyOrders,
       totalProducts,
       categoryCount,
+      dailyOutStatus,
     });
   } catch (error) {
     res.status(500).send("관리페이지 오류");
   }
 };
-
-// 거래 취소 - 삭제
-// exports.deleteAdminOrder = async (req, res) => {
-//   try {
-//     console.log(req.body);
-//     const { orderId } = req.params;
-//     const isDeleted = await db.products.destroy({ where: { orderId } });
-//     console.log(isDeleted);
-//     if (isDeleted) return res.send(true);
-//     else return res.send(false);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("거래 취소 오류");
-//   }
-// };
