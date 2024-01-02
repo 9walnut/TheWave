@@ -14,6 +14,7 @@ const session = require("express-session");
 const PORT = 8001;
 const https_port = 8000;
 
+// https - ssl 인증서 참조
 // ------------여기 주석-------------
 const options = {
   key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
@@ -52,30 +53,30 @@ const mypageRouter = require("./routes/mypage");
 const categoryRouter = require("./routes/category");
 const productRouter = require("./routes/product");
 const paymentRouter = require("./routes/payment");
-const adminRouter = require("./routes/admin");
 const cartRouter = require("./routes/cart");
+const adminRouter = require("./routes/admin");
+const adminUsersRouter = require("./routes/adminUsers");
+const adminProductsRouter = require("./routes/adminProducts");
+const adminOrdersRouter = require("./routes/adminOrders");
 
+// http 서버 오픈
 server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
 });
-
-// app.use("/", authRouter);
-// app.use("/mypage", mypageRouter);
-// app.use("/category", categoryRouter);
-// app.use("/product", productRouter);
-// app.use("/payment", paymentRouter);
-// app.use("/admin", adminRouter);
-// app.use("/cart", cartRouter);
 
 app.use("/api", authRouter);
 app.use("/api/mypage", mypageRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
 app.use("/api/payment", paymentRouter);
-app.use("/api/admin", adminRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/admin", adminRouter);
+app.use("/api/admin/users", adminUsersRouter);
+app.use("/api/admin/products", adminProductsRouter);
+app.use("/api/admin/orders", adminOrdersRouter);
 
-// ------------여기 주석-------------
+// https 서버 오픈
+//------------여기 주석-------------
 https_server.listen(https_port, function () {
   console.log(`HTTPS Server Open: ${https_port}`);
 });
