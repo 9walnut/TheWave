@@ -15,18 +15,18 @@ const PORT = 8001;
 const https_port = 8000;
 
 // ------------여기 주석-------------
-const options = {
-  key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
-  cert: fs.readFileSync(
-    "/etc/letsencrypt/live/thewavemarket.co.kr/fullchain.pem"
-  ),
-};
+// const options = {
+//   key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
+//   cert: fs.readFileSync(
+//     "/etc/letsencrypt/live/thewavemarket.co.kr/fullchain.pem"
+//   ),
+// };
 // -----------------------
 
 const server = http.createServer(app);
 
 // ------------여기 주석-------------
-const https_server = https.createServer(options, app);
+// const https_server = https.createServer(options, app);
 // --------------------------------
 
 app.use(cors());
@@ -76,7 +76,7 @@ app.use("/api/admin", adminRouter);
 app.use("/api/cart", cartRouter);
 
 // ------------여기 주석-------------
-https_server.listen(https_port, function () {
-  console.log(`HTTPS Server Open: ${https_port}`);
-});
+// https_server.listen(https_port, function () {
+//   console.log(`HTTPS Server Open: ${https_port}`);
+// });
 // -----------------------
