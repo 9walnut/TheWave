@@ -11,15 +11,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     color: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.JSON,
       allowNull: false
     },
     size: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
-    deliveryHope: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.JSON,
       allowNull: false
     }
   }, {

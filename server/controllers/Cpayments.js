@@ -51,7 +51,8 @@ exports.goPayment = async (req, res) => {
 
 // 주문 정보 > 결제하기
 exports.payment = async (req, res) => {
-  const { orderQuantity, color, size } = req.body;
+  const { orderQuantity, color, size, address, receiveName, deliveryRequest } =
+    req.body;
   const accessToken = req.headers["authorization"];
   try {
     const tokenCheck = await verifyToken(accessToken);
@@ -59,16 +60,6 @@ exports.payment = async (req, res) => {
 
     const userNumber = decodedToken.userNumber;
     console.log("유저넘버", userNumber);
-
-    const product = await db.products.findOne({
-      where: { productId: req.params.productId },
-    });
-
-    console.log("product.productId", product.productId);
-
-    const address = await db.address.findOne({
-      where: { userNumber: userNumber },
-    });
 
     const newOrder = await db.orders.create({
       userNumber: userNumber,
