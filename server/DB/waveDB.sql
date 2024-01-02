@@ -1,11 +1,10 @@
-	create database thewave default character set utf8mb4 default collate utf8mb4_general_ci;
+	drop database thewave;
+    
+  create database thewave default character set utf8mb4 default collate utf8mb4_general_ci;
 	use thewave;
 	create USER 'admin'@'%' IDENTIFIED with mysql_native_password by'1q2w3e4r';
 	GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
-	FLUSH PRIVILEGES;
-
-	drop database thewave;
-    
+	FLUSH PRIVILEGES;    
     
 	CREATE TABLE `users` (
 		`userNumber`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -46,9 +45,8 @@
 
 	CREATE TABLE `productoption` (
 		`productId`	INT	NOT NULL,
-		`color`	VARCHAR(50)	NOT NULL,
-		`size`	VARCHAR(50)	 NOT NULL,
-		`deliveryHope`	VARCHAR(50)	 NOT NULL,
+		`color`	JSON	NOT NULL,
+		`size`	JSON	 NOT NULL,
 		PRIMARY KEY (`productId`),
 		FOREIGN KEY (`productId`) REFERENCES `products` (`productId`)
 	);
@@ -211,23 +209,23 @@ VALUES
   (7, '상품15', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE);
 
 
-INSERT INTO productoption (productId, color, size, deliveryHope)
+INSERT INTO productoption (productId, color, size)
 VALUES
-	(1, '빨강', 'M', '문 앞에 놔주세요'),
-	(2, '파랑', 'M', '문 앞에 놔주세요'),
-	(3, '노랑', 'L', '직접 수령'),
-	(4, '검정', 'S', '택배함에 넣어주세요'),
-	(5, '초록', 'XL', '집으로 배송'),
-	(6, '주황', 'S', '문 앞에 놔주세요'),
-	(7, '분홍', 'M', '직접 수령'),
-	(8, '흰색', 'L', '택배함에 넣어주세요'),
-	(9, '파랑', 'XL', '집으로 배송'),
-	(10, '빨강', 'S', '문 앞에 놔주세요'),
-	(11, '검정', 'M', '직접 수령'),
-	(12, '초록', 'L', '택배함에 넣어주세요'),
-	(13, '주황', 'XL', '집으로 배송'),
-	(14, '분홍', 'S', '문 앞에 놔주세요'),
-	(15, '흰색', 'M', '직접 수령');
+	(1, '빨강', 'M'),
+	(2, '파랑', 'M'),
+	(3, '노랑', 'L'),
+	(4, '검정', 'S'),
+	(5, '초록', 'XL'),
+	(6, '주황', 'S'),
+	(7, '분홍', 'M'),
+	(8, '흰색', 'L'),
+	(9, '파랑', 'XL'),
+	(10, '빨강', 'S'),
+	(11, '검정', 'M'),
+	(12, '초록', 'L'),
+	(13, '주황', 'XL'),
+	(14, '분홍', 'S'),
+	(15, '흰색', 'M');
 
     
 INSERT INTO carts (userNumber, productId, cartQuantity, isChecked, isDeleted)

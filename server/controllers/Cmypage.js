@@ -90,7 +90,7 @@ exports.editInfoPw = async (req, res) => {
       const userInfo = await db.users.findOne({
         where: { userNumber: decodedToken.userNumber },
       });
-      res.json({ result: true });
+      res.send({ result: true });
     } else res.send({ result: false });
   } catch (error) {
     console.error(error);
