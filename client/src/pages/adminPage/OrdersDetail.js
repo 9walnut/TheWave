@@ -25,6 +25,22 @@ function OrdersDetail({ orders }) {
   }, [orderId]);
 
   //✅ 데이터테이블에 있는것만 보여주면됨.
+
+  //orderStatus switch
+  const getOrderStatus = (status) => {
+    switch (status) {
+      case 1:
+        return "주문";
+      case 2:
+        return "교환";
+      case 3:
+        return "환불";
+      case 4:
+        return "취소";
+      default:
+        return "알 수 없음";
+    }
+  };
   return (
     <>
       <Card>
@@ -47,7 +63,7 @@ function OrdersDetail({ orders }) {
             <hr />
             <h3>거래 정보</h3>
             <div>주문 날짜: {order.orderDate}</div>
-            <div>orderStatus: {order.orderStatus}</div>
+            <div>orderStatus: {getOrderStatus(order.orderStatus)}</div>
             <div>출고 날짜(changeDate): {order.changeDate}</div>
             <hr />
           </>
