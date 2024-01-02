@@ -71,19 +71,18 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
     <div>
       <br />
       <br />
-      <p>✅썸네일 수정하기 (사진 재선택)</p>
+      <p>✅썸네일 수정하기 (변경 될 썸네일 선택)</p>
       <input type="file" onChange={handleFileChange} />
-
+      {/* <p>변경 썸네일 미리보기:</p>
       {thumbnailUrl && (
         <div>
-          <p>썸네일 미리보기:</p>
           <img
             src={thumbnailUrl}
             alt="Thumbnail"
-            style={{ maxWidth: "100%" }}
+            style={{ width: "100px", height: "100px" }}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

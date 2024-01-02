@@ -9,6 +9,7 @@ import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack";
 
 import SelectBoxProduct from "../../shared/adminPage/components/SelectBoxProduct";
 import SelectBoxCategory from "../../shared/adminPage/components/SelectBoxCategory";
+import SelectBoxOptionSize from "../../shared/adminPage/components/SelectBoxOptionSize";
 import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import axios from "axios";
 import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
@@ -24,6 +25,10 @@ function ProductsAdd() {
   const [productPrice, setProductPrice] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [productStatus, setProductStatus] = useState("");
+
+  const [optionSize, setOptionSize] = useState("");
+  const [optionColor, setOptionColor] = useState("");
+
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [detailUrls, setDetailUrls] = useState(null);
 
@@ -53,6 +58,7 @@ function ProductsAdd() {
         productStatus,
         thumbnailUrl,
         detailUrls,
+        // optionColor,
       };
       console.log("ㅎㅎㅎㅎ", detailUrls);
 
@@ -83,6 +89,7 @@ function ProductsAdd() {
         >
           상품명
         </AdminInput>
+
         <AdminInput
           type="text"
           placeholder="상품 관련 상세 설명을 입력해주세요."
@@ -109,6 +116,17 @@ function ProductsAdd() {
           <SelectBoxProduct value={productStatus} onChange={setProductStatus} />
         </AdminSelect>
 
+        <AdminSelect title="상품 옵션 - 사이즈">
+          <SelectBoxOptionSize value={optionSize} onChange={setOptionSize} />
+        </AdminSelect>
+        <AdminInput
+          type="text"
+          placeholder="상품컬러는 , 로 구분"
+          value={optionColor}
+          onChange={setOptionColor}
+        >
+          상품 옵션 - 컬러
+        </AdminInput>
         <hr />
         <h3>이미지 정보</h3>
         <h3>thumbnailUpload</h3>
