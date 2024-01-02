@@ -7,7 +7,7 @@ import { ResponsivePie } from "@nivo/pie";
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const AdminGraph = ({ getData }) => {
+const AdminGraphPie = ({ getData }) => {
   const handle = {
     padClick: (data) => {
       console.log(data);
@@ -136,4 +136,4 @@ const AdminGraph = ({ getData }) => {
   );
 };
 
-export default AdminGraph;
+export default AdminGraphPie;

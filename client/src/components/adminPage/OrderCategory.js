@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import AdminGraph from "./AdminGraph";
+import AdminGraphPie from "./AdminGraphPie";
 
 const DUMMY = [
   { id: "커스텀풍선", categoryName: "categoryCustom", value: 324 },
@@ -23,9 +23,9 @@ function OrderCategory({ categoryCount }) {
 
   return (
     <>
-      <h3>거래 카테고리 통계</h3>
+      <h3>거래 카테고리 통계 DUMMY</h3>
 
-      <AdminGraph getData={DUMMY} />
+      <AdminGraphPie getData={DUMMY} />
     </>
   );
 }
