@@ -1,6 +1,8 @@
 // ProductsAdd.js 파일
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import AdminInput from "../../shared/adminPage/components/AdminInput";
 import AdminInputText from "../../shared/adminPage/components/AdminInputText";
 import Card from "../../shared/adminPage/components/Card";
@@ -16,6 +18,8 @@ import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
 import UploadDetail from "../../shared/adminPage/components/UploadDetail";
 
 function ProductsAdd() {
+  const navigate = useNavigate();
+
   const textAreaStyle = {
     width: "590px",
     height: "300px",
@@ -26,8 +30,8 @@ function ProductsAdd() {
   const [categoryName, setCategoryName] = useState("");
   const [productStatus, setProductStatus] = useState("");
 
-  const [optionSize, setOptionSize] = useState("");
-  const [optionColor, setOptionColor] = useState("");
+  const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
 
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [detailUrls, setDetailUrls] = useState(null);
@@ -58,13 +62,19 @@ function ProductsAdd() {
         productStatus,
         thumbnailUrl,
         detailUrls,
+        color,
+        size,
         // optionColor,
       };
       console.log("ㅎㅎㅎㅎ", detailUrls);
 
       const response = await axios.post("/api/admin/products/add", data);
-      console.log("전송 성공", response.data.result);
-      if (response.data.result) {
+      console.log("전송 성공response 데이터", response);
+      console.log("response 데이터 생성된 productId", response.data.productId);
+
+      const productId = response.data.productId;
+      if (response.data) {
+        navigate(`/admin/products/${productId}`);
         console.log("되었다");
       } else {
         console.log("안보내짐");
@@ -117,13 +127,13 @@ function ProductsAdd() {
         </AdminSelect>
 
         <AdminSelect title="상품 옵션 - 사이즈">
-          <SelectBoxOptionSize value={optionSize} onChange={setOptionSize} />
+          <SelectBoxOptionSize value={size} onChange={setSize} />
         </AdminSelect>
         <AdminInput
           type="text"
           placeholder="상품컬러는 , 로 구분"
-          value={optionColor}
-          onChange={setOptionColor}
+          value={color}
+          onChange={setColor}
         >
           상품 옵션 - 컬러
         </AdminInput>

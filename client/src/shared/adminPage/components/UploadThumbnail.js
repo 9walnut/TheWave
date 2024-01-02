@@ -66,7 +66,7 @@ const UploadThumbnail = ({ onFileChange }) => {
           <img
             src={thumbnailUrl}
             alt="Thumbnail"
-            style={{ maxWidth: "100%" }}
+            style={{ width: "100px", height: "100px" }}
           />
         </div>
       )}
