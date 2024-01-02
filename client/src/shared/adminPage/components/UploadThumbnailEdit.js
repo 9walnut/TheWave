@@ -35,6 +35,7 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
 
       console.log("FormData:", formData);
 
+      //컨트롤러에서 productId req.params로 받도록 하면 productId 찍힘
       const response = await axios.patch(
         `/api/admin/products/${productId}/edit/thumbnail`,
         formData,
