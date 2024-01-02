@@ -39,18 +39,18 @@ router.post(
 router.get("/products/:productId", controller.getAdminProduct);
 
 // 등록 상품 수정
-router.patch("/products/:productId", controller.editAdminProduct);
+router.patch("/products/:productId/edit", controller.editAdminProduct);
 
 // 썸네일 사진 수정
 router.patch(
-  "/products/:productId/thumbnail",
+  "/products/:productId/edit/thumbnail",
   thumbnailUpload.array("thumbnailUrl"),
   controller.editThumbnail
 );
 
 // 상세 사진 수정
 router.patch(
-  "/products/:productId/detail",
+  "/products/:productId/edit/detail",
   detailUpload.array("detailUrls"),
   controller.editDetails
 );
