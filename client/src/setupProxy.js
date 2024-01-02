@@ -121,6 +121,15 @@ module.exports = function (app) {
       // },
     })
   );
+  app.use(
+    createProxyMiddleware("/api/admin/products/:productId/edit/thumbnail", {
+      target: apiURL,
+      changeOrigin: true,
+      // pathRewrite: {
+      //   "^/api": "", // URL ^/api -> 공백 변경
+      // },
+    })
+  );
 
   app.use(
     createProxyMiddleware("/api/admin/users", {
