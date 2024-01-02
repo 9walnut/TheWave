@@ -44,9 +44,7 @@ function Users() {
   //---axios get
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "https://thewavemarket.co.kr:8000/api/admin/users"
-      );
+      const response = await axios.get("/api/admin/users");
       console.log("response", response.data);
 
       const modifiedData = response.data.map((user) => ({
