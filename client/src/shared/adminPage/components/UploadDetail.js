@@ -74,7 +74,7 @@ const UploadDetail = ({ onFileChange }) => {
               <img
                 src={url}
                 alt={`Detail ${index}`}
-                style={{ maxWidth: "100%" }}
+                style={{ width: "100px", height: "100px" }}
               />
             </div>
           ))}
