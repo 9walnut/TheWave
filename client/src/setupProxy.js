@@ -17,9 +17,9 @@ module.exports = function (app) {
     createProxyMiddleware("/api/register", {
       target: apiURL,
       changeOrigin: true,
-      pathRewrite: {
-        "^/api": "", // URL ^/api -> 공백 변경
-      },
+      // pathRewrite: {
+      //   "^/api": "", // URL ^/api -> 공백 변경
+      // },
     })
   );
 
