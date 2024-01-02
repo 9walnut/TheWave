@@ -35,7 +35,7 @@ router.patch("/:productId/edit", controller.editAdminProduct);
 // 썸네일 사진 수정
 router.patch(
   "/:productId/edit/thumbnail",
-  thumbnailUpload.array("thumbnailUrl"),
+  thumbnailUpload.single("thumbnailUrl"),
   controller.editThumbnail
 );
 

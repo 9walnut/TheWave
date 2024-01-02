@@ -16,18 +16,18 @@ const https_port = 8000;
 
 // https - ssl 인증서 참조
 // ------------여기 주석-------------
-const options = {
-  key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
-  cert: fs.readFileSync(
-    "/etc/letsencrypt/live/thewavemarket.co.kr/fullchain.pem"
-  ),
-};
+// const options = {
+//   key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
+//   cert: fs.readFileSync(
+//     "/etc/letsencrypt/live/thewavemarket.co.kr/fullchain.pem"
+//   ),
+// };
 // -----------------------
 
 const server = http.createServer(app);
 
 // ------------여기 주석-------------
-const https_server = https.createServer(options, app);
+// const https_server = https.createServer(options, app);
 // --------------------------------
 
 app.use(cors());
@@ -77,7 +77,7 @@ app.use("/api/admin/orders", adminOrdersRouter);
 
 // https 서버 오픈
 //------------여기 주석-------------
-https_server.listen(https_port, function () {
-  console.log(`HTTPS Server Open: ${https_port}`);
-});
+// https_server.listen(https_port, function () {
+//   console.log(`HTTPS Server Open: ${https_port}`);
+// });
 // -----------------------
