@@ -15,19 +15,23 @@ exports.goPayment = async (req, res) => {
     const decodedToken = jwt.decode(tokenCheck.accessToken);
     const userNumber = decodedToken.userNumber;
 
-    const userInfo = db.users.findOne({
+    const userInfo = await db.users.findOne({
       where: { userNumber: userNumber },
       attributes: ["userName", "phoneNumber"],
     });
+    console.log("userInfo", userInfo);
 
-    const userAddress = db.address.findOne({
+    const userAddress = await db.address.findOne({
       where: { userNumber: userNumber },
+      attributes: ["address"],
     });
+    console.log("userAddress", userAddress);
 
-    const productInfo = db.products.findOne({
+    const productInfo = await db.products.findOne({
       where: { productId: productId },
       attributes: ["productName", "thumbnailUrl", "productPrice"],
     });
+    console.log("productInfo", productInfo);
 
     if (userInfo && userAddress)
       res.json({

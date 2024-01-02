@@ -77,7 +77,7 @@ app.use("/api/admin/orders", adminOrdersRouter);
 
 // https 서버 오픈
 //------------여기 주석-------------
-https_server.listen(https_port, function () {
-  console.log(`HTTPS Server Open: ${https_port}`);
-});
+// https_server.listen(https_port, function () {
+//   console.log(`HTTPS Server Open: ${https_port}`);
+// });
 // -----------------------
