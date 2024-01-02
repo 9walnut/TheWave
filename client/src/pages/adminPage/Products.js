@@ -43,6 +43,13 @@ const header = [
 function Products() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
+  //------내림차순 정렬 여기
+  const descendingData = (a, b) => {
+    return b.productID - a.productID;
+  };
+  //------------------------------------
+
   //---axios get
   const fetchData = async () => {
     try {
@@ -61,6 +68,10 @@ function Products() {
         productStatus: product.productStatus,
         productInfo: product.productInfo,
       }));
+
+      //------내림차순 정렬 여기
+      modifiedData.sort(descendingData);
+      //------------------------------------
 
       setProducts(modifiedData);
       // console.log(products);

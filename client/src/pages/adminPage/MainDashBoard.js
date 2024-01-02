@@ -48,6 +48,9 @@ function MainDashBoard() {
 
   return (
     <>
+      <p>✅등록상품 상세 조회(getAdminProduct) ▶️ 상품 옵션 안들어옴 </p>
+      <p>✅주문 상세 조회(getAdminOrder) ▶️ orderStatus 숫자로 넘오오는거</p>
+      <p>✅상품관리페이지 - 신규 등록 시 맨 뒤로.. 내림차순 정렬 추가</p>
       <Card>
         <S.AdminPageMainLayout>
           <S.StyledCard>
