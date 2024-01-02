@@ -11,7 +11,6 @@ import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 function ProductsDetail({ products }) {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
-  // console.log("상품 아이디", productId);
   const navigate = useNavigate();
 
   //---axios get
