@@ -58,16 +58,33 @@ function ProductsDetail({ products }) {
       <Card>
         <h3>상품 상세 페이지</h3>
         <h3>productId : {product.productId}</h3>
-        <div>
-          이미지자리
-          <img src={product.thumbnailUrl} alt={product.productName} />
-        </div>
+
+        <h3>상품 썸네일 이미지</h3>
+        <img
+          src={product.thumbnailUrl}
+          alt={product.productName}
+          style={{ width: "100px", height: "100px" }}
+        />
+
         <p>상품이름: {product.productName}</p>
         <p>상품 카테고리: {product.category.categoryName}</p>
         <p>가격: {product.productPrice}원</p>
         <p>설명: {product.productInfo}</p>
         <p>상태: {product.productStatus}</p>
-        <p>상세이미지자리</p>
+        <h3>상품 디테일 페이지</h3>
+        {product.detailUrls && product.detailUrls.length > 0 && (
+          <>
+            {product.detailUrls.map((url, index) => (
+              <div key={index}>
+                <img
+                  src={url}
+                  alt={`Detail ${index}`}
+                  style={{ width: "100px", height: "100px" }}
+                />
+              </div>
+            ))}
+          </>
+        )}
         <p>✅ 상품옵션 들어와야함</p>
         <S.ButtonContainer>
           <AdminButtonGrey

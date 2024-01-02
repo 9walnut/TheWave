@@ -1,7 +1,7 @@
 // ProductsAdd.js 파일
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import AdminInput from "../../shared/adminPage/components/AdminInput";
 import AdminInputText from "../../shared/adminPage/components/AdminInputText";
@@ -14,10 +14,10 @@ import SelectBoxCategory from "../../shared/adminPage/components/SelectBoxCatego
 import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import axios from "axios";
 import UploadThumbnailEdit from "../../shared/adminPage/components/UploadThumbnailEdit";
-import UploadDetail from "../../shared/adminPage/components/UploadDetail";
-
+import UploadDetailEdit from "../../shared/adminPage/components/UploadDetailEdit";
 function ProductsEdit() {
   const { productId } = useParams();
+  const navigate = useNavigate();
 
   const textAreaStyle = {
     width: "590px",
@@ -29,7 +29,7 @@ function ProductsEdit() {
   const [newCategoryName, setNewCategoryName] = useState("");
   const [newProductStatus, setNewProductStatus] = useState("");
   const [newThumbnailUrl, setNewThumbnailUrl] = useState("");
-  const [newDetailUrls, setNewDetailUrls] = useState(null);
+  const [newDetailUrls, setNewDetailUrls] = useState("");
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -55,39 +55,42 @@ function ProductsEdit() {
     fetchProductData();
   }, [productId]);
 
-  const getImageDataThumbnail = (thumbnailUrl) => {
-    setNewThumbnailUrl(thumbnailUrl);
-    console.log("썸네일왔니", thumbnailUrl); //왔다!
+  const getImageDataThumbnail = (editThumbnailUrl) => {
+    setNewThumbnailUrl(editThumbnailUrl);
+    console.log("썸네일왔니", editThumbnailUrl); //왔다!
   };
-  const getImageDataDetail = (detailUrls) => {
-    setNewDetailUrls(detailUrls);
-    console.log("디테일왔니", detailUrls); //왔다!
+  const getImageDataDetail = (editDetailUrls) => {
+    setNewDetailUrls(editDetailUrls);
+    console.log("디테일왔니", editDetailUrls); //왔다!
   };
-  // const sendData = async () => {
-  //   try {
 
-  //     const data = {
-  //       productName,
-  //       productInfo,
-  //       productPrice,
-  //       categoryName,
-  //       productStatus,
-  //       thumbnailUrl,
-  //       detailUrls,
-  //     };
-  //     console.log("ㅎㅎㅎㅎ", detailUrls);
+  const sendData = async () => {
+    try {
+      const data = {
+        productName: newProductName,
+        productInfo: newProductInfo,
+        productPrice: newProductPrice,
+        categoryName: newCategoryName,
+        productStatus: newProductStatus,
+        thumbnailUrl: newThumbnailUrl,
+        detailUrls: newDetailUrls,
+      };
 
-  //     const response = await axios.post("/api/admin/products/add", data);
-  //     console.log("전송 성공", response.data.result);
-  //     if (response.data.result) {
-  //       console.log("되었다");
-  //     } else {
-  //       console.log("안보내짐");
-  //     }
-  //   } catch (error) {
-  //     console.log("에러", error);
-  //   }
-  // };
+      const response = await axios.patch(
+        `/api/admin/products/${productId}/edit`,
+        data
+      );
+      console.log("전송 성공", response.data);
+      if (response.data) {
+        navigate(`/admin/products/${productId}`);
+        console.log("되었다");
+      } else {
+        console.log("안보내짐");
+      }
+    } catch (error) {
+      console.log("에러", error);
+    }
+  };
 
   return (
     <>
@@ -165,12 +168,15 @@ function ProductsEdit() {
                 />
               </div>
             ))}
-            <UploadDetail onFileChange={getImageDataDetail} />
           </>
         )}
 
+        <UploadDetailEdit
+          onFileChange={getImageDataDetail}
+          productId={productId}
+        />
         <hr />
-        {/* <AdminButtonBlack onClick={sendData}>상품 수정하기</AdminButtonBlack> */}
+        <AdminButtonBlack onClick={sendData}>상품 수정하기</AdminButtonBlack>
       </Card>
     </>
   );
