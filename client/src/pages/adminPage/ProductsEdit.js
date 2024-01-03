@@ -15,6 +15,8 @@ import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import axios from "axios";
 import UploadThumbnailEdit from "../../shared/adminPage/components/UploadThumbnailEdit";
 import UploadDetailEdit from "../../shared/adminPage/components/UploadDetailEdit";
+import SelectBoxOptionSize from "../../shared/adminPage/components/SelectBoxOptionSize";
+
 function ProductsEdit() {
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -31,6 +33,9 @@ function ProductsEdit() {
   const [newThumbnailUrl, setNewThumbnailUrl] = useState("");
   const [newDetailUrls, setNewDetailUrls] = useState("");
 
+  const [newSize, setNewSize] = useState("");
+  const [newColor, setNewColor] = useState("");
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -46,7 +51,11 @@ function ProductsEdit() {
         setNewThumbnailUrl(productData.thumbnailUrl);
         setNewDetailUrls(productData.detailUrls);
 
-        console.log(newDetailUrls);
+        const colorValue = productData.productoption.color[0];
+        setNewColor(colorValue);
+
+        const sizeValue = productData.productoption.size[0];
+        setNewSize(sizeValue);
       } catch (error) {
         console.error("상품 정보를 가져오는 중 에러 발생", error);
       }
@@ -137,7 +146,17 @@ function ProductsEdit() {
             onChange={setNewProductStatus}
           />
         </AdminSelect>
-        <p>✅ 상품옵션 들어와야함</p>
+        <AdminSelect title="상품 옵션 - 사이즈">
+          <SelectBoxOptionSize value={newSize} onChange={setNewSize} />
+        </AdminSelect>
+        <AdminInput
+          type="text"
+          placeholder="상품컬러는 , 로 구분"
+          value={newColor}
+          onChange={setNewColor}
+        >
+          상품 옵션 - 컬러
+        </AdminInput>
 
         <hr />
         <h3>이미지 정보</h3>
