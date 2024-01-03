@@ -8,6 +8,12 @@ router.get("/", controller.mypage);
 // 위시리스트(찜한 상품) 조회
 router.get("/wishList", controller.wishList);
 
+// 위시리스트 > 장바구니 담기
+router.post("/wishList", controller.wishToCart);
+
+// 위시리스트 > 삭제
+router.delete("/wishList", controller.deleteWish);
+
 // 회원 정보 수정 페이지
 router.get("/info", controller.editInfoPage);
 

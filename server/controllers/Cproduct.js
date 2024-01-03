@@ -53,10 +53,7 @@ exports.wish = async (req, res) => {
 exports.cartIn = async (req, res) => {
   const { cartQuantity } = req.body;
   const productId = req.params.productId;
-
-  console.log("productId", productId);
   const accessToken = req.headers["authorization"];
-  console.log("accessToken임", accessToken);
 
   try {
     if (accessToken === "Bearer null") {
@@ -74,23 +71,23 @@ exports.cartIn = async (req, res) => {
       } else return res.send({ result: false }); // 토큰이 유효하지 않음
 
       const userNumber = decodedToken.userNumber;
+
+      // 이미 장바구니에 담긴 상품 있는지 확인
       const sameProduct = await db.carts.findOne({
         where: { userNumber: userNumber, productId: productId },
         attributes: ["cartQuantity"],
       });
-      console.log("sameProduct.cartQuantity", sameProduct.cartQuantity);
 
       if (sameProduct) {
         const cartIn = await db.carts.update(
           {
-            cartQuantity: sameProduct.cartQuantity + cartQuantity,
+            cartQuantity: (sameProduct.cartQuantity += Number(cartQuantity)),
           },
           {
             where: { userNumber: userNumber, productId: productId },
           }
         );
         res.json({ result: true, cart: cartIn });
-        console.log("cartIn 1111111", cartIn);
       } else {
         const cartIn = await db.carts.create({
           productId: productId,
@@ -99,7 +96,6 @@ exports.cartIn = async (req, res) => {
           isChecked: "0",
         });
         res.json({ result: true, cart: cartIn });
-        console.log("cartIn 2222222", cartIn);
       }
     }
   } catch (error) {
