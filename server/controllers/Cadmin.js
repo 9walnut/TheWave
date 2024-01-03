@@ -192,7 +192,7 @@ const getCategoryCount = async () => {
 
 // 4번 대시보드
 // 일자별 판매량
-const getDailyOutStatus = async (req, res) => {
+const getDailyOutStatus = async () => {
   try {
     // outStatus가 3인 데이터를 outDate 별로 그룹화
     const result = await db.productout.findAll({
@@ -205,7 +205,7 @@ const getDailyOutStatus = async (req, res) => {
       order: [["outDate", "DESC"]],
     });
 
-    res.send(result);
+    return result;
   } catch (error) {
     console.error(error);
     res.status(500).send("데이터 조회 오류");

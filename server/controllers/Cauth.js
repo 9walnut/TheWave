@@ -89,6 +89,21 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+// 카카오 로그인
+exports.loginKakao = async (req, res) => {
+  const baseUrl = "https://kauth.kakao.com/oauth/authorize";
+  const config = {
+    client_id: "a5e186173cbb917d0d627a1d982d3785",
+    redirect_uri: "http://localhost:3000/login/kakao",
+    response_type: "code",
+  };
+  const params = new URLSearchParams(config).toString();
+
+  const finalUrl = `${baseUrl}?${params}`;
+  console.log(finalUrl);
+  return res.redirect(finalUrl);
+};
+
 // 로그아웃(access 토큰 받아 해당 사용자의 refresh 토큰 삭제)
 exports.logout = async (req, res) => {
   try {
