@@ -65,6 +65,19 @@ const getTotalProducts = async () => {
   }
 };
 
+// 품절 상품 수
+const getSoldoutProducts = async () => {
+  try {
+    const soldoutProducts = await db.products.count({
+      where: { productStatus: "판매준비중" },
+    });
+    return soldoutProducts;
+  } catch (error) {
+    console.error("품절상품 수 오류", error);
+    throw error;
+  }
+};
+
 // -------- 3번 대시보드------------ //
 // 거래 카테고리 통계
 const getCategoryCount = async () => {
@@ -220,6 +233,7 @@ exports.getAdminMain = async (req, res) => {
     const deliveryCompleteOrders = await getDeliveryCompleteOrders();
     const deliveryReadyOrders = await getDeliveryReadyOrders();
     const totalProducts = await getTotalProducts();
+    const soldoutProducts = await getSoldoutProducts();
     const categoryCount = await getCategoryCount();
     const dailyOutStatus = await getDailyOutStatus();
     res.send({
@@ -228,6 +242,7 @@ exports.getAdminMain = async (req, res) => {
       deliveryCompleteOrders,
       deliveryReadyOrders,
       totalProducts,
+      soldoutProducts,
       categoryCount,
       dailyOutStatus,
     });
