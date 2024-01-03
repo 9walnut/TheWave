@@ -127,9 +127,6 @@ function Orders() {
   return (
     <>
       <Card>
-        <p>✅출고상태변경 수정요청</p>
-        {/* <p>✅출고상태변경 일괄변경.. 위에 </p> */}
-        <p>✅주문상태, 날짜 필터링? </p>
         <h3>거래 내역 관리</h3>
         <DataTable
           keySet="ordersTb_"

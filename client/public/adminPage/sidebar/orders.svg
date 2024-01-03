@@ -1,6 +1,14 @@
-<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 21" style="enable-background:new 0 0 20 21;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#6E7F8D;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#6E7F8D;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+</style>
 <g id="tag">
-<circle id="Oval" cx="7.08333" cy="7.58333" r="0.833333" fill="white" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Path" fill-rule="evenodd" clip-rule="evenodd" d="M3.33325 6.33325V9.54909C3.33325 9.99659 3.51075 10.4258 3.82742 10.7424L10.5908 17.5058C10.9072 17.8223 11.3365 18.0001 11.7841 18.0001C12.2317 18.0001 12.6609 17.8223 12.9774 17.5058L17.0058 13.4774C17.3223 13.1609 17.5001 12.7317 17.5001 12.2841C17.5001 11.8365 17.3223 11.4072 17.0058 11.0908L10.2416 4.32742C9.92529 4.01117 9.49637 3.83342 9.04909 3.83325H5.83325C4.45254 3.83325 3.33325 4.95254 3.33325 6.33325Z" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+	<circle id="Oval" class="st0" cx="7.1" cy="7.6" r="0.8"/>
+	<path id="Path" class="st1" d="M3.3,6.3v3.2c0,0.4,0.2,0.9,0.5,1.2l6.8,6.8c0.3,0.3,0.7,0.5,1.2,0.5c0.4,0,0.9-0.2,1.2-0.5l4-4
+		c0.3-0.3,0.5-0.7,0.5-1.2c0-0.4-0.2-0.9-0.5-1.2l-6.8-6.8C9.9,4,9.5,3.8,9,3.8H5.8C4.5,3.8,3.3,5,3.3,6.3z"/>
 </g>
 </svg>

@@ -54,32 +54,30 @@ function MainDashBoard() {
 
   return (
     <>
-      <Card>
-        <S.AdminPageMainLayout>
-          <S.StyledCard>
-            <MonthlyOrder
-              totalOrders={totalOrders}
-              totalOrderPrices={totalOrderPrices}
-              deliveryCompleteOrders={deliveryCompleteOrders}
-              deliveryReadyOrders={deliveryReadyOrders}
-            />
-          </S.StyledCard>
-          <S.StyledCard>
-            <CurrentProductStatus
-              totalProducts={totalProducts}
-              soldoutProducts={soldoutProducts}
-            />
-          </S.StyledCard>
-          <S.StyledCard>
-            <OrderCategory categoryCount={categoryCount} />
-          </S.StyledCard>
-          <S.StyledCard>
-            {dailyOutStatus && (
-              <CategorySales dailyOutStatus={dailyOutStatus} />
-            )}
-          </S.StyledCard>
-        </S.AdminPageMainLayout>
-      </Card>
+      {/* <Card> */}
+      <S.AdminPageMainLayout>
+        <S.StyledCardRow1>
+          <MonthlyOrder
+            totalOrders={totalOrders}
+            totalOrderPrices={totalOrderPrices}
+            deliveryCompleteOrders={deliveryCompleteOrders}
+            deliveryReadyOrders={deliveryReadyOrders}
+          />
+        </S.StyledCardRow1>
+        <S.StyledCardRow1>
+          <CurrentProductStatus
+            totalProducts={totalProducts}
+            soldoutProducts={soldoutProducts}
+          />
+        </S.StyledCardRow1>
+        <S.StyledCardRow2>
+          <OrderCategory categoryCount={categoryCount} />
+        </S.StyledCardRow2>
+        <S.StyledCardRow2>
+          {dailyOutStatus && <CategorySales dailyOutStatus={dailyOutStatus} />}
+        </S.StyledCardRow2>
+      </S.AdminPageMainLayout>
+      {/* </Card> */}
     </>
   );
 }

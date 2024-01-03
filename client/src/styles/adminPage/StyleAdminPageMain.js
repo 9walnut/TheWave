@@ -1,9 +1,17 @@
 import styled from "styled-components";
 
 export const AdminPageMainLayout = styled.div`
+  /* background-color: #eff2f9; */
+  background: linear-gradient(
+    119.73617769993893deg,
+    rgba(239, 242, 249, 1) 34.73985239852399%,
+    rgba(238, 241, 248, 1) 34.73985239852399%,
+    rgba(228, 235, 240, 1) 87.06457564575646%
+  );
   display: grid;
   grid-template-columns: 255px 1fr;
   grid-gap: 10px;
+  height: 100%;
 `;
 
 export const LeftBox = styled.header`
@@ -11,6 +19,6 @@ export const LeftBox = styled.header`
 `;
 
 export const RightBox = styled.main`
-  background-color: white;
+  background-color: none;
   margin: 20px;
 `;

@@ -1,14 +1,36 @@
 import styled from "styled-components";
 
-// export const ListItemBox = styled.div`
-//   /* height: 100px; */
-//   margin: 11px;
-//   padding: 20px;
-//   align-items: center;
-//   /* background-color: red; */
+export const ItemWrapper = styled.div`
+  /* background-color: darkblue; */
+  position: relative;
+  width: 560px;
+  align-content: center;
+  height: 129px;
+  margin-top: 59px;
+`;
 
-//   & > div {
-//     /* background-color: #515362; */
-//     /* margin: 15px; */
-//   }
-// `;
+export const ListItemBox = styled.div`
+  margin: 11px;
+  align-items: center;
+  display: flex;
+  width: 250px;
+  /* background-color: red; */
+  justify-content: center;
+  margin-left: 202px;
+`;
+
+export const IconContainer = styled.div`
+  margin-left: 10px;
+  & img {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+export const TitleContainer = styled.div`
+  margin-left: 7px;
+`;
+export const ResultContainer = styled.div`
+  text-align: left;
+  margin-left: auto;
+`;

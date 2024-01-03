@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import AdminGraphPie from "./AdminGraphPie";
+import CardTitle from "../../shared/adminPage/components/CardTitle";
+import * as S from "./GraphBoxStyle";
 
 function OrderCategory({ categoryCount }) {
   const {
@@ -51,9 +53,10 @@ function OrderCategory({ categoryCount }) {
 
   return (
     <>
-      <h3>거래 카테고리 통계</h3>
-
-      <AdminGraphPie getData={categoryCountData} />
+      <CardTitle>거래 카테고리 통계</CardTitle>
+      <S.PieGraphBox>
+        <AdminGraphPie getData={categoryCountData} />
+      </S.PieGraphBox>
     </>
   );
 }
