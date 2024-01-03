@@ -80,7 +80,7 @@ exports.wishToCart = async (req, res) => {
     const tokenCheck = await verifyToken(accessToken);
     const decodedToken = jwt.decode(tokenCheck.accessToken);
 
-    // 삭제된 상품인지 확인
+    // 판매 중인 상품인지 확인
     const productIsDeleted = await db.products.findOne({
       where: { productId: productId },
       attributes: ["isDeleted"],
@@ -105,7 +105,21 @@ exports.wishToCart = async (req, res) => {
 };
 
 // 찜한 상품 삭제
-exports.deleteWish = (req, res) => {};
+exports.deleteWish = async (req, res) => {
+  const accessToken = req.headers["authorization"];
+  const { productId } = req.body;
+  try {
+    const tokenCheck = await verifyToken(accessToken);
+    const decodedToken = jwt.decode(tokenCheck.accessToken);
+
+    const cartOut = await db.wishlist.destroy({
+      where: { userNumber: decodedToken.userNumber, productId: productId },
+    });
+    res.send({ result: true });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 // 회원 정보 수정 페이지
 exports.editInfoPage = (req, res) => {
