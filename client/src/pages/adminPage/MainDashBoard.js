@@ -16,6 +16,7 @@ function MainDashBoard() {
   const [deliveryCompleteOrders, setDeliveryCompleteOrders] = useState("");
   const [deliveryReadyOrders, setDeliveryReadyOrders] = useState("");
   const [totalProducts, setTotalProducts] = useState("");
+  const [soldoutProducts, setSoldoutProducts] = useState("");
   const [categoryCount, setCategoryCount] = useState("");
   const [dailyOutStatus, setDailyOutStatus] = useState("");
 
@@ -23,7 +24,7 @@ function MainDashBoard() {
     try {
       const response = await axios.get("/api/admin");
 
-      // console.log("response.data", response);
+      console.log("response.data", response);
       console.log("response.data", response.data);
 
       setTotalOrders(response.data.totalOrders);
@@ -31,6 +32,7 @@ function MainDashBoard() {
       setDeliveryCompleteOrders(response.data.deliveryCompleteOrders);
       setDeliveryReadyOrders(response.data.deliveryReadyOrders);
       setTotalProducts(response.data.totalProducts);
+      setSoldoutProducts(response.data.soldoutProducts);
       setCategoryCount(response.data.categoryCount);
       setDailyOutStatus(response.data.dailyOutStatus);
     } catch (error) {
@@ -63,15 +65,18 @@ function MainDashBoard() {
             />
           </S.StyledCard>
           <S.StyledCard>
-            <CurrentProductStatus totalProducts={totalProducts} />
+            <CurrentProductStatus
+              totalProducts={totalProducts}
+              soldoutProducts={soldoutProducts}
+            />
           </S.StyledCard>
           <S.StyledCard>
             <OrderCategory categoryCount={categoryCount} />
           </S.StyledCard>
           <S.StyledCard>
-            {/* {dailyOutStatus && (
+            {dailyOutStatus && (
               <CategorySales dailyOutStatus={dailyOutStatus} />
-            )} */}
+            )}
           </S.StyledCard>
         </S.AdminPageMainLayout>
       </Card>
