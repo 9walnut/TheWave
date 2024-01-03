@@ -191,6 +191,7 @@ VALUES
   ('장미'),
   ('튤립');
 
+
 INSERT INTO products (categoryId, productName, productPrice, productInfo, productStatus, thumbnailUrl, detailUrls, isDeleted)
 VALUES 
   (1, '상품1', 20000, '이 상품은 테스트 상품입니다.', '판매중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
@@ -207,8 +208,11 @@ VALUES
   (4, '상품12', 20000, '용돈 아껴 쓰는 상품입니다.', '판매중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
   (5, '상품13', 22000, '용돈 아낄 필요 없는 고급 상품입니다.', '판매중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
   (6, '상품14', 17000, '옴브레가 아름다운 상품입니다.', '판매중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
-  (7, '상품15', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE);
-
+  (7, '상품15', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
+  (1, '상품16', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
+  (2, '상품17', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
+  (3, '상품18', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
+  (7, '상품15', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE);
 
 INSERT INTO productoption (productId, color, size)
 VALUES
@@ -226,7 +230,10 @@ VALUES
 	(12, '["초록"]', '["L"]'),
 	(13, '["주황"]', '["XL"]'),
 	(14, '["분홍"]', '["S"]'),
-	(15, '["흰색"]', '["M"]');
+	(15, '["분홍"]', '["S"]'),
+	(16, '["분홍"]', '["S"]'),
+	(17, '["분홍"]', '["S"]'),
+	(18, '["흰색"]', '["M"]');
 
     
 INSERT INTO carts (userNumber, productId, cartQuantity, isChecked, isDeleted)
@@ -245,8 +252,21 @@ VALUES
   (13, 13, 1, 0, FALSE),
   (14, 14, 2, 1, FALSE),
   (15, 15, 1, 0, FALSE),
-  (16, 1, 2, 1, FALSE);
-
+    (2, 2, 3, 1, FALSE),
+  (3, 3, 1, 0, FALSE),
+  (4, 4, 2, 1, FALSE),
+  (5, 5, 1, 0, FALSE),
+  (6, 6, 2, 1, FALSE),
+  (7, 7, 1, 0, FALSE),
+  (8, 8, 3, 1, FALSE),
+  (9, 9, 2, 0, FALSE),
+  (10, 10, 1, 1, FALSE),
+  (11, 11, 2, 0, FALSE),
+  (12, 12, 3, 1, FALSE),
+  (13, 13, 1, 0, FALSE),
+  (14, 14, 2, 1, FALSE),
+  (15, 15, 1, 0, FALSE);
+  
 
 INSERT INTO orders (userNumber, cartId, productId, orderQuantity, color, size, totalPrice, receiveName, address, deliveryRequest, orderDate, orderStatus, changeDate)
 VALUES 
@@ -279,9 +299,15 @@ VALUES
   (27, null, 12, 3, 'Green', 'XL', 80000, '임다영', '서울특별시 강남구 테스트로 2323', 'Express Delivery', CURDATE(), 2, CURDATE()),
   (28, null, 13, 1, 'Orange', 'S', 45000, '정유진', '서울특별시 강북구 테스트로 2424', 'Fast Delivery', CURDATE(), 3, CURDATE()),
   (29, null, 14, 2, 'Pink', 'M', 55000, '이동훈', '서울특별시 서초구 테스트로 2525', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (30, null, 15, 1, 'White', 'L', 60000, '박민지', '서울특별시 강동구 테스트로 2626', 'Express Delivery', CURDATE(), 2, CURDATE()),
+  (23, null, 8, 3, 'White', 'XL', 90000, '김재원', '서울특별시 구로구 테스트로 1919', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (24, null, 9, 2, 'Blue', 'S', 70000, '김수민', '서울특별시 동대문구 테스트로 2020', 'Express Delivery', CURDATE(), 3, CURDATE()),
+  (25, null, 10, 1, 'Red', 'M', 35000, '이지은', '서울특별시 중랑구 테스트로 2121', 'Fast Delivery', CURDATE(), 2, CURDATE()),
+  (26, null, 11, 2, 'Black', 'L', 65000, '박민성', '서울특별시 서초구 테스트로 2222', 'Standard Delivery', CURDATE(), 1, CURDATE()),
+  (27, null, 12, 3, 'Green', 'XL', 80000, '임다영', '서울특별시 강남구 테스트로 2323', 'Express Delivery', CURDATE(), 2, CURDATE()),
+  (28, null, 13, 1, 'Orange', 'S', 45000, '정유진', '서울특별시 강북구 테스트로 2424', 'Fast Delivery', CURDATE(), 3, CURDATE()),
+  (29, null, 14, 2, 'Pink', 'M', 55000, '이동훈', '서울특별시 서초구 테스트로 2525', 'Standard Delivery', CURDATE(), 1, CURDATE()),
   (30, null, 15, 1, 'White', 'L', 60000, '박민지', '서울특별시 강동구 테스트로 2626', 'Express Delivery', CURDATE(), 2, CURDATE());
-
-
 
 INSERT INTO payment (orderId, payPrice, payMethod, isPaid, isRefund)
 VALUES 
@@ -316,20 +342,20 @@ VALUES
   (29, 22000, 1, 1, 0),
   (30, 18000, 2, 1, 0);
 
-
 INSERT INTO productout (orderId, cartId, productId, outStatus, outDate)
 VALUES 
-  (2, 2, 2, 1, CURDATE()),
-  (3, 3, 3, 1, CURDATE()),
-  (4, 4, 4, 1, CURDATE()),
-  (5, 5, 5, 1, CURDATE()),
-  (6, 6, 6, 1, CURDATE()),
-  (7, 7, 7, 1, CURDATE()),
-  (8, 8, 8, 1, CURDATE()),
-  (9, 9, 9, 1, CURDATE()),
-  (10, 10, 10, 1, CURDATE()),
-  (11, 11, 11, 1, CURDATE()),
-  (12, 12, 12, 1, CURDATE()),
-  (13, 13, 13, 1, CURDATE()),
-  (14, 14, 14, 1, CURDATE()),
-  (15, 15, 15, 1, CURDATE());
+  (1, 2, 2, 1, '2023-12-31'),
+  (2, 2, 2, 1, '2023-12-31'),
+  (3, 3, 3, 1, '2023-12-31'),
+  (4, 4, 4, 1, '2023-12-31'),
+  (5, 5, 5, 3, '2024-01-01'),
+  (6, 6, 6, 3, '2024-01-01'),
+  (7, 7, 7, 3, '2024-01-01'),
+  (8, 8, 8, 1, '2024-01-01'),
+  (9, 9, 9, 1, '2024-01-01'),
+  (10, 10, 10, 1, '2024-01-01'),
+  (11, 11, 11, 1, '2024-01-01'),
+  (12, 12, 12, 3, '2024-01-01'),
+  (13, 13, 13, 1, '2024-01-01'),
+  (14, 14, 14, 1, '2024-01-02'),
+  (15, 15, 15, 3, '2024-01-02');

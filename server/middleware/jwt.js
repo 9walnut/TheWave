@@ -35,16 +35,14 @@ const verifyToken = async (accessToken) => {
   }
 
   const token = accessToken.split(" ")[1];
-  console.log(token);
 
   try {
     jwt.verify(token, secret); // access 토큰 검증
-    return { accessToken: token }; // access 토큰이 만료되지 않은 경우, 토큰 다시 반환
+    const decodeAccessToken = jwt.decode(token);
+    return { accessToken: token, userData: decodeAccessToken }; // access 토큰이 만료되지 않은 경우, 토큰과 payload 값 반환
   } catch (error) {
     // access 토큰이 만료된 경우
     const decodedToken = jwt.decode(token);
-    console.log("access 토큰 만료됨 > decodedToken", decodedToken);
-
     const refreshToken = await redisClient.get(decodedToken.userId);
 
     try {
@@ -57,7 +55,8 @@ const verifyToken = async (accessToken) => {
       const newAccessToken = jwt.sign(payload, secret, {
         expiresIn: "1h",
       });
-      return { accessToken: newAccessToken }; // 새 access 토큰 반환
+      const decodeNewAccessToken = jwt(newAccessToken);
+      return { accessToken: newAccessToken, userData: decodeNewAccessToken }; // 새 access 토큰 반환
     } catch (error) {
       // refresh 토큰이 만료된 경우
       return { result: "signin again" };

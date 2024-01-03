@@ -1,6 +1,5 @@
 const { db } = require("../models/index");
-const { decodeToken, verifyToken } = require("../middleware/jwt");
-const jwt = require("jsonwebtoken");
+const { verifyToken } = require("../middleware/jwt");
 
 // 특정 상품 상세 페이지
 exports.productPage = async (req, res) => {
@@ -26,23 +25,23 @@ exports.productPage = async (req, res) => {
 exports.wish = async (req, res) => {
   const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
   const tokenCheck = await verifyToken(accessToken);
-  let decodedToken;
-
-  if (
-    tokenCheck.result !== "no token" &&
-    tokenCheck.result !== "signin again"
-  ) {
-    decodedToken = jwt.decode(tokenCheck.accessToken);
-  } else res.send({ result: false }); // 토큰이 유효하지 않음
 
   try {
-    const wishListIn = await db.wishlist.create({
-      productId: req.params.productId,
-      userNumber: decodedToken.userNumber,
+    const checkWishList = await db.wishlist.findOne({
+      where: { productId: req.params.productId },
     });
 
-    if (wishListIn) res.send({ result: true });
-    else res.send({ result: false });
+    console.log("checkWishList 결과", checkWishList);
+
+    if (!checkWishList) {
+      const wishListIn = await db.wishlist.create({
+        productId: req.params.productId,
+        userNumber: tokenCheck.userData.userNumber,
+      });
+
+      if (wishListIn) res.send({ result: true });
+      else res.send({ result: false });
+    } else res.send({ result: "동일 상품 존재" });
   } catch (error) {
     console.error(error);
     res.status(500).send("찜하기 오류");
@@ -60,17 +59,7 @@ exports.cartIn = async (req, res) => {
       return res.send({ result: "guest" }); // 토큰값 없음(==비회원)
     } else {
       const tokenCheck = await verifyToken(accessToken);
-
-      let decodedToken;
-
-      if (
-        tokenCheck.result !== "no token" &&
-        tokenCheck.result !== "signin again"
-      ) {
-        decodedToken = jwt.decode(tokenCheck.accessToken);
-      } else return res.send({ result: false }); // 토큰이 유효하지 않음
-
-      const userNumber = decodedToken.userNumber;
+      const userNumber = tokenCheck.userData.userNumber;
 
       // 이미 장바구니에 담긴 상품 있는지 확인
       const sameProduct = await db.carts.findOne({
