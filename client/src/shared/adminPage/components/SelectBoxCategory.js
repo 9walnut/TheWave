@@ -11,7 +11,7 @@ function SelectBoxCategory({ value, onChange }) {
   }
 
   useEffect(() => {
-    console.log("select 변경 시 render", releaseStatus);
+    // console.log("select 변경 시 render", releaseStatus);
   }, [releaseStatus]);
   return (
     <>

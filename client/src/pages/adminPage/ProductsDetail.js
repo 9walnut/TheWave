@@ -69,11 +69,13 @@ function ProductsDetail({ products }) {
 
         <p>상품이름: {product.productName}</p>
         <p>상품 카테고리: {product.category.categoryName}</p>
+        <p>설명: {product.productInfo}</p>
+        <p>상품 옵션 - 컬러 : {product.productoption.color}</p>
+        <p>상품 옵션 - 사이즈 : {product.productoption.size} </p>
         <div>
           가격:
           <ModifiedPrice number={product.productPrice} /> 원
         </div>
-        <p>설명: {product.productInfo}</p>
         <p>상태: {product.productStatus}</p>
         <h3>상품 디테일 페이지</h3>
         {product.detailUrls && product.detailUrls.length > 0 && (

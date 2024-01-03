@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
-const AdminGraphChart = () => {
+const AdminGraphChart = ({ getData }) => {
   const handle = {
     barClick: (data) => {
       console.log(data);
@@ -19,19 +19,20 @@ const AdminGraphChart = () => {
         /**
          * chart에 사용될 데이터
          */
-        data={[
-          { bottle: "365ml", cola: 1200, cidar: 1000, fanta: 1100 },
-          { bottle: "500ml", cola: 2200, cidar: 2000, fanta: 2100 },
-          { bottle: "1000ml", cola: 3200, cidar: 3000, fanta: 3100 },
-        ]}
+        // data={[
+        //   { date: "2024-01-03", count: 120 },
+        //   { date: "2024-01-04", count: 220 },
+        //   { date: "2024-01-05", count: 320 },
+        // ]}
+        data={getData}
         /**
          * chart에 보여질 데이터 key (측정되는 값)
          */
-        keys={["cola", "cidar", "fanta"]}
+        keys={["count"]}
         /**
          * keys들을 그룹화하는 index key (분류하는 값)
          */
-        indexBy="bottle"
+        indexBy="outDate"
         /**
          * chart margin
          */
@@ -44,7 +45,7 @@ const AdminGraphChart = () => {
          * chart 색상
          */
         // colors={["olive", "brown", "orange"]} // 커스터하여 사용할 때
-        colors={{ scheme: "blues" }} // nivo에서 제공해주는 색상 조합 사용할 때
+        colors={{ scheme: "paired" }} // nivo에서 제공해주는 색상 조합 사용할 때
         /**
          * color 적용 방식
          */
@@ -97,7 +98,7 @@ const AdminGraphChart = () => {
           tickSize: 5, // 값 설명하기 위해 튀어나오는 점 크기
           tickPadding: 5, // tick padding
           tickRotation: 0, // tick 기울기
-          legend: "bottle", // bottom 글씨
+          legend: "날짜", // bottom 글씨
           legendPosition: "middle", // 글씨 위치
           legendOffset: 40, // 글씨와 chart간 간격
         }}
@@ -108,7 +109,7 @@ const AdminGraphChart = () => {
           tickSize: 5, // 값 설명하기 위해 튀어나오는 점 크기
           tickPadding: 5, // tick padding
           tickRotation: 0, // tick 기울기
-          legend: "price", // left 글씨
+          legend: "판매량", // left 글씨
           legendPosition: "middle", // 글씨 위치
           legendOffset: -60, // 글씨와 chart간 간격
         }}
