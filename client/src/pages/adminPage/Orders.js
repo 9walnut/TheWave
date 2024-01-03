@@ -48,6 +48,10 @@ function Orders() {
   const [selectedOrderId, setSelectedOrderId] = useState(null); //*
   const params = useParams(); //*
 
+  const descendingData = (a, b) => {
+    return b.orderId - a.orderId;
+  };
+
   //---axios get
   const fetchData = async () => {
     try {
@@ -66,6 +70,9 @@ function Orders() {
         orderDate: order.orderDate,
         orderStatus: order.orderStatus,
       }));
+
+      modifiedData.sort(descendingData);
+
       setOrders(modifiedData);
       console.log(orders);
     } catch (error) {

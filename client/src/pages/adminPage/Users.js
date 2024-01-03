@@ -42,6 +42,15 @@ const header = [
 
 function Users() {
   const [users, setUsers] = useState([]);
+
+  const descendingData = (a, b) => {
+    return b.userNumber - a.userNumber;
+  };
+
+  // const descendingData = (a, b) => {
+  //   return b.userId.localeCompare(a.userId);
+  // };
+
   //---axios get
   const fetchData = async () => {
     try {
@@ -55,8 +64,11 @@ function Users() {
         phoneNumber: <ModifiedPhoneNumber phoneNumber={user.phoneNumber} />,
         birthday: user.birthday,
         gender: user.gender,
-        address: user.addresses.map((address) => address.address),
+        address: user.addresses[0].address,
+        // address: user.addresses.map((address) => address.address),
       }));
+      modifiedData.sort(descendingData);
+
       setUsers(modifiedData);
       console.log("user 데이터 들어왔나", users);
     } catch (error) {
