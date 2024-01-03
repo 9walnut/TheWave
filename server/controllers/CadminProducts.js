@@ -52,8 +52,6 @@ exports.createAdminProduct = async (req, res) => {
       productPrice,
       productInfo,
       productStatus,
-      thumbnailUrl,
-      detailUrls,
       color,
       size,
     } = req.body;
@@ -64,6 +62,18 @@ exports.createAdminProduct = async (req, res) => {
     }
 
     const categoryId = category.categoryId;
+
+    // 썸네일 사진 업로드
+    // if (!req.file) {
+    //   return res.status(400).send("썸네일 파일이 업로드되지 않았습니다.");
+    // }
+    // const thumbnailUrl = req.file.location;
+
+    // 상세 사진 업로드
+    // if (!req.files || req.files.length === 0) {
+    //   return res.status(400).send("상세 사진 파일이 업로드되지 않았습니다.");
+    // }
+    // const detailUrls = req.files.map((file) => file.location);
 
     const newProduct = await db.products.create({
       categoryId,
