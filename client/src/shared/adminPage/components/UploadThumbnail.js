@@ -9,7 +9,7 @@ const UploadThumbnail = ({ onFileChange }) => {
     const file = event.target.files[0];
     setSelectedFile(file);
 
-    console.log("Selected File1:", file); //찍힘
+    // console.log("Selected File1:", file); //찍힘
 
     // handleUpload(file);
   };
@@ -56,7 +56,7 @@ const UploadThumbnail = ({ onFileChange }) => {
   };
 
   useEffect(() => {
-    console.log("Selected File3:", selectedFile);
+    // console.log("Selected File3:", selectedFile);
   }, [selectedFile]);
 
   return (

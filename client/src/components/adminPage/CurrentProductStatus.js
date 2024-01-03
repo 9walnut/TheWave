@@ -1,6 +1,7 @@
 import ListItem from "../../shared/adminPage/components/ListItem";
 
 function CurrentProductStatus({ totalProducts }) {
+  // console.log(totalProducts);
   return (
     <>
       <h3>현재 상품 현황</h3>
@@ -14,7 +15,7 @@ function CurrentProductStatus({ totalProducts }) {
         icon="/adminPage/dashBoard/itemNo.svg"
         arrow="/adminPage/sidebar/none.svg"
       >
-        품절 상품 수
+        품절 상품 수 0
       </ListItem>
     </>
   );

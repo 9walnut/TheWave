@@ -55,7 +55,7 @@ function Users() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/admin/users");
-      console.log("response", response.data);
+      // console.log("response", response.data);
 
       const modifiedData = response.data.map((user) => ({
         userNumber: user.userNumber,
@@ -70,7 +70,7 @@ function Users() {
       modifiedData.sort(descendingData);
 
       setUsers(modifiedData);
-      console.log("user 데이터 들어왔나", users);
+      // console.log("user 데이터 들어왔나", users);
     } catch (error) {
       console.log("에러", error);
     }

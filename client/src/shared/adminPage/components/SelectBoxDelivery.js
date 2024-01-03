@@ -23,7 +23,7 @@ function SelectBoxDelivery({ onOrderIdChange, onOrderIdValue }) {
   }
 
   useEffect(() => {
-    console.log("select 변경 시 render");
+    // console.log("select 변경 시 render");
   }, [releaseStatus]);
 
   return (

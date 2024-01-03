@@ -8,7 +8,7 @@ import AdminGraphChart from "./AdminGraphChart";
 // ];
 
 function CategorySales({ dailyOutStatus }) {
-  // console.log(dailyOutStatus[0]);
+  console.log(dailyOutStatus[0]);
   // console.log(dailyOutStatus[0].outDate);
   // console.log(dailyOutStatus[0].count);
 

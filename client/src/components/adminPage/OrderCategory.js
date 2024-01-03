@@ -2,30 +2,58 @@ import React, { useState, useEffect } from "react";
 
 import AdminGraphPie from "./AdminGraphPie";
 
-const DUMMY = [
-  { id: "커스텀풍선", categoryName: "categoryCustom", value: 324 },
-  { id: "용돈풍선", categoryName: "categoryMoney", value: 88 },
-  { id: "브라이덜샤워", categoryName: "categoryBridal", value: 221 },
-  { id: "생일용품", categoryName: "categoryBirth", value: 178 },
-];
-console.log(DUMMY);
-
 function OrderCategory({ categoryCount }) {
-  const { categoryCustom, categoryMoney, categoryBridal, categoryBirth } =
-    categoryCount;
+  const {
+    categoryCharaterSale,
+    categoryDaisySale,
+    categoryLetteringSale,
+    categoryMoneySale,
+    categoryOmbreSale,
+    categoryRoseSale,
+    categoryTulipSale,
+  } = categoryCount;
 
-  useEffect(() => {
-    console.log("✅통계 커스텀풍선 categoryCustom", categoryCustom);
-    console.log("✅통계 용돈풍선 categoryMoney", categoryMoney);
-    console.log("✅통계 브라이덜샤워 categoryBridal", categoryBridal);
-    console.log("✅통계 생일용품 categoryBirth", categoryBirth);
-  }, [categoryCustom, categoryMoney, categoryBridal, categoryBirth]);
+  const categoryCountData = [
+    {
+      id: "캐릭터",
+      categoryName: "categoryCharaterSale",
+      value: categoryCharaterSale,
+    },
+    {
+      id: "데이지",
+      categoryName: "categoryDaisySale",
+      value: categoryDaisySale,
+    },
+    {
+      id: "레터링",
+      categoryName: "categoryLetteringSale",
+      value: categoryLetteringSale,
+    },
+    { id: "용돈", categoryName: "categoryMoneySale", value: categoryMoneySale },
+    {
+      id: "옴브레",
+      categoryName: "categoryOmbreSale",
+      value: categoryOmbreSale,
+    },
+    { id: "장미", categoryName: "categoryRoseSale", value: categoryRoseSale },
+    { id: "튤립", categoryName: "categoryTulipSale", value: categoryTulipSale },
+  ];
+
+  useEffect(() => {}, [
+    categoryCharaterSale,
+    categoryDaisySale,
+    categoryLetteringSale,
+    categoryMoneySale,
+    categoryOmbreSale,
+    categoryRoseSale,
+    categoryTulipSale,
+  ]);
 
   return (
     <>
-      <h3>거래 카테고리 통계 DUMMY</h3>
+      <h3>거래 카테고리 통계</h3>
 
-      <AdminGraphPie getData={DUMMY} />
+      <AdminGraphPie getData={categoryCountData} />
     </>
   );
 }
