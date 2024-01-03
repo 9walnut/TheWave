@@ -13,7 +13,7 @@ function SelectBoxOptionSize({ value, onChange }) {
   }
 
   useEffect(() => {
-    console.log("select 변경 시 render", releaseStatus);
+    // console.log("select 변경 시 render", releaseStatus);
   }, [releaseStatus]);
 
   return (
@@ -29,6 +29,7 @@ function SelectBoxOptionSize({ value, onChange }) {
         <option value="S">S</option>
         <option value="M">M</option>
         <option value="L">L</option>
+        <option value="XL">XL</option>
       </select>
     </>
   );

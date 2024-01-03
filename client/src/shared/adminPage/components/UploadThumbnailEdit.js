@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const UploadThumbnailEdit = ({ onFileChange, productId }) => {
-  console.log(productId);
+  // console.log(productId);
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [thumbnailUrl, setThumbnailUrl] = useState(null);
@@ -11,7 +11,7 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
     const file = event.target.files[0];
     setSelectedFile(file);
 
-    console.log("Selected File1:", file); //찍힘
+    // console.log("Selected File1:", file); //찍힘
 
     // handleUpload(file);
   };

@@ -48,11 +48,15 @@ function Orders() {
   const [selectedOrderId, setSelectedOrderId] = useState(null); //*
   const params = useParams(); //*
 
+  const descendingData = (a, b) => {
+    return b.orderId - a.orderId;
+  };
+
   //---axios get
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/admin/orders");
-      console.log("orders response", response.data);
+      // console.log("orders response", response.data);
 
       const modifiedData = response.data.map((order) => ({
         orderId: order.orderId,
@@ -66,8 +70,11 @@ function Orders() {
         orderDate: order.orderDate,
         orderStatus: order.orderStatus,
       }));
+
+      modifiedData.sort(descendingData);
+
       setOrders(modifiedData);
-      console.log(orders);
+      // console.log(orders);
     } catch (error) {
       console.log("에러", error);
     }
@@ -108,7 +115,7 @@ function Orders() {
           outStatus,
         });
         console.log("patch응답 성공 (response)", response);
-        console.log("patch응답 성공 (response.data)", response.data);
+        // console.log("patch응답 성공 (response.data)", response.data);
         fetchData();
         setSelectBoxStatus({});
       } catch (error) {

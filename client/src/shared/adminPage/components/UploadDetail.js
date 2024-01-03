@@ -9,7 +9,7 @@ const UploadDetail = ({ onFileChange }) => {
     const files = event.target.files;
     setSelectedFiles(files);
 
-    console.log("Selected Files:", files); //찍힘
+    // console.log("Selected Files:", files); //찍힘
 
     // handleUpload(files);
   };
@@ -41,7 +41,7 @@ const UploadDetail = ({ onFileChange }) => {
 
       const detailUrls = response.data.detailUrls;
 
-      console.log("Detail URL 멀로 오니:", detailUrls);
+      // console.log("Detail URL 멀로 오니:", detailUrls);
       // console.log("Detail URL detailUrlObject멀로 오니:", detailUrlObject);
 
       console.log("이미지 업로드 성공", response.data);
@@ -56,7 +56,7 @@ const UploadDetail = ({ onFileChange }) => {
     }
   };
   useEffect(() => {
-    console.log("Selected File3:", selectedFiles);
+    // console.log("Selected File3:", selectedFiles);
   }, [selectedFiles]);
   return (
     <div>
