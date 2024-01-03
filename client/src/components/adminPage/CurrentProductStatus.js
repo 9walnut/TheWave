@@ -1,22 +1,27 @@
 import ListItem from "../../shared/adminPage/components/ListItem";
+import CardTitle from "../../shared/adminPage/components/CardTitle";
+import * as S from "./MonthlyOrderStyle";
 
 function CurrentProductStatus({ totalProducts, soldoutProducts }) {
-  // console.log(totalProducts);
   return (
     <>
-      <h3>현재 상품 현황</h3>
-      <ListItem
-        icon="/adminPage/dashBoard/itemAll.svg"
-        arrow="/adminPage/sidebar/none.svg"
-      >
-        총 상품 수 (전체 등록 상품 수) {totalProducts}
-      </ListItem>
-      <ListItem
-        icon="/adminPage/dashBoard/itemNo.svg"
-        arrow="/adminPage/sidebar/none.svg"
-      >
-        품절 상품 수 {soldoutProducts}
-      </ListItem>
+      <CardTitle>현재 상품 현황</CardTitle>
+      <S.ItemWrapper>
+        <S.ListItemBox>
+          <S.IconContainer>
+            <img src="/adminPage/dashBoard/itemAll.svg" alt="icon" />
+          </S.IconContainer>
+          <S.TitleContainer>전체 상품 수</S.TitleContainer>
+          <S.ResultContainer> {totalProducts}</S.ResultContainer>
+        </S.ListItemBox>
+        <S.ListItemBox>
+          <S.IconContainer>
+            <img src="/adminPage/dashBoard/itemNo.svg" alt="icon" />
+          </S.IconContainer>
+          <S.TitleContainer>품절 상품 수</S.TitleContainer>
+          <S.ResultContainer>{soldoutProducts}</S.ResultContainer>
+        </S.ListItemBox>
+      </S.ItemWrapper>
     </>
   );
 }

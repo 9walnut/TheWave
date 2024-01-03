@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import CardTitle from "../../shared/adminPage/components/CardTitle";
 import AdminGraphChart from "./AdminGraphChart";
+import * as S from "./GraphBoxStyle";
 
 // const DUMMY = [
 //   { outDate: "2024-01-03", count: 120 },
@@ -20,8 +22,10 @@ function CategorySales({ dailyOutStatus }) {
   console.log(categorySalesData);
   return (
     <>
-      <h3>일자별 판매량</h3>
-      <AdminGraphChart getData={categorySalesData} />
+      <CardTitle>일자별 판매량</CardTitle>
+      <S.ChartGraphBox>
+        <AdminGraphChart getData={categorySalesData} />
+      </S.ChartGraphBox>
     </>
   );
 }

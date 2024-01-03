@@ -1,5 +1,13 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="icon / ionicons / sharp / reader-sharp">
-<path id="Vector" d="M3.75 2.0625V21.9375C3.75 22.0867 3.80926 22.2298 3.91475 22.3352C4.02024 22.4407 4.16332 22.5 4.3125 22.5H19.6875C19.8367 22.5 19.9798 22.4407 20.0852 22.3352C20.1907 22.2298 20.25 22.0867 20.25 21.9375V2.0625C20.25 1.91332 20.1907 1.77024 20.0852 1.66475C19.9798 1.55926 19.8367 1.5 19.6875 1.5H4.3125C4.16332 1.5 4.02024 1.55926 3.91475 1.66475C3.80926 1.77024 3.75 1.91332 3.75 2.0625ZM12.75 14.25H7.5V12.75H12.75V14.25ZM16.5 10.5H7.5V9H16.5V10.5ZM16.5 6.75H7.5V5.25H16.5V6.75Z" fill="#21272A"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#576772;}
+</style>
+<g id="icon__x2F__ionicons__x2F__sharp__x2F__reader-sharp">
+	<path id="Vector" class="st0" d="M3.8,2.1v19.9c0,0.1,0.1,0.3,0.2,0.4c0.1,0.1,0.2,0.2,0.4,0.2h15.4c0.1,0,0.3-0.1,0.4-0.2
+		c0.1-0.1,0.2-0.2,0.2-0.4V2.1c0-0.1-0.1-0.3-0.2-0.4c-0.1-0.1-0.2-0.2-0.4-0.2H4.3C4.2,1.5,4,1.6,3.9,1.7C3.8,1.8,3.8,1.9,3.8,2.1z
+		 M12.8,14.2H7.5v-1.5h5.2V14.2z M16.5,10.5h-9V9h9V10.5z M16.5,6.7h-9V5.2h9V6.7z"/>
 </g>
 </svg>

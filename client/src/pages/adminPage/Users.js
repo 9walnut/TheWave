@@ -118,10 +118,6 @@ function Users() {
     <>
       <Card>
         <h3>회원 관리</h3>
-        <ol>
-          <li>✅상세조회 없음</li>
-          <li>검색기능?</li>
-        </ol>
         <DataTable
           keySet="usersTb_"
           headers={header}
