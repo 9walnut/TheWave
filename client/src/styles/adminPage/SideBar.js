@@ -8,6 +8,7 @@ export const NavLinksLayout = styled.ul`
 `;
 
 export const SideBarBox = styled.div`
+  margin-top: -13px;
   width: 255px;
   height: 1187px;
   background-color: #363740;
@@ -24,7 +25,16 @@ export const NavListItem = styled.li`
   }
   &.nav-link {
     padding: 30px;
+
+    /* &:first-child {
+      padding-bottom: 60px;
+    }
+
+    &:last-child {
+      padding-top: 60px;
+    } */
   }
+
   &.nav-link:active {
     padding: 30px;
     background-color: #515362;

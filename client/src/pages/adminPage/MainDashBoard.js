@@ -69,9 +69,9 @@ function MainDashBoard() {
             <OrderCategory categoryCount={categoryCount} />
           </S.StyledCard>
           <S.StyledCard>
-            {dailyOutStatus && (
+            {/* {dailyOutStatus && (
               <CategorySales dailyOutStatus={dailyOutStatus} />
-            )}
+            )} */}
           </S.StyledCard>
         </S.AdminPageMainLayout>
       </Card>
