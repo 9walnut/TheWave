@@ -10,7 +10,12 @@ router.get("/", controller.getAdminAllProducts);
 router.delete("/", controller.deleteAdminProductsChecked);
 
 // 상품 등록
-router.post("/add", controller.createAdminProduct);
+router.post(
+  "/add",
+  // thumbnailUpload.single("thumbnailUrl"),
+  // detailUpload.array("detailUrls", 5),
+  controller.createAdminProduct
+);
 
 // 상품 등록 - 썸네일 사진 등록
 router.post(
@@ -22,7 +27,7 @@ router.post(
 // 상품 등록 - 상세 사진 등록
 router.post(
   "/add/detail",
-  detailUpload.array("detailUrls", 10),
+  detailUpload.array("detailUrls", 5),
   controller.uploadDetails
 );
 
