@@ -44,11 +44,11 @@ const AdminGraphPie = ({ getData }) => {
         /**
          * pad 간격
          */
-        padAngle={1.8}
+        padAngle={1.5}
         /**
          * pad radius 설정 (pad별 간격이 있을 시 보임)
          */
-        cornerRadius={8}
+        cornerRadius={3}
         /**
          * chart 색상
          */

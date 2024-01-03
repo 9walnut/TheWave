@@ -23,7 +23,7 @@ function MainDashBoard() {
     try {
       const response = await axios.get("/api/admin");
 
-      console.log("response.data", response);
+      // console.log("response.data", response);
       console.log("response.data", response.data);
 
       setTotalOrders(response.data.totalOrders);
@@ -38,13 +38,13 @@ function MainDashBoard() {
     }
   };
 
-  console.log("totalOrders", totalOrders);
-  console.log("totalOrderPrices", totalOrderPrices);
-  console.log("deliveryCompleteOrders", deliveryCompleteOrders);
-  console.log("deliveryReadyOrders", deliveryReadyOrders);
-  console.log("totalProducts", totalProducts);
-  console.log("categoryCount", categoryCount);
-  console.log("dailyOutStatus", dailyOutStatus);
+  // console.log("totalOrders", totalOrders);
+  // console.log("totalOrderPrices", totalOrderPrices);
+  // console.log("deliveryCompleteOrders", deliveryCompleteOrders);
+  // console.log("deliveryReadyOrders", deliveryReadyOrders);
+  // console.log("totalProducts", totalProducts);
+  // console.log("categoryCount", categoryCount);
+  // console.log("dailyOutStatus", dailyOutStatus);
 
   useEffect(() => {
     fetchData();
@@ -52,16 +52,6 @@ function MainDashBoard() {
 
   return (
     <>
-      <p>
-        ✅TypeError: Cannot read properties of undefined (reading 'send')
-        getDailyOutStatus오류{" "}
-      </p>
-      <p>✅등록상품 상세 조회(getAdminProduct) ▶️ 상품 옵션 안들어옴 </p>
-      <p>
-        ✅주문 상세 조회(getAdminOrder) ▶️ orderStatus 숫자로 넘오오는거
-        switch문으로 적용 완료
-      </p>
-      <p>✅상품관리페이지 - 신규 등록 시 맨 뒤로.. 내림차순 정렬 추가</p>
       <Card>
         <S.AdminPageMainLayout>
           <S.StyledCard>
@@ -79,7 +69,7 @@ function MainDashBoard() {
             <OrderCategory categoryCount={categoryCount} />
           </S.StyledCard>
           <S.StyledCard>
-            <CategorySales />
+            <CategorySales dailyOutStatus={dailyOutStatus} />
           </S.StyledCard>
         </S.AdminPageMainLayout>
       </Card>
