@@ -1,7 +1,6 @@
 const { db } = require("../models/index");
 const { comparePw } = require("../middleware/pw");
 const { verifyToken } = require("../middleware/jwt");
-const jwt = require("jsonwebtoken");
 
 // 회원 마이페이지(마이페이지 렌더 시 바로 주문 내역 노출)
 exports.mypage = async (req, res) => {
@@ -13,10 +12,8 @@ exports.mypage = async (req, res) => {
       tokenCheck.result !== "no token" &&
       tokenCheck.result !== "signin again"
     ) {
-      const decodedToken = jwt.decode(tokenCheck.accessToken);
-
       const orderList = await db.orders.findAll({
-        where: { userNumber: decodedToken.userNumber },
+        where: { userNumber: tokenCheck.userData.userNumber },
         attributes: [
           "productId",
           "orderDate",
@@ -47,9 +44,8 @@ exports.wishList = async (req, res) => {
       tokenCheck.result !== "no token" &&
       tokenCheck.result !== "signin again"
     ) {
-      const decodedToken = jwt.decode(tokenCheck.accessToken);
       const wishList = await db.wishlist.findAll({
-        where: { userNumber: decodedToken.userNumber },
+        where: { userNumber: tokenCheck.userData.userNumber },
         include: [
           {
             model: db.products,
@@ -78,7 +74,6 @@ exports.wishToCart = async (req, res) => {
 
   try {
     const tokenCheck = await verifyToken(accessToken);
-    const decodedToken = jwt.decode(tokenCheck.accessToken);
 
     // 판매 중인 상품인지 확인
     const productIsDeleted = await db.products.findOne({
@@ -91,7 +86,7 @@ exports.wishToCart = async (req, res) => {
       res.send({ result: false });
     } else {
       const cartIn = await db.carts.create({
-        userNumber: decodedToken.userNumber,
+        userNumber: tokenCheck.userData.userNumber,
         productId: productId,
         cartQuantity: "1", // 기본적으로 수량 1
         isChecked: "0",
@@ -110,10 +105,12 @@ exports.deleteWish = async (req, res) => {
   const { productId } = req.body;
   try {
     const tokenCheck = await verifyToken(accessToken);
-    const decodedToken = jwt.decode(tokenCheck.accessToken);
 
     const cartOut = await db.wishlist.destroy({
-      where: { userNumber: decodedToken.userNumber, productId: productId },
+      where: {
+        userNumber: tokenCheck.userData.userNumber,
+        productId: productId,
+      },
     });
     res.send({ result: true });
   } catch (error) {
@@ -132,14 +129,15 @@ exports.editInfoPw = async (req, res) => {
 
   try {
     const tokenCheck = await verifyToken(accessToken);
-    const decodedToken = jwt.decode(tokenCheck.accessToken);
-    console.log("decodedToken", decodedToken);
 
-    const pwCheck = await comparePw(decodedToken.userId, req.body.password);
+    const pwCheck = await comparePw(
+      tokenCheck.userData.userId,
+      req.body.password
+    );
 
     if (pwCheck) {
       const userInfo = await db.users.findOne({
-        where: { userNumber: decodedToken.userNumber },
+        where: { userNumber: tokenCheck.userData.userNumber },
       });
       res.send({ result: true });
     } else res.send({ result: false });
@@ -154,10 +152,9 @@ exports.editInfo = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
     const tokenCheck = await verifyToken(accessToken);
-    const decodedToken = jwt.decode(tokenCheck.accessToken);
 
     const editInfo = await db.users.update(req.body, {
-      where: { userNumber: decodedToken.userNumber },
+      where: { userNumber: tokenCheck.userData.userNumber },
     });
     if (editInfo) res.send({ result: true });
     else res.send({ result: false });
@@ -172,13 +169,15 @@ exports.deleteUser = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
     const tokenCheck = await verifyToken(accessToken);
-    const decodedToken = jwt.decode(tokenCheck.accessToken);
 
-    const pwCheck = await comparePw(decodedToken.userId, req.body.password);
+    const pwCheck = await comparePw(
+      tokenCheck.userData.userId,
+      req.body.password
+    );
     if (pwCheck) {
       await db.users.destroy({
         where: {
-          userNumber: decodedToken.userNumber,
+          userNumber: tokenCheck.userData.userNumber,
         },
       });
       res.send({ result: true });

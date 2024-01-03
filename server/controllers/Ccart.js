@@ -3,7 +3,6 @@ const {
   db: { Op },
 } = require("../models/index");
 const { verifyToken } = require("../middleware/jwt");
-const jwt = require("jsonwebtoken");
 
 // 장바구니 조회
 exports.getCart = async (req, res) => {
@@ -13,11 +12,11 @@ exports.getCart = async (req, res) => {
     if (req.query.result == "true") {
       const accessToken = req.headers["authorization"];
       const tokenCheck = await verifyToken(accessToken);
-      const decodedToken = jwt.decode(tokenCheck.accessToken);
+
       console.log("넌 회원");
 
       cart = await db.carts.findAll({
-        where: { userNumber: decodedToken.userNumber },
+        where: { userNumber: tokenCheck.userData.userNumber },
       });
       console.log("cart", cart);
     } else {
