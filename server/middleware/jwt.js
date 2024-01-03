@@ -35,6 +35,7 @@ const verifyToken = async (accessToken) => {
   }
 
   const token = accessToken.split(" ")[1];
+  console.log(token);
 
   try {
     jwt.verify(token, secret); // access 토큰 검증
@@ -42,6 +43,8 @@ const verifyToken = async (accessToken) => {
   } catch (error) {
     // access 토큰이 만료된 경우
     const decodedToken = jwt.decode(token);
+    console.log("access 토큰 만료됨 > decodedToken", decodedToken);
+
     const refreshToken = await redisClient.get(decodedToken.userId);
 
     try {
