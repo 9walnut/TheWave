@@ -23,7 +23,7 @@ function SideBar({ selectItem }) {
         >
           <S.NavListItem className="nav-link">
             <ListItem
-              icon="/adminPage/sidebar/out.svg"
+              icon="/adminPage/sidebar/home.svg"
               arrow="/adminPage/sidebar/none.svg"
             >
               ADMIN
@@ -89,7 +89,7 @@ function SideBar({ selectItem }) {
         <NavLink to="/">
           <S.NavListItem className="nav-link">
             <ListItem
-              icon="/adminPage/sidebar/out.svg"
+              icon="/adminPage/sidebar/exit.svg"
               arrow="/adminPage/sidebar/none.svg"
             >
               나가기

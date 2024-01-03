@@ -1,6 +1,6 @@
 import ListItem from "../../shared/adminPage/components/ListItem";
 
-function CurrentProductStatus({ totalProducts }) {
+function CurrentProductStatus({ totalProducts, soldoutProducts }) {
   // console.log(totalProducts);
   return (
     <>
@@ -15,7 +15,7 @@ function CurrentProductStatus({ totalProducts }) {
         icon="/adminPage/dashBoard/itemNo.svg"
         arrow="/adminPage/sidebar/none.svg"
       >
-        품절 상품 수 0
+        품절 상품 수 {soldoutProducts}
       </ListItem>
     </>
   );
