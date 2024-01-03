@@ -2,6 +2,7 @@ const http = require("http");
 const https = require("https");
 const fs = require("fs");
 const express = require("express");
+const passportConfig = require("./passport");
 const app = express();
 const cors = require("cors");
 const path = require("path");
@@ -52,6 +53,8 @@ const adminRouter = require("./routes/admin");
 const adminUsersRouter = require("./routes/adminUsers");
 const adminProductsRouter = require("./routes/adminProducts");
 const adminOrdersRouter = require("./routes/adminOrders");
+
+passportConfig(app);
 
 app.use("/api", authRouter);
 app.use("/api/mypage", mypageRouter);

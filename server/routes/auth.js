@@ -1,5 +1,6 @@
 const express = require("express");
 const controller = require("../controllers/Cauth");
+const passport = require("passport");
 const router = express.Router();
 
 // 메인 페이지
@@ -12,7 +13,10 @@ router.get("/login", controller.loginPage);
 router.post("/login", controller.loginUser);
 
 // 카카오 로그인
-router.post("/login/kakao", controller.loginKakao);
+router.get("/login/kakao", passport.authenticate("kakao"));
+
+// 카카오 로그인 콜백
+router.get("/login/kakao/callback", controller.kakaoCallback);
 
 // '로그아웃' 버튼 클릭 시
 router.get("/logout", controller.logout);
