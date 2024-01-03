@@ -11,6 +11,9 @@ router.get("/login", controller.loginPage);
 // '로그인' 버튼 클릭 시
 router.post("/login", controller.loginUser);
 
+// 카카오 로그인
+router.post("/login/kakao", controller.loginKakao);
+
 // '로그아웃' 버튼 클릭 시
 router.get("/logout", controller.logout);
 
