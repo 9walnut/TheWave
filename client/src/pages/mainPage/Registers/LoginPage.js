@@ -4,6 +4,7 @@ import { setUser } from "../../../redux/reducers/userSlice";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../../components/mainPage/Navbar";
 import Footer from "../../../components/mainPage/Footer";
+import LoginKakao from "../../../shared/adminPage/components/LoginKakao";
 import axios from "axios";
 import "../MainPage.css";
 
@@ -88,6 +89,7 @@ function LoginPage() {
             PW
             <input type="password" onChange={onPasswordHandler} />
             <button onClick={handleLogin}>로그인</button>
+            <LoginKakao />
           </form>
         </div>
       </section>

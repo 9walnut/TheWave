@@ -90,18 +90,11 @@ exports.loginUser = async (req, res) => {
 };
 
 // 카카오 로그인
-exports.loginKakao = async (req, res) => {
-  const baseUrl = "https://kauth.kakao.com/oauth/authorize";
-  const config = {
-    client_id: "a5e186173cbb917d0d627a1d982d3785",
-    redirect_uri: "http://localhost:3000/login/kakao",
-    response_type: "code",
-  };
-  const params = new URLSearchParams(config).toString();
-
-  const finalUrl = `${baseUrl}?${params}`;
-  console.log(finalUrl);
-  return res.redirect(finalUrl);
+exports.kakaoCallback = (req, res) => {
+  // 인증 결과에 따른 처리
+  // req.user에는 serializeUser에서 done 함수에 전달한 사용자 정보가 들어 있습니다.
+  // 여기서는 로그인 성공 후 사용자를 홈페이지로 리디렉션합니다.
+  res.redirect("/");
 };
 
 // 로그아웃(access 토큰 받아 해당 사용자의 refresh 토큰 삭제)
