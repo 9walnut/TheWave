@@ -12,6 +12,21 @@ router.get("/login", controller.loginPage);
 // '로그인' 버튼 클릭 시
 router.post("/login", controller.loginUser);
 
+// 구글 로그인
+router.get(
+  "/login/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+// 구글 로그인 콜백
+router.get(
+  "/login/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect("/");
+  }
+);
+
 // 카카오 로그인
 router.get("/login/kakao", passport.authenticate("kakao"));
 

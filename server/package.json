@@ -26,6 +26,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.6.5",
     "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "passport-kakao": "^1.0.1",
     "redis": "^4.6.12",
     "redis-cli": "^2.1.2",

@@ -104,12 +104,11 @@ function Register() {
             <br />
             <label>
               <AddressSearch />
-              {/* 주소: */}
-              {/* <S.Input
+              <S.Input
                 placeholder="주소"
                 {...register("address", { required: "주소를 입력하세요" })}
               />
-              {errors.address && <p>{errors.address.message}</p>} */}
+              {errors.address && <p>{errors.address.message}</p>}
             </label>
 
             <br />
