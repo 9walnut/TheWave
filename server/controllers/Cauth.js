@@ -3,6 +3,8 @@ const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
 const { generateAccessToken, deleteToken } = require("../middleware/jwt");
 const redisClient = require("../middleware/redis");
+const axios = require("axios");
+const qs = require("qs");
 
 // 메인 페이지 렌더
 exports.main = async (req, res) => {
@@ -90,12 +92,9 @@ exports.loginUser = async (req, res) => {
 };
 
 // 카카오 로그인
-exports.kakaoCallback = (req, res) => {
-  // 인증 결과에 따른 처리
-  // req.user에는 serializeUser에서 done 함수에 전달한 사용자 정보가 들어 있습니다.
-  // 여기서는 로그인 성공 후 사용자를 홈페이지로 리디렉션합니다.
-  res.redirect("/");
-};
+// exports.kakaoCallback = async (req, res) => {
+//   res.redirect("/");
+// };
 
 // 로그아웃(access 토큰 받아 해당 사용자의 refresh 토큰 삭제)
 exports.logout = async (req, res) => {

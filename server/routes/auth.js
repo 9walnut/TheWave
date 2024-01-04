@@ -16,7 +16,16 @@ router.post("/login", controller.loginUser);
 router.get("/login/kakao", passport.authenticate("kakao"));
 
 // 카카오 로그인 콜백
-router.get("/login/kakao/callback", controller.kakaoCallback);
+router.get(
+  "/login/kakao/callback",
+  passport.authenticate("kakao", {
+    failureRedirect: "/", // 로그인 실패 시 리다이렉션 주소
+  }),
+  (req, res) => {
+    // 로그인 성공 시 리다이렉션 주소
+    res.redirect("/");
+  }
+);
 
 // '로그아웃' 버튼 클릭 시
 router.get("/logout", controller.logout);
