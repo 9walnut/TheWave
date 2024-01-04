@@ -9,7 +9,7 @@ export const AdminPageMainLayout = styled.div`
     rgba(228, 235, 240, 1) 87.06457564575646%
   );
   display: grid;
-  grid-template-columns: 255px 1fr;
+  grid-template-columns: 255px 0.8fr;
   grid-gap: 10px;
   height: 100%;
 `;
@@ -21,4 +21,5 @@ export const LeftBox = styled.header`
 export const RightBox = styled.main`
   background-color: none;
   margin: 20px;
+  margin-top: 45px;
 `;

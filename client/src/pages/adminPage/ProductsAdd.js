@@ -3,9 +3,12 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import * as S from "../../styles/adminPage/ProductsAdd.js";
+
 import AdminInput from "../../shared/adminPage/components/AdminInput";
 import AdminInputText from "../../shared/adminPage/components/AdminInputText";
 import Card from "../../shared/adminPage/components/Card";
+import AdminTextarea from "../../shared/adminPage/components/AdminTextarea.js";
 
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack";
 
@@ -20,10 +23,10 @@ import UploadDetail from "../../shared/adminPage/components/UploadDetail";
 function ProductsAdd() {
   const navigate = useNavigate();
 
-  const textAreaStyle = {
-    width: "590px",
-    height: "300px",
-  };
+  // const textAreaStyle = {
+  //   width: "590px",
+  //   height: "404px",
+  // };
   const [productName, setProductName] = useState("");
   const [productInfo, setProductInfo] = useState("");
   const [productPrice, setProductPrice] = useState("");
@@ -87,69 +90,89 @@ function ProductsAdd() {
   return (
     <>
       <Card>
-        <h3>Products Add Page</h3>
-        <hr />
+        <S.TitleBox>상품 등록하기</S.TitleBox>
+        <S.SubTitleBox>상품 정보</S.SubTitleBox>
+        <S.ProductsLayout1>
+          <S.Box1>
+            {" "}
+            <AdminInput
+              type="text"
+              placeholder="특수문자 허용, 최소 4글자 이상"
+              value={productName}
+              onChange={setProductName}
+            >
+              상품명
+            </AdminInput>
+            {/* <AdminInput
+              type="text"
+              placeholder="상품 관련 상세 설명을 입력해주세요."
+              style={textAreaStyle}
+              value={productInfo}
+              onChange={setProductInfo}
+            >
+              상품 상세 설명
+            </AdminInput> */}
+            <AdminTextarea
+              type="text"
+              placeholder="상품 관련 상세 설명을 입력해주세요."
+              value={productInfo}
+              onChange={setProductInfo}
+            >
+              상품 상세 설명
+            </AdminTextarea>
+          </S.Box1>
+          <S.Box2>
+            <AdminInput
+              type="number"
+              placeholder="숫자만 입력 가능"
+              value={productPrice}
+              onChange={setProductPrice}
+            >
+              가격
+            </AdminInput>
 
-        <h3>상품 정보</h3>
-        <AdminInput
-          type="text"
-          placeholder="특수문자 허용, 최소 4글자 이상"
-          value={productName}
-          onChange={setProductName}
-        >
-          상품명
-        </AdminInput>
+            <AdminSelect title="상품 카테고리">
+              <SelectBoxCategory
+                value={categoryName}
+                onChange={setCategoryName}
+              />
+            </AdminSelect>
 
-        <AdminInput
-          type="text"
-          placeholder="상품 관련 상세 설명을 입력해주세요."
-          style={textAreaStyle}
-          value={productInfo}
-          onChange={setProductInfo}
-        >
-          상품 상세 설명
-        </AdminInput>
-        <AdminInput
-          type="number"
-          placeholder="숫자만 입력 가능"
-          value={productPrice}
-          onChange={setProductPrice}
-        >
-          가격
-        </AdminInput>
+            <AdminSelect title="상품 상태">
+              <SelectBoxProduct
+                value={productStatus}
+                onChange={setProductStatus}
+              />
+            </AdminSelect>
 
-        <AdminSelect title="상품 카테고리">
-          <SelectBoxCategory value={categoryName} onChange={setCategoryName} />
-        </AdminSelect>
+            <AdminSelect title="상품 옵션 - 사이즈">
+              <SelectBoxOptionSize value={size} onChange={setSize} />
+            </AdminSelect>
+            <AdminInput
+              type="text"
+              placeholder="상품컬러는 , 로 구분해주세요."
+              value={color}
+              onChange={setColor}
+            >
+              상품 옵션 - 컬러
+            </AdminInput>
+          </S.Box2>
+        </S.ProductsLayout1>
+        <S.SubTitleBox>이미지 정보</S.SubTitleBox>
+        <S.ProductsLayout2>
+          <S.Box3>
+            <S.SubjectBox>썸네일 등록</S.SubjectBox>
+            <p>파일 선택 후 등록 버튼을 꼭 눌러주세요❗️</p>
+            <UploadThumbnail onFileChange={getImageDataThumbnail} />
+          </S.Box3>
+          <S.Box4>
+            <h3>detailUpload</h3>
+            <S.SubjectBox>상세 이미지 등록</S.SubjectBox>
+            <p>파일 선택 후 등록 버튼을 꼭 눌러주세요❗️</p>
+            <UploadDetail onFileChange={getImageDataDetail} />
+          </S.Box4>
+        </S.ProductsLayout2>
 
-        <AdminSelect title="상품 상태">
-          <SelectBoxProduct value={productStatus} onChange={setProductStatus} />
-        </AdminSelect>
-
-        <AdminSelect title="상품 옵션 - 사이즈">
-          <SelectBoxOptionSize value={size} onChange={setSize} />
-        </AdminSelect>
-        <AdminInput
-          type="text"
-          placeholder="상품컬러는 , 로 구분"
-          value={color}
-          onChange={setColor}
-        >
-          상품 옵션 - 컬러
-        </AdminInput>
-        <hr />
-        <h3>이미지 정보</h3>
-        <hr />
-
-        <h3>thumbnailUpload</h3>
-        <p>파일 선택 후 등록 버튼을 꼭 눌러주세요❗️</p>
-        <UploadThumbnail onFileChange={getImageDataThumbnail} />
-        <hr />
-
-        <h3>detailUpload</h3>
-        <p>파일 선택 후 등록 버튼을 꼭 눌러주세요❗️</p>
-        <UploadDetail onFileChange={getImageDataDetail} />
-        <hr />
         <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
       </Card>
     </>

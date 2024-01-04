@@ -4,7 +4,6 @@ import axios from "axios";
 
 import * as S from "../../styles/adminPage/Products.js";
 import Card from "../../shared/adminPage/components/Card";
-
 import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 
@@ -123,7 +122,7 @@ function Products() {
   return (
     <>
       <Card>
-        <h3>상품 관리</h3>
+        <S.InnerCardTitleBox>상품 관리</S.InnerCardTitleBox>
         <DataTable
           keySet="productsTb_"
           headers={header}

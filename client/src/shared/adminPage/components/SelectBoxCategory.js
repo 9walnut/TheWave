@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import * as S from "./SelectBoxStyle.js";
+
 function SelectBoxCategory({ value, onChange }) {
   const [releaseStatus, setReleaseStatus] = useState("");
 
@@ -15,7 +17,7 @@ function SelectBoxCategory({ value, onChange }) {
   }, [releaseStatus]);
   return (
     <>
-      <select
+      <S.Select
         name="releaseStatusCheck"
         onChange={handleChangeStatus}
         value={value}
@@ -30,7 +32,7 @@ function SelectBoxCategory({ value, onChange }) {
         <option value="옴브레">옴브레</option>
         <option value="장미">장미</option>
         <option value="튤립">튤립</option>
-      </select>
+      </S.Select>
     </>
   );
 }
