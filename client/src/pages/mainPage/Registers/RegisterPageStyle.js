@@ -19,7 +19,6 @@ export const FindRegisterHead = styled.div`
 
 export const Input = styled.input`
   margin: 10px auto;
-  color: transparent;
   width: 300px;
   height: 45px;
   border: none;
