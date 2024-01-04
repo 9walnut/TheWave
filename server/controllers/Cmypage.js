@@ -7,6 +7,7 @@ exports.mypage = async (req, res) => {
   const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
   try {
     const tokenCheck = await verifyToken(accessToken); // 토큰 검증 및 디코딩
+    console.log("tokenCheck", tokenCheck);
 
     if (
       tokenCheck.result !== "no token" &&

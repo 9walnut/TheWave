@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Postcode from "@actbase/react-daum-postcode";
 import Modal from "./Modal";
+import * as S from "./AddressSearchStyle.js";
 
 function AddressSearch() {
   const [isModal, setModal] = useState(false);
@@ -23,18 +24,31 @@ function AddressSearch() {
         />
       </Modal>
 
-      <button onClick={() => setModal(true)}>주소 찾기</button>
+      <S.Button onClick={() => setModal(true)}>주소 찾기</S.Button>
 
       {/* 서버 요청 시 전달해야 하는 데이터 */}
       <div>
-        주소 <input type="text" value={selectAddress} readOnly />
+        {/* 주소 */}
+        <S.Input
+          placeholder="주소"
+          type="text"
+          value={selectAddress}
+          readOnly
+        />
       </div>
       <div>
-        우편번호 <input type="text" value={postNumber} readOnly />
+        {/* 우편번호  */}
+        <S.Input
+          placeholder="우편번호"
+          type="text"
+          value={postNumber}
+          readOnly
+        />
       </div>
       <div>
-        상세 주소
-        <input
+        {/* 상세 주소 */}
+        <S.Input
+          placeholder="상세 주소"
           type="text"
           value={detailAddress}
           onChange={(e) => setdetailAd(e.target.value)}
