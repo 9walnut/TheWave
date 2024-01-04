@@ -3,26 +3,44 @@ import { useState } from "react";
 import Navbar from "../../../components/mainPage/Navbar";
 import Footer from "../../../components/mainPage/Footer";
 import "../MainPage.css";
-import Button from "../../../components/register/Button";
-import PageName from "../../../components/register/PageName";
-import PageInput from "../../../components/register/PageInput";
+// import Button from "../../../components/register/Button";
+// import PageName from "../../../components/register/PageName";
+// import PageInput from "../../../components/register/PageInput";
+import * as S from "./FindIdPageStyle.js";
 
 function FindIdPage() {
   return (
     <>
       <Navbar />
       <section>
-        <div className="formBox">
-          <PageName>아이디 찾기</PageName>
-          <PageInput type={"text"}>이름</PageInput>
-          <PageInput
-            type={"text"}
-            placeholder={"핸드폰 번호를 입력해주세요 ( - 제외 )"}
+        <S.FormBox>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+            // onKeyDown={handleEnter}
           >
-            핸드폰 번호
-          </PageInput>
-          <Button>아이디 찾기</Button>
-        </div>
+            <S.FindIdHead>아이디 찾기</S.FindIdHead>
+            <br />
+            <S.Input
+              type="password"
+              // onChange={onPasswordHandler}
+              placeholder="이름"
+            />
+            <br />
+            <S.Input
+              type="password"
+              // onChange={onPasswordHandler}
+              placeholder="휴대폰 번호"
+            />
+            <br />
+            <S.Button
+            // onClick={handleLogin}
+            >
+              아이디 찾기
+            </S.Button>
+          </form>
+        </S.FormBox>
       </section>
       <Footer />
     </>
