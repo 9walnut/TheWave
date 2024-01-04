@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 import * as S from "../../styles/adminPage/Orders.js";
 import Card from "../../shared/adminPage/components/Card";
@@ -8,7 +9,6 @@ import DataTable from "../../shared/adminPage/components/DataTable";
 import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
 import SelectBoxDelivery from "../../shared/adminPage/components/SelectBoxDelivery.js";
-import axios from "axios";
 import OrdersDetail from "./OrdersDetail.js";
 import ModifiedPhoneNumber from "../../shared/ModifiedPhoneNumber.js";
 
@@ -127,7 +127,7 @@ function Orders() {
   return (
     <>
       <Card>
-        <h3>거래 내역 관리</h3>
+        <S.InnerCardTitleBox>거래 내역 관리</S.InnerCardTitleBox>
         <DataTable
           keySet="ordersTb_"
           headers={header}

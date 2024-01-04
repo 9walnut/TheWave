@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputBox = styled.div`
+export const TextareaBox = styled.div`
   width: 810px;
   /* height: 72px; */
   flex-shrink: 0;
@@ -12,7 +12,7 @@ export const InputBox = styled.div`
   margin-left: 5px;
 `;
 
-export const AdminInputText = styled.div`
+export const AdminTextareaText = styled.div`
   margin-bottom: 12px;
   color: #6e7f8d;
   font-size: large;
@@ -20,16 +20,18 @@ export const AdminInputText = styled.div`
   margin-left: 5px;
 `;
 
-// input 기본 스타일 속성
-export const StyledInput = styled.input`
+export const StyledTextarea = styled.textarea`
   border: none;
   outline: none;
-  width: 800px;
-  height: 40px;
+  width: 590px;
+  height: 404px;
   background-color: transparent;
   margin-left: 5px;
+  font-size: larger;
+  resize: none;
+  border: 1px solid #e0e0e0;
 
   &::placeholder {
-    font-size: larger;
+    font-size: large;
   }
 `;

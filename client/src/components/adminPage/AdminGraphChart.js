@@ -44,8 +44,8 @@ const AdminGraphChart = ({ getData }) => {
         /**
          * chart 색상
          */
-        // colors={["olive", "brown", "orange"]} // 커스터하여 사용할 때
-        colors={{ scheme: "paired" }} // nivo에서 제공해주는 색상 조합 사용할 때
+        colors={["#d4e2ef", "#e6edf3", "#b4c6dc"]} // 커스터하여 사용할 때
+        // colors={{ scheme: "paired" }} // nivo에서 제공해주는 색상 조합 사용할 때
         /**
          * color 적용 방식
          */

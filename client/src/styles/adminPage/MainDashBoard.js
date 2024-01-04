@@ -14,7 +14,7 @@ export const StyledCardRow1 = styled.div`
   /* background-color: #fcfeff; */
   position: relative;
   margin: 0;
-  border: 1px solid #e0e0e0;
+  /* border: 1px solid #e0e0e0; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 13px;
   padding: 1rem;
@@ -30,7 +30,7 @@ export const StyledCardRow2 = styled.div`
   /* background-color: #fcfeff; */
   position: relative;
   margin: 0;
-  border: 1px solid #e0e0e0;
+  /* border: 1px solid #e0e0e0; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 13px;
   padding: 1rem;

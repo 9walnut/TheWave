@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import AdminButtonGrey from "../../../components/adminPage/AdminButtonGrey";
 
 const UploadThumbnail = ({ onFileChange }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -62,7 +63,9 @@ const UploadThumbnail = ({ onFileChange }) => {
   return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>썸네일 등록🌀</button>
+      <AdminButtonGrey onClick={handleUpload}>
+        썸네일 업로드하기
+      </AdminButtonGrey>
 
       {thumbnailUrl && (
         <div>
