@@ -4,24 +4,25 @@ const jwt = require("jsonwebtoken");
 const redisClient = require("../middleware/redis");
 
 // 토큰 생성 함수(access, refresh 토큰 반환)
-function generateAccessToken(loginUser) {
+async function generateAccessToken(loginUser) {
   try {
     const payload = {
       userId: loginUser.userId,
       userNumber: loginUser.userNumber,
     };
 
-    console.log("payload", payload);
-
     const accessToken = jwt.sign(payload, secret, {
-      expiresIn: "1h",
+      expiresIn: "30s",
     });
 
     const refreshToken = jwt.sign(payload, secret, {
       expiresIn: "14d",
     });
 
-    return { accessToken: accessToken, refreshToken: refreshToken };
+    await redisClient.set(loginUser.userId, refreshToken); //userId를 키로 refresh 토큰 저장
+    await redisClient.expire(loginUser.userId, 1209600); // 14일 후 데이터 삭제
+
+    return { accessToken: accessToken };
   } catch (error) {
     console.error(error);
   }
@@ -43,20 +44,25 @@ const verifyToken = async (accessToken) => {
   } catch (error) {
     // access 토큰이 만료된 경우
     const decodedToken = jwt.decode(token);
-    const refreshToken = await redisClient.get(decodedToken.userId);
-
     try {
-      jwt.verify(refreshToken, secret); // refresh 토큰 검증
+      const refreshToken = await redisClient.get(decodedToken.userId);
+      const checkBlackList = await redisClient.get(refreshToken);
 
-      const payload = {
-        userId: decodedToken.userId,
-        userNumber: decodedToken.userNumber,
-      };
-      const newAccessToken = jwt.sign(payload, secret, {
-        expiresIn: "1h",
-      });
-      const decodeNewAccessToken = jwt(newAccessToken);
-      return { accessToken: newAccessToken, userData: decodeNewAccessToken }; // 새 access 토큰 반환
+      if (checkBlackList !== "logoutToken") {
+        jwt.verify(refreshToken, secret); // refresh 토큰 검증
+
+        const payload = {
+          userId: decodedToken.userId,
+          userNumber: decodedToken.userNumber,
+        };
+        const newAccessToken = jwt.sign(payload, secret, {
+          expiresIn: "1h",
+        });
+        const decodeNewAccessToken = jwt.decode(newAccessToken);
+        return { accessToken: newAccessToken, userData: decodeNewAccessToken }; // 새 access 토큰 반환
+      } else {
+        return { result: "logoutToken" }; // 이미 로그아웃한 토큰
+      }
     } catch (error) {
       // refresh 토큰이 만료된 경우
       return { result: "signin again" };
@@ -67,15 +73,26 @@ const verifyToken = async (accessToken) => {
 // 로그아웃 시 refresh 토큰 삭제
 const deleteToken = async (accessToken) => {
   const token = accessToken.split(" ")[1];
-  const decodedeToken = jwt.decode(token);
+  const decodedToken = jwt.decode(token);
+  console.log("decodedeToken", decodedToken);
 
   try {
-    const refreshToken = await redisClient.get(decodedeToken.userId);
-    console.log("refreshToken", refreshToken);
+    const refreshToken = await redisClient.get(decodedToken.userId);
+    const verifyRefreshToken = jwt.verify(refreshToken, secret);
+    console.log("verifyRefreshToken", verifyRefreshToken);
+
+    const expireTime = (
+      verifyRefreshToken.exp -
+      new Date().getTime() / 1000
+    ).toFixed();
+    console.log("refresh 토큰 남은 시간", expireTime);
 
     try {
-      jwt.verify(refreshToken, secret);
-      await redisClient.del(decodedeToken.userId); // access 토큰의 userId에 해당하는 refresh 토큰 삭제
+      await redisClient.set(refreshToken, "logoutToken"); // 로그아웃한 사용자의 refresh 토큰을 logoutToken 값을 넣어 저장
+      await redisClient.expire(refreshToken, expireTime); // 발급되었던 시점으로부터 14일 뒤엔 삭제됨
+
+      await redisClient.del(decodedToken.userId); // userId에 해당하는 refresh 토큰 삭제
+
       return { result: "true" };
     } catch (error) {
       console.error(error);
