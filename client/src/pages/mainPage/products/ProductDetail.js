@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as S from "../../../styles/mainPage/ProductDetails.style";
-import Button from "../../../components/register/Button";
 import axios from "axios";
 import SeperatedPrice from "../../../hooks/SeparatedPrice";
 import getAccessToken from "../../../hooks/getAcessToken";
@@ -13,8 +12,33 @@ function ProductDetail() {
   const [product, setProduct] = useState([]);
   const { productId } = useParams();
   const [categoryName, setCategoryName] = useState();
+  const [value, displayValue, setValue] = SeperatedPrice(0);
+  const [orderQuantity, SetOrderQuantity] = useState(0);
+  const [size, setSize] = useState("소");
+  const [color, setColor] = useState("파랑");
+
+  const selectColor = [
+    { value: "빨강", name: "빨강" },
+    { value: "초록", name: "초록" },
+    { value: "파랑", name: "파랑" },
+  ];
+
+  const selectSize = [
+    { value: "소", name: "소" },
+    { value: "중", name: "중" },
+    { value: "대", name: "대" },
+  ];
+
+  const handleSize = (e) => {
+    setSize(e.target.value);
+  };
+
+  const handleColor = (e) => {
+    setColor(e.target.value);
+  };
   console.log("상품 아이디", productId);
 
+  // 상품 불러오기
   const getProductDetail = async () => {
     try {
       const res = await axios.get(`/api/product/${productId}`);
@@ -29,9 +53,6 @@ function ProductDetail() {
   useEffect(() => {
     getProductDetail();
   }, []);
-
-  const [value, displayValue, setValue] = SeperatedPrice(0);
-  const [orderQuantity, SetOrderQuantity] = useState(0);
 
   const plusBtn = () => {
     SetOrderQuantity(orderQuantity + 1);
@@ -91,16 +112,16 @@ function ProductDetail() {
       // 넘길 데이터는
       const headers = getAccessToken();
       const res = await axios.post(
-        `/api/payment/${productId}`,
-        { orderQuantity },
+        `/api/payment/orderList/${productId}`,
+        { orderQuantity, color, size },
         {
           headers,
         }
       );
-      // 개수 (orderQuantity)
-      // 토큰 (accessToken)
-      //
-      console.log("결제버튼", res.data);
+      if (!res.data.result) {
+        console.log("결제완", res.data);
+        navigate(`/payment/orderList/${productId}`, { state: res.data });
+      }
     } catch (error) {
       console.log("결제에러", error);
     }
@@ -119,11 +140,33 @@ function ProductDetail() {
               </Link>
               <span className="miniProductName"> {product.productName}</span>
             </div>
+            {/* 셀렉트박스 */}
             <div className="productName">{product.productName}</div>
             <div>{product.productInfo}</div>
             <div>
               <span>가격 : </span>
               <span>{product.productPrice}</span>
+            </div>
+            <div>
+              <select onChange={handleColor} value={color}>
+                {selectColor.map((item) => {
+                  return (
+                    <option value={item.value} key={item.value}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>
+              {/*  */}
+              <select onChange={handleSize} value={size}>
+                {selectSize.map((item) => {
+                  return (
+                    <option value={item.value} key={item.value}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <S.ProductCountBox>
               <button onClick={minusBtn}>

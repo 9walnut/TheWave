@@ -29,7 +29,7 @@ exports.goPayment = async (req, res) => {
     });
     console.log("productInfo", productInfo);
 
-    if (userInfo && userAddress)
+    if (userInfo && userAddress) {
       res.json({
         userInfo,
         userAddress,
@@ -38,7 +38,7 @@ exports.goPayment = async (req, res) => {
         color,
         size,
       });
-    else res.send({ result: false });
+    } else res.send({ result: false });
   } catch (error) {
     console.error(error);
     res.status(500).send("주문 정보 불러오기 오류");
