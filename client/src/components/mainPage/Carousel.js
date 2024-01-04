@@ -1,44 +1,80 @@
+import React from "react";
 import Slider from "react-slick";
+import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.css";
 
+const ImgBox = styled.div`
+  /* margin: 0px 40px; */
+
+  img {
+    display: inline-block;
+    /* margin: 0px 50px; */
+    /* width: 100%; */
+    height: 700px;
+  }
+`;
+
 function MainCarousel() {
+  const imgList = [
+    "/img/daisy01.jpg",
+    "/img/daisy02.jpg",
+    "/img/daisy03.jpg",
+    "/img/daisy04.jpg",
+    "/img/daisy05.jpg",
+    "/img/daisy06.jpg",
+    "/img/daisy07.jpg",
+  ];
+
   const settings = {
-    className: "slider-items",
+    className: "slider variable-width",
     infinite: true,
     speed: 700,
-    slideToShow: 2,
-    slidesToScroll: 1, // 스크롤 시 넘어가는 컨텐츠 수
-    dots: true,
-    arrows: false,
+    centerMode: true,
+    slidesToShow: 1,
+    slidesToScroll: 2,
+    arrows: true,
     autoplay: true, // 자동 캐러셀
     autoplaySpeed: 2000, // 자동 캐러셀 속도
+    // responsive: [
+    //   {
+    //     breakpoint: 2300,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 2,
+    //     },
+    //     breakpoint: 1800,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 2,
+    //     },
+    //     breakpoint: 1400,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 1,
+    //     },
+    //     breakpoint: 1100,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 1,
+    //     },
+    //   },
+    // ],
   };
 
   return (
-    <div className="slider-wrapper">
+    <div>
       <Slider {...settings}>
-        <div className="slider-item">
-          <div className="slider-item-gradient">
-            <img src="/img/carousel1.jpg" />
-          </div>
-          <div className="slider-item-gradient">
-            <img src="/img/carousel1.jpg" />
-          </div>
-        </div>
-        <div className="slider-item">
-          <div className="slider-item-gradient"></div>
-          <img src="/csp2.jpg" />
-        </div>
-        <div className="slider-item">
-          <div className="slider-item-gradient"></div>
-          <img src="/csp3.jpg" />
-        </div>
-        <div className="slider-item">
-          <div className="slider-item-gradient"></div>
-          <img src="/csp4.jpg" />
-        </div>
+        {imgList.map((img) => {
+          return (
+            <ImgBox>
+              <p>
+                <img src={img} />
+              </p>
+            </ImgBox>
+          );
+        })}
       </Slider>
     </div>
   );
