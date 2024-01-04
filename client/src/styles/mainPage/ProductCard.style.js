@@ -12,6 +12,7 @@ export const CardItemBox = styled.div`
   margin-bottom: 20px;
   box-sizing: border-box;
   border: 1px solid black;
+  border-radius: 10px;
   cursor: pointer;
 
   div {
@@ -19,6 +20,7 @@ export const CardItemBox = styled.div`
   }
 
   img {
+    border-radius: 10px;
     width: 100%;
     height: 50%;
   }
