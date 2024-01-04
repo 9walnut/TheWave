@@ -14,16 +14,4 @@ section {
   padding: 4rem;
 }
 
-.formBox {
-  padding: 200px 0px;
-  margin: auto;
-  display: flex;
-  height: 100%;
-  width: 50%;
-  flex-direction: column;
-  box-sizing: border-box;
-  text-align: center;
-  /* justify-content: center; */
-  /* align-items: center; */
-}
 /* https://d2.naver.com/helloworld/8540176 */

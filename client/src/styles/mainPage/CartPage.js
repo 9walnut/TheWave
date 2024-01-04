@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CartTitle = styled.h1`
-  font-size: 38px;
+  font-size: 30px;
 `;
 
 export const CheckBox = styled.div`

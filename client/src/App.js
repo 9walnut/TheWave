@@ -20,6 +20,7 @@ import NotFound from "./shared/NotFound404";
 import ProductsDetail from "./pages/adminPage/ProductsDetail";
 import ProductDetailsPage from "./pages/mainPage/products/ProductDetailsPage";
 import CategoryPage from "./pages/mainPage/products/CategoryPage";
+import OrderListPage from "./pages/mainPage/payment/OrderListPage";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
         {/* <Route path="/mypage/info" element={<MyPageInfo />} /> */}
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/products/:productId" element={<ProductDetailsPage />} />
+        <Route
+          path="/payment/orderList/:productId"
+          element={<OrderListPage />}
+        />
         <Route path="/cart" element={<CartPage />} />
         {/* <Route path="/cart/checkout" element={<CheckoutPage />} /> */}
         {/* admin */}

@@ -2,7 +2,6 @@ const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
 const { generateAccessToken, deleteToken } = require("../middleware/jwt");
-const redisClient = require("../middleware/redis");
 const axios = require("axios");
 const qs = require("qs");
 
@@ -46,16 +45,7 @@ exports.loginUser = async (req, res) => {
           userId: userId,
         },
       });
-      const { accessToken, refreshToken } = generateAccessToken(loginUser);
-
-      await redisClient.set(userId, refreshToken, (err, reply) => {
-        if (err) {
-          console.error("redis 저장 오류 ;ㅁ;", err);
-        } else {
-          console.log("redis 저장 성공!", reply);
-        }
-      });
-      //userId를 키로 refresh 토큰 저장
+      const { accessToken } = await generateAccessToken(loginUser);
 
       // 비회원 장바구니 동기화
       if (cart && cart.length > 0) {

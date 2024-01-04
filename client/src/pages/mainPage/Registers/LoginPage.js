@@ -7,6 +7,7 @@ import Footer from "../../../components/mainPage/Footer";
 import LoginKakao from "../../../shared/adminPage/components/LoginKakao";
 import axios from "axios";
 import "../MainPage.css";
+import * as S from "./LoginPageStyle.js";
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -72,26 +73,63 @@ function LoginPage() {
     }
   };
 
+  const handleFindId = () => {
+    navigate("/findId");
+  };
+
+  const handleFindPw = () => {
+    navigate("/findPw");
+  };
+  const handleRegister = () => {
+    navigate("/register");
+  };
+
   return (
     <>
       <Navbar />
       <section>
-        <div className="formBox">
+        <S.FormBox>
           <form
             onSubmit={(e) => {
               e.preventDefault();
             }}
             onKeyDown={handleEnter}
           >
-            ID
-            <input type="text" onChange={onUserIdHandler} />
+            <S.LoginHead>로그인</S.LoginHead>
             <br />
-            PW
-            <input type="password" onChange={onPasswordHandler} />
-            <button onClick={handleLogin}>로그인</button>
+            <S.Input
+              type="text"
+              onChange={onUserIdHandler}
+              placeholder="아이디"
+            />
+            <br />
+            <S.Input
+              type="password"
+              onChange={onPasswordHandler}
+              placeholder="비밀번호"
+            />
+            <br />
+            <S.Button onClick={handleLogin}>로그인</S.Button>
+            <br />
+            <S.ButtonContainer>
+              <S.ButtonGroup>
+                <S.FindButton onClick={handleFindId}>아이디 찾기</S.FindButton>
+                <S.FindButton onClick={handleFindPw}>
+                  비밀번호 찾기
+                </S.FindButton>
+              </S.ButtonGroup>
+              <S.RegisterGroup>
+                <S.RegisterButton onClick={handleRegister}>
+                  회원가입
+                </S.RegisterButton>
+              </S.RegisterGroup>
+            </S.ButtonContainer>
+            <br />
+            소셜 로그인
             <LoginKakao />
+            <br />
           </form>
-        </div>
+        </S.FormBox>
       </section>
       <Footer />
     </>
