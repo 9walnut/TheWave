@@ -1,8 +1,20 @@
 import React from "react";
 import Slider from "react-slick";
+import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import "./Carousel.css"
+import "./Carousel.css";
+
+const ImgBox = styled.div`
+  /* margin: 0px 40px; */
+
+  img {
+    display: inline-block;
+    /* margin: 0px 50px; */
+    /* width: 100%; */
+    height: 700px;
+  }
+`;
 
 function MainCarousel() {
   const imgList = [
@@ -17,37 +29,38 @@ function MainCarousel() {
 
   const settings = {
     className: "slider variable-width",
-    // dots: false,
     infinite: true,
     speed: 700,
     centerMode: true,
-    centerPadding: "40px",
-    slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToShow: 1,
+    slidesToScroll: 2,
     arrows: true,
     autoplay: true, // 자동 캐러셀
     autoplaySpeed: 2000, // 자동 캐러셀 속도
-    // pauseOnHover: false, // 호버 시 멈춤
-    responsive: [
-      {
-        breakpoint: 2300,
-        settings: {
-          slidesToShow: 2,
-        },
-        breakpoint: 1800,
-        settings: {
-          slidesToShow: 2,
-        },
-        breakpoint: 1400,
-        settings: {
-          slidesToShow: 1,
-        },
-        breakpoint: 1100,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
+    // responsive: [
+    //   {
+    //     breakpoint: 2300,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 2,
+    //     },
+    //     breakpoint: 1800,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 2,
+    //     },
+    //     breakpoint: 1400,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 1,
+    //     },
+    //     breakpoint: 1100,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 1,
+    //     },
+    //   },
+    // ],
   };
 
   return (
@@ -55,11 +68,11 @@ function MainCarousel() {
       <Slider {...settings}>
         {imgList.map((img) => {
           return (
-            <div>
+            <ImgBox>
               <p>
-                <img src={img} style={{ height: "700px" }} />
+                <img src={img} />
               </p>
-            </div>
+            </ImgBox>
           );
         })}
       </Slider>

@@ -8,28 +8,28 @@ import getAccessToken from "../../../hooks/getAcessToken";
 import axios from "axios";
 
 function OrderListPage() {
-  //   const { state } = useLocation();
-  //   console.log("받아온 데이터입니다.", state);
-  //   const { productId } = useParams();
-  //   const [size, setSize] = useState(state.size);
-  //   const [color, setColor] = useState(state.color);
-  //   const [orderQuantity, SetOrderQuantity] = useState(state.orderQuantity);
-  //   const [userName, setUserName] = useState("");
-  //   const [receiveName, setReceiveName] = useState("");
-  //   const [deliveryRequest, setDeliveryRequest] = useState("");
+  const { state } = useLocation();
+  console.log("받아온 데이터입니다.", state);
+  const { productId } = useParams();
+  const [size, setSize] = useState(state.size);
+  const [color, setColor] = useState(state.color);
+  const [orderQuantity, SetOrderQuantity] = useState(state.orderQuantity);
+  const [userName, setUserName] = useState("");
+  const [receiveName, setReceiveName] = useState("");
+  const [deliveryRequest, setDeliveryRequest] = useState("");
 
-  //   const payment = async () => {
-  //     try {
-  //       const headers = getAccessToken();
-  //       const res = await axios.post(
-  //         `/api/payment/${productId}`,
-  //         {},
-  //         { headers }
-  //       );
-  //     } catch (error) {
-  //       console.log("ㅋㅋ실패요", error);
-  //     }
-  //   };
+  const payment = async () => {
+    try {
+      const headers = getAccessToken();
+      const res = await axios.post(
+        `/api/payment/${productId}`,
+        {},
+        { headers }
+      );
+    } catch (error) {
+      console.log("ㅋㅋ실패요", error);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -43,9 +43,10 @@ function OrderListPage() {
             <li>
               <S.Productbox>
                 <S.ImgBox>
-                  {/* <img src={state.productInfo.thumbnailUrl} /> */}
+                  <img src={state.productInfo.thumbnailUrl} />
                 </S.ImgBox>
-                {/* <div>{}</div> */}
+                <div>{size}</div>
+                <div>{color}</div>
               </S.Productbox>
             </li>
           </S.OrderLeftBox>
