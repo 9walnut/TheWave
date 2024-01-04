@@ -23,11 +23,11 @@ export const AdminTextareaText = styled.div`
 export const StyledTextarea = styled.textarea`
   border: none;
   outline: none;
-  width: 590px;
+  width: 779px;
   height: 404px;
-  background-color: transparent;
   margin-left: 5px;
   font-size: larger;
+  background-color: #f7faf9;
   resize: none;
   border: 1px solid #e0e0e0;
 

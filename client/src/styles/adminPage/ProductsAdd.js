@@ -27,13 +27,13 @@ export const ProductsLayout2 = styled.div`
 `;
 
 export const Box3 = styled.div`
-  /* background-color: none; */
-  background-color: yellow;
+  background-color: none;
+  /* background-color: yellow; */
 `;
 
 export const Box4 = styled.div`
-  /* background-color: none; */
-  background-color: green;
+  background-color: none;
+  /* background-color: green; */
   /* margin: 20px;
   margin-top: 45px; */
 `;
@@ -66,4 +66,12 @@ export const SubTitleBox = styled.div`
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 10px;
+`;
+
+export const SubjectBox = styled.div`
+  margin-bottom: 12px;
+  color: #6e7f8d;
+  font-size: large;
+  font-weight: 900;
+  margin-left: 5px;
 `;
