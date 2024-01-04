@@ -6,6 +6,7 @@ import Footer from "../../../components/mainPage/Footer";
 import "../MainPage.css";
 import axios from "axios";
 import AddressSearch from "../../../components/AddressSearch";
+import * as S from "./RegisterPageStyle.js";
 
 function Register() {
   const navigate = useNavigate();
@@ -34,19 +35,23 @@ function Register() {
     <>
       <Navbar />
       <section>
-        <div className="formBox">
+        <S.FormBox>
+          <S.FindRegisterHead>회원가입</S.FindRegisterHead>
+          <br></br>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label>
-              아이디:
-              <input
+              {/* 아이디: */}
+              <S.Input
+                placeholder="아이디"
                 {...register("userId", { required: "아이디를 입력하세요" })}
               />
               {errors.userId && <p>{errors.userId.message}</p>}
             </label>
             <br />
             <label>
-              비밀번호:
-              <input
+              {/* 비밀번호: */}
+              <S.Input
+                placeholder="패스워드"
                 {...register("password", {
                   required: "비밀번호를 입력하세요",
                   minLength: 6,
@@ -57,16 +62,18 @@ function Register() {
             </label>
             <br />
             <label>
-              이름:
-              <input
+              {/* 이름: */}
+              <S.Input
+                placeholder="이름"
                 {...register("userName", { required: "이름을 입력하세요" })}
               />
               {errors.userName && <p>{errors.userName.message}</p>}
             </label>
             <br />
             <label>
-              전화번호:
-              <input
+              {/* 전화번호: */}
+              <S.Input
+                placeholder="전화번호"
                 {...register("phoneNumber", {
                   required: "전화번호를 입력하세요",
                 })}
@@ -75,37 +82,40 @@ function Register() {
             </label>
             <br />
             <label>
-              생년월일:
-              <input
+              {/* 생년월일: */}
+              <S.Input
+                placeholder="생년월일"
                 {...register("birthday", { required: "생년월일을 입력하세요" })}
               />
               {errors.birthday && <p>{errors.birthday.message}</p>}
             </label>
             <br />
             <label>
-              성별:
-              <select
+              {/* 성별: */}
+              <S.select
                 {...register("gender", { required: "성별을 선택하세요" })}
               >
-                <option value="M">남성</option>
-                <option value="F">여성</option>
-              </select>
+                <S.Option value="">성별</S.Option>
+                <S.Option value="M">남성</S.Option>
+                <S.Option value="F">여성</S.Option>
+              </S.select>
               {errors.gender && <p>{errors.gender.message}</p>}
             </label>
             <br />
             <label>
               <AddressSearch />
-              주소:
-              <input
+              {/* 주소: */}
+              {/* <S.Input
+                placeholder="주소"
                 {...register("address", { required: "주소를 입력하세요" })}
               />
-              {errors.address && <p>{errors.address.message}</p>}
+              {errors.address && <p>{errors.address.message}</p>} */}
             </label>
 
             <br />
-            <button type="submit">가입하기</button>
+            <S.Button type="submit">가입하기</S.Button>
           </form>
-        </div>
+        </S.FormBox>
       </section>
       <Footer />
     </>
