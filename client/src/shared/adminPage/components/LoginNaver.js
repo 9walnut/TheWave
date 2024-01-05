@@ -1,13 +1,13 @@
-import * as S from "./LoginKakaoStyle.js";
+import * as S from "./LoginNaverStyle.js";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-const KAKAO_ID = process.env.REACT_APP_KAKAO_ID; //REST API KEY
-const KAKAO_URL = process.env.REACT_APP_KAKAO_URL; //Redirect URI
-export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_ID}&redirect_uri=${KAKAO_URL}&response_type=code`;
+const NAVER_ID = process.env.REACT_APP_NAVER_ID;
+const NAVER_URL = process.env.REACT_APP_NAVER_URL;
+export const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_ID}&state=STATE_STRING&redirect_uri=${NAVER_URL}`;
 
-export default function LoginKakao() {
+export default function LoginNaver() {
   // oauth 요청 URL
   const location = useLocation();
 
@@ -17,7 +17,7 @@ export default function LoginKakao() {
 
     if (authorizationCode) {
       axios
-        .post("http://localhost:8001/api/login/kakao/callback", {
+        .post("http://localhost:8001/api/login/naver/callback", {
           authorizationCode,
         })
         .then((res) => {
@@ -36,8 +36,8 @@ export default function LoginKakao() {
 
   return (
     <>
-      <a href={KAKAO_AUTH_URL}>
-        <S.LoginKakaoStyle></S.LoginKakaoStyle>
+      <a href={NAVER_AUTH_URL}>
+        <S.LoginNaverStyle></S.LoginNaverStyle>
       </a>
     </>
   );
