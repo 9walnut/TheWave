@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../../components/mainPage/Navbar";
 import Footer from "../../../components/mainPage/Footer";
 import LoginKakao from "../../../shared/adminPage/components/LoginKakao";
-import GoogleLoginButton from "../../../shared/adminPage/components/LoginGoogle.js";
 import axios from "axios";
 import "../MainPage.css";
 import * as S from "./LoginPageStyle.js";
@@ -128,7 +127,6 @@ function LoginPage() {
             <br />
             소셜 로그인
             <LoginKakao />
-            <GoogleLoginButton />
             <br />
           </form>
         </S.FormBox>
