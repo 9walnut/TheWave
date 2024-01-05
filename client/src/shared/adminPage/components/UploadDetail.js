@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import AdminButtonGrey from "../../../components/adminPage/AdminButtonGrey";
 
 const UploadDetail = ({ onFileChange }) => {
   const [selectedFiles, setSelectedFiles] = useState(null);
@@ -61,7 +62,9 @@ const UploadDetail = ({ onFileChange }) => {
   return (
     <div>
       <input type="file" onChange={handleFileChange} multiple />
-      <button onClick={handleUpload}>상세이미지 등록🌀</button>
+      <AdminButtonGrey onClick={handleUpload}>
+        상세이미지 업로드하기
+      </AdminButtonGrey>
 
       {detailUrls && (
         <div>

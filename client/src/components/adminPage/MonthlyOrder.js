@@ -13,7 +13,7 @@ function MonthlyOrder({
     <>
       <CardTitle>이번달 거래 현황</CardTitle>
       {/* <h3>이번달 거래 현황</h3> */}
-      <S.ItemWrapper>
+      <S.OrderItemWrapper>
         <S.ListItemBox>
           <S.IconContainer>
             <img src="/adminPage/dashBoard/orderAll.svg" alt="icon" />
@@ -45,7 +45,7 @@ function MonthlyOrder({
           <S.TitleContainer>배송 준비 수</S.TitleContainer>
           <S.ResultContainer> {deliveryReadyOrders}</S.ResultContainer>
         </S.ListItemBox>
-      </S.ItemWrapper>
+      </S.OrderItemWrapper>
     </>
   );
 }

@@ -52,8 +52,8 @@ const AdminGraphPie = ({ getData }) => {
         /**
          * chart 색상
          */
-        //colors={["olive", "brown", "orange"]} // 커스터하여 사용할 때
-        colors={{ scheme: "blues" }} // nivo에서 제공해주는 색상 조합 사용할 때
+        colors={["#d9e6ec", "#b1c2d6", "#b5c2c8"]} // 커스터하여 사용할 때
+        // colors={{ scheme: "blues" }} // nivo에서 제공해주는 색상 조합 사용할 때
         /**
          * pad border 두께 설정
          */

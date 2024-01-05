@@ -19,7 +19,7 @@ export const FindIdHead = styled.div`
 
 export const Input = styled.input`
   margin: 10px auto;
-  color: transparent;
+  color: black;
   width: 300px;
   height: 45px;
   border: none;
@@ -38,4 +38,18 @@ export const Button = styled.button`
   margin: 10px;
   border: none;
   font-weight: 900;
+`;
+
+export const ButtonSecond = styled(Button)`
+  background-color: white;
+  margin: 0px;
+  width: 100px;
+`;
+
+export const ButtonGroup = styled.div`
+  display: inline-block;
+`;
+
+export const UserIdDisplay = styled.div`
+  text-align: center;
 `;

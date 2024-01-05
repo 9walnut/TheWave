@@ -71,6 +71,7 @@ function ProductsDetail({ products }) {
         <p>상품 카테고리: {product.category.categoryName}</p>
         <p>설명: {product.productInfo}</p>
         <p>상품 옵션 - 컬러 : {product.productoption.color}</p>
+
         <p>상품 옵션 - 사이즈 : {product.productoption.size} </p>
         <div>
           가격:
@@ -91,7 +92,6 @@ function ProductsDetail({ products }) {
             ))}
           </>
         )}
-        <p>✅ 상품옵션 들어와야함</p>
         <S.ButtonContainer>
           <AdminButtonGrey
             onClick={() => {

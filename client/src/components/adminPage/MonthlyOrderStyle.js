@@ -1,12 +1,20 @@
 import styled from "styled-components";
 
-export const ItemWrapper = styled.div`
+export const OrderItemWrapper = styled.div`
   /* background-color: darkblue; */
   position: relative;
   width: 560px;
   align-content: center;
   height: 129px;
   margin-top: 59px;
+`;
+export const ProductItemWrapper = styled.div`
+  /* background-color: darkblue; */
+  position: relative;
+  width: 560px;
+  align-content: center;
+  height: 129px;
+  margin-top: 85px;
 `;
 
 export const ListItemBox = styled.div`

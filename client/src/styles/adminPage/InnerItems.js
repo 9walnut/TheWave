@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
-
-export const InnerCardTitleBox = styled.div`
+export const TitleBox = styled.div`
   /* background-color: #e9eff4; */
   /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;

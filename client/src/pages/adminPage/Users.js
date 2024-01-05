@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import * as S from "../../styles/adminPage/Users.js";
 import Card from "../../shared/adminPage/components/Card";
-import axios from "axios";
 import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
+
 import DataTable from "../../shared/adminPage/components/DataTable";
 import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
@@ -117,7 +118,7 @@ function Users() {
   return (
     <>
       <Card>
-        <h3>회원 관리</h3>
+        <S.InnerCardTitleBox>회원 관리</S.InnerCardTitleBox>
         <DataTable
           keySet="usersTb_"
           headers={header}

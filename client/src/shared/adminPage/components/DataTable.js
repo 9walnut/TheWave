@@ -68,13 +68,13 @@ function DataTable({
       <S.Table>
         <thead>
           <S.TableTr>
-            <S.TableTd>
+            <S.TableInputTd>
               <input
                 type="checkbox"
                 onChange={SelectAll}
                 checked={selectedLists.size === items.length}
               />
-            </S.TableTd>
+            </S.TableInputTd>
             {headers.map((header) => (
               <S.TableHeader key={header.text}>
                 {header.value === "deliveryStatus" ? header.text : header.text}

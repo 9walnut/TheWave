@@ -12,14 +12,21 @@ function Register() {
   const navigate = useNavigate();
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const handleAddressChange = (addressData) => {
+    const newAddress = `${addressData.selectAddress} ${addressData.postNumber} ${addressData.detailAddress}`;
+    console.log(newAddress);
+    setValue(newAddress);
+  };
+
   const onSubmit = async (data) => {
     try {
       const res = await axios.post("api/register", data);
-      console.log("Signup Successful:", res.data.result);
+      console.log("Signup Successful:", res);
       if (res.data.result) {
         alert("회원가입 성공 ~~");
         navigate("/login");
@@ -103,9 +110,9 @@ function Register() {
             </label>
             <br />
             <label>
-              <AddressSearch />
-              <S.Input
+              <AddressSearch
                 placeholder="주소"
+                onChange={handleAddressChange}
                 {...register("address", { required: "주소를 입력하세요" })}
               />
               {errors.address && <p>{errors.address.message}</p>}

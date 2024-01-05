@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import * as S from "./SelectBoxStyle.js";
 
 function SelectBoxOptionSize({ value, onChange }) {
   const [releaseStatus, setReleaseStatus] = useState("");
@@ -18,7 +19,7 @@ function SelectBoxOptionSize({ value, onChange }) {
 
   return (
     <>
-      <select
+      <S.Select
         name="releaseStatusCheck"
         onChange={handleChangeStatus}
         value={value}
@@ -30,7 +31,7 @@ function SelectBoxOptionSize({ value, onChange }) {
         <option value="M">M</option>
         <option value="L">L</option>
         <option value="XL">XL</option>
-      </select>
+      </S.Select>
     </>
   );
 }

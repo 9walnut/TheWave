@@ -1,5 +1,6 @@
 // SelectBoxDelivery.js
 import { useState, useEffect } from "react";
+import * as S from "./SelectBoxStyle.js";
 
 function SelectBoxDelivery({ onOrderIdChange, onOrderIdValue }) {
   const [releaseStatus, setReleaseStatus] = useState("");
@@ -28,7 +29,7 @@ function SelectBoxDelivery({ onOrderIdChange, onOrderIdValue }) {
 
   return (
     <>
-      <select
+      <S.Select
         name="releaseStatusCheck"
         onChange={handleChangeStatus}
         value={releaseStatus}
@@ -40,7 +41,7 @@ function SelectBoxDelivery({ onOrderIdChange, onOrderIdValue }) {
         <option value="출고대기">출고 대기</option>
         <option value="출고">출고</option>
         <option value="취소">취소</option>
-      </select>
+      </S.Select>
     </>
   );
 }

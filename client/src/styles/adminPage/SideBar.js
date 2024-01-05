@@ -47,6 +47,12 @@ export const NavListItem = styled.li`
 
     /* background: blue; */
   }
+  &.nav-link:hover {
+    padding: 30px;
+    background-color: #d7e0e5;
+
+    /* background: blue; */
+  }
 `;
 export const NavListItemNone = styled.li`
   &.nav-link {

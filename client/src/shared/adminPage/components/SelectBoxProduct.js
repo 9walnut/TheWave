@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import * as S from "./SelectBoxStyle.js";
 
 function SelectBoxProduct({ value, onChange }) {
   const [releaseStatus, setReleaseStatus] = useState("");
@@ -18,7 +19,7 @@ function SelectBoxProduct({ value, onChange }) {
 
   return (
     <>
-      <select
+      <S.Select
         name="releaseStatusCheck"
         onChange={handleChangeStatus}
         value={value}
@@ -28,7 +29,7 @@ function SelectBoxProduct({ value, onChange }) {
         </option>
         <option value="판매중">판매 중</option>
         <option value="상품준비중">상품 준비 중</option>
-      </select>
+      </S.Select>
     </>
   );
 }
