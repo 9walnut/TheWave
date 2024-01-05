@@ -162,13 +162,13 @@ function ProductsAdd() {
         <S.ProductsLayout2>
           <S.Box3>
             <S.SubjectBox>썸네일 등록</S.SubjectBox>
-            <p>파일 선택 후 등록 버튼을 꼭 눌러주세요❗️</p>
+
             <UploadThumbnail onFileChange={getImageDataThumbnail} />
           </S.Box3>
           <S.Box4>
             <h3>detailUpload</h3>
             <S.SubjectBox>상세 이미지 등록</S.SubjectBox>
-            <p>파일 선택 후 등록 버튼을 꼭 눌러주세요❗️</p>
+
             <UploadDetail onFileChange={getImageDataDetail} />
           </S.Box4>
         </S.ProductsLayout2>
