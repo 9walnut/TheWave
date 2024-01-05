@@ -1,7 +1,7 @@
 const passport = require("passport");
 // const local = require("./localStrategy");
 const kakao = require("./kakaoStrategy");
-// const naver = require("./naverStrategy");
+const naver = require("./naverStrategy");
 const { db } = require("../models/index");
 
 module.exports = () => {
@@ -18,5 +18,5 @@ module.exports = () => {
 
   // local();
   kakao();
-  // naver();
+  naver();
 };

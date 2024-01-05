@@ -32,7 +32,7 @@ module.exports = () => {
               birthday: profile.birthday,
               gender: profile.gender,
               password: randomPassword, // 임의의 비밀번호를 저장
-              providerType: "kakao",
+              // providerType: "kakao",
             });
             firstLogin = true; // 첫 로그인이라는 플래그 설정
           }

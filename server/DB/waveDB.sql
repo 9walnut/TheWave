@@ -15,7 +15,8 @@
 		`phoneNumber`	VARCHAR(11)	 NOT NULL,
 		`birthday`	DATE NOT NULL,
 		`isAdmin`	CHAR(1)	NOT NULL DEFAULT "N",
-		`gender`	CHAR(1)	 NOT NULL
+		`gender`	CHAR(1)	 NOT NULL,
+	  `provider`	VARCHAR(20) NULL
 	);
 
 	CREATE TABLE `address` (
