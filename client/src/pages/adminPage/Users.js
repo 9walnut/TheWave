@@ -14,30 +14,37 @@ const header = [
   {
     text: "NO.",
     value: "userNumber",
+    width: 100,
   },
   {
     text: "아이디",
     value: "userId",
+    width: 230,
   },
   {
     text: "이름",
     value: "userName",
+    width: 180,
   },
   {
     text: "핸드폰 번호",
     value: "phoneNumber",
+    width: 250,
   },
   {
     text: "생년월일",
     value: "birthday",
+    width: 230,
   },
   {
     text: "성별",
     value: "gender",
+    width: 100,
   },
   {
     text: "주소",
     value: "address",
+    width: 430,
   },
 ];
 
