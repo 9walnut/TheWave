@@ -1,3 +1,4 @@
+const passport = require("passport");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
@@ -19,6 +20,7 @@ const https_port = 8000;
 //   ),
 // };
 // -----------------------
+require("dotenv").config();
 
 const server = http.createServer(app);
 // ------------여기 주석-------------
@@ -56,6 +58,8 @@ const adminOrdersRouter = require("./routes/adminOrders");
 
 passportConfig(app);
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use("/api", authRouter);
 app.use("/api/mypage", mypageRouter);
 app.use("/api/category", categoryRouter);
@@ -70,6 +74,7 @@ app.use("/api/admin/orders", adminOrdersRouter);
 // http 서버 오픈
 server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
+  console.log(process.env.KAKAO_ID);
 });
 
 // https 서버 오픈
