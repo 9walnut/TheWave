@@ -1,3 +1,4 @@
+const passport = require("passport");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
@@ -12,17 +13,18 @@ const https_port = 8000;
 
 // https - ssl 인증서 참조
 // ------------여기 주석-------------
-const options = {
-  key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
-  cert: fs.readFileSync(
-    "/etc/letsencrypt/live/thewavemarket.co.kr/fullchain.pem"
-  ),
-};
+// const options = {
+//   key: fs.readFileSync("/etc/letsencrypt/live/thewavemarket.co.kr/privkey.pem"),
+//   cert: fs.readFileSync(
+//     "/etc/letsencrypt/live/thewavemarket.co.kr/fullchain.pem"
+//   ),
+// };
 // -----------------------
+require("dotenv").config();
 
 const server = http.createServer(app);
 // ------------여기 주석-------------
-const https_server = https.createServer(options, app);
+// const https_server = https.createServer(options, app);
 // --------------------------------
 
 app.use(cors());
@@ -56,6 +58,8 @@ const adminOrdersRouter = require("./routes/adminOrders");
 
 passportConfig(app);
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use("/api", authRouter);
 app.use("/api/mypage", mypageRouter);
 app.use("/api/category", categoryRouter);
@@ -70,11 +74,12 @@ app.use("/api/admin/orders", adminOrdersRouter);
 // http 서버 오픈
 server.listen(PORT, function () {
   console.log(`Sever Open: ${PORT}`);
+  console.log(process.env.KAKAO_ID);
 });
 
 // https 서버 오픈
 //------------여기 주석-------------
-https_server.listen(https_port, function () {
-  console.log(`HTTPS Server Open: ${https_port}`);
-});
+// https_server.listen(https_port, function () {
+//   console.log(`HTTPS Server Open: ${https_port}`);
+// });
 // -----------------------
