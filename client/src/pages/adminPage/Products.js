@@ -17,26 +17,32 @@ const header = [
   {
     text: "NO.",
     value: "productID",
+    width: 100,
   },
   {
     text: "상품명",
     value: "productName",
+    width: 230,
   },
   {
     text: "카테고리",
     value: "categoryName",
+    width: 230,
   },
   {
     text: "가격",
     value: "productPrice",
+    width: 230,
   },
   {
     text: "상태",
     value: "productStatus",
+    width: 300,
   },
   {
     text: "정보",
     value: "productInfo",
+    width: 430,
   },
 ];
 

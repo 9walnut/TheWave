@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import AdminButtonGrey from "../../../components/adminPage/AdminButtonGrey";
+import * as S from "./UploadImageBox";
 
 const UploadThumbnailEdit = ({ onFileChange, productId }) => {
   // console.log(productId);
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [thumbnailUrl, setThumbnailUrl] = useState(null);
+  const [fileSelectedMessage, setFileSelectedMessage] = useState("");
+  const [fileBasicMessage, setFileBasicMessage] = useState(
+    "썸네일은 한 장만 선택 가능합니다."
+  );
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
-
+    setFileBasicMessage("");
+    setFileSelectedMessage("😀썸네일 수정 버튼을 꼭 눌러주세요😀");
     // console.log("Selected File1:", file); //찍힘
 
     // handleUpload(file);
@@ -25,6 +32,10 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
 
     if (!selectedFile) {
       console.log("이미지를 선택하세요."); //찍힘
+      setFileSelectedMessage(
+        "✅ 이미지가 선택되지 않았습니다. 미 선택 시 기존 이미지가 업로드 됩니다."
+      );
+      setFileBasicMessage("");
       return;
     }
 
@@ -56,6 +67,7 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
       setThumbnailUrl(response.data.thumbnailUrl);
       // onFileChange(thumbnailUrl);
       onFileChange(response.data.thumbnailUrl);
+      setFileSelectedMessage("");
     } catch (error) {
       console.error("response.data이미지 업로드 실패", error);
       console.error("response 이미지 업로드 실패", error);
@@ -69,11 +81,21 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
   }, [thumbnailUrl, onFileChange]);
   return (
     <div>
-      <br />
-      <br />
-      <p>✅썸네일 수정하기 (변경 될 썸네일 선택)</p>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>썸네일 수정🌀</button>
+      <div style={{ position: "relative" }}>
+        <S.EditFileSelectBtn>파일 선택</S.EditFileSelectBtn>
+
+        <S.FileTypeLeftInput
+          type="file"
+          onChange={handleFileChange}
+        ></S.FileTypeLeftInput>
+      </div>
+      <AdminButtonGrey onClick={handleUpload}>썸네일 수정</AdminButtonGrey>
+      <S.EditMsgBox>
+        <p>{fileBasicMessage}</p>
+        <p>{fileSelectedMessage}</p>
+      </S.EditMsgBox>
+      {/* <input type="file" onChange={handleFileChange} /> */}
+      {/* <button onClick={handleUpload}>썸네일 수정🌀</button> */}
     </div>
   );
 };

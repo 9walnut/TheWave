@@ -76,7 +76,13 @@ function DataTable({
               />
             </S.TableInputTd>
             {headers.map((header) => (
-              <S.TableHeader key={header.text}>
+              <S.TableHeader
+                key={header.text}
+                text={header.text}
+                width={header.width}
+                // style={{ width: `${header.width}px` }}
+              >
+                {/* <S.TableHeader key={header.text}> */}
                 {header.value === "deliveryStatus" ? header.text : header.text}
               </S.TableHeader>
             ))}
@@ -95,7 +101,10 @@ function DataTable({
                 />
               </S.TableTd>
               {headerList.map((value, columnIndex) => (
-                <S.TableTd key={`${keySet}_${index}_${columnIndex}`}>
+                <S.TableTd
+                  key={`${keySet}_${index}_${columnIndex}`}
+                  style={{ padding: "10px" }}
+                >
                   {value === "orderStatus" ? (
                     <SelectBoxDelivery
                       value={selectedStatus}

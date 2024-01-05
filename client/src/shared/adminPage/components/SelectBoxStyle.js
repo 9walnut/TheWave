@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Select = styled.select`
   width: 200px;
-  height: 50px;
+  height: 42px;
   border: 1px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 10px;
