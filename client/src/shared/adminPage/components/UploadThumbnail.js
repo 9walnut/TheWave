@@ -7,14 +7,15 @@ const UploadThumbnail = ({ onFileChange }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [thumbnailUrl, setThumbnailUrl] = useState(null);
   const [fileSelectedMessage, setFileSelectedMessage] = useState("");
-  const [fileBasicMessage, setFileBasicMessage] =
-    useState("썸네일은 한 장만 가능합니다.");
+  const [fileBasicMessage, setFileBasicMessage] = useState(
+    "썸네일은 한 장만 선택 가능합니다."
+  );
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
     setFileBasicMessage("");
-    setFileSelectedMessage("😀업로드하기 버튼을 꼭 눌러주세요😀");
+    setFileSelectedMessage("😀업로드 버튼을 꼭 눌러주세요😀");
     // console.log("Selected File1:", file); //찍힘
 
     // handleUpload(file);
@@ -26,7 +27,8 @@ const UploadThumbnail = ({ onFileChange }) => {
 
   const handleUpload = async () => {
     if (!selectedFile) {
-      setFileSelectedMessage("이미지가 선택되지 않았습니다.");
+      setFileSelectedMessage("✅ 이미지가 선택되지 않았습니다.");
+      setFileBasicMessage("");
       return;
     }
 
@@ -67,46 +69,39 @@ const UploadThumbnail = ({ onFileChange }) => {
   }, [selectedFile]);
 
   return (
-    <div>
-      <S.ThumbnailBox>
-        {/* {fileSelectedMessage && <p>{fileSelectedMessage}</p>} */}
-        {thumbnailUrl ? (
-          <div>
-            {/* <p>썸네일 미리보기:</p> */}
-            <img
-              src={thumbnailUrl}
-              alt="Thumbnail"
-              style={{ width: "300px", height: "auto" }}
-            />
+    <>
+      <S.ImageUploadWrapper>
+        <S.ThumbnailBox>
+          {thumbnailUrl ? (
+            <div>
+              <img
+                src={thumbnailUrl}
+                alt="Thumbnail"
+                style={{ width: "300px", height: "auto" }}
+              />
+            </div>
+          ) : (
+            <>
+              <p>{fileBasicMessage}</p>
+              <p>{fileSelectedMessage}</p>
+            </>
+          )}
+        </S.ThumbnailBox>
+        <div>
+          <div style={{ position: "relative" }}>
+            <S.FileSelectBtn>파일 선택</S.FileSelectBtn>
+
+            <S.FileTypeLeftInput
+              type="file"
+              onChange={handleFileChange}
+            ></S.FileTypeLeftInput>
           </div>
-        ) : (
-          <>
-            <p>{fileBasicMessage}</p>
-            <p>{fileSelectedMessage}</p>
-          </>
-        )}
-      </S.ThumbnailBox>
-
-      <div style={{ position: "relative" }}>
-        <S.FileSelectBtn>파일 선택</S.FileSelectBtn>
-        <input
-          type="file"
-          onChange={handleFileChange}
-          style={{
-            opacity: 0,
-            position: "absolute",
-            top: 5,
-            left: 6,
-            // cursor: "pointer",
-          }}
-        />
-      </div>
-
-      {/* <input type="file" onChange={handleFileChange} /> */}
-      <AdminButtonGrey onClick={handleUpload}>
-        썸네일 업로드하기
-      </AdminButtonGrey>
-    </div>
+          <AdminButtonGrey onClick={handleUpload}>
+            썸네일 업로드
+          </AdminButtonGrey>
+        </div>
+      </S.ImageUploadWrapper>
+    </>
   );
 };
 

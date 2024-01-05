@@ -166,14 +166,16 @@ function ProductsAdd() {
             <UploadThumbnail onFileChange={getImageDataThumbnail} />
           </S.Box3>
           <S.Box4>
-            <h3>detailUpload</h3>
             <S.SubjectBox>상세 이미지 등록</S.SubjectBox>
 
             <UploadDetail onFileChange={getImageDataDetail} />
           </S.Box4>
         </S.ProductsLayout2>
-
-        <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
+        <br />
+        <hr />
+        <S.sendDataBtnWrapper>
+          <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
+        </S.sendDataBtnWrapper>
       </Card>
     </>
   );

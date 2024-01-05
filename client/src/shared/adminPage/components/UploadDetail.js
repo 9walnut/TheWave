@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminButtonGrey from "../../../components/adminPage/AdminButtonGrey";
+import * as S from "./UploadImageBox";
 
 const UploadDetail = ({ onFileChange }) => {
   const [selectedFiles, setSelectedFiles] = useState(null);
   const [detailUrls, setDetailUrls] = useState(null);
+  const [fileSelectedMessage, setFileSelectedMessage] = useState("");
+  const [fileBasicMessage, setFileBasicMessage] = useState(
+    "여러장일 경우 일괄 선택 해주세요."
+  );
 
   const handleFileChange = (event) => {
     const files = event.target.files;
     setSelectedFiles(files);
-
+    setFileBasicMessage("");
+    setFileSelectedMessage("😀업로드 버튼을 꼭 눌러주세요😀");
     // console.log("Selected Files:", files); //찍힘
 
     // handleUpload(files);
@@ -17,7 +23,11 @@ const UploadDetail = ({ onFileChange }) => {
 
   const handleUpload = async () => {
     if (!selectedFiles) {
-      console.log("상세 이미지를 선택하세요."); //찍힘
+      setFileSelectedMessage("이미지가 선택되지 않았습니다.");
+
+      console.log("✅ 이미지가 선택되지 않았습니다."); //찍힘
+      setFileBasicMessage("");
+
       return;
     }
 
@@ -51,6 +61,7 @@ const UploadDetail = ({ onFileChange }) => {
       // 업로드 성공 후 썸네일 저장
       setDetailUrls(response.data.detailUrls);
       onFileChange(detailUrls);
+      setFileSelectedMessage("😀아래에서 상세 이미지를 확인해보세요😀");
     } catch (error) {
       console.error("response.data이미지 업로드 실패", error);
       console.error("response 이미지 업로드 실패", error);
@@ -60,28 +71,48 @@ const UploadDetail = ({ onFileChange }) => {
     // console.log("Selected File3:", selectedFiles);
   }, [selectedFiles]);
   return (
-    <div>
-      <input type="file" onChange={handleFileChange} multiple />
-      <AdminButtonGrey onClick={handleUpload}>
-        상세이미지 업로드하기
-      </AdminButtonGrey>
-
-      {detailUrls && (
+    <>
+      <S.ImageUploadWrapper>
+        {/* <S.DetailBox /> */}
+        <S.DetailBox>
+          <p>{fileBasicMessage}</p>
+          <p>{fileSelectedMessage}</p>
+        </S.DetailBox>
         <div>
-          <p>디테일이미지 미리보기:</p>
-          {/* <img src={detailUrls} alt="Detail" style={{ maxWidth: "100%" }} /> */}
-          {detailUrls.map((url, index) => (
-            <div key={index}>
-              <img
-                src={url}
-                alt={`Detail ${index}`}
-                style={{ width: "100px", height: "100px" }}
-              />
-            </div>
-          ))}
+          <div style={{ position: "relative" }}>
+            <S.FileTypeRightInput
+              type="file"
+              multiple
+              onChange={handleFileChange}
+            ></S.FileTypeRightInput>
+            <S.FileSelectBtn>파일 선택</S.FileSelectBtn>
+          </div>
+          <AdminButtonGrey onClick={handleUpload}>
+            상세이미지 업로드
+          </AdminButtonGrey>
         </div>
-      )}
-    </div>
+      </S.ImageUploadWrapper>
+
+      <div>
+        {detailUrls && detailUrls.length > 0 ? (
+          <div>
+            <div style={{ marginTop: "10px", marginLeft: "20px" }}>
+              {detailUrls.map((url, index) => (
+                <div key={index}>
+                  <img
+                    src={url}
+                    alt={`Detail ${index}`}
+                    style={{ width: "300px", height: "auto" }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -3,12 +3,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import * as S from "../../styles/adminPage/ProductsEdit.js";
+
 import AdminInput from "../../shared/adminPage/components/AdminInput";
 import AdminInputText from "../../shared/adminPage/components/AdminInputText";
 import Card from "../../shared/adminPage/components/Card";
 
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack";
-
+import AdminTextarea from "../../shared/adminPage/components/AdminTextarea.js";
 import SelectBoxProduct from "../../shared/adminPage/components/SelectBoxProduct";
 import SelectBoxCategory from "../../shared/adminPage/components/SelectBoxCategory";
 import AdminSelect from "../../shared/adminPage/components/AdminSelect";
@@ -104,98 +106,107 @@ function ProductsEdit() {
   return (
     <>
       <Card>
-        <h3>Products Edit Page</h3>
-        <hr />
-        <h3>상품 정보</h3>
-        <AdminInput
-          type="text"
-          placeholder="특수문자 허용, 최소 4글자 이상"
-          value={newProductName}
-          onChange={setNewProductName}
-        >
-          상품명
-        </AdminInput>
-        <AdminInput
-          type="text"
-          placeholder="상품 관련 상세 설명을 입력해주세요."
-          style={textAreaStyle}
-          value={newProductInfo}
-          onChange={setNewProductInfo}
-        >
-          상품 상세 설명
-        </AdminInput>
-        <AdminInput
-          type="number"
-          placeholder="숫자만 입력 가능"
-          value={newProductPrice}
-          onChange={setNewProductPrice}
-        >
-          가격
-        </AdminInput>
+        <S.TitleBox>상품 수정하기</S.TitleBox>
+        <S.SubTitleBox>상품 정보</S.SubTitleBox>
+        <S.ProductsLayout1>
+          <S.Box1>
+            <AdminInput
+              type="text"
+              placeholder="특수문자 허용, 최소 4글자 이상"
+              value={newProductName}
+              onChange={setNewProductName}
+            >
+              상품명
+            </AdminInput>
+            <AdminTextarea
+              type="text"
+              placeholder="상품 관련 상세 설명을 입력해주세요."
+              style={textAreaStyle}
+              value={newProductInfo}
+              onChange={setNewProductInfo}
+            >
+              상품 상세 설명
+            </AdminTextarea>
+          </S.Box1>
+          <S.Box2>
+            <AdminInput
+              type="number"
+              placeholder="숫자만 입력 가능"
+              value={newProductPrice}
+              onChange={setNewProductPrice}
+            >
+              가격
+            </AdminInput>
 
-        <AdminSelect title="상품 카테고리">
-          <SelectBoxCategory
-            value={newCategoryName}
-            onChange={setNewCategoryName}
-          />
-        </AdminSelect>
+            <AdminSelect title="상품 카테고리">
+              <SelectBoxCategory
+                value={newCategoryName}
+                onChange={setNewCategoryName}
+              />
+            </AdminSelect>
 
-        <AdminSelect title="상품 상태">
-          <SelectBoxProduct
-            value={newProductStatus}
-            onChange={setNewProductStatus}
-          />
-        </AdminSelect>
-        <AdminSelect title="상품 옵션 - 사이즈">
-          <SelectBoxOptionSize value={newSize} onChange={setNewSize} />
-        </AdminSelect>
-        <AdminInput
-          type="text"
-          placeholder="상품컬러는 , 로 구분"
-          value={newColor}
-          onChange={setNewColor}
-        >
-          상품 옵션 - 컬러
-        </AdminInput>
+            <AdminSelect title="상품 상태">
+              <SelectBoxProduct
+                value={newProductStatus}
+                onChange={setNewProductStatus}
+              />
+            </AdminSelect>
+            <AdminSelect title="상품 옵션 - 사이즈">
+              <SelectBoxOptionSize value={newSize} onChange={setNewSize} />
+            </AdminSelect>
+            <AdminInput
+              type="text"
+              placeholder="상품컬러는 , 로 구분"
+              value={newColor}
+              onChange={setNewColor}
+            >
+              상품 옵션 - 컬러
+            </AdminInput>
+          </S.Box2>
+        </S.ProductsLayout1>
+        <S.SubTitleBox>이미지 정보</S.SubTitleBox>
+        <S.ProductsLayout2>
+          <S.Box3>
+            <S.SubjectBox>썸네일 이미지</S.SubjectBox>
+            <S.ThumbnailBox>
+              <img
+                src={newThumbnailUrl}
+                alt="thumbnail"
+                style={{ width: "300px", height: "auto" }}
+              />
+            </S.ThumbnailBox>
+            <UploadThumbnailEdit
+              onFileChange={getImageDataThumbnail}
+              productId={productId}
+            />
+          </S.Box3>
+          <S.Box4>
+            <S.SubjectBox>상세 이미지 </S.SubjectBox>
+            {newDetailUrls && newDetailUrls.length > 0 && (
+              <>
+                {newDetailUrls.map((url, index) => (
+                  <div key={index}>
+                    <img
+                      src={url}
+                      alt={`Detail ${index}`}
+                      style={{ width: "300px", height: "auto" }}
+                    />
+                  </div>
+                ))}
+              </>
+            )}
 
+            <UploadDetailEdit
+              onFileChange={getImageDataDetail}
+              productId={productId}
+            />
+          </S.Box4>
+        </S.ProductsLayout2>
+        <br />
         <hr />
-        <h3>이미지 정보</h3>
-        <hr />
-        <h3>thumbnailUpload</h3>
-        <p>- 선택된 썸네일 이미지</p>
-        <img
-          src={newThumbnailUrl}
-          alt="thumbnail"
-          style={{ width: "100px", height: "100px" }}
-        />
-        <UploadThumbnailEdit
-          onFileChange={getImageDataThumbnail}
-          productId={productId}
-        />
-        <hr />
-
-        <h3>detailUpload</h3>
-        <p>- 선택된 디테일 이미지</p>
-        {newDetailUrls && newDetailUrls.length > 0 && (
-          <>
-            {newDetailUrls.map((url, index) => (
-              <div key={index}>
-                <img
-                  src={url}
-                  alt={`Detail ${index}`}
-                  style={{ width: "100px", height: "100px" }}
-                />
-              </div>
-            ))}
-          </>
-        )}
-
-        <UploadDetailEdit
-          onFileChange={getImageDataDetail}
-          productId={productId}
-        />
-        <hr />
-        <AdminButtonBlack onClick={sendData}>상품 수정하기</AdminButtonBlack>
+        <S.sendDataBtnWrapper>
+          <AdminButtonBlack onClick={sendData}>상품 수정하기</AdminButtonBlack>
+        </S.sendDataBtnWrapper>
       </Card>
     </>
   );

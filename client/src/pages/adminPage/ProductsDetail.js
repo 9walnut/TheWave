@@ -57,28 +57,52 @@ function ProductsDetail({ products }) {
   return (
     <>
       <Card>
-        <h3>상품 상세 페이지</h3>
-        <h3>productId : {product.productId}</h3>
+        <S.TitleBox>상품 상세 페이지</S.TitleBox>
+        <S.ProductsLayout1>
+          <S.Box1>
+            <S.SubTitleBox>상품 썸네일 이미지</S.SubTitleBox>
+            <img
+              src={product.thumbnailUrl}
+              alt={product.productName}
+              style={{ width: "500px", height: "500px" }}
+            />
+          </S.Box1>
+          <S.Box2>
+            <S.SubTitleBox>상품 상세 정보</S.SubTitleBox>
+            <S.ItemBox>
+              <S.ItemTitle>상품이름</S.ItemTitle>
+              <S.ItemContent>{product.productName}</S.ItemContent>
+            </S.ItemBox>
+            <S.ItemBox>
+              <S.ItemTitle>상품 카테고리</S.ItemTitle>
+              <S.ItemContent>{product.category.categoryName}</S.ItemContent>
+            </S.ItemBox>
+            <S.ItemBox>
+              <S.ItemTitle>상품 설명</S.ItemTitle>
+              <S.ItemContent>{product.productInfo}</S.ItemContent>
+            </S.ItemBox>
+            <S.ItemBox>
+              <S.ItemTitle>상품 옵션(컬러)</S.ItemTitle>
+              <S.ItemContent>{product.productoption.color}</S.ItemContent>
+            </S.ItemBox>
+            <S.ItemBox>
+              <S.ItemTitle>상품 옵션(사이즈)</S.ItemTitle>
+              <S.ItemContent>{product.productoption.size}</S.ItemContent>
+            </S.ItemBox>
+            <S.ItemBox>
+              <S.ItemTitle>가격</S.ItemTitle>
+              <S.ItemContent>
+                <ModifiedPrice number={product.productPrice} /> 원
+              </S.ItemContent>
+            </S.ItemBox>
+            <S.ItemBox>
+              <S.ItemTitle>상태</S.ItemTitle>
+              <S.ItemContent>{product.productStatus}</S.ItemContent>
+            </S.ItemBox>
+          </S.Box2>
+        </S.ProductsLayout1>
 
-        <h3>상품 썸네일 이미지</h3>
-        <img
-          src={product.thumbnailUrl}
-          alt={product.productName}
-          style={{ width: "100px", height: "100px" }}
-        />
-
-        <p>상품이름: {product.productName}</p>
-        <p>상품 카테고리: {product.category.categoryName}</p>
-        <p>설명: {product.productInfo}</p>
-        <p>상품 옵션 - 컬러 : {product.productoption.color}</p>
-
-        <p>상품 옵션 - 사이즈 : {product.productoption.size} </p>
-        <div>
-          가격:
-          <ModifiedPrice number={product.productPrice} /> 원
-        </div>
-        <p>상태: {product.productStatus}</p>
-        <h3>상품 디테일 페이지</h3>
+        <S.SubTitleBox>상품 디테일 이미지</S.SubTitleBox>
         {product.detailUrls && product.detailUrls.length > 0 && (
           <>
             {product.detailUrls.map((url, index) => (
@@ -86,7 +110,7 @@ function ProductsDetail({ products }) {
                 <img
                   src={url}
                   alt={`Detail ${index}`}
-                  style={{ width: "100px", height: "100px" }}
+                  style={{ width: "500px", height: "500px" }}
                 />
               </div>
             ))}
