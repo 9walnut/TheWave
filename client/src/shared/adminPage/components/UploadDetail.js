@@ -16,7 +16,6 @@ const UploadDetail = ({ onFileChange }) => {
     setSelectedFiles(files);
     setFileBasicMessage("");
     setFileSelectedMessage("😀업로드 버튼을 꼭 눌러주세요😀");
-    // console.log("Selected Files:", files); //찍힘
 
     // handleUpload(files);
   };
@@ -24,8 +23,6 @@ const UploadDetail = ({ onFileChange }) => {
   const handleUpload = async () => {
     if (!selectedFiles) {
       setFileSelectedMessage("이미지가 선택되지 않았습니다.");
-
-      console.log("✅ 이미지가 선택되지 않았습니다."); //찍힘
       setFileBasicMessage("");
 
       return;
