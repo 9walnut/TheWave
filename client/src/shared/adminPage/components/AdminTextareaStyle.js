@@ -28,6 +28,7 @@ export const StyledTextarea = styled.textarea`
   margin-left: 5px;
   font-size: larger;
   background-color: #f7faf9;
+  background-color: white;
   resize: none;
   border: 1px solid #e0e0e0;
 

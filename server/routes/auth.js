@@ -42,6 +42,20 @@ router.get(
   }
 );
 
+// 네이버 로그인
+router.get("/login/naver", passport.authenticate("naver"));
+
+// 네이버 로그인 콜백
+router.get(
+  "/login/naver/callback",
+  passport.authenticate("naver", {
+    failureRedirect: "/",
+  }),
+  (req, res) => {
+    res.redirect("/");
+  }
+);
+
 // '로그아웃' 버튼 클릭 시
 router.get("/logout", controller.logout);
 
