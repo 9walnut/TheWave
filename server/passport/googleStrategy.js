@@ -1,5 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const crypto = require("crypto");
+
 const {
   db,
   db: { Op },
@@ -17,6 +19,8 @@ module.exports = () => {
       },
       async (accessToken, refreshToken, profile, done) => {
         console.log("google profile ", profile);
+        console.log("구글 accessToken", accessToken);
+        console.log("구글 refreshToken", refreshToken); // undefined
         try {
           const exUser = await db.users.findOne({
             // 이미 가입된 아이디인지 확인
@@ -26,16 +30,18 @@ module.exports = () => {
             done(null, exUser); // 로그인 인증 완료
           } else {
             const randomPassword = crypto.randomBytes(20).toString("hex");
-            const newUser = await db.users.create({
+            const passwordSalt = crypto.randomBytes(16).toString("hex");
+
+            const user = await db.users.create({
               userId: profile.id,
               userName: profile.displayName,
               phoneNumber: "00000000000",
-              birthday: "2024-00-00",
+              birthday: "1999-01-01",
               gender: "A",
               password: randomPassword,
-              passwordSalt: randomPassword,
+              passwordSalt: passwordSalt,
             });
-            done(null, newUser); // 회원가입하고 로그인 인증 완료
+            done(null, user); // 회원가입하고 로그인 인증 완료
           }
         } catch (error) {
           console.error(error);

@@ -15,15 +15,17 @@ router.post("/login", controller.loginUser);
 // 구글 로그인
 router.get(
   "/login/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", { scope: ["profile"] })
 );
 
 // 구글 로그인 콜백
 router.get(
   "/login/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
+  passport.authenticate("google", {
+    failureRedirect: "http://localhost:3000/login",
+  }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("http://localhost:3000");
   }
 );
 
