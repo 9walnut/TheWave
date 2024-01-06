@@ -1,10 +1,8 @@
 const passport = require("passport");
 const KakaoStrategy = require("passport-kakao").Strategy;
 const { db } = require("../models/index");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto"); // 추가
-
-const secret = process.env.SECRET_KEY; // 암호화에 사용할 키
+// const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 module.exports = () => {
   passport.use(
@@ -14,7 +12,6 @@ module.exports = () => {
         callbackURL: "http://localhost:8001/api/login/kakao/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log("kakao profile", profile);
         try {
           let user = await db.users.findOne({
             where: {
@@ -35,7 +32,7 @@ module.exports = () => {
               password: randomPassword,
               passwordSalt: passwordSalt,
               // providerType: "kakao",
-              userName: profile.displayName || "Unknown", // 카카오 프로필에서 제공하지 않을 경우 기본값
+              userName: profile.displayName || "Unknown",
               phoneNumber: phoneNumber,
               birthday: profile._json.kakao_account.birthday || "1900-01-01",
               gender: profile._json.kakao_account.gender || "M",
