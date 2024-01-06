@@ -5,14 +5,16 @@ const naver = require("./naverStrategy");
 const { db } = require("../models/index");
 
 module.exports = () => {
-  passport.serializeUser((db, done) => {
-    done(null, db.users.userid);
+  passport.serializeUser((user, done) => {
+    done(null, user.userId);
   });
 
-  passport.deserializeUser((userid, done) => {
+  passport.deserializeUser((userId, done) => {
     db.users
-      .findOne({ where: { userid } })
-      .then((user) => done(null, user))
+      .findOne({ where: { userId } })
+      .then((user) => {
+        done(null, user); // 사용자 객체로 역직렬화
+      })
       .catch((err) => done(err));
   });
 
