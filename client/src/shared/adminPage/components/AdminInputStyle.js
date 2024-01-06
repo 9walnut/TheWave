@@ -28,6 +28,7 @@ export const StyledInput = styled.input`
   height: 40px;
   background-color: transparent;
   margin-left: 5px;
+  font-size: large;
 
   &::placeholder {
     font-size: larger;
