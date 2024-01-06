@@ -12,6 +12,6 @@ router.patch("/:cartId", controller.editCart);
 router.delete("/", controller.deleteCart);
 
 // 장바구니 결제하기
-router.get("/checkout", controller.payCart);
+router.post("/checkout", controller.payCart);
 
 module.exports = router;
