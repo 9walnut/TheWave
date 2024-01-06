@@ -13,7 +13,11 @@ exports.productPage = async (req, res) => {
       attributes: ["categoryName"],
     });
 
-    res.json({ productDetail, categoryName });
+    const productOption = await db.productoption.findOne({
+      where: { productId: req.params.productId },
+    });
+
+    res.json({ productDetail, categoryName, productOption });
     console.log(categoryName);
   } catch (error) {
     console.error(error);

@@ -5,3 +5,5 @@ ca.key
 cert.crt
 cert.key
 .env
+.env.development
+client/.env.development

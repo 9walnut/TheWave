@@ -8,14 +8,14 @@
     
 	CREATE TABLE `users` (
 		`userNumber`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		`userId`	VARCHAR(12)	NOT NULL,
+		`userId`	VARCHAR(200)	NOT NULL,
 		`password`	VARCHAR(255) NOT NULL,
 		`passwordSalt`	VARCHAR(255) NOT NULL,
 		`userName`	VARCHAR(20)	 NOT NULL,
 		`phoneNumber`	VARCHAR(11)	 NOT NULL,
 		`birthday`	DATE NOT NULL,
 		`isAdmin`	CHAR(1)	NOT NULL DEFAULT "N",
-		`gender`	CHAR(1)	 NOT NULL,
+		`gender`	CHAR(1)	 NOT NULL
 	);
 
 	CREATE TABLE `address` (
@@ -45,8 +45,8 @@
 
 	CREATE TABLE `productoption` (
 		`productId`	INT	NOT NULL,
-		`color`	JSON	NOT NULL,
-		`size`	JSON	 NOT NULL,
+		`color`	JSON NOT NULL,
+		`size`	JSON NOT NULL,
 		PRIMARY KEY (`productId`),
 		FOREIGN KEY (`productId`) REFERENCES `products` (`productId`)
 	);
@@ -234,6 +234,7 @@ VALUES
 	(16, '["분홍"]', '["S"]'),
 	(17, '["분홍"]', '["S", "M", "L"]'),
 	(18, '["흰색"]', '["M"]');
+	(19, '["흰색"]', '["L"]');
 
     
 INSERT INTO carts (userNumber, productId, cartQuantity, isChecked, isDeleted)

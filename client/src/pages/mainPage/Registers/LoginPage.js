@@ -6,6 +6,7 @@ import Navbar from "../../../components/mainPage/Navbar";
 import Footer from "../../../components/mainPage/Footer";
 import LoginKakao from "../../../shared/adminPage/components/LoginKakao";
 import LoginNaver from "../../../shared/adminPage/components/LoginNaver";
+import LoginGoogle from "../../../shared/adminPage/components/LoginGoogle";
 import axios from "axios";
 import "../MainPage.css";
 import * as S from "./LoginPageStyle.js";
@@ -129,6 +130,7 @@ function LoginPage() {
             소셜 로그인
             <LoginKakao />
             <LoginNaver />
+            <LoginGoogle />
             <br />
           </form>
         </S.FormBox>
