@@ -17,8 +17,20 @@ exports.getCart = async (req, res) => {
 
       cart = await db.carts.findAll({
         where: { userNumber: tokenCheck.userData.userNumber },
+        include: [
+          {
+            model: db.products,
+            as: "product",
+            required: true,
+            include: [
+              {
+                model: db.productoption,
+                as: "productoption",
+              },
+            ],
+          },
+        ],
       });
-      console.log("cart", cart);
     } else {
       // 비회원인 경우
       console.log("넌 비회원");
@@ -32,11 +44,12 @@ exports.getCart = async (req, res) => {
 };
 
 // 장바구니 수정
+// ------------ 이게 과연 필요할까 고민 --------------
 exports.editCart = async (req, res) => {
   try {
     const { cartId } = req.params;
-    const { cartQuantity, color, size, deliveryHope } = req.body; // 옵션 정보 추가
-    let updateData = { cartQuantity, color, size, deliveryHope }; // 수정할 데이터에 옵션 정보 포함
+    const { cartQuantity, color, size } = req.body; // 옵션 정보 추가
+    let updateData = { cartQuantity, color, size }; // 수정할 데이터에 옵션 정보 포함
     const editCart = await db.carts.update(updateData, { where: { cartId } });
     return res.send(editCart);
   } catch (error) {
@@ -61,58 +74,53 @@ exports.deleteCart = async (req, res) => {
   }
 };
 
-// 장바구니 결제하기 버튼
-// cartItems는 체크박스 체크된 항목
+// 장바구니 구매하기 버튼 - 주문 정보 페이지로 정보 발송
 exports.payCart = async (req, res) => {
+  const { cartQuantity, color, size } = req.body;
+  const accessToken = req.headers["authorization"];
   try {
-    const { userNumber, cartItems } = req.body;
-    const t = await db.sequelize.transaction();
+    const { cartIds } = req.body.cartId;
+    const isChecked = await db.carts.update(
+      { isChecked: 1 },
+      { where: { cartId: { [Op.in]: cartIds } } }
+    );
+    const tokenCheck = await verifyToken(accessToken);
+    const userNumber = tokenCheck.userData.userNumber;
 
-    try {
-      for (let i = 0; i < cartItems.length; i++) {
-        const { cartId, quantity, color, size, deliveryHope } = cartItems[i];
+    const userInfo = await db.users.findOne({
+      where: { userNumber: userNumber },
+      attributes: ["userName", "phoneNumber"],
+    });
 
-        const cart = await db.carts.findOne(
-          { where: { cartId, userNumber } },
-          { transaction: t }
-        );
-        if (!cart || cart.isDeleted) {
-          throw new Error(`Cart not found: ${cartId}`);
-        }
+    const userAddress = await db.address.findOne({
+      where: { userNumber: userNumber },
+      attributes: ["address"],
+    });
 
-        const productOption = await db.productoption.findOne(
-          { where: { productId: cart.productId, color, size } }, // deliveryHope 조건 제거
-          { transaction: t }
-        );
+    const product = await db.carts.findAll({
+      where: { cartId: cartIds, isChecked: 1 },
+      attributes: ["productId"],
+    });
 
-        const order = await db.orders.create(
-          {
-            userNumber,
-            cartId,
-            productId: cart.productId,
-            orderQuantity: quantity,
-            color,
-            size,
-            deliveryRequest: deliveryHope,
-            orderDate: new Date(),
-            orderStatus: 1,
-            changeDate: new Date(),
-          },
-          { transaction: t }
-        );
+    // const productInfo = await db.products.findOne({
+    //   where: { productId: productId },
+    //   attributes: ["productName", "thumbnailUrl", "productPrice"],
+    // });
 
-        // 결제가 완료되면 장바구니 제거
-        // await cart.update({ isDeleted: true }, { transaction: t });
-      }
-
-      await t.commit();
-      res.send(true);
-    } catch (error) {
-      await t.rollback();
-      throw error;
-    }
+    if (userInfo && userAddress) {
+      res.json({
+        userInfo,
+        userAddress,
+        // productInfo,
+        cartQuantity,
+        product,
+        color,
+        size,
+      });
+      if (isChecked[0] > 0) return res.send(true);
+    } else res.send({ result: false });
   } catch (error) {
     console.error(error);
-    res.status(500).send("결제 오류");
+    res.status(500).send("주문 정보 불러오기 오류");
   }
 };
