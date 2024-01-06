@@ -9,23 +9,27 @@ import axios from "axios";
 
 function OrderListPage() {
   const { state } = useLocation();
-  console.log("받아온 데이터입니다.", state);
   const { productId } = useParams();
-  const [size, setSize] = useState(state.size);
-  const [color, setColor] = useState(state.color);
+  const { size, color, productInfo, userAddress, userInfo } = state;
   const [orderQuantity, SetOrderQuantity] = useState(state.orderQuantity);
-  const [userName, setUserName] = useState("");
-  const [receiveName, setReceiveName] = useState("");
+  const [receiveName, setReceiveName] = useState(userInfo.userName);
   const [deliveryRequest, setDeliveryRequest] = useState("");
+  const totalPrice = productInfo.productPrice * orderQuantity;
 
-  const payment = async () => {
+  const postPayment = async () => {
     try {
+      const data = {
+        orderQuantity,
+        color,
+        size,
+        address: userAddress.address,
+        receiveName: receiveName,
+        deliveryRequest: deliveryRequest,
+      };
       const headers = getAccessToken();
-      const res = await axios.post(
-        `/api/payment/${productId}`,
-        {},
-        { headers }
-      );
+      const res = await axios.post(`/api/payment/${productId}`, data, {
+        headers,
+      });
     } catch (error) {
       console.log("ㅋㅋ실패요", error);
     }
@@ -49,10 +53,23 @@ function OrderListPage() {
                 <div>{color}</div>
               </S.Productbox>
             </li>
+            <input
+              type="text"
+              value={receiveName}
+              onChange={(e) => setReceiveName(e.target.value)}
+            />
+            <input
+              type="text"
+              value={deliveryRequest}
+              onChange={(e) => setDeliveryRequest(e.target.value)}
+            />
           </S.OrderLeftBox>
           {/* 오른쪽 */}
           <S.OrderRightBox>
             <div>주문 정보 확인</div>
+            <div>Total</div>
+            <div>{totalPrice}</div>
+            <button onClick={postPayment}>결제하기</button>
           </S.OrderRightBox>
         </S.OrderListLayout>
       </section>

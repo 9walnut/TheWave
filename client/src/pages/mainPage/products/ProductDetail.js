@@ -123,7 +123,7 @@ function ProductDetail() {
         }
       );
       if (!res.data.result == true) {
-        console.log("결제완", res.data);
+        console.log("정상작동", res.data);
         navigate(`/payment/orderList/${productId}`, { state: res.data });
       } else {
         console.log("삐빅실패");
@@ -194,7 +194,24 @@ function ProductDetail() {
           </S.ProductInfoBox>
         </S.ProductTopBox>
         {/* 상품 사진 ~ 내용 등 */}
-        <S.ProductContentBox>{product.productInfo}</S.ProductContentBox>
+        <S.ProductContentBox>
+          {product.detailUrls && product.detailUrls.length > 0 && (
+            <>
+              {product.detailUrls.map((url, index) => (
+                <div key={index}>
+                  <img
+                    src={url}
+                    alt={`Detail ${index}`}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                    }}
+                  />
+                </div>
+              ))}
+            </>
+          )}
+        </S.ProductContentBox>
       </S.ProductLayout>
     </>
   );
