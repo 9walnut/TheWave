@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { thumbnailUpload, detailUpload } = require("../middleware/imageUpload");
 const controller = require("../controllers/Cadmin");
 
 // 관리 페이지 렌더링

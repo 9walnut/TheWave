@@ -19,7 +19,7 @@ router.get("/login/kakao", passport.authenticate("kakao"));
 router.get(
   "/login/kakao/callback",
   passport.authenticate("kakao", {
-    failureRedirect: "http://localhost:3000/login/kakao", // 로그인 실패 시 리다이렉션 주소
+    failureRedirect: "http://localhost:3000/login", // 로그인 실패 시 리다이렉션 주소
   }),
   (req, res) => {
     // 로그인 성공 시 리다이렉션 주소
@@ -34,10 +34,10 @@ router.get("/login/naver", passport.authenticate("naver"));
 router.get(
   "/login/naver/callback",
   passport.authenticate("naver", {
-    failureRedirect: "/",
+    failureRedirect: "http://localhost:3000/login",
   }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("http://localhost:3000");
   }
 );
 
