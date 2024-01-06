@@ -8,5 +8,5 @@ export const LoginGoogleStyle = styled.div`
   margin: 10px auto;
   color: transparent;
   width: 300px;
-  height: 60px;
+  height: 45px;
 `;
