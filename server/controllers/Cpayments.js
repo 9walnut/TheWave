@@ -58,6 +58,7 @@ exports.payment = async (req, res) => {
     cartId,
   } = req.body;
   const accessToken = req.headers["authorization"];
+
   try {
     const tokenCheck = await verifyToken(accessToken);
     const userNumber = tokenCheck.userData.userNumber;
