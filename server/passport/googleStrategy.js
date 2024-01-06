@@ -30,12 +30,13 @@ module.exports = () => {
             const randomPassword = crypto.randomBytes(20).toString("hex");
             const passwordSalt = crypto.randomBytes(16).toString("hex");
 
+            // 받아올 수 없는 부분은 임의 값 넣어 유저 데이터 저장
             const user = await db.users.create({
               userId: profile.id,
               userName: profile.displayName,
-              phoneNumber: "00000000000",
-              birthday: "1999-01-01",
-              gender: "A",
+              phoneNumber: profile.phoneNumber || "00000000000",
+              birthday: profile.birthday || "1999-01-01",
+              gender: profile.gender || "A",
               password: randomPassword,
               passwordSalt: passwordSalt,
             });
