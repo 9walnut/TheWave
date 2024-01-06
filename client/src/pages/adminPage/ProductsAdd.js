@@ -103,15 +103,6 @@ function ProductsAdd() {
             >
               상품명
             </AdminInput>
-            {/* <AdminInput
-              type="text"
-              placeholder="상품 관련 상세 설명을 입력해주세요."
-              style={textAreaStyle}
-              value={productInfo}
-              onChange={setProductInfo}
-            >
-              상품 상세 설명
-            </AdminInput> */}
             <AdminTextarea
               type="text"
               placeholder="상품 관련 상세 설명을 입력해주세요."
