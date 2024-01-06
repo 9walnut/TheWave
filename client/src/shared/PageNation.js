@@ -15,7 +15,7 @@ function PageNation({ total, limit, page, setPage }) {
       buttons.push(
         <S.PageButton
           key={i}
-          active={i === page}
+          active={i === page ? true : false}
           onClick={() => handlePageClick(i)}
         >
           {i}

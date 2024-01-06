@@ -4,6 +4,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  padding: 5px 30px 5px 30px;
 `;
 
 export const InnerCardTitleBox = styled.div`

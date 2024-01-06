@@ -76,7 +76,17 @@ export const SubjectBox = styled.div`
   margin-left: 19px;
 `;
 
-export const sendDataBtnWrapper = styled.div`
+export const SendDataBtnWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+export const AlertMsgBox = styled.span`
+  /* background-color: blue; */
+  width: auto;
+  height: auto;
+  margin-left: 30px;
+  font-weight: 500;
+  color: #4681ad;
+  border-bottom: 1px solid #4681ad;
 `;

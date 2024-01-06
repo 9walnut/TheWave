@@ -1,6 +1,6 @@
 // ProductsAdd.js 파일
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as S from "../../styles/adminPage/ProductsAdd.js";
@@ -32,14 +32,27 @@ function ProductsAdd() {
   const [productPrice, setProductPrice] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [productStatus, setProductStatus] = useState("");
-
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
-
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [detailUrls, setDetailUrls] = useState(null);
 
-  console.log("dddd", productStatus);
+  const [alertProductName, setAlertProductName] = useState("");
+  const [alertProductPrice, setAlertProductPrice] = useState("");
+
+  useEffect(() => {
+    if (productName.length <= 3) {
+      setAlertProductName("최소 4글자 이상 입력해주세요. 특수문자 허용 😀");
+    } else {
+      setAlertProductName("");
+    }
+
+    if (productPrice !== Number) {
+      setAlertProductPrice("숫자만 입력해주세요. 😀");
+    } else {
+      setAlertProductPrice("");
+    }
+  }, [productName, productPrice]);
 
   const getImageDataThumbnail = (thumbnailUrl) => {
     setThumbnailUrl(thumbnailUrl);
@@ -69,7 +82,7 @@ function ProductsAdd() {
         size,
         // optionColor,
       };
-      console.log("ㅎㅎㅎㅎ", detailUrls);
+      // console.log("ㅎㅎㅎㅎ", detailUrls);
 
       const response = await axios.post("/api/admin/products/add", data);
       console.log("전송 성공response 데이터", response);
@@ -83,6 +96,7 @@ function ProductsAdd() {
         console.log("안보내짐");
       }
     } catch (error) {
+      // alert("입력란과 이미지를 모두 등록해주세요.");
       console.log("에러", error);
     }
   };
@@ -100,8 +114,10 @@ function ProductsAdd() {
               placeholder="특수문자 허용, 최소 4글자 이상"
               value={productName}
               onChange={setProductName}
+              required
+              minlength="4"
             >
-              상품명
+              상품명 <S.AlertMsgBox>{alertProductName}</S.AlertMsgBox>
             </AdminInput>
             <AdminTextarea
               type="text"
@@ -119,7 +135,7 @@ function ProductsAdd() {
               value={productPrice}
               onChange={setProductPrice}
             >
-              가격
+              가격<S.AlertMsgBox>{alertProductPrice}</S.AlertMsgBox>
             </AdminInput>
 
             <AdminSelect title="상품 카테고리">
@@ -164,9 +180,9 @@ function ProductsAdd() {
         </S.ProductsLayout2>
         <br />
         <hr />
-        <S.sendDataBtnWrapper>
+        <S.SendDataBtnWrapper>
           <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
-        </S.sendDataBtnWrapper>
+        </S.SendDataBtnWrapper>
       </Card>
     </>
   );
