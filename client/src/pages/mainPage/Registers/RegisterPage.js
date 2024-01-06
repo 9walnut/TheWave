@@ -9,21 +9,26 @@ import AddressSearch from "../../../components/AddressSearch";
 import * as S from "./RegisterPageStyle.js";
 
 function Register() {
+  const [address, setAddress] = useState("");
   const navigate = useNavigate();
   const {
     register,
-    setValue,
+    // setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleAddressChange = (addressData) => {
+  const getAddress = (addressData) => {
+    console.log("address데이타입니다다다다", addressData);
     const newAddress = `${addressData.selectAddress} ${addressData.postNumber} ${addressData.detailAddress}`;
-    console.log(newAddress);
-    setValue(newAddress);
+    console.log("newAddress입니다.", newAddress);
+    setAddress(newAddress);
+    // return newAddress;
   };
 
   const onSubmit = async (data) => {
+    console.log("주소", address);
+    console.log(data);
     try {
       const res = await axios.post("api/register", data);
       console.log("Signup Successful:", res);
@@ -111,9 +116,10 @@ function Register() {
             <br />
             <label>
               <AddressSearch
+                getAddress={getAddress}
+                register={register}
                 placeholder="주소"
-                onChange={handleAddressChange}
-                {...register("address", { required: "주소를 입력하세요" })}
+                value={address}
               />
               {errors.address && <p>{errors.address.message}</p>}
             </label>

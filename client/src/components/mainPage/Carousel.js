@@ -32,11 +32,11 @@ function MainCarousel() {
     infinite: true,
     speed: 700,
     centerMode: true,
-    slidesToShow: 1,
+    slidesToShow: 2,
     slidesToScroll: 2,
     arrows: true,
     autoplay: true, // 자동 캐러셀
-    autoplaySpeed: 2000, // 자동 캐러셀 속도
+    autoplaySpeed: 3000, // 자동 캐러셀 속도
     // responsive: [
     //   {
     //     breakpoint: 2300,
