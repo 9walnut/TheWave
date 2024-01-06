@@ -3,7 +3,7 @@ import Postcode from "@actbase/react-daum-postcode";
 import Modal from "./Modal";
 import * as S from "./AddressSearchStyle.js";
 
-function AddressSearch({ onChange }) {
+function AddressSearch({ getAddress, register }) {
   // function AddressSearch() {
   const [isModal, setModal] = useState(false);
   const [selectAddress, setAddress] = useState("");
@@ -11,15 +11,20 @@ function AddressSearch({ onChange }) {
   const [detailAddress, setdetailAd] = useState("");
 
   useEffect(() => {
-    if (onChange) {
-      setAddress(selectAddress);
-      setPostNumber(postNumber);
-      setdetailAd(detailAddress);
-      console.log("하히앟잏이ㅣ");
-      console.log(selectAddress);
-      console.log(detailAddress);
-    }
+    setAddress(selectAddress);
+    setPostNumber(postNumber);
+    setdetailAd(detailAddress);
+    const address = {
+      selectAddress: selectAddress,
+      postNumber: postNumber,
+      detailAddress: detailAddress,
+    };
+    getAddress(address);
   }, [selectAddress, postNumber, detailAddress]);
+
+  const handleAddressChange = (addressData) => {
+    getAddress(addressData);
+  };
 
   return (
     <>
@@ -46,6 +51,7 @@ function AddressSearch({ onChange }) {
           type="text"
           value={selectAddress}
           readOnly
+          {...register("address", { required: "주소를 입력하세요" })}
         />
       </div>
       <div>
@@ -67,6 +73,8 @@ function AddressSearch({ onChange }) {
           required
         />
       </div>
+
+      {handleAddressChange({ selectAddress, postNumber, detailAddress })}
     </>
   );
 }

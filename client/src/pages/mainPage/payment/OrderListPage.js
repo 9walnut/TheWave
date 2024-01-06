@@ -43,7 +43,7 @@ function OrderListPage() {
             <li>
               <S.Productbox>
                 <S.ImgBox>
-                  <img src={state.productInfo.thumbnailUrl} />
+                  {/* <img src={state.productInfo.thumbnailUrl} /> */}
                 </S.ImgBox>
                 <div>{size}</div>
                 <div>{color}</div>

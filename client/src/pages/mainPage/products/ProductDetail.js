@@ -14,20 +14,8 @@ function ProductDetail() {
   const [categoryName, setCategoryName] = useState();
   const [value, displayValue, setValue] = SeperatedPrice(0);
   const [orderQuantity, SetOrderQuantity] = useState(0);
-  const [size, setSize] = useState("소");
-  const [color, setColor] = useState("파랑");
-
-  const selectColor = [
-    { value: "빨강", name: "빨강" },
-    { value: "초록", name: "초록" },
-    { value: "파랑", name: "파랑" },
-  ];
-
-  const selectSize = [
-    { value: "소", name: "소" },
-    { value: "중", name: "중" },
-    { value: "대", name: "대" },
-  ];
+  const [size, setSize] = useState([]);
+  const [color, setColor] = useState([]);
 
   const handleSize = (e) => {
     setSize(e.target.value);
@@ -45,6 +33,8 @@ function ProductDetail() {
       console.log(res.data);
       setProduct(res.data.productDetail);
       setCategoryName(res.data.categoryName.categoryName);
+      setColor(res.data.productOption.color);
+      setSize(res.data.productOption.size);
     } catch (error) {
       console.log("상품 불러오기 에러", error);
     }
@@ -149,20 +139,20 @@ function ProductDetail() {
             </div>
             <div>
               <select onChange={handleColor} value={color}>
-                {selectColor.map((item) => {
+                {color.map((color) => {
                   return (
-                    <option value={item.value} key={item.value}>
-                      {item.name}
+                    <option value={color} key={color}>
+                      {color}
                     </option>
                   );
                 })}
               </select>
               {/*  */}
               <select onChange={handleSize} value={size}>
-                {selectSize.map((item) => {
+                {size.map((size) => {
                   return (
-                    <option value={item.value} key={item.value}>
-                      {item.name}
+                    <option value={size} key={size}>
+                      {size}
                     </option>
                   );
                 })}
