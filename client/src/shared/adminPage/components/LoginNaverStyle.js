@@ -9,5 +9,5 @@ export const LoginNaverStyle = styled.div`
   /* padding: -10px; */
   color: transparent;
   width: 300px;
-  height: 45px;
+  height: 60px;
 `;

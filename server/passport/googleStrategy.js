@@ -40,6 +40,11 @@ module.exports = () => {
               password: randomPassword,
               passwordSalt: passwordSalt,
             });
+
+            const address = await db.address.create({
+              userNumber: user.userNumber,
+              address: profile.address || "No address",
+            });
             done(null, user); // 회원가입하고 로그인 인증 완료
           }
         } catch (error) {
