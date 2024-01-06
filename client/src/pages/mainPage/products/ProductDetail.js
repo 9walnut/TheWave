@@ -14,8 +14,10 @@ function ProductDetail() {
   const [categoryName, setCategoryName] = useState();
   const [value, displayValue, setValue] = SeperatedPrice(0);
   const [orderQuantity, SetOrderQuantity] = useState(0);
-  const [size, setSize] = useState([]);
-  const [color, setColor] = useState([]);
+  const [sizeList, setSizeList] = useState([]);
+  const [colorList, setColorList] = useState([]);
+  const [size, setSize] = useState();
+  const [color, setColor] = useState();
 
   const handleSize = (e) => {
     setSize(e.target.value);
@@ -24,6 +26,7 @@ function ProductDetail() {
   const handleColor = (e) => {
     setColor(e.target.value);
   };
+
   console.log("상품 아이디", productId);
 
   // 상품 불러오기
@@ -33,8 +36,8 @@ function ProductDetail() {
       console.log(res.data);
       setProduct(res.data.productDetail);
       setCategoryName(res.data.categoryName.categoryName);
-      setColor(res.data.productOption.color);
-      setSize(res.data.productOption.size);
+      setColorList(res.data.productOption.color);
+      setSizeList(res.data.productOption.size);
     } catch (error) {
       console.log("상품 불러오기 에러", error);
     }
@@ -43,6 +46,17 @@ function ProductDetail() {
   useEffect(() => {
     getProductDetail();
   }, []);
+
+  useEffect(() => {
+    setSize(sizeList[0]);
+    setColor(colorList[0]);
+  }, [sizeList, colorList]);
+
+  // useEffect(() => {
+  //   console.log("플덕입니다", product);
+  //   setSize(product.productOption.size);
+  //   setColor(product.productOption.color);
+  // }, [product]);
 
   const plusBtn = () => {
     SetOrderQuantity(orderQuantity + 1);
@@ -108,9 +122,11 @@ function ProductDetail() {
           headers,
         }
       );
-      if (!res.data.result) {
-        console.log("결제완", res.data);
+      if (!res.data.result == true) {
+        console.log("정상작동", res.data);
         navigate(`/payment/orderList/${productId}`, { state: res.data });
+      } else {
+        console.log("삐빅실패");
       }
     } catch (error) {
       console.log("결제에러", error);
@@ -139,7 +155,7 @@ function ProductDetail() {
             </div>
             <div>
               <select onChange={handleColor} value={color}>
-                {color.map((color) => {
+                {colorList.map((color) => {
                   return (
                     <option value={color} key={color}>
                       {color}
@@ -149,7 +165,7 @@ function ProductDetail() {
               </select>
               {/*  */}
               <select onChange={handleSize} value={size}>
-                {size.map((size) => {
+                {sizeList.map((size) => {
                   return (
                     <option value={size} key={size}>
                       {size}
@@ -178,7 +194,24 @@ function ProductDetail() {
           </S.ProductInfoBox>
         </S.ProductTopBox>
         {/* 상품 사진 ~ 내용 등 */}
-        <S.ProductContentBox>{product.productInfo}</S.ProductContentBox>
+        <S.ProductContentBox>
+          {product.detailUrls && product.detailUrls.length > 0 && (
+            <>
+              {product.detailUrls.map((url, index) => (
+                <div key={index}>
+                  <img
+                    src={url}
+                    alt={`Detail ${index}`}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                    }}
+                  />
+                </div>
+              ))}
+            </>
+          )}
+        </S.ProductContentBox>
       </S.ProductLayout>
     </>
   );
