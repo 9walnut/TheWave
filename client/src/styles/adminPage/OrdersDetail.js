@@ -29,15 +29,13 @@ export const SubTitleBox = styled.div`
   font-size: larger;
   font-weight: 600;
   margin-bottom: 10px;
+  text-align: center;
 `;
 
 export const OrdersDetailLayout1 = styled.div`
+  /* background-color: violet; */
   /* background-color: #eff2f9; */
   display: flex;
-  /* grid-template-columns: 0.8fr 0.8fr;
-  grid-gap: 10px;
-  height: 200px; */
-  background-color: violet;
   justify-content: space-between;
 
   align-items: center;
@@ -48,24 +46,23 @@ export const OrdersDetailLayout1 = styled.div`
 `;
 
 export const Box1 = styled.div`
+  /* background-color: red; */
   background-color: none;
-  background-color: red;
   margin-left: -30px;
+
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
 
 export const Box2 = styled.div`
+  /* background-color: blue; */
   background-color: none;
-  background-color: blue;
-  margin-left: 150px;
-`;
-export const Box3 = styled.div`
-  background-color: none;
-  background-color: blue;
   margin-left: 28px;
 `;
 
 export const ItemBox = styled.div`
-  width: 810px;
+  width: 880px;
   height: 60px;
   flex-shrink: 0;
   border-radius: 13px;
@@ -117,4 +114,10 @@ export const OrderProductImgBox = styled.div`
   overflow: hidden;
 
   background-color: yellow;
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  margin: 70px 0px 10px 0px;
+  justify-content: center;
 `;

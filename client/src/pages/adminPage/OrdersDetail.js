@@ -57,9 +57,6 @@ function OrdersDetail({ orders }) {
                 <S.SubTitleBox>주문 상품 정보</S.SubTitleBox>
               </S.Box1>
               <S.Box2>
-                <S.OrderProductImgBox></S.OrderProductImgBox>
-              </S.Box2>
-              <S.Box3>
                 <S.ItemBox>
                   <S.ItemTitle>주문 상품명</S.ItemTitle>
                   <S.ItemContent>{order.product.productName}</S.ItemContent>
@@ -76,14 +73,14 @@ function OrdersDetail({ orders }) {
                   <S.ItemTitle>사이즈</S.ItemTitle>
                   <S.ItemContent>{order.size}</S.ItemContent>
                 </S.ItemBox>
-              </S.Box3>
+              </S.Box2>
             </S.OrdersDetailLayout1>
 
             <S.OrdersDetailLayout1>
               <S.Box1>
                 <S.SubTitleBox>배송 정보</S.SubTitleBox>
               </S.Box1>
-              <S.Box3>
+              <S.Box2>
                 <S.ItemBox>
                   <S.ItemTitle>수령자 성함</S.ItemTitle>
                   <S.ItemContent>
@@ -115,7 +112,7 @@ function OrdersDetail({ orders }) {
                   <S.ItemTitle>배송 요청사항</S.ItemTitle>
                   <S.ItemContent>{order.deliveryRequest}</S.ItemContent>
                 </S.ItemBox>
-              </S.Box3>
+              </S.Box2>
             </S.OrdersDetailLayout1>
 
             <S.OrdersDetailLayout1>
@@ -123,7 +120,7 @@ function OrdersDetail({ orders }) {
                 {" "}
                 <S.SubTitleBox>거래 정보</S.SubTitleBox>
               </S.Box1>
-              <S.Box3>
+              <S.Box2>
                 <S.ItemBox>
                   <S.ItemTitle>주문 날짜</S.ItemTitle>
                   <S.ItemContent>{order.orderDate}</S.ItemContent>
@@ -138,12 +135,14 @@ function OrdersDetail({ orders }) {
                   <S.ItemTitle>출고 변경 날짜</S.ItemTitle>
                   <S.ItemContent>{order.changeDate}</S.ItemContent>
                 </S.ItemBox>
-              </S.Box3>
+              </S.Box2>
             </S.OrdersDetailLayout1>
           </>
         )}
-        <AdminButtonGrey>거래 취소</AdminButtonGrey>
-        <AdminButtonBlack>거래 확정</AdminButtonBlack>
+        <S.BtnWrapper>
+          <AdminButtonGrey>거래 취소</AdminButtonGrey>
+          <AdminButtonBlack>거래 확정</AdminButtonBlack>
+        </S.BtnWrapper>
       </Card>
     </>
   );
