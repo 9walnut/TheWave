@@ -35,6 +35,8 @@ exports.getCart = async (req, res) => {
 exports.editCart = async (req, res) => {
   try {
     const { cartId } = req.params;
+
+    console.log("req.params", req.params);
     const { cartQuantity, color, size, deliveryHope } = req.body; // 옵션 정보 추가
     let updateData = { cartQuantity, color, size, deliveryHope }; // 수정할 데이터에 옵션 정보 포함
     const editCart = await db.carts.update(updateData, { where: { cartId } });

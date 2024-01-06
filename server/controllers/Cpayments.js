@@ -45,10 +45,18 @@ exports.goPayment = async (req, res) => {
   }
 };
 
-// 상품 상세 페이지 > 주문 정보 > 결제하기
+// 결제하기(장바구니 결제, 단일 상품 결제)
 exports.payment = async (req, res) => {
-  const { orderQuantity, color, size, address, receiveName, deliveryRequest } =
-    req.body;
+  const {
+    orderQuantity,
+    color,
+    size,
+    address,
+    receiveName,
+    deliveryRequest,
+    productId,
+    cartId,
+  } = req.body;
   const accessToken = req.headers["authorization"];
   try {
     const tokenCheck = await verifyToken(accessToken);
@@ -56,26 +64,45 @@ exports.payment = async (req, res) => {
     console.log("유저넘버", userNumber);
 
     const product = await db.products.findOne({
-      where: { productId: req.params.productId },
+      where: { productId: productId },
     });
     console.log("product", product);
 
-    // 장바구니 담지 않고 바로 구매이므로 cartId 없음
     const newOrder = await db.orders.create({
       userNumber: userNumber,
-      productId: req.params.productId,
-      orderQuantity: orderQuantity,
-      color: color,
-      size: size,
-      receiveName: receiveName,
-      address: address,
-      deliveryRequest: deliveryRequest,
+      cartId: cartId || null,
+      productId,
+      orderQuantity,
+      color,
+      size,
+      receiveName,
+      address,
+      deliveryRequest,
       totalPrice: product.productPrice * orderQuantity,
       productId: product.productId,
       orderQuantity: orderQuantity,
       orderDate: new Date(),
       changeDate: new Date(),
     });
+
+    const payment = await db.payment.create({
+      orderId: newOrder.orderId,
+      payPrice: newOrder.totalPrice,
+      payMethod: payMethod || "credit card",
+      isPaid: isPaid || "0",
+      isRefund: "0",
+    });
+
+    const productOut = await db.productout.create({
+      orderId: payment.orderId,
+      cartId: newOrder.cartId || null,
+      productId: newOrder.productId,
+      outStatus: ,
+      outDate:, 
+    });
+
+    // 결제 완료된 후 장바구니 비우기 추가
+    await db.cartId.update({ isDeleted: true });
 
     if (newOrder) res.send(newOrder);
     else res.send({ result: false });
