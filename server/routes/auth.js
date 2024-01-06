@@ -19,11 +19,11 @@ router.get("/login/kakao", passport.authenticate("kakao"));
 router.get(
   "/login/kakao/callback",
   passport.authenticate("kakao", {
-    failureRedirect: "/", // 로그인 실패 시 리다이렉션 주소
+    failureRedirect: "http://localhost:3000/login/kakao", // 로그인 실패 시 리다이렉션 주소
   }),
   (req, res) => {
     // 로그인 성공 시 리다이렉션 주소
-    res.redirect("/");
+    res.redirect("http://localhost:3000");
   }
 );
 
