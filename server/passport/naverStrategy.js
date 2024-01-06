@@ -10,7 +10,7 @@ module.exports = () => {
       {
         clientID: process.env.NAVER_ID,
         clientSecret: process.env.NAVER_SECRET,
-        callbackURL: "http://localhost:8001/api/login/naver/callbackk",
+        callbackURL: process.env.NAVER_URL,
       },
       async (accessToken, refreshToekn, profile, done) => {
         try {
@@ -34,6 +34,11 @@ module.exports = () => {
               birthday: profile._json.birthday || "1900-01-01",
               gender: profile._json.gender || "M",
               // providerType: "kakao",
+            });
+
+            address = await db.address.create({
+              userNumber: user.userNumber,
+              address: profile._json.kakao_account.address || "경기도 고양시!",
             });
             firstLogin = true;
           }
