@@ -18,3 +18,10 @@ export const InnerCardTitleBox = styled.div`
   margin-bottom: 30px;
   margin-left: 25px;
 `;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 5px 30px 5px 30px;
+`;

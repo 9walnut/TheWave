@@ -132,9 +132,11 @@ function Users() {
           items={currentItems}
           onSelectionChange={onSelectionChange}
         />
-        <AdminButtonGrey onClick={deleteUsers}>
-          선택 회원 삭제하기
-        </AdminButtonGrey>
+        <S.BtnWrapper>
+          <AdminButtonGrey onClick={deleteUsers}>
+            선택 회원 삭제하기
+          </AdminButtonGrey>
+        </S.BtnWrapper>
         <PageNation
           total={users.length}
           limit={oneOfPage}

@@ -9,7 +9,7 @@ module.exports = () => {
     new KakaoStrategy(
       {
         clientID: process.env.KAKAO_ID,
-        callbackURL: process.env.KAKAO_URL,
+        callbackURL: "http://localhost:8001/api/login/kakao/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
@@ -36,11 +36,6 @@ module.exports = () => {
               phoneNumber: phoneNumber,
               birthday: profile._json.kakao_account.birthday || "1900-01-01",
               gender: profile._json.kakao_account.gender || "M",
-            });
-
-            address = await db.address.create({
-              userNumber: user.userNumber,
-              address: profile._json.kakao_account.address || "전북 익산!",
             });
             firstLogin = true;
           }

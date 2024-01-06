@@ -54,6 +54,8 @@ exports.createAdminProduct = async (req, res) => {
       productStatus,
       color,
       size,
+      thumbnailUrl, // 추가
+      detailUrls, // 추가
     } = req.body;
     // 카테고리 이름으로 categoryId 찾기
     const category = await db.categories.findOne({ where: { categoryName } });
