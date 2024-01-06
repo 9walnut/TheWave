@@ -19,8 +19,6 @@ module.exports = () => {
       },
       async (accessToken, refreshToken, profile, done) => {
         console.log("google profile ", profile);
-        console.log("구글 accessToken", accessToken);
-        console.log("구글 refreshToken", refreshToken); // undefined
         try {
           const exUser = await db.users.findOne({
             // 이미 가입된 아이디인지 확인
