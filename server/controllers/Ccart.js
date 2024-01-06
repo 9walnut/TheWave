@@ -18,6 +18,7 @@ exports.getCart = async (req, res) => {
       cart = await db.carts.findAll({
         where: { userNumber: tokenCheck.userData.userNumber },
       });
+
       console.log("cart", cart);
     } else {
       // 비회원인 경우

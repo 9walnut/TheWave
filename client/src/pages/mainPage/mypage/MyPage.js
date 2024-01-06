@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import Navbar from "../../../components/mainPage/Navbar";
+import Footer from "../../../components/mainPage/Footer";
 
 function MyPage() {
   const { isAdmin, accessToken } = useSelector((state) => state.user);
@@ -33,17 +35,22 @@ function MyPage() {
   }, []);
 
   return (
-    <div>
-      <div>마이페이지 맞아요 당황하지마세요</div>
-      {orderList.map((order, i) => (
-        <div key={i}>
-          <div>ProductId: {order.productId}</div>
-          <div>OrderDate: {order.orderDate}</div>
-          <div>OrderQuantity: {order.orderQuantity}</div>
-          <div>DeliveryRequest: {order.deliveryRequest}</div>
+    <>
+      <Navbar />
+      <section>
+        <div>
+          {orderList.map((order, i) => (
+            <div key={i}>
+              <div>ProductId: {order.productId}</div>
+              <div>OrderDate: {order.orderDate}</div>
+              <div>OrderQuantity: {order.orderQuantity}</div>
+              <div>DeliveryRequest: {order.deliveryRequest}</div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </section>
+      <Footer />
+    </>
   );
 }
 

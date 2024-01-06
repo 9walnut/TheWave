@@ -55,7 +55,7 @@ function MainDashBoard() {
   return (
     <>
       {/* <Card> */}
-      <S.AdminPageMainLayout>
+      {/* <S.AdminPageMainLayout>
         <S.StyledCardRow1>
           <MonthlyOrder
             totalOrders={totalOrders}
@@ -76,7 +76,7 @@ function MainDashBoard() {
         <S.StyledCardRow2>
           {dailyOutStatus && <CategorySales dailyOutStatus={dailyOutStatus} />}
         </S.StyledCardRow2>
-      </S.AdminPageMainLayout>
+      </S.AdminPageMainLayout> */}
       {/* </Card> */}
     </>
   );
