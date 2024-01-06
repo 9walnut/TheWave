@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     userId: {
-      type: DataTypes.STRING(12),
+      type: DataTypes.STRING(200),
       allowNull: false
     },
     password: {
