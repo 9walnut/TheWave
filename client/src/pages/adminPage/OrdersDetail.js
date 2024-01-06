@@ -5,6 +5,8 @@ import axios from "axios";
 import * as S from "../../styles/adminPage/OrdersDetail.js";
 import Card from "../../shared/adminPage/components/Card";
 import ModifiedPhoneNumber from "../../shared/ModifiedPhoneNumber.js";
+import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
+import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 
 function OrdersDetail({ orders }) {
   const [order, setOrder] = useState({});
@@ -48,37 +50,100 @@ function OrdersDetail({ orders }) {
       <Card>
         {order.product && order.userNumber_user && (
           <>
-            <h3>거래 내역 상세 페이지</h3>
-            <div>orderId: {order.orderId}</div>
-            <hr />
-            <h3>주문 상품 정보</h3>
-            <div>주문 상품명: {order.product.productName}</div>
-            <div>주문 수량: {order.orderQuantity}</div>
-            <div>주문 상품 디테일 color: {order.color}</div>
-            <div>주문 상품 디테일 size: {order.size}</div>
-            <hr />
-            <h3>배송 정보</h3>
-            <div>수령자 성함: {order.userNumber_user.userName}</div>
+            <S.TitleBox>거래 내역 상세 페이지</S.TitleBox>
+            {/* <div>orderId: {order.orderId}</div> */}
+            <S.OrdersDetailLayout1>
+              <S.Box1>
+                <S.SubTitleBox>주문 상품 정보</S.SubTitleBox>
+              </S.Box1>
+              <S.Box2>
+                <S.OrderProductImgBox></S.OrderProductImgBox>
+              </S.Box2>
+              <S.Box3>
+                <S.ItemBox>
+                  <S.ItemTitle>주문 상품명</S.ItemTitle>
+                  <S.ItemContent>{order.product.productName}</S.ItemContent>
+                </S.ItemBox>
+                <S.ItemBox>
+                  <S.ItemTitle>주문 수량</S.ItemTitle>
+                  <S.ItemContent>{order.orderQuantity}</S.ItemContent>
+                </S.ItemBox>
+                <S.ItemBox>
+                  <S.ItemTitle>색상</S.ItemTitle>
+                  <S.ItemContent>{order.color}</S.ItemContent>
+                </S.ItemBox>
+                <S.ItemBox>
+                  <S.ItemTitle>사이즈</S.ItemTitle>
+                  <S.ItemContent>{order.size}</S.ItemContent>
+                </S.ItemBox>
+              </S.Box3>
+            </S.OrdersDetailLayout1>
 
-            {order.userNumber_user.phoneNumber && (
-              <div>
-                수령자 연락처:{" "}
-                <ModifiedPhoneNumber
-                  phoneNumber={order.userNumber_user.phoneNumber}
-                />
-              </div>
-            )}
+            <S.OrdersDetailLayout1>
+              <S.Box1>
+                <S.SubTitleBox>배송 정보</S.SubTitleBox>
+              </S.Box1>
+              <S.Box3>
+                <S.ItemBox>
+                  <S.ItemTitle>수령자 성함</S.ItemTitle>
+                  <S.ItemContent>
+                    {order.userNumber_user.userName}
+                  </S.ItemContent>
+                </S.ItemBox>
 
-            <div>주소: {order.userNumber_user.addresses[0].address}</div>
-            <div>배송 요청사항: {order.deliveryRequest}</div>
-            <hr />
-            <h3>거래 정보</h3>
-            <div>주문 날짜: {order.orderDate}</div>
-            <div>orderStatus: {getOrderStatus(order.orderStatus)}</div>
-            <div>출고 날짜(changeDate): {order.changeDate}</div>
-            <hr />
+                <S.ItemBox>
+                  {order.userNumber_user.phoneNumber && (
+                    <>
+                      <S.ItemTitle>수령자 연락처</S.ItemTitle>
+                      <S.ItemContent>
+                        {" "}
+                        <ModifiedPhoneNumber
+                          phoneNumber={order.userNumber_user.phoneNumber}
+                        />
+                      </S.ItemContent>
+                    </>
+                  )}
+                </S.ItemBox>
+
+                <S.ItemBox>
+                  <S.ItemTitle>주소</S.ItemTitle>
+                  <S.ItemContent>
+                    {order.userNumber_user.addresses[0].address}
+                  </S.ItemContent>
+                </S.ItemBox>
+                <S.ItemBox>
+                  <S.ItemTitle>배송 요청사항</S.ItemTitle>
+                  <S.ItemContent>{order.deliveryRequest}</S.ItemContent>
+                </S.ItemBox>
+              </S.Box3>
+            </S.OrdersDetailLayout1>
+
+            <S.OrdersDetailLayout1>
+              <S.Box1>
+                {" "}
+                <S.SubTitleBox>거래 정보</S.SubTitleBox>
+              </S.Box1>
+              <S.Box3>
+                <S.ItemBox>
+                  <S.ItemTitle>주문 날짜</S.ItemTitle>
+                  <S.ItemContent>{order.orderDate}</S.ItemContent>
+                </S.ItemBox>
+                <S.ItemBox>
+                  <S.ItemTitle>배송 상태</S.ItemTitle>
+                  <S.ItemContent>
+                    {getOrderStatus(order.orderStatus)}
+                  </S.ItemContent>
+                </S.ItemBox>
+                <S.ItemBox>
+                  <S.ItemTitle>출고 변경 날짜</S.ItemTitle>
+                  <S.ItemContent>{order.changeDate}</S.ItemContent>
+                </S.ItemBox>
+              </S.Box3>
+            </S.OrdersDetailLayout1>
           </>
         )}
+        <AdminButtonGrey>거래 취소</AdminButtonGrey>
+        <AdminButtonBlack>거래 확정</AdminButtonBlack>
       </Card>
     </>
   );
