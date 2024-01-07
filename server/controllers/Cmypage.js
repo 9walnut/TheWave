@@ -22,9 +22,16 @@ exports.mypage = async (req, res) => {
           "deliveryRequest",
         ],
       });
+      const userInfo = await db.users.findOne({
+        where: { userNumber: tokenCheck.userData.userNumber },
+      });
 
       if (orderList)
-        res.json({ orderList: orderList, accessToken: tokenCheck.accessToken });
+        res.json({
+          userInfo,
+          orderList: orderList,
+          accessToken: tokenCheck.accessToken,
+        });
       else res.send({ result: true, accessToken: tokenCheck.accessToken }); // 주문 내역 없는 경우
     } else {
       res.send({ result: tokenCheck.result }); // 토큰 검증 실패
@@ -140,7 +147,7 @@ exports.editInfoPw = async (req, res) => {
       const userInfo = await db.users.findOne({
         where: { userNumber: tokenCheck.userData.userNumber },
       });
-      res.send({ result: true });
+      res.send({ result: true, userInfo });
     } else res.send({ result: false });
   } catch (error) {
     console.error(error);

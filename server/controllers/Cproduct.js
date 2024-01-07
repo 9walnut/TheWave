@@ -17,11 +17,12 @@ exports.productPage = async (req, res) => {
       where: { productId: req.params.productId },
     });
 
-    // 배열
-    const colors = productOption.color.split(",");
+    // 배열 생성
+    const colors = productOption.color ? productOption.color.split(",") : [];
+    const size = productOption.size ? [productOption.size] : [];
     console.log(colors);
 
-    res.json({ productDetail, categoryName, productOption, colors });
+    res.json({ productDetail, categoryName, productOption, colors, size });
     console.log(categoryName);
   } catch (error) {
     console.error(error);
