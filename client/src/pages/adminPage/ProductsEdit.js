@@ -33,10 +33,13 @@ function ProductsEdit() {
   const [newProductStatus, setNewProductStatus] = useState("");
   const [newThumbnailUrl, setNewThumbnailUrl] = useState("");
   const [newDetailUrls, setNewDetailUrls] = useState("");
-
   const [newSize, setNewSize] = useState("");
-
   const [newColor, setNewColor] = useState("");
+
+  const [alertProductName, setAlertProductName] = useState("");
+  const [alertProductPrice, setAlertProductPrice] = useState("");
+  const [alertColor, setAlertColor] = useState("");
+  const [alertTextarea, setAlertTextarea] = useState("");
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -114,7 +117,75 @@ function ProductsEdit() {
   //     </>
   //   );
   // }
+  //------------------------ 유효성 검사
+  useEffect(() => {
+    validateProductName();
+    validateProductPrice();
+    validateTextarea();
+  }, [newProductName, newProductPrice, newProductInfo]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      validateColor();
+    }, 300);
+  }, [newColor]);
+
+  const validateProductName = () => {
+    if (newProductName.length <= 3) {
+      setAlertProductName("최소 4글자 이상 입력해주세요. 특수문자 허용 😀");
+    } else {
+      setAlertProductName("");
+    }
+  };
+
+  const validateProductPrice = () => {
+    if (isNaN(newProductPrice) || newProductPrice <= 0) {
+      setAlertProductPrice("숫자만 입력 가능합니다. 😀");
+    } else {
+      setAlertProductPrice("");
+    }
+  };
+
+  const validateColor = () => {
+    if (Array.isArray(newColor)) {
+      // newColor가 배열인 경우
+      if (
+        newColor.some(
+          (color) =>
+            color.includes(",,") ||
+            color.startsWith(",") ||
+            color.endsWith(",") ||
+            color.includes(" ") ||
+            color.trim() === ""
+        )
+      ) {
+        setAlertColor("공백이나 연속된 콤마, 시작과 끝에 콤마가 있습니다. 😀");
+      } else {
+        setAlertColor("");
+      }
+    } else if (typeof newColor === "string") {
+      // newColor가 문자열인 경우
+      if (
+        newColor.includes(",,") ||
+        newColor.startsWith(",") ||
+        newColor.endsWith(",") ||
+        newColor.includes(" ") ||
+        newColor.trim() === ""
+      ) {
+        setAlertColor("공백이나 연속된 콤마, 시작과 끝에 콤마가 있습니다. 😀");
+      } else {
+        setAlertColor("");
+      }
+    }
+  };
+
+  const validateTextarea = () => {
+    if (newProductInfo.trim() === "") {
+      setAlertTextarea("상품 상세 설명란이 비어있습니다.😀");
+    } else {
+      setAlertTextarea("");
+    }
+  };
   return (
     <>
       <Card>
@@ -127,16 +198,20 @@ function ProductsEdit() {
               placeholder="특수문자 허용, 최소 4글자 이상"
               value={newProductName}
               onChange={setNewProductName}
+              required
+              minlength="4"
+              onFocus={validateProductName}
             >
-              상품명
+              상품명<S.AlertMsgBox>{alertProductName}</S.AlertMsgBox>
             </AdminInput>
             <AdminTextarea
               type="text"
               placeholder="상품 관련 상세 설명을 입력해주세요."
               value={newProductInfo}
               onChange={setNewProductInfo}
+              onFocus={validateTextarea}
             >
-              상품 상세 설명
+              상품 상세 설명<S.AlertMsgBox>{alertTextarea}</S.AlertMsgBox>
             </AdminTextarea>
           </S.Box1>
           <S.Box2>
@@ -145,8 +220,10 @@ function ProductsEdit() {
               placeholder="숫자만 입력 가능"
               value={newProductPrice}
               onChange={setNewProductPrice}
+              required
+              onFocus={validateProductPrice}
             >
-              가격
+              가격<S.AlertMsgBox>{alertProductPrice}</S.AlertMsgBox>
             </AdminInput>
 
             <AdminSelect title="상품 카테고리">
@@ -183,8 +260,9 @@ function ProductsEdit() {
               placeholder="상품컬러는 , 로 구분"
               value={newColor}
               onChange={setNewColor}
+              onFocus={validateColor}
             >
-              상품 옵션 - 컬러 / 콤마 (,) 로 구분
+              상품 옵션 - 컬러 <S.AlertMsgBox>{alertColor}</S.AlertMsgBox>
             </AdminInput>
           </S.Box2>
         </S.ProductsLayout1>
