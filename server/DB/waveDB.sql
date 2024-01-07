@@ -95,7 +95,7 @@ CREATE TABLE `orders` (
 	CREATE TABLE `productout` (
 		`productOutId`	INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`orderId`	INT	NOT NULL,
-		`cartId`	INT	NOT NULL,
+		`cartId`	INT,
 		`productId`	INT	NOT NULL,
 		`outStatus`	INT	NOT NULL,
 		`outDate`	DATE	NOT NULL,
@@ -233,7 +233,7 @@ VALUES
 	(15, '["분홍"]', '["S"]'),
 	(16, '["분홍"]', '["S"]'),
 	(17, '["분홍"]', '["S", "M", "L"]'),
-	(18, '["흰색"]', '["M"]'),;
+	(18, '["흰색"]', '["M"]'),
 	(19, '["흰색"]', '["L"]');
 
     

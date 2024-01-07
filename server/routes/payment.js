@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/orderList/:productId", controller.goPayment);
 
 // 주문 정보 > 결제하기
-router.post("/:productId", controller.payment);
+router.post("/", controller.payment);
 
 // 결제하기 > '비회원으로 결제' 클릭 시
 // router.post("/:productId/N", controller.noMemberPay);
