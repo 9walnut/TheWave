@@ -9,6 +9,7 @@ import AdminInput from "../../shared/adminPage/components/AdminInput";
 import AdminInputText from "../../shared/adminPage/components/AdminInputText";
 import Card from "../../shared/adminPage/components/Card";
 
+import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack";
 import AdminTextarea from "../../shared/adminPage/components/AdminTextarea.js";
 import SelectBoxProduct from "../../shared/adminPage/components/SelectBoxProduct";
@@ -23,10 +24,6 @@ function ProductsEdit() {
   const { productId } = useParams();
   const navigate = useNavigate();
 
-  const textAreaStyle = {
-    width: "590px",
-    height: "300px",
-  };
   const [newProductName, setNewProductName] = useState("");
   const [newProductInfo, setNewProductInfo] = useState("");
   const [newProductPrice, setNewProductPrice] = useState("");
@@ -121,7 +118,6 @@ function ProductsEdit() {
             <AdminTextarea
               type="text"
               placeholder="상품 관련 상세 설명을 입력해주세요."
-              style={textAreaStyle}
               value={newProductInfo}
               onChange={setNewProductInfo}
             >
@@ -160,7 +156,7 @@ function ProductsEdit() {
               value={newColor}
               onChange={setNewColor}
             >
-              상품 옵션 - 컬러
+              상품 옵션 - 컬러 / 콤마 (,) 로 구분
             </AdminInput>
           </S.Box2>
         </S.ProductsLayout1>
@@ -205,6 +201,7 @@ function ProductsEdit() {
         <br />
         <hr />
         <S.sendDataBtnWrapper>
+          <AdminButtonGrey onClick={() => navigate(-1)}>취소</AdminButtonGrey>
           <AdminButtonBlack onClick={sendData}>상품 수정하기</AdminButtonBlack>
         </S.sendDataBtnWrapper>
       </Card>
