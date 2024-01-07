@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import Card from "../../shared/adminPage/components/Card";
 
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
 export const AdminPageMainLayout = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;

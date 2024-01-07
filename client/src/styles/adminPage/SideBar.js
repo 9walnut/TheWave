@@ -7,16 +7,23 @@ import { NavLink } from "react-router-dom";
 //   }
 // `;
 
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
 export const SideBarBox = styled.div`
   width: 255px;
-  height: 1012px;
+  height: 800px;
   border: 1px solid #e2e6e9;
   box-shadow: 2px 11px 14px -4px #b5bfc6;
   border-radius: 8px;
   background-color: #e4ebf1;
-  margin-top: 25px;
   margin-left: 14px;
   margin-bottom: 20px;
+  position: fixed;
 `;
 
 export const NavListItem = styled.li`

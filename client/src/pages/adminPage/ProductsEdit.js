@@ -41,6 +41,9 @@ function ProductsEdit() {
   const [alertColor, setAlertColor] = useState("");
   const [alertTextarea, setAlertTextarea] = useState("");
 
+  const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState("");
+  const [originalDetailUrls, setOriginalDetailUrls] = useState([]);
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -55,6 +58,9 @@ function ProductsEdit() {
         setNewProductStatus(productData.productStatus);
         setNewThumbnailUrl(productData.thumbnailUrl);
         setNewDetailUrls(productData.detailUrls);
+
+        setOriginalThumbnailUrl(productData.thumbnailUrl);
+        setOriginalDetailUrls(productData.detailUrls);
 
         const colorValue = productData.productoption.color;
         setNewColor(colorValue);
@@ -72,12 +78,24 @@ function ProductsEdit() {
   }, [productId]);
 
   const getImageDataThumbnail = (editThumbnailUrl) => {
+    console.log("이미지 데이터 썸네일 변경 전:", newThumbnailUrl);
     setNewThumbnailUrl(editThumbnailUrl);
-    console.log("썸네일왔니", editThumbnailUrl); //왔다!
+    console.log("이미지 데이터 썸네일 변경 후:", newThumbnailUrl);
   };
   const getImageDataDetail = (editDetailUrls) => {
     setNewDetailUrls(editDetailUrls);
     console.log("디테일왔니", editDetailUrls); //왔다!
+  };
+
+  const cancelEdit = async () => {
+    // 외않돼......
+    setNewThumbnailUrl(originalThumbnailUrl);
+    setNewDetailUrls(originalDetailUrls);
+
+    console.log(originalThumbnailUrl);
+
+    await setNewThumbnailUrl(originalThumbnailUrl);
+    navigate(-1);
   };
 
   const sendData = async () => {
@@ -307,7 +325,7 @@ function ProductsEdit() {
         <br />
         <hr />
         <S.sendDataBtnWrapper>
-          <AdminButtonGrey onClick={() => navigate(-1)}>취소</AdminButtonGrey>
+          <AdminButtonGrey onClick={cancelEdit}>취소</AdminButtonGrey>
           <AdminButtonBlack onClick={sendData}>상품 수정하기</AdminButtonBlack>
         </S.sendDataBtnWrapper>
       </Card>

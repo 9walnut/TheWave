@@ -11,7 +11,8 @@ export const AdminPageMainLayout = styled.div`
   display: grid;
   grid-template-columns: 255px 0.8fr;
   grid-gap: 10px;
-  height: 100%;
+  min-height: 100vh;
+  /* height: 100%; */
 `;
 
 export const LeftBox = styled.header`

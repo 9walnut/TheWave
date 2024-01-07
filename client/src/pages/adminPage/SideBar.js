@@ -14,21 +14,91 @@ function SideBar({ selectItem }) {
 
   //exact="true" : 경로가 정확히 일치할 때만 해당 링크 활성화
   return (
-    <S.SideBarBox>
-      {/* <S.NavLinksLayout> */}
-      <NavLink
-        to="/admin"
-        exact="true"
-        onClick={() => handleItemClick("mainDashboard")}
-      >
-        <S.NavListItem className="nav-link">
-          <ListItem
-            icon="/adminPage/sidebar/home.svg"
-            arrow="/adminPage/sidebar/none.svg"
-          >
-            ADMIN
-          </ListItem>
-        </S.NavListItem>
+    <S.Container>
+      <S.SideBarBox>
+        {/* <S.NavLinksLayout> */}
+        <NavLink
+          to="/admin"
+          exact="true"
+          onClick={() => handleItemClick("mainDashboard")}
+        >
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/home.svg"
+              arrow="/adminPage/sidebar/none.svg"
+            >
+              ADMIN
+            </ListItem>
+          </S.NavListItem>
+          <S.NavListItemNone>
+            <ListItem
+              icon="/adminPage/sidebar/none.svg"
+              arrow="/adminPage/sidebar/none.svg"
+            ></ListItem>
+          </S.NavListItemNone>
+          <S.NavListItemNone>
+            <ListItem
+              icon="/adminPage/sidebar/none.svg"
+              arrow="/adminPage/sidebar/none.svg"
+            ></ListItem>
+          </S.NavListItemNone>
+        </NavLink>
+        {/* </S.NavLinksLayout> */}
+        {/* <S.NavLinksLayout> */}
+        <S.StyledNavLink
+          to="/admin/dashboard"
+          exact={true}
+          onClick={() => handleItemClick("mainDashboard")}
+        >
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/dashboard.svg"
+              arrow="/adminPage/sidebar/arrow.svg"
+            >
+              대시 보드
+            </ListItem>
+          </S.NavListItem>
+        </S.StyledNavLink>
+        <S.StyledNavLink
+          to="/admin/products"
+          exact={true}
+          activeClassName="active"
+        >
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/products.svg"
+              arrow="/adminPage/sidebar/arrow.svg"
+            >
+              상품 관리
+            </ListItem>
+          </S.NavListItem>
+        </S.StyledNavLink>
+        <S.StyledNavLink to="/admin/orders" exact={true}>
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/orders.svg"
+              arrow="/adminPage/sidebar/arrow.svg"
+            >
+              거래 내역 관리
+            </ListItem>
+          </S.NavListItem>
+        </S.StyledNavLink>
+        <S.StyledNavLink
+          to="/admin/users"
+          exact={true}
+          onClick={() => handleItemClick("users")}
+        >
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/users.svg"
+              arrow="/adminPage/sidebar/arrow.svg"
+            >
+              회원관리
+            </ListItem>
+          </S.NavListItem>
+        </S.StyledNavLink>
+        {/* </S.NavLinksLayout> */}
+        {/* <S.NavLinksLayout> */}
         <S.NavListItemNone>
           <ListItem
             icon="/adminPage/sidebar/none.svg"
@@ -41,87 +111,19 @@ function SideBar({ selectItem }) {
             arrow="/adminPage/sidebar/none.svg"
           ></ListItem>
         </S.NavListItemNone>
-      </NavLink>
-      {/* </S.NavLinksLayout> */}
-      {/* <S.NavLinksLayout> */}
-      <S.StyledNavLink
-        to="/admin/dashboard"
-        exact={true}
-        onClick={() => handleItemClick("mainDashboard")}
-      >
-        <S.NavListItem className="nav-link">
-          <ListItem
-            icon="/adminPage/sidebar/dashboard.svg"
-            arrow="/adminPage/sidebar/arrow.svg"
-          >
-            대시 보드
-          </ListItem>
-        </S.NavListItem>
-      </S.StyledNavLink>
-      <S.StyledNavLink
-        to="/admin/products"
-        exact={true}
-        activeClassName="active"
-      >
-        <S.NavListItem className="nav-link">
-          <ListItem
-            icon="/adminPage/sidebar/products.svg"
-            arrow="/adminPage/sidebar/arrow.svg"
-          >
-            상품 관리
-          </ListItem>
-        </S.NavListItem>
-      </S.StyledNavLink>
-      <S.StyledNavLink to="/admin/orders" exact={true}>
-        <S.NavListItem className="nav-link">
-          <ListItem
-            icon="/adminPage/sidebar/orders.svg"
-            arrow="/adminPage/sidebar/arrow.svg"
-          >
-            거래 내역 관리
-          </ListItem>
-        </S.NavListItem>
-      </S.StyledNavLink>
-      <S.StyledNavLink
-        to="/admin/users"
-        exact={true}
-        onClick={() => handleItemClick("users")}
-      >
-        <S.NavListItem className="nav-link">
-          <ListItem
-            icon="/adminPage/sidebar/users.svg"
-            arrow="/adminPage/sidebar/arrow.svg"
-          >
-            회원관리
-          </ListItem>
-        </S.NavListItem>
-      </S.StyledNavLink>
-      {/* </S.NavLinksLayout> */}
-      {/* <S.NavLinksLayout> */}
-      <S.NavListItemNone>
-        <ListItem
-          icon="/adminPage/sidebar/none.svg"
-          arrow="/adminPage/sidebar/none.svg"
-        ></ListItem>
-      </S.NavListItemNone>
-      <S.NavListItemNone>
-        <ListItem
-          icon="/adminPage/sidebar/none.svg"
-          arrow="/adminPage/sidebar/none.svg"
-        ></ListItem>
-      </S.NavListItemNone>
-      <NavLink to="/">
-        <S.NavListItem className="nav-link">
-          <ListItem
-            icon="/adminPage/sidebar/exit.svg"
-            arrow="/adminPage/sidebar/none.svg"
-          >
-            나가기
-          </ListItem>
-        </S.NavListItem>
-      </NavLink>
-      {/* </S.NavLinksLayout> */}
-    </S.SideBarBox>
+        <NavLink to="/">
+          <S.NavListItem className="nav-link">
+            <ListItem
+              icon="/adminPage/sidebar/exit.svg"
+              arrow="/adminPage/sidebar/none.svg"
+            >
+              나가기
+            </ListItem>
+          </S.NavListItem>
+        </NavLink>
+        {/* </S.NavLinksLayout> */}
+      </S.SideBarBox>
+    </S.Container>
   );
 }
 
