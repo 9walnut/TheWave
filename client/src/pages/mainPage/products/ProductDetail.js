@@ -36,8 +36,8 @@ function ProductDetail() {
       console.log(res.data);
       setProduct(res.data.productDetail);
       setCategoryName(res.data.categoryName.categoryName);
-      setColorList(res.data.productOption.color);
-      setSizeList(res.data.productOption.size);
+      setColorList(res.data.colors);
+      setSizeList(res.data.size);
     } catch (error) {
       console.log("상품 불러오기 에러", error);
     }

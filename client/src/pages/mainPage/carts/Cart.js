@@ -1,10 +1,11 @@
 import * as S from "../../../styles/mainPage/CartPage";
 import CartProduct from "../../../components/mainPage/CartProduct";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import getAccessToken from "../../../hooks/getAcessToken";
 
 function Cart() {
+  const [cartItem, setCartItem] = useState([]);
   const getCartProduct = async () => {
     try {
       const headers = getAccessToken();
@@ -17,9 +18,10 @@ function Cart() {
         };
         const res = await axios.get("/api/cart", { params: data, headers });
         console.log("장바구니에는 이렇다", res.data);
+        setCartItem(res.data);
       } else {
         // 없을 때
-        console.log("토큰 업ㅆ따");
+        console.log("토큰 업따");
         const data = {
           result: false,
         };
@@ -32,7 +34,7 @@ function Cart() {
 
   useEffect(() => {
     getCartProduct();
-  });
+  }, []);
 
   return (
     <>
@@ -43,9 +45,9 @@ function Cart() {
       </S.CheckBox>
       <div>
         <ul>
-          <CartProduct />
-          <CartProduct />
-          <CartProduct />
+          {cartItem.map((product) => {
+            return <CartProduct product={product} />;
+          })}
         </ul>
       </div>
     </>
