@@ -54,14 +54,10 @@ exports.payment = async (req, res) => {
   // 주문서에서 작성한 정보
   // 여러 상품들에 대한 개별 데이터(color, size, orderQuantity)가 어떤 식으로 넘어올지...
   const {
-    orderQuantity,
-    color,
-    size,
-    userInfo, // "userName", "phoneNumber" (현재 사용 안 함)
     userAddress,
     receiveName,
     deliveryRequest,
-    productInfo, // 주문할 상품 번호, 카트 번호, (color, size, orderQuantit..?)
+    productInfo, // 주문할 상품 번호, 카트 번호, (color, size, orderQuantity..?) > 단일 상품 구매인 경우엔 prductInfo로 묶지 않고 productId, color, size, orderQuantity
   } = req.body;
   const accessToken = req.headers["authorization"];
 
@@ -149,6 +145,7 @@ exports.payment = async (req, res) => {
               color: productInfo[i].color,
               size: productInfo[i].size,
               orderDate: new Date(),
+              orderStatus: "1",
               changeDate: new Date(),
             },
             { t }
