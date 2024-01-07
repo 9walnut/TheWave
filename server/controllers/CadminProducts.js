@@ -75,12 +75,12 @@ exports.createAdminProduct = async (req, res) => {
       detailUrls,
     });
 
-    await db.productoption.create({
+    const option = await db.productoption.create({
       productId: newProduct.productId, // 상품 ID
       color, // 색상
       size, // 사이즈
     });
-
+    console.log(option);
     res.send(newProduct);
   } catch (error) {
     console.error(error);
