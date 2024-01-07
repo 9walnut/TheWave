@@ -23,7 +23,8 @@ import CategoryPage from "./pages/mainPage/products/CategoryPage";
 import OrderListPage from "./pages/mainPage/payment/OrderListPage";
 import MyPageInfo from "./pages/mainPage/mypage/MyPageInfo";
 import WishList from "./pages/mainPage/mypage/WishList";
-import MyPageMain from "./pages/mainPage/mypage/MyPageMain";
+import ChangePw from "./pages/mainPage/mypage/ChangePw";
+import DeliveryList from "./pages/mainPage/mypage/DeliveryList";
 
 function App() {
   return (
@@ -35,9 +36,10 @@ function App() {
         <Route path="/findId" element={<FindIdPage />} />
         <Route path="/findPw" element={<FindPwPage />} />
         <Route path="/mypage/*" element={<MyPage />}>
-          <Route path="delivery" element={<MyPageMain />} />
+          <Route path="delivery" element={<DeliveryList />} />
           <Route path="info" element={<MyPageInfo />} />
           <Route path="wishlist" element={<WishList />} />
+          {/* <Route path="pwmodify" element={<ChangePw />} /> */}
         </Route>
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/products/:productId" element={<ProductDetailsPage />} />

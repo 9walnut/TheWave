@@ -3,12 +3,14 @@ import axios from "axios";
 
 import * as S from "../../../styles/mainPage/mypage.style";
 import getAccessToken from "../../../hooks/getAcessToken";
-import DeliveryComponent from "../../../components/mainPage/DeliveryComponent";
-function MyPageMain() {
+import DeliveryComponent from "../../../components/mainPage/DeliveryListComponent";
+function DeliveryList() {
   const [orderList, setOrderList] = useState([]);
   useEffect(() => {
     const getData = async () => {
       try {
+        console.log("try중입니다");
+
         const headers = getAccessToken();
         const res = await axios.get("/api/mypage", {
           headers,
@@ -29,5 +31,4 @@ function MyPageMain() {
     </>
   );
 }
-
-export default MyPageMain;
+export default DeliveryList;

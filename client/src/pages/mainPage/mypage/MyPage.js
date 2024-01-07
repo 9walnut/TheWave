@@ -11,7 +11,8 @@ import getAccessToken from "../../../hooks/getAcessToken";
 import MyPageInfo from "./MyPageInfo";
 import WishList from "./WishList";
 import MyPageMain from "./MyPageMain";
-import DeliveryStatus from "./DeliveryStatus";
+import DeliveryList from "./DeliveryList";
+import ChangePw from "./ChangePw";
 
 function MyPage() {
   const navigate = useNavigate();
@@ -30,8 +31,10 @@ function MyPage() {
         });
         if (res.data.orderList) {
           console.log("mypage: ", res.data);
-          setOrderList(res.data.orderList);
-          setUserName(res.data.userInfo.userName);
+          const { orderList, userName } = res.data;
+          console.log(orderList, userName);
+          setOrderList(orderList);
+          setUserName(userName.userName);
         }
       } catch (error) {
         console.error(error);
@@ -50,12 +53,12 @@ function MyPage() {
         <S.InfoBox>환영합니다. {userName} 님 !</S.InfoBox>
         <S.MypageLayout>
           <S.SideMenu>
-            <div>
+            <h3>
               <Link to="/mypage">mypage</Link>
-            </div>
+            </h3>
             <ul>
               <li>
-                <Link to="main">배송 현황</Link>
+                <Link to="delivery">주문 정보</Link>
               </li>
               <li>
                 <Link to="/cart">
@@ -64,7 +67,7 @@ function MyPage() {
               </li>
               <li>
                 <Link to="wishList">
-                  <a>찜한 상품</a>
+                  <a>위시리스트</a>
                 </Link>
               </li>
               <li>
@@ -73,8 +76,8 @@ function MyPage() {
                 </Link>
               </li>
               <li>
-                <Link to="info">
-                  <a>회원 탈퇴</a>
+                <Link to="pwmodify">
+                  <a>비밀번호 변경</a>
                 </Link>
               </li>
             </ul>
@@ -82,9 +85,10 @@ function MyPage() {
           <S.MypageContent>
             <Routes>
               <Route path="/" element={<MyPageMain />} />
-              <Route path="delivery" element={<DeliveryStatus />} />
+              <Route path="delivery" element={<DeliveryList />} />
               <Route path="info" element={<MyPageInfo />} />
               <Route path="wishlist" element={<WishList />} />
+              {/* <Route path="pwmodify" element={<ChangePw />} /> */}
             </Routes>
           </S.MypageContent>
         </S.MypageLayout>

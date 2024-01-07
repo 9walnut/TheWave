@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MypageLayout = styled.div`
-  padding: 80px 0px;
+  padding: 60px 0px;
   margin: auto;
   display: flex;
   height: 100%;
@@ -16,11 +16,12 @@ export const MypageTitle = styled.div`
 `;
 
 export const InfoBox = styled.div`
-  margin-top: 10px;
-  font-size: 20px;
+  margin-top: 16px;
+  font-size: 24px;
   text-align: center;
 `;
 export const SideMenu = styled.div`
+  padding: 24px 10px;
   width: 20%;
   div {
     font-weight: 700;
@@ -30,13 +31,16 @@ export const SideMenu = styled.div`
   }
 
   li {
-    margin-top: 8px;
+    margin-top: 12px;
     a {
       cursor: pointer;
     }
   }
+
+  border-right: 1px solid #dde1e6;
 `;
 
 export const MypageContent = styled.div`
+  padding: 24px;
   width: 80%;
 `;

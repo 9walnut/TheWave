@@ -20,15 +20,20 @@ exports.mypage = async (req, res) => {
           "orderDate",
           "orderQuantity",
           "deliveryRequest",
+          "totalPrice",
+          "orderDate",
+          "orderStatus",
         ],
       });
-      const userInfo = await db.users.findOne({
+
+      const userName = await db.users.findOne({
         where: { userNumber: tokenCheck.userData.userNumber },
+        attributes: ["userName"],
       });
 
       if (orderList)
         res.json({
-          userInfo,
+          userName,
           orderList: orderList,
           accessToken: tokenCheck.accessToken,
         });
@@ -134,7 +139,6 @@ exports.editInfoPage = (req, res) => {
 // 회원 정보 수정 페이지 > 비밀번호 인증
 exports.editInfoPw = async (req, res) => {
   const accessToken = req.headers["authorization"];
-
   try {
     const tokenCheck = await verifyToken(accessToken);
 
