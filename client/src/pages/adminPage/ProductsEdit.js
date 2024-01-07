@@ -19,6 +19,7 @@ import axios from "axios";
 import UploadThumbnailEdit from "../../shared/adminPage/components/UploadThumbnailEdit";
 import UploadDetailEdit from "../../shared/adminPage/components/UploadDetailEdit";
 import SelectBoxOptionSize from "../../shared/adminPage/components/SelectBoxOptionSize";
+import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
 import AdminOptionSize from "../../shared/adminPage/components/AdminOptionSize.js";
 
 function ProductsEdit() {
@@ -52,7 +53,7 @@ function ProductsEdit() {
         setNewThumbnailUrl(productData.thumbnailUrl);
         setNewDetailUrls(productData.detailUrls);
 
-        const colorValue = productData.productoption.color[0];
+        const colorValue = productData.productoption.color;
         setNewColor(colorValue);
 
         const sizeValue = productData.productoption.size;

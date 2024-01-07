@@ -9,6 +9,7 @@ import ProductsEdit from "./ProductsEdit.js";
 import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 import ModifiedPrice from "../../shared/ModifiedPrice.js";
+import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
 
 function ProductsDetail({ products }) {
   const [product, setProduct] = useState({});
@@ -83,11 +84,19 @@ function ProductsDetail({ products }) {
             </S.ItemBox>
             <S.ItemBox>
               <S.ItemTitle>상품 옵션(컬러)</S.ItemTitle>
-              <S.ItemContent>{product.productoption.color}</S.ItemContent>
+              <S.ItemContent>
+                <ModifiedOptionText
+                  option={product.productoption.color}
+                ></ModifiedOptionText>
+              </S.ItemContent>
             </S.ItemBox>
             <S.ItemBox>
               <S.ItemTitle>상품 옵션(사이즈)</S.ItemTitle>
-              <S.ItemContent>{product.productoption.size}</S.ItemContent>
+              <S.ItemContent>
+                <ModifiedOptionText
+                  option={product.productoption.size}
+                ></ModifiedOptionText>
+              </S.ItemContent>
             </S.ItemBox>
             <S.ItemBox>
               <S.ItemTitle>가격</S.ItemTitle>
