@@ -8,8 +8,6 @@ export const ButtonContainer = styled.div`
 `;
 
 export const InnerCardTitleBox = styled.div`
-  /* background-color: #e9eff4; */
-  /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
   padding: 1rem;
