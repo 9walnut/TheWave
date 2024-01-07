@@ -2,13 +2,13 @@
 import { useState, useEffect } from "react";
 import * as S from "./SelectBoxStyle.js";
 
-function SelectBoxDelivery({ onOrderIdChange, onOrderIdValue }) {
+function SelectBoxDelivery({ onOrderIdChange, onOrderIdValue, initialStatus }) {
   const [releaseStatus, setReleaseStatus] = useState("");
 
   // 현재 페이지에서 orderId가 변경될 때마다 값 변경 (셀렉트박스 값 리셋)
   useEffect(() => {
-    setReleaseStatus(onOrderIdValue);
-  }, [onOrderIdValue]);
+    setReleaseStatus(initialStatus);
+  }, [onOrderIdValue, initialStatus]);
 
   function handleChangeStatus(e) {
     onOrderIdChange?.(e.target.value);

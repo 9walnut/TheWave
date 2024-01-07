@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./DataTableStyle.js";
 
 import SelectBoxDelivery from "./SelectBoxDelivery.js";
@@ -33,6 +33,7 @@ function DataTable({
   onSelectionChange,
   onItemClick,
   onStatusChange,
+  page,
 }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
@@ -60,6 +61,10 @@ function DataTable({
   const SelectAll = () => {
     CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists });
   };
+
+  useEffect(() => {
+    setSelectedLists(new Set());
+  }, [page]);
 
   const headerList = headers.map((header) => header.value);
 
@@ -98,6 +103,7 @@ function DataTable({
                 <CheckBox
                   onChange={() => onChecked(item)}
                   checked={selectedLists.has(index)}
+                  currentPage={page}
                 />
               </S.TableTd>
               {headerList.map((value, columnIndex) => (
@@ -107,7 +113,9 @@ function DataTable({
                 >
                   {value === "orderStatus" ? (
                     <SelectBoxDelivery
-                      value={selectedStatus}
+                      // value={selectedStatus}
+                      initialStatus={item.orderStatus}
+                      // value={item.orderStatus}
                       onChange={(e) => {
                         e.stopPropagation();
                         setSelectedStatus(e.target.value);

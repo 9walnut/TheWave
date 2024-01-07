@@ -11,15 +11,38 @@ export const AdminPageMainLayout = styled.div`
   display: grid;
   grid-template-columns: 255px 0.8fr;
   grid-gap: 10px;
-  height: 100%;
+  min-height: 100vh;
+  /* height: 100%; */
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 60px;
+    min-height: 175vh;
+  }
 `;
 
 export const LeftBox = styled.header`
   background-color: none;
+  @media (max-width: 767px) {
+    margin: 10px;
+    position: static;
+    width: auto;
+    padding-top: 0;
+    height: auto;
+    /* background-color: red; */
+  }
 `;
 
 export const RightBox = styled.main`
   background-color: none;
   margin: 20px;
   margin-top: 45px;
+  @media (max-width: 767px) {
+    grid-row: 1;
+    grid-column: span 2;
+    margin: 20px;
+    margin-top: 15px;
+    height: 97%;
+    /* background-color: blue; */
+  }
 `;

@@ -10,4 +10,7 @@ export const Select = styled.select`
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
+  @media (max-width: 767px) {
+    width: 110px;
+  }
 `;
