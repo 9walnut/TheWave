@@ -15,6 +15,7 @@ function OrderListPage() {
   const [receiveName, setReceiveName] = useState(userInfo.userName);
   const [deliveryRequest, setDeliveryRequest] = useState("");
   const totalPrice = productInfo.productPrice * orderQuantity;
+  const navigate = useNavigate();
 
   const postPayment = async () => {
     try {
@@ -30,6 +31,8 @@ function OrderListPage() {
       const res = await axios.post(`/api/payment/${productId}`, data, {
         headers,
       });
+      alert("결제완료~");
+      navigate("/");
     } catch (error) {
       console.log("ㅋㅋ실패요", error);
     }
@@ -44,7 +47,7 @@ function OrderListPage() {
             <S.OrderListTitle>주문 정보 확인</S.OrderListTitle>
 
             <S.OrderBox>주문 상품</S.OrderBox>
-            <li>
+            <div>
               <S.Productbox>
                 <S.ImgBox>
                   <img src={state.productInfo.thumbnailUrl} />
@@ -52,7 +55,8 @@ function OrderListPage() {
                 <div>{size}</div>
                 <div>{color}</div>
               </S.Productbox>
-            </li>
+            </div>
+
             <input
               type="text"
               value={receiveName}

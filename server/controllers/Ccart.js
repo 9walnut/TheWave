@@ -97,9 +97,9 @@ exports.payCart = async (req, res) => {
       attributes: ["address"],
     });
 
-    const product = await db.carts.findAll({
-      where: { cartId: cartIds, isChecked: 1 },
-      attributes: ["productId"],
+    const productInfo = await db.carts.findAll({
+      where: { cartId: { [Op.in]: cartIds }, isChecked: 1 },
+      attributes: ["productId", "cartId"],
     });
 
     // const productInfo = await db.products.findOne({
@@ -113,7 +113,7 @@ exports.payCart = async (req, res) => {
         userAddress,
         // productInfo,
         cartQuantity,
-        product,
+        productInfo,
         color,
         size,
       });

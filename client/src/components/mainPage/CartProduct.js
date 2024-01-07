@@ -19,14 +19,15 @@ const ImgBox = styled.div`
   }
 `;
 
-function CartProduct() {
+function CartProduct({ product }) {
+  console.log("장바구니다", product);
   return (
     <>
-      <li>
+      <li key={product.cartId}>
         <Productbox>
           <input type="checkbox" />
           <ImgBox>
-            <img src="/csp1.jpg" />
+            <img src={product} />
           </ImgBox>
         </Productbox>
       </li>

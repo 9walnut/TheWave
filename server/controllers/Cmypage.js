@@ -20,11 +20,23 @@ exports.mypage = async (req, res) => {
           "orderDate",
           "orderQuantity",
           "deliveryRequest",
+          "totalPrice",
+          "orderDate",
+          "orderStatus",
         ],
       });
 
+      const userName = await db.users.findOne({
+        where: { userNumber: tokenCheck.userData.userNumber },
+        attributes: ["userName"],
+      });
+
       if (orderList)
-        res.json({ orderList: orderList, accessToken: tokenCheck.accessToken });
+        res.json({
+          userName,
+          orderList: orderList,
+          accessToken: tokenCheck.accessToken,
+        });
       else res.send({ result: true, accessToken: tokenCheck.accessToken }); // 주문 내역 없는 경우
     } else {
       res.send({ result: tokenCheck.result }); // 토큰 검증 실패
@@ -127,7 +139,6 @@ exports.editInfoPage = (req, res) => {
 // 회원 정보 수정 페이지 > 비밀번호 인증
 exports.editInfoPw = async (req, res) => {
   const accessToken = req.headers["authorization"];
-
   try {
     const tokenCheck = await verifyToken(accessToken);
 
@@ -140,7 +151,7 @@ exports.editInfoPw = async (req, res) => {
       const userInfo = await db.users.findOne({
         where: { userNumber: tokenCheck.userData.userNumber },
       });
-      res.send({ result: true });
+      res.send({ result: true, userInfo });
     } else res.send({ result: false });
   } catch (error) {
     console.error(error);

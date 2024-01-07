@@ -19,8 +19,13 @@ import Users from "./pages/adminPage/Users";
 import NotFound from "./shared/NotFound404";
 import ProductsDetail from "./pages/adminPage/ProductsDetail";
 import ProductDetailsPage from "./pages/mainPage/products/ProductDetailsPage";
+import BestPage from "./pages/mainPage/products/BestPage";
 import CategoryPage from "./pages/mainPage/products/CategoryPage";
 import OrderListPage from "./pages/mainPage/payment/OrderListPage";
+import MyPageInfo from "./pages/mainPage/mypage/MyPageInfo";
+import WishList from "./pages/mainPage/mypage/WishList";
+import ChangePw from "./pages/mainPage/mypage/ChangePw";
+import DeliveryList from "./pages/mainPage/mypage/DeliveryList";
 
 function App() {
   return (
@@ -31,8 +36,13 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/findId" element={<FindIdPage />} />
         <Route path="/findPw" element={<FindPwPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-        {/* <Route path="/mypage/info" element={<MyPageInfo />} /> */}
+        <Route path="/mypage/*" element={<MyPage />}>
+          <Route path="delivery" element={<DeliveryList />} />
+          <Route path="info" element={<MyPageInfo />} />
+          <Route path="wishlist" element={<WishList />} />
+          {/* <Route path="pwmodify" element={<ChangePw />} /> */}
+        </Route>
+        <Route path="/category/best" element={<BestPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/products/:productId" element={<ProductDetailsPage />} />
         <Route
