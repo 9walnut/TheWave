@@ -6,6 +6,9 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  /* @media (max-width: 768px) {
+    height: 300vh;
+  } */
 `;
 
 export const AdminPageMainLayout = styled.div`
@@ -14,6 +17,11 @@ export const AdminPageMainLayout = styled.div`
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
   gap: 1px;
+  @media (max-width: 768px) {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 `;
 
 export const StyledCardRow1 = styled.div`
@@ -31,6 +39,16 @@ export const StyledCardRow1 = styled.div`
   overflow: hidden;
   margin-bottom: -4px;
   margin-top: 25px;
+
+  @media (max-width: 768px) {
+    /* width: 100%;
+    margin-bottom: 25px;
+    margin-top: 0px; */
+    width: 635px;
+    margin-bottom: 15px;
+    padding: 2px;
+    margin: 2px;
+  }
 `;
 export const StyledCardRow2 = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
@@ -47,4 +65,13 @@ export const StyledCardRow2 = styled.div`
   overflow: hidden;
   /* margin-bottom: -4px; */
   margin-top: -65px;
+  @media (max-width: 768px) {
+    /* width: 100%;
+    margin-bottom: 25px;
+    margin-top: 0px; */
+    width: 635px;
+    margin-bottom: 25px;
+    padding: 2px;
+    margin: 2px;
+  }
 `;
