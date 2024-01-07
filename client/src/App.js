@@ -19,6 +19,7 @@ import Users from "./pages/adminPage/Users";
 import NotFound from "./shared/NotFound404";
 import ProductsDetail from "./pages/adminPage/ProductsDetail";
 import ProductDetailsPage from "./pages/mainPage/products/ProductDetailsPage";
+import BestPage from "./pages/mainPage/products/BestPage";
 import CategoryPage from "./pages/mainPage/products/CategoryPage";
 import OrderListPage from "./pages/mainPage/payment/OrderListPage";
 import MyPageInfo from "./pages/mainPage/mypage/MyPageInfo";
@@ -41,6 +42,7 @@ function App() {
           <Route path="wishlist" element={<WishList />} />
           {/* <Route path="pwmodify" element={<ChangePw />} /> */}
         </Route>
+        <Route path="/category/best" element={<BestPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/products/:productId" element={<ProductDetailsPage />} />
         <Route
