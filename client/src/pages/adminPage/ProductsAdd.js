@@ -1,22 +1,18 @@
-// ProductsAdd.js 파일
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import * as S from "../../styles/adminPage/ProductsAdd.js";
 
-import AdminInput from "../../shared/adminPage/components/AdminInput";
-import AdminInputText from "../../shared/adminPage/components/AdminInputText";
 import Card from "../../shared/adminPage/components/Card";
-import AdminTextarea from "../../shared/adminPage/components/AdminTextarea.js";
-
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack";
 
+import AdminInput from "../../shared/adminPage/components/AdminInput";
+import AdminTextarea from "../../shared/adminPage/components/AdminTextarea.js";
 import SelectBoxProduct from "../../shared/adminPage/components/SelectBoxProduct";
 import SelectBoxCategory from "../../shared/adminPage/components/SelectBoxCategory";
 import SelectBoxOptionSize from "../../shared/adminPage/components/SelectBoxOptionSize";
 import AdminSelect from "../../shared/adminPage/components/AdminSelect";
-import axios from "axios";
 import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
 import UploadDetail from "../../shared/adminPage/components/UploadDetail";
 import AdminOptionSize from "../../shared/adminPage/components/AdminOptionSize.js";
@@ -24,10 +20,6 @@ import AdminOptionSize from "../../shared/adminPage/components/AdminOptionSize.j
 function ProductsAdd() {
   const navigate = useNavigate();
 
-  // const textAreaStyle = {
-  //   width: "590px",
-  //   height: "404px",
-  // };
   const [productName, setProductName] = useState("");
   const [productInfo, setProductInfo] = useState("");
   const [productPrice, setProductPrice] = useState("");
@@ -40,39 +32,77 @@ function ProductsAdd() {
 
   const [alertProductName, setAlertProductName] = useState("");
   const [alertProductPrice, setAlertProductPrice] = useState("");
+  const [alertColor, setAlertColor] = useState("");
+  const [alertTextarea, setAlertTextarea] = useState("");
 
   const [test, setTest] = useState("");
 
+  //------------------------ 유효성 검사
   useEffect(() => {
+    validateProductName();
+    validateProductPrice();
+    validateTextarea();
+  }, [productName, productPrice, productInfo]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      validateColor();
+    }, 300);
+  }, [color]);
+
+  const validateProductName = () => {
     if (productName.length <= 3) {
       setAlertProductName("최소 4글자 이상 입력해주세요. 특수문자 허용 😀");
     } else {
       setAlertProductName("");
     }
+  };
 
+  const validateProductPrice = () => {
     if (isNaN(productPrice) || productPrice <= 0) {
       setAlertProductPrice("숫자만 입력 가능합니다. 😀");
     } else {
       setAlertProductPrice("");
     }
-  }, [productName, productPrice]);
+  };
 
+  const validateColor = () => {
+    if (
+      color.includes(",,") ||
+      color.startsWith(",") ||
+      color.endsWith(",") ||
+      color.includes(" ") ||
+      color.trim() === "" ||
+      color.includes(",,") ||
+      color.includes(",,")
+    ) {
+      setAlertColor("공백이나 연속된 콤마, 시작과 끝에 콤마가 있습니다. 😀");
+    } else {
+      setAlertColor("");
+    }
+  };
+
+  const validateTextarea = () => {
+    if (productInfo.trim() === "") {
+      setAlertTextarea("상품 상세 설명란이 비어있습니다.😀");
+    } else {
+      setAlertTextarea("");
+    }
+  };
+
+  //------------------------ 이미지 업로드
   const getImageDataThumbnail = (thumbnailUrl) => {
     setThumbnailUrl(thumbnailUrl);
-    console.log("썸네일왔니", thumbnailUrl); //왔다!
+    // console.log("썸네일왔니", thumbnailUrl);
   };
   const getImageDataDetail = (detailUrls) => {
     setDetailUrls(detailUrls);
-    console.log("디테일왔니", detailUrls); //왔다!
+    // console.log("디테일왔니", detailUrls);
   };
+
+  //------------------------ 데이터 전송
   const sendData = async () => {
     try {
-      // const productName = productName;
-      // const productInfo = productInfo;
-      // const productPrice = productPrice;
-      // const categoryId = categoryId;
-      // const productStatus = productStatus;
-
       const data = {
         productName,
         productInfo,
@@ -93,19 +123,19 @@ function ProductsAdd() {
       const productId = response.data.productId;
       if (response.data) {
         navigate(`/admin/products/${productId}`);
-        console.log("되었다");
+        // console.log("되었다");
       } else {
-        console.log("안보내짐");
+        // console.log("안보내짐");
       }
     } catch (error) {
-      alert("입력란과 이미지를 모두 등록해주세요.");
+      alert("입력란과 옵션 선택, 이미지를 모두 등록해주세요.");
       console.log("에러", error);
     }
   };
 
-  useEffect(() => {
-    console.log(size);
-  }, [size]);
+  // useEffect(() => {
+  //   console.log(size);
+  // }, [size]);
 
   return (
     <>
@@ -117,11 +147,12 @@ function ProductsAdd() {
             {" "}
             <AdminInput
               type="text"
-              placeholder="특수문자 허용, 최소 4글자 이상"
+              placeholder="상품명을 입력해주세요."
               value={productName}
               onChange={setProductName}
               required
               minlength="4"
+              onFocus={validateProductName}
             >
               상품명 <S.AlertMsgBox>{alertProductName}</S.AlertMsgBox>
             </AdminInput>
@@ -130,16 +161,19 @@ function ProductsAdd() {
               placeholder="상품 관련 상세 설명을 입력해주세요."
               value={productInfo}
               onChange={setProductInfo}
+              onFocus={validateTextarea}
             >
-              상품 상세 설명
+              상품 상세 설명<S.AlertMsgBox>{alertTextarea}</S.AlertMsgBox>
             </AdminTextarea>
           </S.Box1>
           <S.Box2>
             <AdminInput
               type="number"
-              placeholder="숫자만 입력 가능"
+              placeholder="상품 가격을 입력해주세요."
               value={productPrice}
               onChange={setProductPrice}
+              required
+              onFocus={validateProductPrice}
             >
               가격<S.AlertMsgBox>{alertProductPrice}</S.AlertMsgBox>
             </AdminInput>
@@ -170,8 +204,9 @@ function ProductsAdd() {
               placeholder="상품컬러는 , 로 구분해주세요."
               value={color}
               onChange={setColor}
+              onFocus={validateColor}
             >
-              상품 옵션 - 컬러
+              상품 옵션 - 컬러 <S.AlertMsgBox>{alertColor}</S.AlertMsgBox>
             </AdminInput>
           </S.Box2>
         </S.ProductsLayout1>

@@ -4,10 +4,10 @@ import * as S from "./AdminTextareaStyle.js";
 function AdminTextarea(props) {
   const handleChange = (event) => {
     props.onChange(event.target.value);
-    console.log(
-      `Textarea 입력값 확인 (${props.children}):`,
-      event.target.value
-    );
+    // console.log(
+    //   `Textarea 입력값 확인 (${props.children}):`,
+    //   event.target.value
+    // );
   };
   return (
     <>
@@ -20,6 +20,7 @@ function AdminTextarea(props) {
             style={props.style}
             value={props.value}
             onChange={handleChange}
+            onFocus={props.onFocus}
           />
         </S.TextareaBox>
       </div>

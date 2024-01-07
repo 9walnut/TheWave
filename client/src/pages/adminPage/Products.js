@@ -102,8 +102,11 @@ function Products() {
   };
 
   const deleteProducts = async () => {
-    console.log("deleteProducts 함수 호출되냐");
-    console.log("삭제할 제품 ID:", selectedProductIds);
+    if (selectedProductIds.length === 0) {
+      alert("선택된 상품이 없습니다.");
+      return;
+    }
+    // console.log("삭제할 제품 ID:", selectedProductIds);
     if (window.confirm("정말 상품을 삭제하시겠습니까?")) {
       try {
         const response = await axios.delete("/api/admin/products", {
@@ -116,6 +119,7 @@ function Products() {
             "상품 삭제 완료. 삭제되면1(isDeleted: true), 아니면 0(isDeleted: false)"
           );
           await fetchData();
+          setSelectedProductIds([]);
         } else {
           console.error("상품 삭제 실패");
         }
@@ -135,6 +139,7 @@ function Products() {
           items={currentItems}
           page={currentPage}
           onSelectionChange={onSelectionChange}
+          // checkedItem={selectedProductIds}
           onItemClick={(item) => {
             const productId = item.productId;
 
