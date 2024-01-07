@@ -1,4 +1,8 @@
-const { db } = require("../models/index");
+const {
+  db,
+  db: { Op },
+  sequelize,
+} = require("../models/index");
 const { verifyToken } = require("../middleware/jwt");
 
 // 상품 상세 페이지 구매하기 버튼
@@ -45,105 +49,151 @@ exports.goPayment = async (req, res) => {
   }
 };
 
-// 결제하기(장바구니 결제, 단일 상품 결제)
+// 결제하기(장바구니 결제, 단일 상품 결제 모두)
 exports.payment = async (req, res) => {
+  // 주문서에서 작성한 정보
+  // 여러 상품들에 대한 개별 데이터(color, size, orderQuantity)가 어떤 식으로 넘어올지...
   const {
     orderQuantity,
     color,
     size,
-    address,
+    userInfo, // "userName", "phoneNumber" (현재 사용 안 함)
+    userAddress,
     receiveName,
     deliveryRequest,
-    productId,
-    cartId,
+    productInfo, // 주문할 상품 번호, 카트 번호, (color, size, orderQuantit..?)
   } = req.body;
   const accessToken = req.headers["authorization"];
+
+  const t = await sequelize.transaction();
 
   try {
     const tokenCheck = await verifyToken(accessToken);
     const userNumber = tokenCheck.userData.userNumber;
     console.log("유저넘버", userNumber);
 
-    const product = await db.products.findOne({
-      where: { productId: productId },
-    });
-    console.log("product", product);
+    let newOrder;
+    let payment;
+    let productOut;
 
-    const newOrder = await db.orders.create({
-      userNumber: userNumber,
-      cartId: cartId || null,
-      productId,
-      orderQuantity,
-      color,
-      size,
-      receiveName,
-      address,
-      deliveryRequest,
-      totalPrice: product.productPrice * orderQuantity,
-      productId: product.productId,
-      orderQuantity: orderQuantity,
-      orderDate: new Date(),
-      changeDate: new Date(),
-    });
+    try {
+      // 단일 상품 구매
+      if (req.body.productId) {
+        console.log("단일 상품 구매");
+        const product = await db.products.findOne({
+          where: { productId: req.body.productId },
+        });
 
-    const payment = await db.payment.create({
-      orderId: newOrder.orderId,
-      payPrice: newOrder.totalPrice,
-      payMethod: payMethod || "credit card",
-      isPaid: isPaid || "0",
-      isRefund: "0",
-    });
+        newOrder = await db.orders.create(
+          {
+            userNumber: userNumber,
+            productId: req.body.productId,
+            orderQuantity,
+            color,
+            size,
+            receiveName,
+            address: userAddress,
+            deliveryRequest,
+            totalPrice: product.productPrice * orderQuantity,
+            orderQuantity: orderQuantity,
+            orderDate: new Date(),
+            changeDate: new Date(),
+          },
+          { t }
+        );
 
-    const productOut = await db.productout.create({
-      orderId: payment.orderId,
-      cartId: newOrder.cartId || null,
-      productId: newOrder.productId,
-      outStatus: ,
-      outDate:, 
-    });
+        payment = await db.payment.create(
+          {
+            orderId: newOrder.orderId,
+            payPrice: newOrder.totalPrice,
+            payMethod: "1",
+            isPaid: "0",
+            isRefund: "0",
+          },
+          { t }
+        );
 
-    // 결제 완료된 후 장바구니 비우기 추가
-    await db.cartId.update({ isDeleted: true });
+        productOut = await db.productout.create(
+          {
+            orderId: payment.orderId,
+            cartId: newOrder.cartId || null, // 단일 상품 구매는 장바구니 없음
+            productId: newOrder.productId,
+            outStatus: "1",
+            outDate: new Date(),
+          },
+          { t }
+        );
+      } else {
+        console.log("여러 상품 구매");
 
-    if (newOrder) res.send(newOrder);
-    else res.send({ result: false });
+        // 구매 상품 정보
+        let productIds = productInfo.map((item) => item.productId);
+
+        const productsCheck = await db.products.findAll({
+          where: { productId: { [Op.in]: productIds } },
+        });
+        console.log("productsCheck 결과 확인", productsCheck);
+
+        for (let i = 0; i < productInfo.length; i++) {
+          newOrder = await db.orders.create(
+            {
+              userNumber: userNumber,
+              receiveName,
+              address: userAddress,
+              deliveryRequest,
+              productId: productsCheck[i].productId,
+              cartId: productInfo[i].cartId,
+              totalPrice:
+                productsCheck[i].productPrice * productInfo[i].orderQuantity, // 주문 수량..
+              orderQuantity: productInfo[i].orderQuantity,
+              color: productInfo[i].color,
+              size: productInfo[i].size,
+              orderDate: new Date(),
+              changeDate: new Date(),
+            },
+            { t }
+          );
+
+          payment = await db.payment.create(
+            {
+              orderId: newOrder.orderId,
+              payPrice: newOrder.totalPrice,
+              payMethod: "1",
+              isPaid: "0",
+              isRefund: "0",
+            },
+            { t }
+          );
+
+          productOut = await db.productout.create(
+            {
+              orderId: payment.orderId,
+              cartId: newOrder.cartId || null,
+              productId: newOrder.productId,
+              outStatus: "1",
+              outDate: new Date(),
+            },
+            { t }
+          );
+
+          // 장바구니 비우기
+          await db.carts.update(
+            { isDeleted: true },
+            { where: { cartId: productInfo[i].cartId } }
+          );
+        }
+      }
+
+      await t.commit();
+
+      if (newOrder) res.json(newOrder);
+      else res.send({ result: false });
+    } catch (error) {
+      await t.rollback();
+      throw error;
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("결제하기 오류");
   }
 };
-
-// 결제하기 > 비회원
-// exports.noMemberPay = async (req, res) => {
-//   try {
-//     const { orderQuantity, guestId, address } = req.body;
-
-//     const product = await db.products.findOne({
-//       where: { productId: req.params.productId },
-//     });
-
-//     const guestAddress = await db.address.create({
-//       userNumber: guestId,
-//       address: address,
-//     });
-
-//     const newOrder = await db.orders.create({
-//       userNumber: guestId,
-//       totalPrice: product.productPrice * orderQuantity,
-//       addressId: guestAddress.addressId,
-//     });
-
-//     // 주문 내역에 상품 추가
-//     await db.orders.create({
-//       orderId: newOrder.orderId,
-//       productId: product.productId,
-//       orderQuantity: orderQuantity,
-//     });
-
-//     if (newOrder) res.send(newOrder);
-//     else res.send({ result: false });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("비회원 결제하기 오류");
-//   }
-// };
