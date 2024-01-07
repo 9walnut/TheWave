@@ -19,6 +19,7 @@ import axios from "axios";
 import UploadThumbnailEdit from "../../shared/adminPage/components/UploadThumbnailEdit";
 import UploadDetailEdit from "../../shared/adminPage/components/UploadDetailEdit";
 import SelectBoxOptionSize from "../../shared/adminPage/components/SelectBoxOptionSize";
+import AdminOptionSize from "../../shared/adminPage/components/AdminOptionSize.js";
 
 function ProductsEdit() {
   const { productId } = useParams();
@@ -33,6 +34,7 @@ function ProductsEdit() {
   const [newDetailUrls, setNewDetailUrls] = useState("");
 
   const [newSize, setNewSize] = useState("");
+
   const [newColor, setNewColor] = useState("");
 
   useEffect(() => {
@@ -53,7 +55,8 @@ function ProductsEdit() {
         const colorValue = productData.productoption.color[0];
         setNewColor(colorValue);
 
-        const sizeValue = productData.productoption.size[0];
+        const sizeValue = productData.productoption.size;
+        console.log(sizeValue);
         setNewSize(sizeValue);
       } catch (error) {
         console.error("상품 정보를 가져오는 중 에러 발생", error);
@@ -61,6 +64,7 @@ function ProductsEdit() {
     };
 
     fetchProductData();
+    console.log(newSize);
   }, [productId]);
 
   const getImageDataThumbnail = (editThumbnailUrl) => {
@@ -99,6 +103,16 @@ function ProductsEdit() {
       console.log("에러", error);
     }
   };
+
+  // {
+  //   newSize && (
+  //     <>
+  //       {console.log(newSize)}
+  //       {console.log([...newSize])}
+  //       {console.log(Array.from(newSize))}
+  //     </>
+  //   );
+  // }
 
   return (
     <>
@@ -147,9 +161,22 @@ function ProductsEdit() {
                 onChange={setNewProductStatus}
               />
             </AdminSelect>
+            {/* 실패-------------------- */}
+            {/* <AdminSelect title="상품 옵션 - 사이즈">
+              <AdminOptionSize
+                // value={["XL"]}
+                // value={`{newSize}`}
+                // value={[...newSize]}
+                // value={newSize}
+                value={Array.from(newSize)}
+                onChange={setNewSize}
+              />
+            </AdminSelect> */}
+            {/* 실패-------------------- */}
             <AdminSelect title="상품 옵션 - 사이즈">
               <SelectBoxOptionSize value={newSize} onChange={setNewSize} />
             </AdminSelect>
+
             <AdminInput
               type="text"
               placeholder="상품컬러는 , 로 구분"

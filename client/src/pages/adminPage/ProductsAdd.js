@@ -19,6 +19,7 @@ import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import axios from "axios";
 import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
 import UploadDetail from "../../shared/adminPage/components/UploadDetail";
+import AdminOptionSize from "../../shared/adminPage/components/AdminOptionSize.js";
 
 function ProductsAdd() {
   const navigate = useNavigate();
@@ -40,6 +41,8 @@ function ProductsAdd() {
   const [alertProductName, setAlertProductName] = useState("");
   const [alertProductPrice, setAlertProductPrice] = useState("");
 
+  const [test, setTest] = useState("");
+
   useEffect(() => {
     if (productName.length <= 3) {
       setAlertProductName("최소 4글자 이상 입력해주세요. 특수문자 허용 😀");
@@ -47,8 +50,8 @@ function ProductsAdd() {
       setAlertProductName("");
     }
 
-    if (productPrice !== Number) {
-      setAlertProductPrice("숫자만 입력해주세요. 😀");
+    if (isNaN(productPrice) || productPrice <= 0) {
+      setAlertProductPrice("숫자만 입력 가능합니다. 😀");
     } else {
       setAlertProductPrice("");
     }
@@ -80,7 +83,6 @@ function ProductsAdd() {
         detailUrls,
         color,
         size,
-        // optionColor,
       };
       // console.log("ㅎㅎㅎㅎ", detailUrls);
 
@@ -96,10 +98,14 @@ function ProductsAdd() {
         console.log("안보내짐");
       }
     } catch (error) {
-      // alert("입력란과 이미지를 모두 등록해주세요.");
+      alert("입력란과 이미지를 모두 등록해주세요.");
       console.log("에러", error);
     }
   };
+
+  useEffect(() => {
+    console.log(size);
+  }, [size]);
 
   return (
     <>
@@ -151,7 +157,11 @@ function ProductsAdd() {
                 onChange={setProductStatus}
               />
             </AdminSelect>
-
+            {/* 실패-------------------- */}
+            {/* <AdminSelect title="상품 옵션 - 사이즈">
+              <AdminOptionSize value={size} onChange={setSize} />
+            </AdminSelect>        */}
+            {/* 실패-------------------- */}
             <AdminSelect title="상품 옵션 - 사이즈">
               <SelectBoxOptionSize value={size} onChange={setSize} />
             </AdminSelect>
