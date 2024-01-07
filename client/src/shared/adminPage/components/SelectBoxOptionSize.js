@@ -9,7 +9,6 @@ function SelectBoxOptionSize({ value, onChange }) {
     setReleaseStatus(selectedValue);
     console.log("상품 상태 select", selectedValue);
 
-    // onChange prop으로 전달된 함수를 호출하여 값을 부모 컴포넌트로 전달
     onChange(selectedValue);
   }
 

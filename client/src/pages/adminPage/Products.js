@@ -133,6 +133,7 @@ function Products() {
           keySet="productsTb_"
           headers={header}
           items={currentItems}
+          page={currentPage}
           onSelectionChange={onSelectionChange}
           onItemClick={(item) => {
             const productId = item.productId;
