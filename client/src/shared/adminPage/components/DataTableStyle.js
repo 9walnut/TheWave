@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const TableContainer = styled.div`
   overflow-x: auto; /* 가로 스크롤 */
+  max-width: 100%;
 `;
 export const Table = styled.table`
   border: 1px solid #ddd;
@@ -18,6 +19,9 @@ export const Table = styled.table`
     height: auto;
     margin-left: 23px;
     font-size: smaller;
+  }
+  @media (max-width: 1945px) {
+    width: 100%;
   }
 `;
 
