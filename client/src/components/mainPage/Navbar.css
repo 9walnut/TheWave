@@ -5,13 +5,13 @@ header > * {
 header {
   width: 100%;
 }
+
 .logoBar {
   height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 15px 0 15px;
-  /* width: 100%; */
 }
 
 .logoBar a {
@@ -22,34 +22,30 @@ header {
   display: flex;
   align-items: center;
   width: 100px;
-  /* cursor: pointer; */
 }
 
 .logoBar > div > div {
   margin: 5px;
-  /* cursor: pointer; */
 }
 
-nav {
+.navbar {
   display: flex;
   justify-content: space-around;
   align-items: center;
   border: 1px solid #dde1e6;
   color: #5a5a5a;
   padding: 10px;
-  /* position: fixed; */
-  /* width: 100%; */
   z-index: 997;
 }
 
-nav a {
+.navbar a {
   position: relative;
   text-decoration: none;
   color: #5a5a5a;
   padding-bottom: 5px;
 }
 
-nav a::before {
+.navbar a::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -60,23 +56,19 @@ nav a::before {
   transition: width 0.3s ease-in-out;
 }
 
-nav a:hover::before {
+.navbar a:hover::before {
   width: 100%;
 }
 
-nav ul {
+.navbar ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-nav li {
+.navbar li {
   margin: 0 20px 0 20px;
-}
-
-a {
-  text-decoration: none;
 }
 
 .myPageMenu {

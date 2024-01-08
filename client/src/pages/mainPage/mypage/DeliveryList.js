@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import * as S from "../../../styles/mainPage/mypage.style";
 import getAccessToken from "../../../hooks/getAcessToken";
 import DeliveryComponent from "../../../components/mainPage/DeliveryListComponent";
