@@ -58,6 +58,22 @@ function Orders() {
     return b.orderId - a.orderId;
   };
 
+  //---orderStatus값 이름으로 변경
+  const orderStatusToName = (status) => {
+    switch (status) {
+      case 1:
+        return "결제대기";
+      case 2:
+        return "출고대기";
+      case 3:
+        return "출고";
+      case 4:
+        return "취소";
+      default:
+        return "결제대기";
+    }
+  };
+
   //---axios get
   const fetchData = async () => {
     try {
@@ -74,13 +90,14 @@ function Orders() {
         ),
         address: order.address,
         orderDate: order.orderDate,
-        orderStatus: order.orderStatus,
+        // orderStatus: order.orderStatus,
+        orderStatus: orderStatusToName(order.orderStatus),
       }));
 
       modifiedData.sort(descendingData);
 
       setOrders(modifiedData);
-      // console.log(orders);
+      // console.log(modifiedData); //orderStatus 한글로 변경 완료
     } catch (error) {
       console.log("에러", error);
     }
@@ -146,6 +163,7 @@ function Orders() {
             navigate(`/admin/orders/${orderId}`);
           }}
           onStatusChange={handleStatusChange}
+          page={currentPage}
         />
 
         <PageNation

@@ -6,7 +6,16 @@ export const Table = styled.table`
   border-radius: 7px;
   width: 1600px;
   margin-left: 33px;
+
   cursor: pointer;
+
+  @media (max-width: 767px) {
+    margin-top: 10px;
+    width: 650px;
+    height: auto;
+    margin-left: 23px;
+    font-size: smaller;
+  }
 `;
 
 const BasicStyle = `
@@ -19,23 +28,9 @@ const BasicStyle = `
 
 export const TableHeader = styled.th`
   width: ${(props) => props.width}px;
-  ${BasicStyle}/* ${(props) => {
-    if (props.text === "아이디") {
-      return `
-        padding-left: 38px
-      `;
-    } else if (props.text === "NO.") {
-      return `
-        padding-left: 38px
-      `;
-    } else {
-      //기본 스타일
-      return `
-      text-align: center;
-      
-      `;
-    }
-  }} */
+  ${BasicStyle}/* @media (max-width: 767px) {
+    ${(props) => props.text === "주소" && "display: none;"}
+  } */
 `;
 
 export const TableTr = styled.tr`
@@ -51,9 +46,18 @@ export const TableTr = styled.tr`
 export const TableTd = styled.td`
   width: 100px;
   padding: 20px;
+  @media (max-width: 767px) {
+    width: 80px;
+    padding: 10px;
+  }
 `;
+
 export const TableInputTd = styled.td`
   width: 20px;
   padding: 10px;
   background: #e4ebf1;
+  @media (max-width: 767px) {
+    width: 80px;
+    padding: 10px;
+  }
 `;

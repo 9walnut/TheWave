@@ -4,8 +4,9 @@ import React from "react";
 function AdminInput(props) {
   const handleChange = (event) => {
     props.onChange(event.target.value);
-    console.log(`input 입력값 확인 (${props.children}):`, event.target.value);
+    // console.log(`input 입력값 확인 (${props.children}):`, event.target.value);
   };
+
   return (
     <>
       <div>
@@ -17,6 +18,7 @@ function AdminInput(props) {
             style={props.style}
             value={props.value}
             onChange={handleChange}
+            onFocus={props.onFocus}
           />
         </S.InputBox>
       </div>

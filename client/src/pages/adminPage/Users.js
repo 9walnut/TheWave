@@ -130,6 +130,7 @@ function Users() {
           keySet="usersTb_"
           headers={header}
           items={currentItems}
+          page={currentPage}
           onSelectionChange={onSelectionChange}
         />
         <S.BtnWrapper>

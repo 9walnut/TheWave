@@ -7,7 +7,7 @@ function ListItem(props) {
     <S.ListBox>
       <S.ListIconImg src={props.icon} alt="Icon" className="list-icon" />
       <S.ListItemBox>{props.children}</S.ListItemBox>
-      <S.ListIconImg src={props.arrow} alt="arrow" className="list-arrow" />
+      <S.ListIconImg2 src={props.arrow} alt="arrow" className="list-arrow" />
     </S.ListBox>
   );
 }

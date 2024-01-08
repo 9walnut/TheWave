@@ -22,7 +22,7 @@ function SelectBoxCategory({ value, onChange }) {
         onChange={handleChangeStatus}
         value={value}
       >
-        <option disabled value="" selected>
+        <option disabled value="" defaultValue>
           카테고리 선택
         </option>
         <option value="캐릭터">캐릭터</option>
