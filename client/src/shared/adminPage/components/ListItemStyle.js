@@ -11,7 +11,7 @@ export const ListBox = styled.div`
     align-items: center;
     justify-content: center;
     margin: 0;
-    width: 70px;
+    width: 81px;
   }
 `;
 export const ListIconImg = styled.img`
@@ -21,7 +21,7 @@ export const ListIconImg = styled.img`
   @media (max-width: 767px) {
     width: 20px;
     height: 20px;
-    margin-top: -14px;
+    margin-top: 10px;
     margin-bottom: 6px;
     margin-right: 0px;
   }

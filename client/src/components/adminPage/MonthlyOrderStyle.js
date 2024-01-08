@@ -3,10 +3,15 @@ import styled from "styled-components";
 export const OrderItemWrapper = styled.div`
   /* background-color: darkblue; */
   position: relative;
-  width: 560px;
+  width: 100%;
   align-content: center;
   height: 129px;
   margin-top: 59px;
+
+  @media (max-width: 768px) {
+    width: 60%;
+    margin: 59px auto;
+  }
 `;
 export const ProductItemWrapper = styled.div`
   /* background-color: darkblue; */
@@ -15,6 +20,10 @@ export const ProductItemWrapper = styled.div`
   align-content: center;
   height: 129px;
   margin-top: 85px;
+  @media (max-width: 768px) {
+    width: 60%;
+    margin: 59px auto;
+  }
 `;
 
 export const ListItemBox = styled.div`
@@ -25,6 +34,10 @@ export const ListItemBox = styled.div`
   /* background-color: red; */
   justify-content: center;
   margin-left: 202px;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0px;
+  }
 `;
 
 export const IconContainer = styled.div`
@@ -41,4 +54,7 @@ export const TitleContainer = styled.div`
 export const ResultContainer = styled.div`
   text-align: left;
   margin-left: auto;
+  @media (max-width: 768px) {
+    /* margin-left: 20px; */
+  }
 `;

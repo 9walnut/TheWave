@@ -29,6 +29,7 @@ export const LeftBox = styled.header`
     width: auto;
     padding-top: 0;
     height: auto;
+    width: 100%;
     /* background-color: red; */
   }
 `;
@@ -37,6 +38,7 @@ export const RightBox = styled.main`
   background-color: none;
   margin: 20px;
   margin-top: 45px;
+
   @media (max-width: 767px) {
     grid-row: 1;
     grid-column: span 2;
