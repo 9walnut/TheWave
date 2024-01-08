@@ -57,7 +57,7 @@ exports.payment = async (req, res) => {
     userAddress,
     receiveName,
     deliveryRequest,
-    productInfo, // 주문할 상품 번호, 카트 번호, (color, size, orderQuantity..?) > 단일 상품 구매인 경우엔 prductInfo로 묶지 않고 productId, color, size, orderQuantity
+    productInfo, // [productId, orderQuantity, color, size, cartId]
   } = req.body;
   const accessToken = req.headers["authorization"];
 
@@ -72,26 +72,27 @@ exports.payment = async (req, res) => {
     let payment;
     let productOut;
 
+    console.log("productInfo.length", productInfo.length);
+
     try {
       // 단일 상품 구매
-      if (req.body.productId) {
+      if (productInfo.length === 1) {
         console.log("단일 상품 구매");
         const product = await db.products.findOne({
-          where: { productId: req.body.productId },
+          where: { productId: productInfo[0].productId },
         });
 
         newOrder = await db.orders.create(
           {
-            userNumber: userNumber,
-            productId: req.body.productId,
-            orderQuantity,
-            color,
-            size,
+            userNumber,
+            productId: productInfo[0].productId,
+            orderQuantity: productInfo[0].orderQuantity,
+            color: productInfo[0].productoption.color[0],
+            size: productInfo[0].productoption.size[0],
             receiveName,
             address: userAddress,
             deliveryRequest,
-            totalPrice: product.productPrice * orderQuantity,
-            orderQuantity: orderQuantity,
+            totalPrice: product.productPrice * productInfo[0].orderQuantity,
             orderDate: new Date(),
             changeDate: new Date(),
           },
@@ -133,17 +134,17 @@ exports.payment = async (req, res) => {
         for (let i = 0; i < productInfo.length; i++) {
           newOrder = await db.orders.create(
             {
-              userNumber: userNumber,
+              userNumber,
               receiveName,
               address: userAddress,
               deliveryRequest,
               productId: productsCheck[i].productId,
               cartId: productInfo[i].cartId,
               totalPrice:
-                productsCheck[i].productPrice * productInfo[i].orderQuantity, // 주문 수량..
+                productsCheck[i].productPrice * productInfo[i].orderQuantity,
               orderQuantity: productInfo[i].orderQuantity,
-              color: productInfo[i].color,
-              size: productInfo[i].size,
+              color: productInfo[i].productoption.color[0],
+              size: productInfo[i].productoption.size[0],
               orderDate: new Date(),
               orderStatus: "1",
               changeDate: new Date(),
@@ -164,8 +165,8 @@ exports.payment = async (req, res) => {
 
           productOut = await db.productout.create(
             {
-              orderId: payment.orderId,
-              cartId: newOrder.cartId || null,
+              orderId: newOrder.orderId,
+              cartId: newOrder.cartId,
               productId: newOrder.productId,
               outStatus: "1",
               outDate: new Date(),
