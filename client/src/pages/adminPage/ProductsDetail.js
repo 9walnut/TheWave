@@ -9,7 +9,7 @@ import ProductsEdit from "./ProductsEdit.js";
 import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 import ModifiedPrice from "../../shared/ModifiedPrice.js";
-import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
+// import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
 
 function ProductsDetail({ products }) {
   const [product, setProduct] = useState({});
