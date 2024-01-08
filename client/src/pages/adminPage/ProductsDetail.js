@@ -84,19 +84,11 @@ function ProductsDetail({ products }) {
             </S.ItemBox>
             <S.ItemBox>
               <S.ItemTitle>상품 옵션(컬러)</S.ItemTitle>
-              <S.ItemContent>
-                <ModifiedOptionText
-                  option={product.productoption.color}
-                ></ModifiedOptionText>
-              </S.ItemContent>
+              <S.ItemContent>{product.productoption.color}</S.ItemContent>
             </S.ItemBox>
             <S.ItemBox>
               <S.ItemTitle>상품 옵션(사이즈)</S.ItemTitle>
-              <S.ItemContent>
-                <ModifiedOptionText
-                  option={product.productoption.size}
-                ></ModifiedOptionText>
-              </S.ItemContent>
+              <S.ItemContent>{product.productoption.size}</S.ItemContent>
             </S.ItemBox>
             <S.ItemBox>
               <S.ItemTitle>가격</S.ItemTitle>
