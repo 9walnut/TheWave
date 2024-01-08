@@ -162,7 +162,7 @@ const FormBox = styled.div`
   margin: auto;
   display: flex;
   height: 100%;
-  width: 50%;
+  width: 100%;
   flex-direction: column;
   box-sizing: border-box;
   text-align: center;

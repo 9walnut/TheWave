@@ -4,6 +4,9 @@ export const ProductLayout = styled.div`
   /* display: flex; */
   margin: 30px 40px;
   width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1600px;
   height: 100%;
 `;
 
@@ -11,7 +14,7 @@ export const ProductImgBox = styled.div`
   width: 60%;
   padding: 40px;
   /* border-color: #5a5a5a */
-  border-right: 1px solid #5a5a5a;
+  border-right: 1px solid #dddddd;
   img {
     width: 100%;
     object-fit: cover;
@@ -39,7 +42,7 @@ export const ProductInfoBox = styled.div`
 
 export const ProductTopBox = styled.div`
   display: flex;
-  border-bottom: 1px solid #5a5a5a;
+  border-bottom: 1px solid #ddd;
 `;
 
 export const ProductContentBox = styled.div`
