@@ -31,7 +31,7 @@ function Navbar() {
     }
   };
 
-  const [screenSize, setScreenSize] = useState(window.innerWidth <= 582);
+  const [screenSize, setScreenSize] = useState(window.innerWidth <= 650);
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [sideModal, setSideModal] = useState(false);
 
@@ -40,7 +40,7 @@ function Navbar() {
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenSize(window.innerWidth <= 620);
+      setScreenSize(window.innerWidth <= 650);
     };
 
     window.addEventListener("resize", handleResize);

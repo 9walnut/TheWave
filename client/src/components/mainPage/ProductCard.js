@@ -20,12 +20,20 @@ function ProductCard() {
     getProduct();
   }, []);
 
+  const addToCart = (productId) => {
+    console.log("장바구니 얍");
+  };
+
+  const addToWishlist = (productId) => {
+    console.log("찜하기 얍");
+  };
+
   return (
     <>
       <S.ProductContentBox>
-        {products.slice(0, 8).map((product) => {
+        {products.slice(0, 10).map((product) => {
           return (
-            <S.CardItemBox>
+            <S.CardItemBox key={product.productId}>
               <Link to={`/products/${product.productId}`}>
                 <div>
                   <img src={product.thumbnailUrl} alt="사진" />
@@ -38,6 +46,14 @@ function ProductCard() {
                   </ul>
                 </div>
               </Link>
+              <div className="buttons-container">
+                <button onClick={() => addToCart(product.productId)}>
+                  장바구니
+                </button>
+                <button onClick={() => addToWishlist(product.productId)}>
+                  찜하기
+                </button>
+              </div>
             </S.CardItemBox>
           );
         })}

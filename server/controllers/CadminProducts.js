@@ -144,7 +144,6 @@ exports.getAdminProduct = async (req, res) => {
 exports.editAdminProduct = async (req, res) => {
   try {
     const { productId } = req.params;
-    console.log(req.body);
     const {
       categoryName,
       productName,
@@ -153,6 +152,8 @@ exports.editAdminProduct = async (req, res) => {
       productStatus,
       thumbnailUrl,
       detailUrls,
+      color,
+      size,
     } = req.body;
 
     const category = await db.categories.findOne({ where: { categoryName } });
@@ -177,7 +178,19 @@ exports.editAdminProduct = async (req, res) => {
       detailUrls,
     });
 
-    res.send(updatedProduct);
+    const productOption = await db.productoption.findOne({
+      where: { productId },
+    });
+    if (!productOption) {
+      return res.status(404).send("Product option not found");
+    }
+
+    const updatedProductOption = await productOption.update({
+      color,
+      size,
+    });
+
+    res.send({ updatedProduct, updatedProductOption });
   } catch (error) {
     console.error(error);
     res.status(500).send("상품 수정 오류");
