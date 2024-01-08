@@ -58,7 +58,7 @@ function MyPage() {
             </h3>
             <ul>
               <li>
-                <Link to="delivery">주문 정보</Link>
+                <Link to="delivery">주문 목록</Link>
               </li>
               <li>
                 <Link to="/cart">

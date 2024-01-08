@@ -6,6 +6,7 @@ import menu from "../../assets/img/menu.png";
 import basket from "../../assets/img/basket.png";
 import mypage from "../../assets/img/mypage.png";
 import "./Navbar.css";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUser } from "../../redux/reducers/userSlice";
 import getAccessToken from "../../hooks/getAcessToken";
@@ -32,15 +33,14 @@ function Navbar() {
 
   const [screenSize, setScreenSize] = useState(window.innerWidth <= 582);
   const [isMenuVisible, setMenuVisible] = useState(false);
+  const [sideModal, setSideModal] = useState(false);
 
   const user = useSelector((state) => state.user);
   const isLogin = getAccessToken() ? true : false;
-  // console.log(isLogin);
-  // console.log(user.user);
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenSize(window.innerWidth <= 582);
+      setScreenSize(window.innerWidth <= 620);
     };
 
     window.addEventListener("resize", handleResize);
@@ -63,13 +63,28 @@ function Navbar() {
     setMenuVisible(false);
   };
 
+  useEffect(() => {
+    if (!screenSize) setSideModal(false);
+  });
+
   return (
     <>
       <header>
         {/* searchbar */}
         <div className="logoBar">
           <div>
-            <a>{screenSize ? <img src={menu} /> : <img src={search} />}</a>
+            <a>
+              {screenSize ? (
+                <img
+                  src={menu}
+                  onClick={() => {
+                    setSideModal(!sideModal);
+                  }}
+                />
+              ) : (
+                <img src={search} />
+              )}
+            </a>
           </div>
           <div>
             <a>
@@ -127,13 +142,8 @@ function Navbar() {
 
         {/* navbar */}
         {screenSize ? null : (
-          <nav>
+          <nav className="navbar">
             <ul>
-              {/* <li>
-                <a href="#" style={{ fontWeight: "bold" }}>
-                  All Products
-                </a>
-              </li> */}
               <li>
                 <Link to={`/category/best`} style={{ fontWeight: "bold" }}>
                   <a>Best</a>
@@ -178,8 +188,98 @@ function Navbar() {
           </nav>
         )}
       </header>
+      {sideModal && (
+        <SidebarMenu isOpen={sideModal} onClose={() => setSideModal(false)} />
+      )}
     </>
   );
 }
+
+const Sidebar = styled.nav`
+  margin-top: 60px;
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: top 0.3s ease-in-out;
+  overflow-y: auto;
+`;
+
+const MenuList = styled.ul`
+  list-style-type: none;
+  padding: 20px;
+  margin: 10px 0px;
+`;
+
+const MenuItem = styled.li`
+  margin-bottom: 15px;
+  font-size: 16px;
+  margin-top: 24px;
+`;
+
+const NavLink = styled(Link)`
+  text-decoration: none;
+  color: #5a5a5a;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #7a7a7a;
+  }
+`;
+
+const SidebarMenu = ({ isOpen, onClose }) => {
+  return (
+    <Sidebar style={{ left: isOpen ? "0" : "-250px" }}>
+      <MenuList>
+        <MenuItem>
+          <NavLink to="/category/best" onClick={onClose}>
+            Best
+          </NavLink>
+        </MenuItem>
+        <MenuItem>
+          <NavLink to="/category/1" onClick={onClose}>
+            캐릭터
+          </NavLink>
+        </MenuItem>
+        <MenuItem>
+          <NavLink to="/category/2" onClick={onClose}>
+            데이지
+          </NavLink>
+        </MenuItem>
+        <MenuItem>
+          <NavLink to="/category/3" onClick={onClose}>
+            레터링
+          </NavLink>
+        </MenuItem>
+        <MenuItem>
+          <NavLink to="/category/4" onClick={onClose}>
+            용돈
+          </NavLink>
+        </MenuItem>
+        <MenuItem>
+          <NavLink to="/category/5" onClick={onClose}>
+            옴브레
+          </NavLink>
+        </MenuItem>
+        <MenuItem>
+          <NavLink to="/category/6" onClick={onClose}>
+            장미
+          </NavLink>
+        </MenuItem>
+        <MenuItem>
+          <NavLink to="/category/7" onClick={onClose}>
+            튤립
+          </NavLink>
+        </MenuItem>
+      </MenuList>
+    </Sidebar>
+  );
+};
 
 export default Navbar;

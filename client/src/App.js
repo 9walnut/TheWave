@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import "./App.css";
 import { useSelector } from "react-redux";
 import MainPage from "./pages/mainPage/MainPage";
@@ -26,6 +27,20 @@ import MyPageInfo from "./pages/mainPage/mypage/MyPageInfo";
 import WishList from "./pages/mainPage/mypage/WishList";
 import ChangePw from "./pages/mainPage/mypage/ChangePw";
 import DeliveryList from "./pages/mainPage/mypage/DeliveryList";
+
+const MyPageGuard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken"); // 토큰 저장 방식에 따라 수정
+
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  return null;
+};
 
 function App() {
   return (

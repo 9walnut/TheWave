@@ -24,6 +24,13 @@ exports.mypage = async (req, res) => {
           "orderDate",
           "orderStatus",
         ],
+        include: [
+          {
+            model: db.products,
+            as: "product",
+            attributes: ["productName", "productPrice", "thumbnailUrl"],
+          },
+        ],
       });
 
       const userName = await db.users.findOne({
@@ -151,7 +158,12 @@ exports.editInfoPw = async (req, res) => {
       const userInfo = await db.users.findOne({
         where: { userNumber: tokenCheck.userData.userNumber },
       });
-      res.send({ result: true, userInfo });
+
+      const userAddress = await db.address.findOne({
+        where: { userNumber: tokenCheck.userData.userNumber },
+      });
+
+      res.send({ result: true, userInfo, userAddress });
     } else res.send({ result: false });
   } catch (error) {
     console.error(error);
@@ -168,7 +180,13 @@ exports.editInfo = async (req, res) => {
     const editInfo = await db.users.update(req.body, {
       where: { userNumber: tokenCheck.userData.userNumber },
     });
-    if (editInfo) res.send({ result: true });
+
+    const editAddress = await db.address.update(
+      { address: req.body.address },
+      { where: { userNumber: tokenCheck.userData.userNumber } }
+    );
+
+    if (editInfo && editAddress) res.send({ result: true });
     else res.send({ result: false });
   } catch (error) {
     console.error(error);
