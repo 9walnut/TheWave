@@ -7,7 +7,7 @@ exports.bestPage = async (req, res) => {
 
     const bestProducts = await db.products.findAll({
       // 실제 등록 상품 등록 후 아이디 수정
-      where: { productId: [1, 3, 5] },
+      where: { productId: [21, 28, 29] },
       attributes: [
         "productId",
         "productName",
