@@ -22,7 +22,7 @@ router.post(
 // 상품 등록 - 상세 사진 등록
 router.post(
   "/add/detail",
-  detailUpload.array("detailUrls", 5),
+  detailUpload.array("detailUrls", 10),
   controller.uploadDetails
 );
 
