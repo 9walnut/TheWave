@@ -5,6 +5,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.css";
 
+const CarouselContainer = styled.div`
+  max-width: 1600px;
+  margin: 0 auto; /* 가운데 정렬을 위해 auto로 마진을 조절합니다. */
+`;
+
 const ImgBox = styled.div`
   /* margin: 0px 40px; */
 
@@ -13,6 +18,9 @@ const ImgBox = styled.div`
     /* margin: 0px 50px; */
     /* width: 100%; */
     height: 700px;
+    @media (max-width: 767px) {
+      height: 300px;
+    }
   }
 `;
 
@@ -37,6 +45,15 @@ function MainCarousel() {
     arrows: true,
     autoplay: true, // 자동 캐러셀
     autoplaySpeed: 3000, // 자동 캐러셀 속도
+    responsive: [
+      {
+        breakpoint: 620,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
     // responsive: [
     //   {
     //     breakpoint: 2300,
@@ -64,19 +81,19 @@ function MainCarousel() {
   };
 
   return (
-    <div>
+    <CarouselContainer>
       <Slider {...settings}>
         {imgList.map((img) => {
           return (
-            <ImgBox>
+            <ImgBox key={img}>
               <p>
-                <img src={img} />
+                <img src={img} alt={`Carousel Image ${img}`} />
               </p>
             </ImgBox>
           );
         })}
       </Slider>
-    </div>
+    </CarouselContainer>
   );
 }
 

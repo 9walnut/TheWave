@@ -1,5 +1,5 @@
 header > * {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 header {
@@ -74,7 +74,7 @@ header {
 .myPageMenu {
   position: absolute;
   text-align: center;
-  right: 65px;
+  right: 60px;
   z-index: 999;
   background-color: #ffffff;
   border-radius: 8px;

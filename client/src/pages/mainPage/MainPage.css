@@ -2,16 +2,18 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* height: 100%; */
   overflow-x: hidden;
 }
 
 section {
   box-sizing: border-box;
-  /* width: 100%; */
   width: auto;
   height: 100%;
   padding: 4rem;
+
+  @media (max-width: 767px) {
+    padding: 16px;
+  }
 }
 
 /* https://d2.naver.com/helloworld/8540176 */
