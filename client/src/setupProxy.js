@@ -7,9 +7,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -17,9 +14,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/register", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -27,9 +21,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/login", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -37,9 +28,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/mypage", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -47,9 +35,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/products", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -57,9 +42,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/cart", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -67,9 +49,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/payment/:productId", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -77,9 +56,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/mypage", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -87,9 +63,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/mypage/wishList", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -97,9 +70,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/mypage/info", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -107,9 +77,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/mypage/pwCheck", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -118,27 +85,18 @@ module.exports = function (app) {
     createProxyMiddleware("/api/admin", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
   app.use(
     createProxyMiddleware("/api/admin/products", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
   app.use(
     createProxyMiddleware("/api/admin/products/:productId/edit", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -146,9 +104,6 @@ module.exports = function (app) {
     createProxyMiddleware("/api/admin/products/:productId", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -156,18 +111,12 @@ module.exports = function (app) {
     createProxyMiddleware("/api/admin/products/thumbnail", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
   app.use(
     createProxyMiddleware("/api/admin/products/:productId/edit/thumbnail", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 
@@ -175,27 +124,18 @@ module.exports = function (app) {
     createProxyMiddleware("/api/admin/users", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
   app.use(
     createProxyMiddleware("/api/admin/orders", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
   app.use(
     createProxyMiddleware("/api/admin/orders/:orderId", {
       target: apiURL,
       changeOrigin: true,
-      // pathRewrite: {
-      //   "^/api": "", // URL ^/api -> 공백 변경
-      // },
     })
   );
 };
