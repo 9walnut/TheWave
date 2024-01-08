@@ -70,75 +70,79 @@ function DataTable({
 
   return (
     <>
-      <S.Table>
-        <thead>
-          <S.TableTr>
-            <S.TableInputTd>
-              <input
-                type="checkbox"
-                onChange={SelectAll}
-                checked={selectedLists.size === items.length}
-              />
-            </S.TableInputTd>
-            {headers.map((header) => (
-              <S.TableHeader
-                key={header.text}
-                text={header.text}
-                width={header.width}
-                // style={{ width: `${header.width}px` }}
-              >
-                {/* <S.TableHeader key={header.text}> */}
-                {header.value === "deliveryStatus" ? header.text : header.text}
-              </S.TableHeader>
-            ))}
-          </S.TableTr>
-        </thead>
-        <tbody>
-          {items.map((item, index) => (
-            <S.TableTr
-              key={`${keySet}_${index}`}
-              onClick={(event) => onRowClick(item, event)}
-            >
-              <S.TableTd>
-                <CheckBox
-                  onChange={() => onChecked(item)}
-                  checked={selectedLists.has(index)}
-                  currentPage={page}
+      <S.TableContainer>
+        <S.Table>
+          <thead>
+            <S.TableTr>
+              <S.TableInputTd>
+                <input
+                  type="checkbox"
+                  onChange={SelectAll}
+                  checked={selectedLists.size === items.length}
                 />
-              </S.TableTd>
-              {headerList.map((value, columnIndex) => (
-                <S.TableTd
-                  key={`${keySet}_${index}_${columnIndex}`}
-                  style={{ padding: "10px" }}
+              </S.TableInputTd>
+              {headers.map((header) => (
+                <S.TableHeader
+                  key={header.text}
+                  text={header.text}
+                  width={header.width}
+                  // style={{ width: `${header.width}px` }}
                 >
-                  {value === "orderStatus" ? (
-                    <SelectBoxDelivery
-                      // value={selectedStatus}
-                      initialStatus={item.orderStatus}
-                      // value={item.orderStatus}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        setSelectedStatus(e.target.value);
-                      }}
-                      onClick={(e) => e.stopPropagation()}
-                      onOrderIdChange={(selectedValue) => {
-                        setNewSelectedValue(selectedValue);
-                        onStatusChange({
-                          outStatus: selectedValue,
-                          orderId: item.orderId,
-                        });
-                      }}
-                      onOrderIdValue={item.orderId}
-                    />
-                  ) : (
-                    item[value]
-                  )}
-                </S.TableTd>
+                  {/* <S.TableHeader key={header.text}> */}
+                  {header.value === "deliveryStatus"
+                    ? header.text
+                    : header.text}
+                </S.TableHeader>
               ))}
             </S.TableTr>
-          ))}
-        </tbody>
-      </S.Table>
+          </thead>
+          <tbody>
+            {items.map((item, index) => (
+              <S.TableTr
+                key={`${keySet}_${index}`}
+                onClick={(event) => onRowClick(item, event)}
+              >
+                <S.TableTd>
+                  <CheckBox
+                    onChange={() => onChecked(item)}
+                    checked={selectedLists.has(index)}
+                    currentPage={page}
+                  />
+                </S.TableTd>
+                {headerList.map((value, columnIndex) => (
+                  <S.TableTd
+                    key={`${keySet}_${index}_${columnIndex}`}
+                    style={{ padding: "10px" }}
+                  >
+                    {value === "orderStatus" ? (
+                      <SelectBoxDelivery
+                        // value={selectedStatus}
+                        initialStatus={item.orderStatus}
+                        // value={item.orderStatus}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          setSelectedStatus(e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        onOrderIdChange={(selectedValue) => {
+                          setNewSelectedValue(selectedValue);
+                          onStatusChange({
+                            outStatus: selectedValue,
+                            orderId: item.orderId,
+                          });
+                        }}
+                        onOrderIdValue={item.orderId}
+                      />
+                    ) : (
+                      item[value]
+                    )}
+                  </S.TableTd>
+                ))}
+              </S.TableTr>
+            ))}
+          </tbody>
+        </S.Table>
+      </S.TableContainer>
     </>
   );
 }

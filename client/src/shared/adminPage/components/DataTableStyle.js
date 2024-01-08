@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+export const TableContainer = styled.div`
+  overflow-x: auto; /* 가로 스크롤 */
+`;
 export const Table = styled.table`
   border: 1px solid #ddd;
   border-spacing: 0;
