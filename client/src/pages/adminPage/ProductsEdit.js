@@ -19,7 +19,7 @@ import axios from "axios";
 import UploadThumbnailEdit from "../../shared/adminPage/components/UploadThumbnailEdit";
 import UploadDetailEdit from "../../shared/adminPage/components/UploadDetailEdit";
 import SelectBoxOptionSize from "../../shared/adminPage/components/SelectBoxOptionSize";
-import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
+// import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
 import AdminOptionSize from "../../shared/adminPage/components/AdminOptionSize.js";
 
 function ProductsEdit() {
@@ -285,9 +285,12 @@ function ProductsEdit() {
           </S.Box2>
         </S.ProductsLayout1>
         <S.SubTitleBox>이미지 정보</S.SubTitleBox>
+
         <S.ProductsLayout2>
           <S.Box3>
-            <S.SubjectBox>썸네일 이미지</S.SubjectBox>
+            <S.SubjectBox>
+              썸네일 이미지 (".png", ".jpg", ".jpeg", ".bmp")
+            </S.SubjectBox>
             <S.ThumbnailBox>
               <img
                 src={newThumbnailUrl}
@@ -301,7 +304,9 @@ function ProductsEdit() {
             />
           </S.Box3>
           <S.Box4>
-            <S.SubjectBox>상세 이미지 </S.SubjectBox>
+            <S.SubjectBox>
+              상세 이미지 (".png", ".jpg", ".jpeg", ".bmp")
+            </S.SubjectBox>
             {newDetailUrls && newDetailUrls.length > 0 && (
               <>
                 {newDetailUrls.map((url, index) => (
