@@ -1,9 +1,16 @@
 import styled from "styled-components";
 
+export const PageWrapper = styled.div`
+  height: auto;
+`;
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  @media (max-width: 767px) {
+    justify-content: center;
+    margin-top: 20px;
+  }
 `;
 
 export const TitleBox = styled.div`
@@ -20,6 +27,13 @@ export const TitleBox = styled.div`
   font-weight: 900;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
+  @media (max-width: 767px) {
+    /* height: auto; */
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+    padding-top: 7px;
+  }
 `;
 export const SubTitleBox = styled.div`
   box-shadow: 2px 11px 14px -4px #fafbff;
@@ -34,6 +48,13 @@ export const SubTitleBox = styled.div`
   font-size: large;
   font-weight: 600;
   margin-bottom: 10px;
+  @media (max-width: 767px) {
+    /* height: auto; */
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+    padding-top: 7px;
+  }
 `;
 
 export const ProductsLayout1 = styled.div`
@@ -42,6 +63,12 @@ export const ProductsLayout1 = styled.div`
   grid-template-columns: 0.8fr 0.8fr;
   grid-gap: 10px;
   height: 600px;
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+  }
 `;
 
 export const Box1 = styled.div`
@@ -51,7 +78,11 @@ export const Box1 = styled.div`
 
 export const Box2 = styled.div`
   background-color: none;
-  /* background-color: blue; */
+  background-color: blue;
+  @media (max-width: 767px) {
+    width: 90%;
+    margin-top: 10px;
+  }
 `;
 
 export const ItemBox = styled.div`
@@ -67,6 +98,17 @@ export const ItemBox = styled.div`
   display: flex;
   align-items: center;
   padding-top: 23px;
+  @media (max-width: 767px) {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 12px;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 23px;
+  }
 `;
 export const ItemTitle = styled.div`
   margin-bottom: 12px;
