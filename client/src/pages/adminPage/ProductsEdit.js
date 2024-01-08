@@ -108,6 +108,8 @@ function ProductsEdit() {
         productStatus: newProductStatus,
         thumbnailUrl: newThumbnailUrl,
         detailUrls: newDetailUrls,
+        color: newColor,
+        size: newSize,
       };
 
       const response = await axios.patch(
