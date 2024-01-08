@@ -7,7 +7,7 @@ import OrderCategory from "../../components/adminPage/OrderCategory.js";
 import CategorySales from "../../components/adminPage/CategorySales.js";
 
 import * as S from "../../styles/adminPage/MainDashBoard.js";
-import Card from "../../shared/adminPage/components/Card";
+import CardDashBoard from "../../shared/adminPage/components/CardDashBoard.js";
 
 function MainDashBoard() {
   //---axios get
@@ -55,7 +55,7 @@ function MainDashBoard() {
   return (
     <>
       <S.Container>
-        <Card>
+        <CardDashBoard>
           <S.AdminPageMainLayout>
             <S.StyledCardRow1>
               <MonthlyOrder
@@ -80,7 +80,7 @@ function MainDashBoard() {
               )}
             </S.StyledCardRow2>
           </S.AdminPageMainLayout>
-        </Card>
+        </CardDashBoard>
       </S.Container>
     </>
   );

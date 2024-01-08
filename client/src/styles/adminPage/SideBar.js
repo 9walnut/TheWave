@@ -14,12 +14,13 @@ export const Container = styled.div`
   height: 100vh;
   @media (max-width: 767px) {
     height: 5vh;
+    width: auto;
   }
 `;
 
 export const SideBarBox = styled.div`
   width: 255px;
-  height: 800px;
+  height: 1000px;
   border: 1px solid #e2e6e9;
   box-shadow: 2px 11px 14px -4px #b5bfc6;
   border-radius: 8px;
@@ -48,7 +49,8 @@ export const NavList = styled.ul`
 
   @media (max-width: 767px) {
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    width: 100%;
   }
 `;
 
@@ -86,16 +88,18 @@ export const NavListItem = styled.li`
     &.nav-link {
       font-weight: 900;
       font-size: smaller;
-      padding: 23px;
+      /* padding: 23px; */
+      padding: 0;
+      /* flex-grow: 1; */
     }
     &.nav-link:active {
-      padding: 23px;
+      padding: 0;
       background-color: #b5bfc6;
 
       /* background: blue; */
     }
     &.nav-link:hover {
-      padding: 23px;
+      padding: 0;
       background-color: #d7e0e5;
 
       /* background: blue; */

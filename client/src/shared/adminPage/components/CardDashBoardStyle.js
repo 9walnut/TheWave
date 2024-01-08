@@ -10,7 +10,7 @@ export const CardBox = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 13px;
   padding: 1rem;
-  /* overflow: hidden; */
+  overflow: hidden;
   /* height: 100%; */
   height: auto;
   /* height: 3000px; */
@@ -18,7 +18,7 @@ export const CardBox = styled.div`
   /* width: 80vw; */
   margin-top: -8px;
   @media (max-width: 767px) {
-    margin-top: 30px;
+    margin-top: 500px;
     width: 100%;
     height: auto;
   }

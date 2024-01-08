@@ -54,9 +54,11 @@ function OrderCategory({ categoryCount }) {
   return (
     <>
       <CardTitle>거래 카테고리 통계</CardTitle>
-      <S.PieGraphBox>
-        <AdminGraphPie getData={categoryCountData} />
-      </S.PieGraphBox>
+      <S.CenteredPieWrapper>
+        <S.PieGraphBox>
+          <AdminGraphPie getData={categoryCountData} />
+        </S.PieGraphBox>
+      </S.CenteredPieWrapper>
     </>
   );
 }

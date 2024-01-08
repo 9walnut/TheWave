@@ -59,9 +59,9 @@ const AdminGraphPie = ({ getData }) => {
         },
       ];
   const containerStyle = {
-    width: isMobile ? "590px" : "644px",
-    height: isMobile ? "372px" : "364px",
-    margin: isMobile ? "-82px auto 0 auto" : "0 auto",
+    width: isMobile ? "380px" : "644px",
+    height: isMobile ? "342px" : "324px",
+    margin: isMobile ? "-62px auto 0 auto" : "-60px auto",
   };
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정

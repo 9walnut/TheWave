@@ -213,12 +213,16 @@ function ProductsAdd() {
         <S.SubTitleBox>이미지 정보</S.SubTitleBox>
         <S.ProductsLayout2>
           <S.Box3>
-            <S.SubjectBox>썸네일 등록</S.SubjectBox>
+            <S.SubjectBox>
+              썸네일 등록 (".png", ".jpg", ".jpeg", ".bmp")
+            </S.SubjectBox>
 
             <UploadThumbnail onFileChange={getImageDataThumbnail} />
           </S.Box3>
           <S.Box4>
-            <S.SubjectBox>상세 이미지 등록</S.SubjectBox>
+            <S.SubjectBox>
+              상세 이미지 등록 (".png", ".jpg", ".jpeg", ".bmp")
+            </S.SubjectBox>
 
             <UploadDetail onFileChange={getImageDataDetail} />
           </S.Box4>

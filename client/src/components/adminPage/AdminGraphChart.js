@@ -1,7 +1,8 @@
 import * as React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-
+import { useEffect, useState } from "react";
 const AdminGraphChart = ({ getData }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
   const handle = {
     barClick: (data) => {
       console.log(data);
@@ -11,10 +12,28 @@ const AdminGraphChart = ({ getData }) => {
       console.log(data);
     },
   };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const containerStyle = {
+    width: isMobile ? "520px" : "644px",
+    height: isMobile ? "282px" : "288px",
+    margin: isMobile ? "100px auto 0 -20px" : "0 auto",
+  };
 
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
-    <div style={{ width: "644px", height: "288px", margin: "0 auto" }}>
+    // <div style={{ width: "644px", height: "288px", margin: "0 auto" }}>
+    <div style={containerStyle}>
       <ResponsiveBar
         /**
          * chart에 사용될 데이터
