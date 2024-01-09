@@ -21,6 +21,9 @@ export const CardBox = styled.div`
     display: flex;
     /* flex-direction: column; */
     justify-content: space-between;
+    > div:not(:last-child) {
+      margin-bottom: 35px;
+    }
   }
   @media (max-width: 396px) {
     margin-top: 3px;

@@ -71,9 +71,9 @@ export const SubTitleBox = styled.div`
   @media (max-width: 767px) {
     /* height: auto; */
     width: 100%;
-    margin-top: 5px;
+    margin-top: 15px;
     text-align: center;
-    padding-top: 7px;
+    padding-top: 20px;
   }
   @media (max-width: 396px) {
     font-size: smaller;
@@ -158,7 +158,7 @@ export const Box2 = styled.div`
   height: 40vh;
   @media (max-width: 767px) {
     width: 89vw;
-    margin-top: 10px;
+    margin-top: 25px;
   }
   @media (max-width: 396px) {
     width: 90vw;
@@ -183,7 +183,7 @@ export const Box3 = styled.div`
     align-items: center;
     justify-content: center;
     width: 85vw;
-    margin-top: 580px;
+    margin-top: 620px;
     height: 50vh;
   }
   @media (max-width: 396px) {
