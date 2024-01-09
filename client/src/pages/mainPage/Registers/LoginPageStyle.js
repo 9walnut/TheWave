@@ -38,6 +38,7 @@ export const Button = styled.button`
   margin: 10px;
   border: none;
   font-weight: 900;
+  cursor: pointer;
 `;
 
 export const FindButton = styled(Button)`
@@ -45,6 +46,7 @@ export const FindButton = styled(Button)`
   text-align: left;
   margin: 0px;
   width: 90px;
+  cursor: pointer;
 `;
 
 export const RegisterButton = styled(Button)`
@@ -53,6 +55,7 @@ export const RegisterButton = styled(Button)`
   margin: 0px;
   width: 100px;
   font-weight: 900;
+  cursor: pointer;
 `;
 
 export const ButtonGroup = styled.div`
