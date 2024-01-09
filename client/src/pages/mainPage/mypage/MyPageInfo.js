@@ -12,7 +12,8 @@ function MypageInfo() {
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState();
+  const [userAddress, setUserAddress] = useState([]);
   const [alertText, setAlertText] = useState("");
 
   useEffect(() => {
@@ -43,8 +44,8 @@ function MypageInfo() {
         setUserName(userName);
         setUserId(userId);
         setBirthday(birthday);
-        setAddress(res.data.userAddress.address);
-        console.log(address);
+        setUserAddress(res.data.userAddress);
+        console.log("주주소", res.data.userAddress);
       }
     } catch (error) {
       console.log(error);
@@ -60,7 +61,7 @@ function MypageInfo() {
     }
   };
   const getAddress = (addressData) => {
-    const newAddress = `${addressData.selectAddress} ${addressData.postNumber} ${addressData.detailAddress}`;
+    const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
     setAddress(newAddress);
     // return newAddress;
   };
@@ -86,6 +87,7 @@ function MypageInfo() {
       console.log("수정 res", res.data);
       if (res.data.result == true) {
         alert("수정 완료");
+        window.location.replace("/mypage/info");
       }
     } catch (error) {
       console.log(error);
@@ -160,7 +162,10 @@ function MypageInfo() {
             </InputWrapper>
             <InputWrapper>
               <InputLabel>주소</InputLabel>
-              <AddressComponent getAddress={getAddress} address={address} />
+              <AddressComponent
+                getAddress={getAddress}
+                userAddress={userAddress}
+              />
             </InputWrapper>
             <Button onClick={patchUserInfo}>수정</Button>
           </FormBox>
