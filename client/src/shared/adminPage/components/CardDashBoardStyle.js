@@ -18,7 +18,6 @@ export const CardBox = styled.div`
   @media (max-width: 767px) {
     /* margin-top: 500px; */
     /* width: 100%;
-    height: auto; */
     height: 93vh;
     width: 89vw;
     margin-top: 5px;
