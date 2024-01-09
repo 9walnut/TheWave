@@ -14,6 +14,7 @@ export const AdminPageMainLayout = styled.div`
   /* min-height: 100vh; */
   /* height: 100%; */
   height: 100vh;
+  overflow-y: auto;
 
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
