@@ -36,11 +36,15 @@ module.exports = () => {
               gender: profile._json.gender || "M",
               // providerType: "kakao",
             });
+            address = await db.address.create({
+              userNumber: user.userNumber,
+              address: profile.address || "No address",
+            });
             firstLogin = true;
           }
 
           const { accessToken } = await generateAccessToken(user);
-          done(null, user);
+          done(null, { user, accessToken });
         } catch (err) {
           console.error(err);
           done(err);

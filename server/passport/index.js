@@ -7,7 +7,7 @@ const { db } = require("../models/index");
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
-    done(null, user.userId);
+    done(null, user.user.userId);
   });
 
   passport.deserializeUser((userId, done) => {
