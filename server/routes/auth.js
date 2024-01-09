@@ -45,7 +45,7 @@ router.get(
 );
 
 // 네이버 로그인
-router.get("/login/naver", passport.authenticate("naver"));
+router.get("/login/naver", passport.authenticate("naver", { session: false }));
 
 // 네이버 로그인 콜백
 router.get(

@@ -3,6 +3,7 @@ const KakaoStrategy = require("passport-kakao").Strategy;
 const { db } = require("../models/index");
 // const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const { generateAccessToken } = require("../middleware/jwt");
 
 module.exports = () => {
   passport.use(
@@ -37,25 +38,15 @@ module.exports = () => {
               birthday: profile._json.kakao_account.birthday || "1900-01-01",
               gender: profile._json.kakao_account.gender || "M",
             });
+            address = await db.address.create({
+              userNumber: user.userNumber,
+              address: profile.address || "No address",
+            });
             firstLogin = true;
           }
 
-          // // JWT 토큰 생성
-          // const payload = {
-          //   userId: user.userId,
-          //   userNumber: user.userNumber,
-          // };
-
-          // const jwtAccessToken = jwt.sign(payload, secret, {
-          //   expiresIn: "30s", // 유효 기간
-          // });
-
-          // const jwtRefreshToken = jwt.sign(payload, secret, {
-          //   expiresIn: "14d", // 유효 기간
-          // });
-
-          // JWT 토큰과 사용자 정보를 함께 반환
-          done(null, user);
+          const { accessToken, refreshToken } = await generateAccessToken(user);
+          done(null, { user, accessToken, refreshToken });
         } catch (err) {
           console.error(err);
           done(err);
