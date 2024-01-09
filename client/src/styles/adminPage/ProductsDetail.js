@@ -1,16 +1,22 @@
 import styled from "styled-components";
 
 export const PageWrapper = styled.div`
-  height: auto;
+  height: 93vh;
+  width: 74vw;
+  /* background-color: yellow; */
+  position: relative;
+`;
+export const ButtonWrapper = styled.div`
+  height: 93vh;
+  width: 74vw;
+  /* background-color: yellow; */
+  position: relative;
 `;
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
-  @media (max-width: 767px) {
-    justify-content: center;
-    margin-top: 20px;
-  }
+  padding: 5px 30px 5px 30px;
 `;
 
 export const TitleBox = styled.div`
@@ -39,11 +45,15 @@ export const SubTitleBox = styled.div`
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
   padding: 1rem;
-  height: 72px;
-  width: 682px;
+  /* height: 72px;
+  width: 682px; */
+  height: 3vh;
+  width: 35vw;
+  /* background-color: black; */
+
   margin-top: 10px;
-  text-align: left;
-  padding-top: 21px;
+  text-align: center;
+  padding-top: 5px;
   color: #6e7f8d;
   font-size: large;
   font-weight: 600;
@@ -56,57 +66,140 @@ export const SubTitleBox = styled.div`
     padding-top: 7px;
   }
 `;
+export const SubTitleWideBox = styled.div`
+  box-shadow: 2px 11px 14px -4px #fafbff;
+  border-radius: 8px;
+  padding: 1rem;
+  /* height: 72px;
+  width: 682px; */
+  height: 3vh;
+  width: 70vw;
+  /* background-color: black; */
 
+  margin-top: 10px;
+  text-align: center;
+  padding-top: 5px;
+  color: #6e7f8d;
+  font-size: large;
+  font-weight: 600;
+  margin-bottom: 10px;
+  @media (max-width: 767px) {
+    /* height: auto; */
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+    padding-top: 7px;
+  }
+`;
 export const ProductsLayout1 = styled.div`
   /* background-color: #eff2f9; */
+  /* background-color: violet; */
   display: grid;
   grid-template-columns: 0.8fr 0.8fr;
-  grid-gap: 10px;
-  height: 600px;
+  grid-gap: 3px;
+  /* height: 600px; */
+  height: 40vh;
+
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
-    width: 90%;
-    margin: 0 auto;
+    width: 90vw;
+    align-items: center;
+    /* justify-content: center; */
+    align-content: center;
+    /* margin: 0 auto; */
+  }
+`;
+// export const ProductsLayout2 = styled.div`
+//   background-color: violet;
+//   height: 30vh;
+//   width: 25vw;
+
+// `;
+export const Box1 = styled.div`
+  /* background-color: red; */
+  width: 36vw;
+  height: 30vh;
+  background-color: none;
+
+  @media (max-width: 767px) {
+    align-items: center;
+    width: 85vw;
+    margin-top: 10px;
+    height: 50vh;
+  }
+  @media (max-width: 390px) {
+    width: 90vw;
+    margin-top: -20px;
   }
 `;
 
-export const Box1 = styled.div`
+export const Box2 = styled.div`
+  /* background-color: blue; */
   background-color: none;
-  /* background-color: red; */
+  width: 36vw;
+  height: 40vh;
+  @media (max-width: 767px) {
+    width: 89vw;
+    margin-top: 10px;
+  }
+  @media (max-width: 390px) {
+    width: 90vw;
+    margin-top: 50px;
+    height: 50vh;
+  }
 `;
 
-export const Box2 = styled.div`
+export const Box3 = styled.div`
+  /* background-color: green; */
+  height: 25vh;
+  width: 25vw;
   background-color: none;
-  background-color: blue;
+  /* display: flex; */
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+
   @media (max-width: 767px) {
-    width: 90%;
-    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 85vw;
+    margin-top: 580px;
+    height: 50vh;
+  }
+  @media (max-width: 390px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    margin-top: 339px;
+    height: 50vh;
   }
 `;
 
 export const ItemBox = styled.div`
-  width: 810px;
-  height: 60px;
+  /* width: 810px; */
+  width: 35vw;
+  height: 4vh;
+  /* height: 60px; */
   flex-shrink: 0;
   border-radius: 13px;
   border: 1px solid #e5e7eb;
   background: #f9fafb;
   padding: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   margin-left: 5px;
   display: flex;
   align-items: center;
   padding-top: 23px;
   @media (max-width: 767px) {
-    width: 100%;
-    height: auto;
+    width: 87vw;
+    height: 4vh;
     padding: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
     margin-left: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     padding-top: 23px;
   }
 `;

@@ -18,4 +18,10 @@ export const AdminButtonGreyStyle = styled.button`
   &:hover {
     background: #a4afbb;
   }
+
+  @media (max-width: 390px) {
+    width: 90px;
+    height: 30px;
+    font-size: x-small;
+  }
 `;

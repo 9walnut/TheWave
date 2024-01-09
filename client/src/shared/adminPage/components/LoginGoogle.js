@@ -15,17 +15,25 @@ export default function LoginGoogle() {
     const authorizationCode = url.searchParams.get("code");
     console.log("authorizationCode", authorizationCode);
 
-    if (authorizationCode) {
-      axios
-        .post("http://localhost:8001/api/login/google/callback", {
-          authorizationCode,
-        })
-        .then((res) => {
+    const fetchToken = async () => {
+      if (authorizationCode) {
+        try {
+          const res = await axios.get(
+            `${GOOGLE_REDIRECT_URL}?code=${authorizationCode}`
+          );
           console.log("res 결과", res);
-          localStorage.setItem("jwtAccessToken", res.data.accessToken);
-        })
-        .catch((err) => console.error(err));
-    }
+          localStorage.setItem("accessToken", res.data.accessToken);
+          const headers = {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          };
+          console.log(headers);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
+
+    fetchToken();
   }, [location]);
 
   return (

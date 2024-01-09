@@ -13,12 +13,13 @@ export const Container = styled.div`
 `;
 
 export const AdminPageMainLayout = styled.div`
-  display: grid;
+  /* display: grid; */
   display: inline-grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
-  gap: 1px;
+  gap: 10px;
+  margin: auto;
   @media (max-width: 768px) {
     /* grid-template-rows: repeat(2, 1fr); */
     grid-template-rows: auto auto;
@@ -37,11 +38,12 @@ export const StyledCardRow1 = styled.div`
   border-radius: 13px;
   padding: 1rem;
   margin: 7px;
-  width: 717px;
+  /* width: 717px; */
+  width: 35vw;
   height: 362px;
   overflow: hidden;
   margin-bottom: -4px;
-  margin-top: 25px;
+  margin-top: 15px;
 
   @media (max-width: 768px) {
     /* width: 100%;
@@ -64,11 +66,12 @@ export const StyledCardRow2 = styled.div`
   border-radius: 13px;
   padding: 1rem;
   margin: 7px;
-  width: 717px;
+  /* width: 717px; */
+  width: 35vw;
   height: 532px;
   overflow: hidden;
   /* margin-bottom: -4px; */
-  margin-top: -65px;
+  margin-top: -75px;
   @media (max-width: 768px) {
     /* width: 100%;
     margin-bottom: 25px;

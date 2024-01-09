@@ -10,19 +10,27 @@ export const PageNationWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  @media (max-width: 390px) {
+    margin-top: 8px;
+  }
 `;
 
 export const PageButton = styled.button`
   margin: 0 5px;
   padding: 5px 10px;
   cursor: pointer;
-  background-color: ${({ active }) => (active ? "#333" : "#fff")};
-  color: ${({ active }) => (active ? "#fff" : "#333")};
-  border: 1px solid #333;
+  background-color: ${({ active }) => (active ? "#98b3b7" : "#fff")};
+  color: ${({ active }) => (active ? "#fff" : "#98b3b7")};
+  border: 1px solid #98b3b7;
   border-radius: 4px;
 
   &:hover {
-    background-color: #333;
+    background-color: #98b3b7;
     color: #fff;
+  }
+
+  @media (max-width: 390px) {
+    padding: 2px 6px;
+    font-size: 10px;
   }
 `;
