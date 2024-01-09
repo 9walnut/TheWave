@@ -27,13 +27,8 @@ function LoginPage() {
   };
 
   const handleEnter = (e) => {
-    if (e.key === "Enter") {
-      if (userId === "" || password === "") {
-        alert("아이디 또는 패스워드를 입력해주세요.");
-      } else {
-        // alert("엔터");
-        handleLogin();
-      }
+    if (e) {
+      handleLogin();
     }
   };
 

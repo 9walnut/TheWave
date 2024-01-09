@@ -50,4 +50,13 @@ export const Button = styled.button`
   margin: 10px;
   border: none;
   font-weight: 900;
+  cursor: pointer;
+`;
+
+export const CheckButton = styled.button`
+  position: absolute;
+  display: flex;
+  width: 20px;
+  height: 10px;
+  cursor: pointer;
 `;

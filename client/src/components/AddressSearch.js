@@ -51,7 +51,7 @@ function AddressSearch({ getAddress, register }) {
           type="text"
           value={selectAddress}
           readOnly
-          {...register("address", { required: "주소를 입력하세요" })}
+          // {...register("address", { required: "주소를 입력하세요" })}
         />
       </div>
       <div>

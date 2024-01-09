@@ -9,6 +9,11 @@ import AddressSearch from "../../../components/AddressSearch";
 import * as S from "./RegisterPageStyle.js";
 
 function Register() {
+  // const [userId, setUserId] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  // const [birthday, setBirthday]
   const [address, setAddress] = useState("");
   const navigate = useNavigate();
   const {
@@ -20,17 +25,15 @@ function Register() {
 
   const getAddress = (addressData) => {
     console.log("address데이타입니다다다다", addressData);
-    const newAddress = `${addressData.selectAddress} ${addressData.postNumber} ${addressData.detailAddress}`;
-    console.log("newAddress입니다.", newAddress);
+    const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
     setAddress(newAddress);
-    // return newAddress;
   };
 
   const onSubmit = async (data) => {
     console.log("주소", address);
     console.log(data);
     try {
-      const res = await axios.post("api/register", data);
+      const res = await axios.post("api/register", { data, address: address });
       console.log("Signup Successful:", res);
       if (res.data.result) {
         alert("회원가입 성공 ~~");
@@ -56,7 +59,9 @@ function Register() {
               <S.Input
                 placeholder="아이디"
                 {...register("userId", { required: "아이디를 입력하세요" })}
+                style={{ position: "relative" }}
               />
+              {/* <S.CheckButton>확인</S.CheckButton> */}
               {errors.userId && <p>{errors.userId.message}</p>}
             </label>
             <br />
@@ -117,13 +122,10 @@ function Register() {
             <label>
               <AddressSearch
                 getAddress={getAddress}
-                register={register}
                 placeholder="주소"
                 value={address}
               />
-              {errors.address && <p>{errors.address.message}</p>}
             </label>
-
             <br />
             <S.Button type="submit">가입하기</S.Button>
           </form>
