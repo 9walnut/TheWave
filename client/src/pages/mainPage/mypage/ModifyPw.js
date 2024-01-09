@@ -1,13 +1,25 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import getAccessToken from "../../../hooks/getAcessToken";
-import { combineSlices } from "@reduxjs/toolkit";
 
 function ModifyPw() {
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [checkResult, setCheckResult] = useState(false);
+  const [alertText, setAlertText] = useState("");
+
+  useEffect(() => {
+    validatePassword();
+  }, [password]);
+
+  const validatePassword = () => {
+    if (password.length == 0) {
+      setAlertText("비밀번호를 입력해주세요");
+    } else {
+      setAlertText("");
+    }
+  };
 
   const pwCheck = async () => {
     try {
@@ -20,6 +32,8 @@ function ModifyPw() {
       if (res.data.result == true) {
         setCheckResult(true);
         setPassword("");
+      } else {
+        setAlertText("비밀번호가 일치하지 않습니다.");
       }
     } catch (error) {
       console.log(error);
@@ -28,21 +42,13 @@ function ModifyPw() {
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
-      if (password === "") {
-        alert("비밀번호를 입력해주세요.");
-      } else {
-        pwCheck();
-      }
+      pwCheck();
     }
   };
 
   const handleEnter2 = (e) => {
     if (e.key === "Enter") {
-      if (password === "") {
-        alert("비밀번호를 입력해주세요.");
-      } else {
-        modifyPw();
-      }
+      modifyPw();
     }
   };
 
@@ -66,7 +72,6 @@ function ModifyPw() {
             }}
             onKeyDown={handleEnter}
           >
-            <div>비밀번호를 입력해주세요</div>
             <InputWrapper>
               <Input
                 type="password"
@@ -74,6 +79,8 @@ function ModifyPw() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="비밀번호"
               />
+              <br />
+              <div>{alertText}</div>
             </InputWrapper>
             <Button type="button" onClick={pwCheck}>
               확인

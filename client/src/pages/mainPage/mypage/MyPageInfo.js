@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import getAccessToken from "../../../hooks/getAcessToken";
 import { setUser } from "../../../redux/reducers/userSlice";
 import AddressComponent from "../../../components/register/AddressComponent";
@@ -13,6 +13,19 @@ function MypageInfo() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [birthday, setBirthday] = useState("");
   const [address, setAddress] = useState("");
+  const [alertText, setAlertText] = useState("");
+
+  useEffect(() => {
+    validatePassword();
+  }, [password]);
+
+  const validatePassword = () => {
+    if (password.length == 0) {
+      setAlertText("비밀번호를 입력해주세요");
+    } else {
+      setAlertText("");
+    }
+  };
 
   const pwCheck = async () => {
     try {
@@ -90,7 +103,6 @@ function MypageInfo() {
             }}
             onKeyDown={handleEnter}
           >
-            <div>비밀번호를 입력해주세요</div>
             <InputWrapper>
               <Input
                 type="password"
@@ -98,6 +110,8 @@ function MypageInfo() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="비밀번호"
               />
+              <br />
+              <div>{alertText}</div>
             </InputWrapper>
             <Button type="button" onClick={pwCheck}>
               확인
