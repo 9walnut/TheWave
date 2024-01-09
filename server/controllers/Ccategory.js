@@ -34,7 +34,6 @@ exports.categoryPage = async (req, res) => {
     const categoryPage = await db.categories.findAll({
       where: { categoryId: req.params.categoryId },
       attributes: ["categoryName"],
-
       include: {
         model: db.products,
         as: "products",
@@ -46,6 +45,7 @@ exports.categoryPage = async (req, res) => {
           "productStatus",
           "thumbnailUrl",
         ],
+        where: { isDeleted: false }, // isDeleted가 false인 상품만 조회
       },
     });
     res.json(categoryPage);
