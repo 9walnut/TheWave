@@ -26,13 +26,13 @@ const ImgBox = styled.div`
 
 function MainCarousel() {
   const imgList = [
-    "/img/daisy01.jpg",
-    "/img/daisy02.jpg",
-    "/img/daisy03.jpg",
-    "/img/daisy04.jpg",
-    "/img/daisy05.jpg",
-    "/img/daisy06.jpg",
-    "/img/daisy07.jpg",
+    "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704722278642_moneyBallon02.jpg",
+    "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704722039518_tulipDetail02.jpg",
+    "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704721891528_daisy02.jpg",
+    "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704721508672_characterBalloon06.jpg",
+    "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704722917998_ombreBalloon14.jpg",
+    "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704722733124_letteringBalloon17.jpg",
+    "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704723100102_roseBallon03.jpg",
   ];
 
   const settings = {

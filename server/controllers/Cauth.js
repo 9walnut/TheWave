@@ -81,11 +81,6 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-// 카카오 로그인
-// exports.kakaoCallback = async (req, res) => {
-//   res.redirect("/");
-// };
-
 // 로그아웃(access 토큰 받아 해당 사용자의 refresh 토큰 삭제)
 exports.logout = async (req, res) => {
   try {
