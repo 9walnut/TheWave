@@ -165,13 +165,14 @@ function Orders() {
           onStatusChange={handleStatusChange}
           page={currentPage}
         />
-
-        <PageNation
-          total={orders.length}
-          limit={oneOfPage}
-          page={currentPage}
-          setPage={handlePageClick}
-        />
+        <S.ButtonContainer>
+          <PageNation
+            total={orders.length}
+            limit={oneOfPage}
+            page={currentPage}
+            setPage={handlePageClick}
+          />
+        </S.ButtonContainer>
       </Card>
       <Routes>
         <Route path="/orders/:orderId" element={<OrdersDetail />} />

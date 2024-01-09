@@ -19,8 +19,8 @@ export const AdminPageMainLayout = styled.div`
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 60px;
-    /* min-height: 175vh; */
-    height: 140vh;
+    height: 100vh;
+    overflow-y: hidden;
   }
 `;
 
@@ -47,7 +47,11 @@ export const RightBox = styled.main`
     grid-column: span 2;
     margin: 20px;
     margin-top: 15px;
-    height: 97%;
+    height: 90vh;
     /* background-color: blue; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;

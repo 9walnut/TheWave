@@ -13,6 +13,13 @@ export const ListBox = styled.div`
     margin: 0;
     width: 81px;
   }
+  @media (max-width: 390px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    width: 65px;
+  }
 `;
 export const ListIconImg = styled.img`
   width: 24px;
@@ -43,5 +50,6 @@ export const ListItemBox = styled.div`
     width: 68px;
     margin-left: 0;
     text-align: center;
+    font-size: smaller;
   }
 `;

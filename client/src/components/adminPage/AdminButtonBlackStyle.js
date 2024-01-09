@@ -17,4 +17,10 @@ export const AdminButtonBlackStyle = styled.button`
   &:hover {
     background: #567584;
   }
+
+  @media (max-width: 390px) {
+    width: 90px;
+    height: 30px;
+    font-size: x-small;
+  }
 `;

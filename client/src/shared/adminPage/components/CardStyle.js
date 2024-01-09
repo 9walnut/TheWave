@@ -10,16 +10,22 @@ export const CardBox = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 13px;
   padding: 1rem;
-  /* overflow: hidden; */
-  /* height: 100%; */
-  height: auto;
-  /* height: 3000px; */
-  width: 1700px;
-  /* width: 80vw; */
+  height: 93vh;
+  width: 74vw;
   margin-top: -8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   @media (max-width: 767px) {
     margin-top: 30px;
-    width: 100%;
-    height: auto;
+    height: 83vh;
+    width: 95vw;
+  }
+  @media (max-width: 390px) {
+    margin-top: 3px;
+    height: 83vh;
+    width: 92vw;
+    margin-left: -4px;
   }
 `;

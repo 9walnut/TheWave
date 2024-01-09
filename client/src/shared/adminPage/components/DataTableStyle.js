@@ -12,7 +12,9 @@ export const Table = styled.table`
   margin-left: 33px;
 
   cursor: pointer;
-
+  @media (max-width: 1945px) {
+    width: 100%;
+  }
   @media (max-width: 767px) {
     margin-top: 10px;
     width: 650px;
@@ -20,8 +22,12 @@ export const Table = styled.table`
     margin-left: 23px;
     font-size: smaller;
   }
-  @media (max-width: 1945px) {
-    width: 100%;
+  @media (max-width: 390px) {
+    margin-top: 10px;
+    width: 650px;
+    height: auto;
+    margin-left: 2px;
+    font-size: smaller;
   }
 `;
 
@@ -35,9 +41,14 @@ const BasicStyle = `
 
 export const TableHeader = styled.th`
   width: ${(props) => props.width}px;
-  ${BasicStyle}/* @media (max-width: 767px) {
+  ${BasicStyle} /* @media (max-width: 767px) {
     ${(props) => props.text === "주소" && "display: none;"}
   } */
+
+  @media (max-width: 390px) {
+    font-size: smaller;
+    height: 5px;
+  }
 `;
 
 export const TableTr = styled.tr`
@@ -48,6 +59,9 @@ export const TableTr = styled.tr`
     padding: 30px;
     background-color: #f2f5f7;
   }
+  /* @media (max-width: 390px) {
+    height: 15px;
+  } */
 `;
 
 export const TableTd = styled.td`
@@ -56,6 +70,13 @@ export const TableTd = styled.td`
   @media (max-width: 767px) {
     width: 80px;
     padding: 10px;
+  }
+  @media (max-width: 390px) {
+    width: 650px;
+    height: auto;
+    font-size: smaller;
+    width: 80px;
+    padding: 2px;
   }
 `;
 
