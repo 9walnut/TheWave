@@ -31,7 +31,7 @@ function ProductCard() {
   return (
     <>
       <S.ProductContentBox>
-        {products.slice(0, 10).map((product) => {
+        {products.slice(0, 40).map((product) => {
           return (
             <S.CardItemBox key={product.productId}>
               <Link to={`/products/${product.productId}`}>
