@@ -66,7 +66,11 @@ function ProductsDetail({ products }) {
               <img
                 src={product.thumbnailUrl}
                 alt={product.productName}
-                style={{ width: "500px", height: "500px" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
               />
             </S.Box1>
             <S.Box2>
@@ -103,34 +107,43 @@ function ProductsDetail({ products }) {
               </S.ItemBox>
             </S.Box2>
           </S.ProductsLayout1>
+          {/* <S.ProductsLayout2> */}
+          <S.Box3>
+            <S.SubTitleWideBox>상품 디테일 이미지</S.SubTitleWideBox>
+            {product.detailUrls && product.detailUrls.length > 0 && (
+              <>
+                {product.detailUrls.map((url, index) => (
+                  <div key={index}>
+                    <img
+                      src={url}
+                      alt={`Detail ${index}`}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </div>
+                ))}
+              </>
+            )}
+          </S.Box3>
+          {/* </S.ProductsLayout2> */}
+          <S.ButtonWrapper>
+            <S.ButtonContainer>
+              <AdminButtonGrey
+                onClick={() => {
+                  navigate(`/admin/products/${productId}/edit`);
+                }}
+              >
+                수정
+              </AdminButtonGrey>
 
-          <S.SubTitleBox>상품 디테일 이미지</S.SubTitleBox>
-          {product.detailUrls && product.detailUrls.length > 0 && (
-            <>
-              {product.detailUrls.map((url, index) => (
-                <div key={index}>
-                  <img
-                    src={url}
-                    alt={`Detail ${index}`}
-                    style={{ width: "500px", height: "500px" }}
-                  />
-                </div>
-              ))}
-            </>
-          )}
-          <S.ButtonContainer>
-            <AdminButtonGrey
-              onClick={() => {
-                navigate(`/admin/products/${productId}/edit`);
-              }}
-            >
-              수정
-            </AdminButtonGrey>
-
-            <AdminButtonBlack onClick={deleteProduct}>
-              상품 삭제하기
-            </AdminButtonBlack>
-          </S.ButtonContainer>
+              <AdminButtonBlack onClick={deleteProduct}>
+                상품 삭제하기
+              </AdminButtonBlack>
+            </S.ButtonContainer>
+          </S.ButtonWrapper>
         </Card>
       </S.PageWrapper>
       <Routes>

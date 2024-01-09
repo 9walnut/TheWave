@@ -16,6 +16,10 @@ export const Container = styled.div`
     height: 5vh;
     width: auto;
   }
+  @media (max-width: 390px) {
+    height: 5vh;
+    width: auto;
+  }
 `;
 
 export const SideBarBox = styled.div`
@@ -39,6 +43,12 @@ export const SideBarBox = styled.div`
     margin-left: 0px;
     z-index: 5;
   }
+  @media (max-width: 390px) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    font-size: smaller;
+  }
 `;
 export const NavList = styled.ul`
   list-style: none;
@@ -51,6 +61,10 @@ export const NavList = styled.ul`
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
+  }
+  @media (max-width: 390px) {
+    width: 40%;
+    margin-left: 120px;
   }
 `;
 

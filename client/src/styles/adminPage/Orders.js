@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  @media (max-width: 390px) {
+    padding-bottom: -10px;
+  }
 `;
 
 export const InnerCardTitleBox = styled.div`
@@ -23,4 +23,16 @@ export const InnerCardTitleBox = styled.div`
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
   margin-left: 25px;
+  @media (max-width: 390px) {
+    font-size: smaller;
+    margin-top: -10px;
+    border: none;
+    height: 55px;
+    width: 331px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-left: -15px;
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 5px;
+  }
 `;

@@ -5,6 +5,9 @@ export const ButtonContainer = styled.div`
   justify-content: space-between;
   margin-top: 20px;
   padding: 5px 30px 5px 30px;
+  @media (max-width: 390px) {
+    padding: 0;
+  }
 `;
 
 export const InnerCardTitleBox = styled.div`
@@ -21,4 +24,16 @@ export const InnerCardTitleBox = styled.div`
   font-weight: 900;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
+  @media (max-width: 390px) {
+    font-size: smaller;
+    margin-top: -10px;
+    border: none;
+    height: 55px;
+    width: 331px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-left: -15px;
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 5px;
+  }
 `;
