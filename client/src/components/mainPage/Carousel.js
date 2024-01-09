@@ -20,6 +20,15 @@ const ImgBox = styled.div`
     height: 700px;
     @media (max-width: 767px) {
       height: 300px;
+      width: 500px;
+    }
+    @media (max-width: 1024px) {
+      height: 400px;
+      width: 500px;
+    }
+    @media (max-width: 1200px) {
+      height: 500px;
+      width: 300px;
     }
   }
 `;
@@ -47,9 +56,23 @@ function MainCarousel() {
     autoplaySpeed: 3000, // 자동 캐러셀 속도
     responsive: [
       {
-        breakpoint: 620,
+        breakpoint: 767,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -67,6 +90,11 @@ function MainCarousel() {
     //       slidesToShow: 2,
     //     },
     //     breakpoint: 1400,
+    //     settings: {
+    //       centerMode: true,
+    //       slidesToShow: 1,
+    //     },
+    //     breakpoint: 1100,
     //     settings: {
     //       centerMode: true,
     //       slidesToShow: 1,
