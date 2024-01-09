@@ -108,7 +108,7 @@ exports.idCheck = async (req, res) => {
     const checkInfo = await db.users.findOne({
       where: {
         userId: req.body.userId,
-        phoneNumber: req.body.phoneNumber,
+        // phoneNumber: req.body.phoneNumber,
       },
     });
     if (!checkInfo) res.send({ result: true });
@@ -130,10 +130,9 @@ exports.register = async (req, res) => {
       birthday,
       gender,
       isAdmin,
-      // address,
+      address,
     } = req.body.data;
 
-    const address = req.body.address;
     console.log(req.body, "바디바디");
     console.log(req.body.data, "바디데이터");
     console.log("주소입니다 ! ", address);

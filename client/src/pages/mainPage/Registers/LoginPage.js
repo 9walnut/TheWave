@@ -96,7 +96,7 @@ function LoginPage() {
               type="text"
               onChange={onUserIdHandler}
               placeholder="아이디"
-            />
+            ></S.Input>
             <br />
             <S.Input
               type="password"

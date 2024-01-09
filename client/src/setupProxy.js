@@ -74,6 +74,13 @@ module.exports = function (app) {
   );
 
   app.use(
+    createProxyMiddleware("/api/mypage/info/pw", {
+      target: apiURL,
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
     createProxyMiddleware("/api/mypage/pwCheck", {
       target: apiURL,
       changeOrigin: true,

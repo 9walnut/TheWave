@@ -5,19 +5,30 @@ import getAccessToken from "../../../hooks/getAcessToken";
 
 function ModifyPw() {
   const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [checkResult, setCheckResult] = useState(false);
   const [alertText, setAlertText] = useState("");
+  const [alertText2, setAlertText2] = useState("");
 
   useEffect(() => {
     validatePassword();
-  }, [password]);
+    validateNewPassword();
+  }, [password, newPassword]);
 
   const validatePassword = () => {
     if (password.length == 0) {
       setAlertText("비밀번호를 입력해주세요");
     } else {
       setAlertText("");
+    }
+  };
+
+  const validateNewPassword = () => {
+    if (newPassword.length == 0) {
+      setAlertText2("비밀번호를 입력해주세요");
+    } else {
+      setAlertText2("");
     }
   };
 
@@ -53,11 +64,25 @@ function ModifyPw() {
   };
 
   const modifyPw = async () => {
-    try {
-      const headers = getAccessToken();
-      const res = await axios.post("/api/mypage", { password }, { headers });
-    } catch (error) {
-      console.log(error);
+    if (newPassword == checkPassword) {
+      try {
+        const headers = getAccessToken();
+        const res = await axios.patch(
+          "/api/mypage/info/pw",
+          { newPassword },
+          { headers }
+        );
+        if (res.data.result == true) {
+          alert("비밀번호가 변경되었습니다.");
+          window.location.replace("/mypage/modifypw");
+        } else {
+          alert("변경 실패..!");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setAlertText2("비밀번호가 일치하지 않습니다.");
     }
   };
 
@@ -100,8 +125,8 @@ function ModifyPw() {
             <InputWrapper>
               <Input
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="비밀번호"
               />
               <br />
@@ -111,6 +136,8 @@ function ModifyPw() {
                 onChange={(e) => setCheckPassword(e.target.value)}
                 placeholder="비밀번호 확인"
               />
+              <br />
+              <div>{alertText2}</div>
             </InputWrapper>
             <Button type="button" onClick={modifyPw}>
               확인

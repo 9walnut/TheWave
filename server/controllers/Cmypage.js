@@ -200,7 +200,9 @@ exports.editInfo = async (req, res) => {
 // 회원 비밀번호 수정
 exports.editPw = async (req, res) => {
   const accessToken = req.headers["authorization"];
+  console.log(req.body);
   const { newPassword } = req.body;
+  console.log(newPassword, "newpwpwpwpw");
   const tokenCheck = await verifyToken(accessToken);
 
   try {
@@ -213,7 +215,11 @@ exports.editPw = async (req, res) => {
       { where: { userNumber: tokenCheck.userData.userNumber } }
     );
     console.log("editPw 결과", editPw);
-    res.send({ result: true });
+    if (editPw == 1) {
+      res.send({ result: true });
+    } else {
+      res.send({ result: false });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("비밀번호 수정 오류");
