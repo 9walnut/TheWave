@@ -8,13 +8,21 @@ export const MypageLayout = styled.div`
   width: 80%;
   box-sizing: border-box;
   text-align: center;
+  margin-bottom: 200px;
 
   @media (max-width: 980px) {
     /* flex-direction: column-reverse; */
     padding: 30px 0px;
     width: 100%;
     display: block;
-    margin-bottom: 200px;
+  }
+
+  @media (min-height: 1150px) {
+    margin-bottom: 300px;
+  }
+
+  @media (min-height: 1250px) {
+    margin-bottom: 440px;
   }
 `;
 

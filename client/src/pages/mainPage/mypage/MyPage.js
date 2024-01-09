@@ -76,7 +76,7 @@ function MyPage() {
                 </Link>
               </li>
               <li>
-                <Link to="pwmodify">
+                <Link to="modifypw">
                   <a>비밀번호 변경</a>
                 </Link>
               </li>

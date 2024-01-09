@@ -2,9 +2,11 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import getAccessToken from "../../../hooks/getAcessToken";
+import { combineSlices } from "@reduxjs/toolkit";
 
 function ModifyPw() {
   const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
   const [checkResult, setCheckResult] = useState(false);
 
   const pwCheck = async () => {
@@ -17,6 +19,7 @@ function ModifyPw() {
       );
       if (res.data.result == true) {
         setCheckResult(true);
+        setPassword("");
       }
     } catch (error) {
       console.log(error);
@@ -26,10 +29,29 @@ function ModifyPw() {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       if (password === "") {
-        alert("패스워드를 입력해주세요.");
+        alert("비밀번호를 입력해주세요.");
       } else {
         pwCheck();
       }
+    }
+  };
+
+  const handleEnter2 = (e) => {
+    if (e.key === "Enter") {
+      if (password === "") {
+        alert("비밀번호를 입력해주세요.");
+      } else {
+        modifyPw();
+      }
+    }
+  };
+
+  const modifyPw = async () => {
+    try {
+      const headers = getAccessToken();
+      const res = await axios.post("/api/mypage", { password }, { headers });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -54,6 +76,36 @@ function ModifyPw() {
               />
             </InputWrapper>
             <Button type="button" onClick={pwCheck}>
+              확인
+            </Button>
+          </FormBox>
+        </>
+      )}
+      {checkResult && (
+        <>
+          <FormBox
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+            onKeyDown={handleEnter2}
+          >
+            <div>변경할 비밀번호를 입력해주세요</div>
+            <InputWrapper>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="비밀번호"
+              />
+              <br />
+              <Input
+                type="password"
+                value={checkPassword}
+                onChange={(e) => setCheckPassword(e.target.value)}
+                placeholder="비밀번호 확인"
+              />
+            </InputWrapper>
+            <Button type="button" onClick={modifyPw}>
               확인
             </Button>
           </FormBox>
