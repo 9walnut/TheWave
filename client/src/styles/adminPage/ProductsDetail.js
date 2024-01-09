@@ -5,18 +5,24 @@ export const PageWrapper = styled.div`
   width: 74vw;
   /* background-color: yellow; */
   position: relative;
+  @media (max-width: 396px) {
+    width: 95vw;
+    margin-bottom: 60px;
+    /* align-items: center; */
+  }
 `;
-export const ButtonWrapper = styled.div`
-  height: 93vh;
-  width: 74vw;
-  /* background-color: yellow; */
-  position: relative;
-`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
   padding: 5px 30px 5px 30px;
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
+  @media (max-width: 396px) {
+    bottom: 0;
+  }
 `;
 
 export const TitleBox = styled.div`
@@ -40,6 +46,10 @@ export const TitleBox = styled.div`
     text-align: center;
     padding-top: 7px;
   }
+  @media (max-width: 396px) {
+    font-size: smaller;
+    padding-top: -20px;
+  }
 `;
 export const SubTitleBox = styled.div`
   box-shadow: 2px 11px 14px -4px #fafbff;
@@ -61,9 +71,12 @@ export const SubTitleBox = styled.div`
   @media (max-width: 767px) {
     /* height: auto; */
     width: 100%;
-    margin-top: 5px;
+    margin-top: 15px;
     text-align: center;
-    padding-top: 7px;
+    padding-top: 20px;
+  }
+  @media (max-width: 396px) {
+    font-size: smaller;
   }
 `;
 export const SubTitleWideBox = styled.div`
@@ -89,6 +102,9 @@ export const SubTitleWideBox = styled.div`
     margin-top: 5px;
     text-align: center;
     padding-top: 7px;
+  }
+  @media (max-width: 396px) {
+    font-size: smaller;
   }
 `;
 export const ProductsLayout1 = styled.div`
@@ -128,8 +144,9 @@ export const Box1 = styled.div`
     margin-top: 10px;
     height: 50vh;
   }
-  @media (max-width: 390px) {
-    width: 90vw;
+  @media (max-width: 396px) {
+    width: 80vw;
+    height: 80vh;
     margin-top: -20px;
   }
 `;
@@ -141,9 +158,9 @@ export const Box2 = styled.div`
   height: 40vh;
   @media (max-width: 767px) {
     width: 89vw;
-    margin-top: 10px;
+    margin-top: 25px;
   }
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     width: 90vw;
     margin-top: 50px;
     height: 50vh;
@@ -166,16 +183,16 @@ export const Box3 = styled.div`
     align-items: center;
     justify-content: center;
     width: 85vw;
-    margin-top: 580px;
+    margin-top: 620px;
     height: 50vh;
   }
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90vw;
-    margin-top: 339px;
+    width: 80vw;
     height: 50vh;
+    margin-left: 14px;
   }
 `;
 
@@ -202,6 +219,15 @@ export const ItemBox = styled.div`
     margin-left: 5px;
     padding-top: 23px;
   }
+  @media (max-width: 396px) {
+    font-size: smaller;
+    height: auto;
+    width: 85vw;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 5px;
+  }
 `;
 export const ItemTitle = styled.div`
   margin-bottom: 12px;
@@ -211,6 +237,11 @@ export const ItemTitle = styled.div`
   margin-left: 5px;
   width: 150px;
   /* background-color: red; */
+  @media (max-width: 396px) {
+    font-size: smaller;
+    text-align: center;
+    margin-left: 0;
+  }
 `;
 
 export const ItemContent = styled.div`
@@ -218,4 +249,10 @@ export const ItemContent = styled.div`
   color: #6e7f8d;
   margin-left: 60px;
   text-align: left;
+  @media (max-width: 396px) {
+    font-size: smaller;
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 0px;
+  }
 `;

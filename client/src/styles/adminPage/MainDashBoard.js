@@ -26,6 +26,8 @@ export const AdminPageMainLayout = styled.div`
     grid-template-columns: 1fr;
     gap: 10px;
   }
+  @media (max-width: 396px) {
+  }
 `;
 
 export const StyledCardRow1 = styled.div`
@@ -46,14 +48,19 @@ export const StyledCardRow1 = styled.div`
   margin-top: 15px;
 
   @media (max-width: 768px) {
-    /* width: 100%;
-    margin-bottom: 25px;
-    margin-top: 0px; */
-    /* width: 635px; */
     width: 99%;
     margin-bottom: 15px;
     padding: 2px;
     margin: 2px;
+  }
+  @media (max-width: 396px) {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 5px;
+    margin-left: 0px;
+    height: 300px;
   }
 `;
 export const StyledCardRow2 = styled.div`
@@ -70,16 +77,22 @@ export const StyledCardRow2 = styled.div`
   width: 35vw;
   height: 532px;
   overflow: hidden;
+  overflow-x: auto;
   /* margin-bottom: -4px; */
   margin-top: -75px;
   @media (max-width: 768px) {
-    /* width: 100%;
-    margin-bottom: 25px;
-    margin-top: 0px; */
-    /* width: 635px; */
     width: 99%;
     margin-bottom: 25px;
     padding: 2px;
     margin: 2px;
+  }
+  @media (max-width: 396px) {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 5px;
+    margin-left: 0px;
+    overflow-x: auto;
   }
 `;

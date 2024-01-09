@@ -10,6 +10,13 @@ export const SelectBox = styled.div`
   padding: 12px;
   margin-bottom: 10px;
   margin-left: 5px;
+  @media (max-width: 396px) {
+    height: auto;
+    width: 85vw;
+    padding: 1;
+    margin-bottom: 4px;
+    font-size: smaller;
+  }
 `;
 
 export const AdminInputText = styled.div`
@@ -18,4 +25,7 @@ export const AdminInputText = styled.div`
   font-size: large;
   font-weight: 900;
   margin-left: 5px;
+  @media (max-width: 396px) {
+    font-size: smaller;
+  }
 `;

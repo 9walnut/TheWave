@@ -10,8 +10,9 @@ export const PageNationWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 30px;
-  @media (max-width: 390px) {
-    margin-top: 8px;
+  @media (max-width: 396px) {
+    /* margin-top: 20px; */
+    margin-bottom: 20px;
   }
 `;
 
@@ -29,8 +30,8 @@ export const PageButton = styled.button`
     color: #fff;
   }
 
-  @media (max-width: 390px) {
-    padding: 2px 6px;
-    font-size: 10px;
+  @media (max-width: 396px) {
+    padding: 1px 5px;
+    font-size: 9px;
   }
 `;

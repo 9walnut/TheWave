@@ -22,8 +22,8 @@ export const Table = styled.table`
     margin-left: 23px;
     font-size: smaller;
   }
-  @media (max-width: 390px) {
-    margin-top: 10px;
+  @media (max-width: 396px) {
+    margin-top: 2px;
     width: 650px;
     height: auto;
     margin-left: 2px;
@@ -45,9 +45,9 @@ export const TableHeader = styled.th`
     ${(props) => props.text === "주소" && "display: none;"}
   } */
 
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     font-size: smaller;
-    height: 5px;
+    padding: 5px;
   }
 `;
 
@@ -59,23 +59,25 @@ export const TableTr = styled.tr`
     padding: 30px;
     background-color: #f2f5f7;
   }
-  /* @media (max-width: 390px) {
-    height: 15px;
-  } */
+  @media (max-width: 396px) {
+    height: 5px;
+    font-size: smaller;
+  }
 `;
 
 export const TableTd = styled.td`
   width: 100px;
   padding: 20px;
+  white-space: nowrap;
   @media (max-width: 767px) {
     width: 80px;
     padding: 10px;
   }
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     width: 650px;
     height: auto;
     font-size: smaller;
-    width: 80px;
+    width: 70px;
     padding: 2px;
   }
 `;
@@ -85,7 +87,10 @@ export const TableInputTd = styled.td`
   padding: 10px;
   background: #e4ebf1;
   @media (max-width: 767px) {
-    width: 80px;
+    width: 70px;
     padding: 10px;
+  }
+  @media (max-width: 767px) {
+    padding: 5px;
   }
 `;

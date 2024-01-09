@@ -19,9 +19,10 @@ export const AdminButtonGreyStyle = styled.button`
     background: #a4afbb;
   }
 
-  @media (max-width: 390px) {
-    width: 90px;
-    height: 30px;
-    font-size: x-small;
+  @media (max-width: 396px) {
+    width: 91px;
+    height: 24px;
+    font-size: xx-small;
+    margin: 2px;
   }
 `;

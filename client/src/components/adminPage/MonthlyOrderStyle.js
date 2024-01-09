@@ -46,6 +46,9 @@ export const ListItemBox = styled.div`
     width: 100%;
     margin-left: 0px;
   }
+  @media (max-width: 396px) {
+    width: 90%;
+  }
 `;
 
 export const IconContainer = styled.div`
@@ -54,6 +57,13 @@ export const IconContainer = styled.div`
     width: 24px;
     height: 24px;
   }
+  @media (max-width: 396px) {
+    & img {
+      width: 14px;
+      height: 14px;
+      margin-top: 5px;
+    }
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -61,11 +71,17 @@ export const TitleContainer = styled.div`
   @media (max-width: 390px) {
     font-size: smaller;
   }
+  @media (max-width: 396px) {
+    font-size: xx-small;
+  }
 `;
 export const ResultContainer = styled.div`
   text-align: left;
   margin-left: auto;
   @media (max-width: 390px) {
     font-size: smaller;
+  }
+  @media (max-width: 396px) {
+    font-size: xx-small;
   }
 `;

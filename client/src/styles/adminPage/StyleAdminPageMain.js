@@ -14,9 +14,15 @@ export const AdminPageMainLayout = styled.div`
   /* min-height: 100vh; */
   /* height: 100%; */
   height: 100vh;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 
   @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 60px;
+    height: 100vh;
+    overflow-y: hidden;
+  }
+  @media (max-width: 396px) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 60px;
     height: 100vh;
@@ -48,10 +54,17 @@ export const RightBox = styled.main`
     margin: 20px;
     margin-top: 15px;
     height: 90vh;
-    /* background-color: blue; */
-
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  @media (max-width: 396px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 60px;
+    height: 100vh;
+    overflow-y: hidden;
+    width: 96vw;
+    padding-left: 8px;
+    margin: 5px;
   }
 `;

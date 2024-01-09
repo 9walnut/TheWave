@@ -134,9 +134,7 @@ function Users() {
           onSelectionChange={onSelectionChange}
         />
         <S.BtnWrapper>
-          <AdminButtonGrey onClick={deleteUsers}>
-            선택 회원 삭제하기
-          </AdminButtonGrey>
+          <AdminButtonGrey onClick={deleteUsers}>회원 삭제하기</AdminButtonGrey>
         </S.BtnWrapper>
         <PageNation
           total={users.length}

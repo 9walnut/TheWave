@@ -74,7 +74,7 @@ const UploadDetailEdit = ({ onFileChange, productId }) => {
   }, [selectedFiles]);
 
   return (
-    <div>
+    <S.ImageBtnWrapper>
       <div style={{ position: "relative" }}>
         <S.EditFileSelectBtn>파일 선택</S.EditFileSelectBtn>
 
@@ -89,7 +89,7 @@ const UploadDetailEdit = ({ onFileChange, productId }) => {
         <p>{fileBasicMessage}</p>
         <p>{fileSelectedMessage}</p>
       </S.EditMsgBox>
-    </div>
+    </S.ImageBtnWrapper>
   );
 };
 

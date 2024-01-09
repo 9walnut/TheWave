@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ButtonContainer = styled.div`
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     padding-bottom: -10px;
   }
 `;
@@ -23,7 +23,7 @@ export const InnerCardTitleBox = styled.div`
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
   margin-left: 25px;
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     font-size: smaller;
     margin-top: -10px;
     border: none;
