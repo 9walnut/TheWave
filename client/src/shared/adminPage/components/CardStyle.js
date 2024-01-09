@@ -15,12 +15,18 @@ export const CardBox = styled.div`
   margin-top: -8px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  /* background-color: red; */
+  overflow-y: auto;
 
   @media (max-width: 767px) {
     margin-top: 30px;
     height: 83vh;
     width: 95vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   @media (max-width: 390px) {
     margin-top: 3px;

@@ -6,7 +6,7 @@ export const AdminButtonNavBackBox = styled.div`
   & img {
     width: 34px;
     height: 34px;
-    margin-left: 35px;
+    margin-left: 3px;
   }
 
   @media (max-width: 767px) {
