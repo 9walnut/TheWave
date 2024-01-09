@@ -63,3 +63,7 @@ export const IdCheckButton = styled.button`
   right: 4px;
   bottom: -4px;
 `;
+
+export const ValidTextBox = styled.div`
+  font-size: small;
+`;

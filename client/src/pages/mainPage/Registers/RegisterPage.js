@@ -17,6 +17,7 @@ function Register() {
   const [gender, setGender] = useState("");
   const [address, setAddress] = useState("");
   const [isValid, setIsValid] = useState(false);
+  const [validText, setValidText] = useState("");
   const navigate = useNavigate();
 
   const getAddress = (addressData) => {
@@ -24,11 +25,13 @@ function Register() {
     const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
     setAddress(newAddress);
   };
+
   const handleEnter = (e) => {
     if (e.key == "Enter") {
       onSubmit();
     }
   };
+
   // 아이디 중복 확인
   const idCheck = async () => {
     if (userId == "") {
@@ -72,6 +75,19 @@ function Register() {
     }
   };
 
+  useEffect(() => {
+    pwCheck();
+  }, [password, checkPassword]);
+  const pwCheck = () => {
+    if (password == "" || checkPassword == "") {
+      setValidText("비밀번호를 입력해주세요");
+    } else if (password === checkPassword) {
+      setValidText("비밀번호가 일치합니다");
+    } else if (!(password === checkPassword)) {
+      setValidText("비밀번호가 일치하지 않습니다");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -105,19 +121,20 @@ function Register() {
             <label>
               {/* 비밀번호: */}
               <S.Input
-                placeholder="패스워드"
+                placeholder="비밀번호"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <br />
               <S.Input
-                placeholder="패스워드"
+                placeholder="비밀번호 확인"
                 type="password"
                 value={checkPassword}
                 onChange={(e) => setCheckPassword(e.target.value)}
               />
+              <S.ValidTextBox>{validText}</S.ValidTextBox>
             </label>
-            <br />
             <label>
               {/* 이름: */}
               <S.Input
@@ -131,7 +148,7 @@ function Register() {
             <label>
               {/* 전화번호: */}
               <S.Input
-                placeholder="전화번호 ( - 제외)"
+                placeholder="전화번호 ( - 제외 )"
                 type="text"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}

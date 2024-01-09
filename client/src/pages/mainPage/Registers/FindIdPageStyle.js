@@ -38,12 +38,14 @@ export const Button = styled.button`
   margin: 10px;
   border: none;
   font-weight: 900;
+  cursor: pointer;
 `;
 
 export const ButtonSecond = styled(Button)`
   background-color: white;
   margin: 0px;
   width: 100px;
+  cursor: pointer;
 `;
 
 export const ButtonGroup = styled.div`
