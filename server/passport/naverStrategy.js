@@ -3,6 +3,7 @@ const NaverStrategy = require("passport-naver").Strategy;
 const { db } = require("../models/index");
 // const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const { generateAccessToken } = require("../middleware/jwt");
 
 module.exports = () => {
   passport.use(
@@ -10,7 +11,7 @@ module.exports = () => {
       {
         clientID: process.env.NAVER_ID,
         clientSecret: process.env.NAVER_SECRET,
-        callbackURL: "http://localhost:8001/api/login/naver/callbackk",
+        callbackURL: process.env.NAVER_URL,
       },
       async (accessToken, refreshToekn, profile, done) => {
         try {
@@ -35,10 +36,15 @@ module.exports = () => {
               gender: profile._json.gender || "M",
               // providerType: "kakao",
             });
+            address = await db.address.create({
+              userNumber: user.userNumber,
+              address: profile.address || "No address",
+            });
             firstLogin = true;
           }
 
-          done(null, user);
+          const { accessToken } = await generateAccessToken(user);
+          done(null, { user, accessToken });
         } catch (err) {
           console.error(err);
           done(err);

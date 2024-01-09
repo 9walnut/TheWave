@@ -23,6 +23,9 @@ router.post("/pwCheck", controller.editInfoPw);
 // 회원 정보 수정
 router.patch("/info", controller.editInfo);
 
+// 회원 비밀번호 수정
+router.patch("/info/pw", controller.editPw);
+
 // 회원 탈퇴
 router.delete("/", controller.deleteUser);
 
