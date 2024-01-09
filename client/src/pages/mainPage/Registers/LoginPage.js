@@ -27,7 +27,7 @@ function LoginPage() {
   };
 
   const handleEnter = (e) => {
-    if (e) {
+    if (e.key == "Enter") {
       handleLogin();
     }
   };
@@ -45,9 +45,7 @@ function LoginPage() {
           Authorization: `${localStorage.getItem("accessToken")}`,
         };
         console.log("토큰값입니다", headers);
-
         const { isAdmin, accessToken } = res.data;
-
         console.log(res.data);
         const user = {
           accessToken,
@@ -98,7 +96,7 @@ function LoginPage() {
               type="text"
               onChange={onUserIdHandler}
               placeholder="아이디"
-            />
+            ></S.Input>
             <br />
             <S.Input
               type="password"

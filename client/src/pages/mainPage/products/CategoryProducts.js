@@ -1,10 +1,7 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import Navbar from "../../../components/mainPage/Navbar";
-import Footer from "../../../components/mainPage/Footer";
-import "../MainPage.css";
 import { useEffect, useState } from "react";
-import * as S from "../../../styles/mainPage/ProductCard.style";
+import * as S from "../../../styles/mainPage/CategoryProducts.style";
 import axios from "axios";
 
 function CategoryProducts() {
@@ -32,8 +29,8 @@ function CategoryProducts() {
 
   return (
     <>
+      <S.CategoryTitle>{categoryName} 풍선</S.CategoryTitle>
       <S.ProductContentBox>
-        <div>{categoryName}</div>
         {products.map((product) => {
           return (
             <S.CardItemBox>

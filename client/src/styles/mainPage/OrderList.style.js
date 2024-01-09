@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const OrderListLayout = styled.div`
   display: flex;
-  height: 1400px;
+  height: 1600px;
   width: 100%;
   margin-top: 100px;
   margin-bottom: 100px;

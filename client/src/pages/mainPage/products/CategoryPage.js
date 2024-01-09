@@ -9,7 +9,7 @@ function CategoryPage() {
   return (
     <>
       <Navbar />
-      <section>
+      <section className="category">
         <CategoryProducts />
       </section>
       <Footer />

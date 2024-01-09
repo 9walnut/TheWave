@@ -53,10 +53,17 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const CheckButton = styled.button`
-  position: absolute;
+export const IdCheckButton = styled.button`
   display: flex;
-  width: 20px;
-  height: 10px;
+  position: absolute;
   cursor: pointer;
+  border: none;
+  font-weight: 900;
+  padding: 4px;
+  right: 4px;
+  bottom: -4px;
+`;
+
+export const ValidTextBox = styled.div`
+  font-size: small;
 `;

@@ -1,22 +1,17 @@
 import styled from "styled-components";
 
-export const CategoryTitle = styled.div`
-  text-align: center;
-  font-size: 24px;
-  font-weight: 900;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 20px;
-`;
-
 export const ProductContentBox = styled.div`
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 24px;
-  max-width: 1600px;
+  @media (max-width: 550px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
 `;
 
 export const CardItemBox = styled.div`
@@ -75,7 +70,7 @@ export const CardItemBox = styled.div`
 
   .buttons-container {
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 25%;
     display: flex;
     align-items: center;

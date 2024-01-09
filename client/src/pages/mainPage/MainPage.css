@@ -9,11 +9,13 @@ section {
   box-sizing: border-box;
   width: auto;
   height: 100%;
-  padding: 4rem;
-
+  padding: 60px;
   @media (max-width: 767px) {
     padding: 16px;
   }
+}
+.category {
+  padding: 20px 60px;
 }
 
 /* https://d2.naver.com/helloworld/8540176 */

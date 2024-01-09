@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import getAccessToken from "../../../hooks/getAcessToken";
 import { setUser } from "../../../redux/reducers/userSlice";
 import AddressComponent from "../../../components/register/AddressComponent";
@@ -13,6 +13,19 @@ function MypageInfo() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [birthday, setBirthday] = useState("");
   const [address, setAddress] = useState("");
+  const [alertText, setAlertText] = useState("");
+
+  useEffect(() => {
+    validatePassword();
+  }, [password]);
+
+  const validatePassword = () => {
+    if (password.length == 0) {
+      setAlertText("비밀번호를 입력해주세요");
+    } else {
+      setAlertText("");
+    }
+  };
 
   const pwCheck = async () => {
     try {
@@ -40,16 +53,14 @@ function MypageInfo() {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       if (password === "") {
-        alert("패스워드를 입력해주세요.");
+        alert("비밀번호를 입력해주세요.");
       } else {
         pwCheck();
       }
     }
   };
   const getAddress = (addressData) => {
-    // console.log("address데이타입니다다다다", addressData);
     const newAddress = `${addressData.selectAddress} ${addressData.postNumber} ${addressData.detailAddress}`;
-    // console.log("newAddress입니다.", newAddress);
     setAddress(newAddress);
     // return newAddress;
   };
@@ -80,6 +91,7 @@ function MypageInfo() {
       console.log(error);
     }
   };
+
   return (
     <>
       <h3>내 정보 수정</h3>
@@ -91,14 +103,15 @@ function MypageInfo() {
             }}
             onKeyDown={handleEnter}
           >
-            <div>비밀번호를 입력해주세요</div>
             <InputWrapper>
               <Input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="password"
+                placeholder="비밀번호"
               />
+              <br />
+              <div>{alertText}</div>
             </InputWrapper>
             <Button type="button" onClick={pwCheck}>
               확인

@@ -25,8 +25,8 @@ import CategoryPage from "./pages/mainPage/products/CategoryPage";
 import OrderListPage from "./pages/mainPage/payment/OrderListPage";
 import MyPageInfo from "./pages/mainPage/mypage/MyPageInfo";
 import WishList from "./pages/mainPage/mypage/WishList";
-import ChangePw from "./pages/mainPage/mypage/ChangePw";
 import DeliveryList from "./pages/mainPage/mypage/DeliveryList";
+import ModifyPw from "./pages/mainPage/mypage/ModifyPw";
 
 const MyPageGuard = () => {
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ function App() {
           <Route path="delivery" element={<DeliveryList />} />
           <Route path="info" element={<MyPageInfo />} />
           <Route path="wishlist" element={<WishList />} />
-          {/* <Route path="pwmodify" element={<ChangePw />} /> */}
+          <Route path="modifypw" element={<ModifyPw />} />
         </Route>
         <Route path="/category/best" element={<BestPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
