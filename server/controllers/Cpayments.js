@@ -53,12 +53,7 @@ exports.goPayment = async (req, res) => {
 exports.payment = async (req, res) => {
   // 주문서에서 작성한 정보
   // 여러 상품들에 대한 개별 데이터(color, size, orderQuantity)가 어떤 식으로 넘어올지...
-  const {
-    userAddress,
-    receiveName,
-    deliveryRequest,
-    productInfo, // [productId, orderQuantity, color, size, cartId]
-  } = req.body;
+  const { userAddress, receiveName, deliveryRequest, productInfo } = req.body;
   const accessToken = req.headers["authorization"];
 
   const t = await sequelize.transaction();

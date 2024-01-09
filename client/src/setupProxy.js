@@ -32,6 +32,20 @@ module.exports = function (app) {
   );
 
   app.use(
+    createProxyMiddleware("/api/findPw", {
+      target: apiURL,
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/api/findPw/newPw", {
+      target: apiURL,
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
     createProxyMiddleware("/api/products", {
       target: apiURL,
       changeOrigin: true,

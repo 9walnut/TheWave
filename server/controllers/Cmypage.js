@@ -163,9 +163,11 @@ exports.editInfoPw = async (req, res) => {
         where: { userNumber: tokenCheck.userData.userNumber },
       });
 
-      const userAddress = await db.address.findOne({
+      const address = await db.address.findOne({
         where: { userNumber: tokenCheck.userData.userNumber },
       });
+
+      const userAddress = address.address ? address.address.split("/") : [];
 
       res.send({ result: true, userInfo, userAddress });
     } else res.send({ result: false });

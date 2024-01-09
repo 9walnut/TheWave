@@ -3,7 +3,7 @@ import Postcode from "@actbase/react-daum-postcode";
 import Modal from "../Modal";
 import styled from "styled-components";
 
-function AddressComponent({ getAddress, address }) {
+function AddressComponent({ getAddress, userAddress }) {
   const [isModal, setModal] = useState(false);
   const [selectAddress, setAddress] = useState("");
   const [postNumber, setPostNumber] = useState("");
@@ -25,6 +25,13 @@ function AddressComponent({ getAddress, address }) {
     getAddress(addressData);
   };
 
+  useEffect(() => {
+    // console.log(userAddress);
+    setAddress(userAddress[0]);
+    setPostNumber(userAddress[1]);
+    setdetailAd(userAddress[2]);
+  }, []);
+
   //   useEffect(() => {
   //     console.log(address);
   //     setAddress(address.address);
@@ -34,7 +41,7 @@ function AddressComponent({ getAddress, address }) {
     <>
       <Modal isVisible={isModal}>
         <Postcode
-          style={{ width: "100%", height: 300 }}
+          style={{ width: 400, height: 400 }}
           jsOptions={{ animation: true, hideMapBtn: true }}
           onSelected={(addressData) => {
             console.log(addressData);
@@ -60,7 +67,6 @@ function AddressComponent({ getAddress, address }) {
         type="text"
         value={detailAddress}
         onChange={(e) => setdetailAd(e.target.value)}
-        required
       />
 
       {handleAddressChange({ selectAddress, postNumber, detailAddress })}

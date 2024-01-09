@@ -5,6 +5,6 @@ export const CartTitle = styled.h1`
 `;
 
 export const CheckBox = styled.div`
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
 `;

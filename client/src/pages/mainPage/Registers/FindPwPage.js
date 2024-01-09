@@ -59,9 +59,8 @@ function FindPwPage() {
         setNotFound(true);
       } else {
         // 일치하는 정보가 있을 때
-        setUserId(res.data.userId); // 아이디 값을 상태에 저장
         setNotFound(false);
-        navigate("/findPw/newPw");
+        setPwResult(true);
       }
     } catch (error) {
       console.log("아이디 찾기", error);
@@ -82,15 +81,20 @@ function FindPwPage() {
   };
 
   const modifyPw = async () => {
-    try {
-      const data = {
-        userId: userId,
-        password: password,
-      };
+    if (password === checkPassword) {
+      try {
+        const data = {
+          userId: userId,
+          password: password,
+        };
 
-      const res = await axios.post("/api/findPw/newPw", data);
-    } catch (error) {
-      console.log(error);
+        const res = await axios.post("/api/findPw/newPw", data);
+        if (res.data.result == true) {
+          alert("비밀번호가 변경되었습니다.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (

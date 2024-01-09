@@ -21,7 +21,7 @@ function Register() {
   const navigate = useNavigate();
 
   const getAddress = (addressData) => {
-    console.log("address데이타입니다다다다", addressData);
+    // console.log("address데이타입니다다다다", addressData);
     const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
     setAddress(newAddress);
   };

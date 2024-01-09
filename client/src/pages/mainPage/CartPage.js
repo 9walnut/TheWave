@@ -8,18 +8,19 @@ import Button from "../../components/register/Button";
 
 const CartLayout = styled.div`
   display: flex;
-  height: 1400px;
+  height: 100%;
   width: 100%;
   margin-top: 100px;
   margin-bottom: 100px;
   padding: 20px;
+  /* color: #5a5a5a; */
 `;
 
 const CartLeftBox = styled.div`
   height: 100%;
   width: 60%;
   padding: 2em;
-  border-right: 1px solid black;
+  border-right: 1px solid #ddd;
 `;
 
 const CartRightBox = styled.div`
@@ -42,7 +43,8 @@ function CartPage() {
           <CartRightBox>
             {/* 주문 정보 확인 */}
             {/* 결제 */}
-            총합 :<Button>주문하기</Button>
+            <div>총합:</div>
+            <Button>주문하기</Button>
           </CartRightBox>
         </CartLayout>
       </section>
