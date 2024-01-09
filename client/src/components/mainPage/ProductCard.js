@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as S from "../../styles/mainPage/ProductCard.style";
 import axios from "axios";
+import getAccessToken from "../../hooks/getAcessToken";
 
 function ProductCard() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   const getProduct = async () => {
@@ -21,11 +23,18 @@ function ProductCard() {
   }, []);
 
   const addToCart = (productId) => {
-    console.log("장바구니 얍");
+    navigate(`/products/${productId}`);
   };
 
-  const addToWishlist = (productId) => {
-    console.log("찜하기 얍");
+  const addToWishlist = async (productId) => {
+    const headers = getAccessToken();
+    console.log(productId, "프로덕아디");
+    const res = await axios.get(`/api/product/wish/${productId}`, { headers });
+    if (res.data.result == true) {
+      alert("찜하기 완료");
+    } else {
+      alert("이미 존재하는 상품입니다.");
+    }
   };
 
   return (

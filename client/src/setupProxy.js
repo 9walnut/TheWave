@@ -80,6 +80,13 @@ module.exports = function (app) {
     })
   );
 
+  app.use(
+    createProxyMiddleware("/api/products/wish/:productId", {
+      target: apiURL,
+      changeOrigin: true,
+    })
+  );
+
   // ------------------- admin ----------------------
   app.use(
     createProxyMiddleware("/api/admin", {

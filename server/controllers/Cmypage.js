@@ -90,7 +90,8 @@ exports.wishList = async (req, res) => {
 // 찜한 상품 장바구니 담기 (담고 나서도 찜한 상품에서는 사라지지 않음)
 exports.wishToCart = async (req, res) => {
   const accessToken = req.headers["authorization"];
-  const { productId } = req.body;
+  console.log("마바디", req.body);
+  const { productId } = req.body.data;
 
   try {
     const tokenCheck = await verifyToken(accessToken);
@@ -122,7 +123,9 @@ exports.wishToCart = async (req, res) => {
 // 찜한 상품 삭제
 exports.deleteWish = async (req, res) => {
   const accessToken = req.headers["authorization"];
+  console.log("찜상품삭제", req.body);
   const { productId } = req.body;
+  console.log(productId);
   try {
     const tokenCheck = await verifyToken(accessToken);
 
@@ -132,7 +135,8 @@ exports.deleteWish = async (req, res) => {
         productId: productId,
       },
     });
-    res.send({ result: true });
+
+    res.send({ result: cartOut });
   } catch (error) {
     console.error(error);
   }
@@ -140,7 +144,7 @@ exports.deleteWish = async (req, res) => {
 
 // 회원 정보 수정 페이지
 exports.editInfoPage = (req, res) => {
-  res.send({ result: true });
+  // res.send({ result: true })
 };
 
 // 회원 정보 수정 페이지 > 비밀번호 인증

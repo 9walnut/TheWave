@@ -9,11 +9,6 @@ import AddressSearch from "../../../components/AddressSearch";
 import * as S from "./RegisterPageStyle.js";
 
 function Register() {
-  // const [userId, setUserId] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [userName, setUserName] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  // const [birthday, setBirthday]
   const [address, setAddress] = useState("");
   const navigate = useNavigate();
   const {
@@ -34,7 +29,7 @@ function Register() {
     console.log(data);
     try {
       const res = await axios.post("api/register", { data, address: address });
-      console.log("Signup Successful:", res);
+
       if (res.data.result) {
         alert("회원가입 성공 ~~");
         navigate("/login");
@@ -42,7 +37,7 @@ function Register() {
         alert("에러");
       }
     } catch (error) {
-      console.error("Signup Failed:", error.res.data);
+      console.error("Signup Failed:", error);
     }
   };
 

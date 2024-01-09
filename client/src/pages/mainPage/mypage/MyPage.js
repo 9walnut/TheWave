@@ -12,7 +12,7 @@ import MyPageInfo from "./MyPageInfo";
 import WishList from "./WishList";
 import MyPageMain from "./MyPageMain";
 import DeliveryList from "./DeliveryList";
-import ChangePw from "./ChangePw";
+import ModifyPw from "./ModifyPw";
 
 function MyPage() {
   const navigate = useNavigate();
@@ -49,8 +49,8 @@ function MyPage() {
       <section>
         <S.MypageTitle>
           <Link to="/mypage">마이 페이지</Link>
+          <S.InfoBox>환영합니다. {userName} 님 !</S.InfoBox>
         </S.MypageTitle>
-        <S.InfoBox>환영합니다. {userName} 님 !</S.InfoBox>
         <S.MypageLayout>
           <S.SideMenu>
             <h3>
@@ -88,7 +88,7 @@ function MyPage() {
               <Route path="delivery" element={<DeliveryList />} />
               <Route path="info" element={<MyPageInfo />} />
               <Route path="wishlist" element={<WishList />} />
-              {/* <Route path="pwmodify" element={<ChangePw />} /> */}
+              <Route path="modifypw" element={<ModifyPw />} />
             </Routes>
           </S.MypageContent>
         </S.MypageLayout>

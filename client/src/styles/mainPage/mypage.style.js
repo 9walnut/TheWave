@@ -11,8 +11,10 @@ export const MypageLayout = styled.div`
 
   @media (max-width: 980px) {
     /* flex-direction: column-reverse; */
+    padding: 30px 0px;
     width: 100%;
     display: block;
+    margin-bottom: 200px;
   }
 `;
 
@@ -20,15 +22,20 @@ export const MypageTitle = styled.div`
   font-size: 32px;
   font-weight: 900;
   text-align: center;
-  @media (max-width: 767px) {
-    margin-top: 60px;
+  @media (max-width: 980px) {
+    margin-top: 30px;
+    font-size: 24px;
   }
 `;
 
 export const InfoBox = styled.div`
   margin-top: 16px;
   font-size: 24px;
+  font-weight: 500;
   text-align: center;
+  @media (max-width: 980px) {
+    font-size: 16px;
+  }
 `;
 
 export const SideMenu = styled.div`
@@ -53,7 +60,7 @@ export const SideMenu = styled.div`
   }
 
   @media (max-width: 980px) {
-    padding: 24px 10px;
+    padding: 16px 10px;
     width: 100%;
     border-right: none;
     div {
@@ -72,7 +79,7 @@ export const SideMenu = styled.div`
       margin-top: 12px;
       margin-right: 20px;
       a {
-        font-size: 12px;
+        font-size: x-small;
         transition: opacity 0.3s;
         cursor: pointer;
         display: block;

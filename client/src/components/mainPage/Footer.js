@@ -6,17 +6,24 @@ const FooterLayout = styled.div`
   align-items: center;
   position: absolute;
   justify-content: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  border-top: 1px solid #ddd;
   /* bottom: 0; */
   width: 100%;
   height: 200px;
+  @media (max-width: 980px) {
+    display: block;
+    border: none;
+    height: auto;
+    text-align: center;
+  }
 `;
 
 const FooterBox = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  border-right: 1px solid black;
+  border-right: 1px solid #ddd;
   padding: 20px;
   flex-direction: column;
   color: #5a5a5a;
@@ -27,6 +34,19 @@ const FooterBox = styled.div`
   a {
     cursor: pointer;
   }
+  @media (max-width: 980px) {
+    display: block;
+    border-right: none;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    .contactBox {
+      display: flex;
+      justify-content: center;
+    }
+    a {
+      margin: 4px;
+    }
+  }
 `;
 
 function Footer() {
@@ -34,15 +54,16 @@ function Footer() {
     <>
       <FooterLayout>
         <FooterBox>
-          <a>
-            <div>이용약관</div>
-          </a>
-          <a>
-            <div>이용안내</div>
-          </a>
-          <a>
-            <div>개인정보 처리방침</div>
-          </a>
+          <div>
+            <a>이용약관</a>
+          </div>
+          <div>
+            <a>이용안내</a>
+          </div>
+
+          <div>
+            <a>개인정보 처리방침</a>
+          </div>
         </FooterBox>
         <FooterBox>
           <div>CUSTOMER SERVICE</div>
@@ -52,13 +73,14 @@ function Footer() {
         </FooterBox>
         <FooterBox>
           <div>Contact</div>
-          <div>
+          <div className="contactBox">
             <div>
               <a href="https://link.inpock.co.kr/thewave" target="_blank">
-                <img src="/footer/link.png"></img>
+                <img src="/footer/link.png" />
               </a>
+
               <a href="https://open.kakao.com/o/s3MTxx5d" target="_blank">
-                <img src="/footer/kakaotalk.png"></img>
+                <img src="/footer/kakaotalk.png" />
               </a>
             </div>
             <div>
@@ -66,13 +88,13 @@ function Footer() {
                 href="https://www.instagram.com/thewave_balloon/?igsh=bDVwb2FpdHNqbmt1"
                 target="_blank"
               >
-                <img src="/footer/instagram.png"></img>
+                <img src="/footer/instagram.png" />
               </a>
               <a
                 href="https://smartstore.naver.com/studiowells"
                 target="_blank"
               >
-                <img src="/footer/naver.png"></img>
+                <img src="/footer/naver.png" />
               </a>
             </div>
           </div>

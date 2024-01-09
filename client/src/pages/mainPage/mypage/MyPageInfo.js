@@ -97,7 +97,7 @@ function MypageInfo() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="password"
+                placeholder="비밀번호"
               />
             </InputWrapper>
             <Button type="button" onClick={pwCheck}>
