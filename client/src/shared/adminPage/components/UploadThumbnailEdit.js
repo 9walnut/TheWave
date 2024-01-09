@@ -80,7 +80,7 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
     }
   }, [thumbnailUrl, onFileChange]);
   return (
-    <div>
+    <S.ImageBtnWrapper>
       <div style={{ position: "relative" }}>
         <S.EditFileSelectBtn>파일 선택</S.EditFileSelectBtn>
 
@@ -96,7 +96,7 @@ const UploadThumbnailEdit = ({ onFileChange, productId }) => {
       </S.EditMsgBox>
       {/* <input type="file" onChange={handleFileChange} /> */}
       {/* <button onClick={handleUpload}>썸네일 수정🌀</button> */}
-    </div>
+    </S.ImageBtnWrapper>
   );
 };
 

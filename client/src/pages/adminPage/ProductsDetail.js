@@ -127,9 +127,7 @@ function ProductsDetail({ products }) {
                 ))}
               </>
             )}
-          </S.Box3>
-          {/* </S.ProductsLayout2> */}
-          <S.ButtonWrapper>
+
             <S.ButtonContainer>
               <AdminButtonGrey
                 onClick={() => {
@@ -143,7 +141,8 @@ function ProductsDetail({ products }) {
                 상품 삭제하기
               </AdminButtonBlack>
             </S.ButtonContainer>
-          </S.ButtonWrapper>
+          </S.Box3>
+          {/* </S.ProductsLayout2> */}
         </Card>
       </S.PageWrapper>
       <Routes>

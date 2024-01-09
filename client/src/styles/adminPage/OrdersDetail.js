@@ -14,6 +14,17 @@ export const TitleBox = styled.div`
   font-weight: 900;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
+  @media (max-width: 767px) {
+    /* height: auto; */
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+    padding-top: 7px;
+  }
+  @media (max-width: 396px) {
+    font-size: smaller;
+    padding-top: -20px;
+  }
 `;
 
 export const SubTitleBox = styled.div`
@@ -30,6 +41,17 @@ export const SubTitleBox = styled.div`
   font-weight: 600;
   margin-bottom: 10px;
   text-align: center;
+  @media (max-width: 767px) {
+    /* height: auto; */
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+    padding-top: 7px;
+  }
+  @media (max-width: 396px) {
+    font-size: smaller;
+    height: 4vh;
+  }
 `;
 
 export const OrdersDetailLayout1 = styled.div`
@@ -43,6 +65,15 @@ export const OrdersDetailLayout1 = styled.div`
   padding: 20px;
 
   position: relative;
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    align-items: center;
+    /* justify-content: center; */
+    align-content: center;
+    /* margin: 0 auto; */
+  }
 `;
 
 export const Box1 = styled.div`
@@ -74,6 +105,24 @@ export const ItemBox = styled.div`
   display: flex;
   align-items: center;
   padding-top: 23px;
+  @media (max-width: 767px) {
+    width: 87vw;
+    height: 4vh;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    padding-top: 23px;
+  }
+  @media (max-width: 396px) {
+    font-size: smaller;
+    height: auto;
+    width: 90vw;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 5px;
+    margin-left: -40px;
+  }
 `;
 export const ItemTitle = styled.div`
   margin-bottom: 12px;
@@ -83,6 +132,11 @@ export const ItemTitle = styled.div`
   margin-left: 5px;
   width: 150px;
   /* background-color: red; */
+  @media (max-width: 396px) {
+    font-size: smaller;
+    text-align: center;
+    margin-left: 0;
+  }
 `;
 
 export const ItemContent = styled.div`
@@ -90,6 +144,12 @@ export const ItemContent = styled.div`
   color: #6e7f8d;
   margin-left: 60px;
   text-align: left;
+  @media (max-width: 396px) {
+    font-size: smaller;
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 0px;
+  }
 `;
 
 export const OrderProductImgBox = styled.div`

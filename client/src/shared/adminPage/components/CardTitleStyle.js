@@ -21,6 +21,10 @@ export const CardTitleBox = styled.div`
     margin-left: -10px;
     margin-top: 3px;
   }
+  @media (max-width: 396px) {
+    width: 450px;
+    font-size: smaller;
+  }
 `;
 export const InnerCardTitleBox = styled.div`
   /* background-color: #e9eff4; */

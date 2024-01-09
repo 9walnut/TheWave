@@ -10,6 +10,14 @@ export const TextareaBox = styled.div`
   padding: 12px;
   margin-bottom: 10px;
   margin-left: 5px;
+  @media (max-width: 396px) {
+    height: auto;
+    width: 85vw;
+    padding: 1;
+    margin-bottom: 4px;
+    font-size: smaller;
+    /* text-align: center; */
+  }
 `;
 
 export const AdminTextareaText = styled.div`
@@ -18,6 +26,9 @@ export const AdminTextareaText = styled.div`
   font-size: large;
   font-weight: 900;
   margin-left: 5px;
+  @media (max-width: 396px) {
+    font-size: smaller;
+  }
 `;
 
 export const StyledTextarea = styled.textarea`
@@ -34,5 +45,11 @@ export const StyledTextarea = styled.textarea`
 
   &::placeholder {
     font-size: large;
+  }
+  @media (max-width: 396px) {
+    font-size: smaller;
+    width: 78vw;
+    margin-left: 0px;
+    height: 20vh;
   }
 `;

@@ -6,6 +6,14 @@ export const ProductsLayout1 = styled.div`
   grid-template-columns: 0.8fr 0.8fr;
   grid-gap: 10px;
   height: 600px;
+
+  @media (max-width: 396px) {
+    grid-template-columns: 1fr;
+    grid-gap: 1px;
+    height: auto;
+    align-items: center;
+    align-content: center;
+  }
 `;
 
 export const Box1 = styled.div`
@@ -24,11 +32,19 @@ export const ProductsLayout2 = styled.div`
   grid-gap: 10px;
   height: 100%;
   /* margin-top: 300px; */
+  @media (max-width: 396px) {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    height: auto;
+  }
 `;
 
 export const Box3 = styled.div`
   background-color: none;
   /* background-color: yellow; */
+  @media (max-width: 396px) {
+    margin-left: 20px;
+  }
 `;
 
 export const Box4 = styled.div`
@@ -36,6 +52,9 @@ export const Box4 = styled.div`
   /* background-color: green; */
   /* margin: 20px;
   margin-top: 45px; */
+  @media (max-width: 396px) {
+    margin-left: 20px;
+  }
 `;
 
 export const TitleBox = styled.div`
@@ -52,6 +71,19 @@ export const TitleBox = styled.div`
   font-weight: 900;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
+  @media (max-width: 767px) {
+    /* height: auto; */
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+    padding-top: 7px;
+    margin-left: 20px;
+  }
+  @media (max-width: 396px) {
+    font-size: smaller;
+    padding-top: -20px;
+    width: 80vw;
+  }
 `;
 export const SubTitleBox = styled.div`
   box-shadow: 2px 11px 14px -4px #fafbff;
@@ -66,6 +98,16 @@ export const SubTitleBox = styled.div`
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 10px;
+  @media (max-width: 767px) {
+    /* height: auto; */
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+    padding-top: 7px;
+  }
+  @media (max-width: 396px) {
+    font-size: smaller;
+  }
 `;
 
 export const SubjectBox = styled.div`
@@ -74,11 +116,21 @@ export const SubjectBox = styled.div`
   font-size: large;
   font-weight: 900;
   margin-left: 19px;
+  @media (max-width: 396px) {
+    font-size: xx-small;
+    width: 80vw;
+    text-align: center;
+    margin-left: 0px;
+  }
 `;
 
 export const sendDataBtnWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  @media (max-width: 396px) {
+    bottom: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 export const ThumbnailBox = styled.div`
@@ -101,6 +153,9 @@ export const ThumbnailBox = styled.div`
   justify-content: center;
 
   overflow: hidden;
+  @media (max-width: 396px) {
+    margin-left: 0px;
+  }
 `;
 
 export const AlertMsgBox = styled.span`
@@ -111,4 +166,7 @@ export const AlertMsgBox = styled.span`
   font-weight: 500;
   color: #4681ad;
   border-bottom: 1px solid #4681ad;
+  @media (max-width: 396px) {
+    font-size: smaller;
+  }
 `;

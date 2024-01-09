@@ -18,7 +18,7 @@ export const InnerCardTitleBox = styled.div`
   margin-bottom: 30px;
   margin-left: 25px;
 
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     font-size: smaller;
     margin-top: -10px;
     border: none;
@@ -37,7 +37,9 @@ export const BtnWrapper = styled.div`
   justify-content: space-between;
   margin-top: 20px;
   padding: 5px 30px 5px 30px;
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     margin-left: -34px;
+    margin-top: -5px;
+    padding: 5px 30px 5px 30px;
   }
 `;

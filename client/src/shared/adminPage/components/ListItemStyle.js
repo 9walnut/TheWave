@@ -11,9 +11,9 @@ export const ListBox = styled.div`
     align-items: center;
     justify-content: center;
     margin: 0;
-    width: 81px;
+    width: 65px;
   }
-  @media (max-width: 390px) {
+  @media (max-width: 396px) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
