@@ -1,5 +1,5 @@
 const { db } = require("../models/index");
-const { comparePw } = require("../middleware/pw");
+const { comparePw, hashedPwWithSalt } = require("../middleware/pw");
 const { verifyToken } = require("../middleware/jwt");
 
 // 회원 마이페이지(마이페이지 렌더 시 바로 주문 내역 노출)
@@ -177,10 +177,9 @@ exports.editInfoPw = async (req, res) => {
 
 // 회원 정보 수정
 exports.editInfo = async (req, res) => {
+  const accessToken = req.headers["authorization"];
+  const tokenCheck = await verifyToken(accessToken);
   try {
-    const accessToken = req.headers["authorization"];
-    const tokenCheck = await verifyToken(accessToken);
-
     const editInfo = await db.users.update(req.body, {
       where: { userNumber: tokenCheck.userData.userNumber },
     });
@@ -195,6 +194,29 @@ exports.editInfo = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("회원 정보 수정 오류");
+  }
+};
+
+// 회원 비밀번호 수정
+exports.editPw = async (req, res) => {
+  const accessToken = req.headers["authorization"];
+  const { newPassword } = req.body;
+  const tokenCheck = await verifyToken(accessToken);
+
+  try {
+    const { userPw, salt } = await hashedPwWithSalt(newPassword);
+    const editPw = await db.users.update(
+      {
+        password: userPw,
+        passwordSalt: salt,
+      },
+      { where: { userNumber: tokenCheck.userData.userNumber } }
+    );
+    console.log("editPw 결과", editPw);
+    res.send({ result: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("비밀번호 수정 오류");
   }
 };
 
