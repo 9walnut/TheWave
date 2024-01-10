@@ -28,6 +28,31 @@ async function generateAccessToken(loginUser) {
   }
 }
 
+// 간편 로그인 토큰 생성 함수
+async function generateAccessTokenSNS(loginUser) {
+  try {
+    const payload = {
+      userId: loginUser.userId,
+      userNumber: loginUser.userNumber,
+    };
+
+    const accessToken = jwt.sign(payload, secret, {
+      expiresIn: "30s",
+    });
+
+    const refreshToken = jwt.sign(payload, secret, {
+      expiresIn: "14d",
+    });
+
+    await redisClient.set(loginUser.userId, refreshToken); //userId를 키로 refresh 토큰 저장
+    await redisClient.expire(loginUser.userId, 1209600); // 14일 후 데이터 삭제
+
+    return { accessToken: accessToken };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // 토큰 검증 및 디코딩
 const verifyToken = async (accessToken) => {
   // 토큰이 없는 경우
@@ -104,4 +129,9 @@ const deleteToken = async (accessToken) => {
   }
 };
 
-module.exports = { generateAccessToken, verifyToken, deleteToken };
+module.exports = {
+  generateAccessToken,
+  verifyToken,
+  deleteToken,
+  generateAccessTokenSNS,
+};
