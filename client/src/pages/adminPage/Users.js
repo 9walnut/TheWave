@@ -55,10 +55,6 @@ function Users() {
     return b.userNumber - a.userNumber;
   };
 
-  // const descendingData = (a, b) => {
-  //   return b.userId.localeCompare(a.userId);
-  // };
-
   //---axios get
   const fetchData = async () => {
     try {
