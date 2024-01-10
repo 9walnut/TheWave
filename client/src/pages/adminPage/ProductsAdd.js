@@ -139,100 +139,104 @@ function ProductsAdd() {
 
   return (
     <>
-      <Card>
-        <S.TitleBox>상품 등록하기</S.TitleBox>
-        <S.SubTitleBox>상품 정보</S.SubTitleBox>
-        <S.ProductsLayout1>
-          <S.Box1>
-            {" "}
-            <AdminInput
-              type="text"
-              placeholder="상품명을 입력해주세요."
-              value={productName}
-              onChange={setProductName}
-              required
-              minlength="4"
-              onFocus={validateProductName}
-            >
-              상품명 <S.AlertMsgBox>{alertProductName}</S.AlertMsgBox>
-            </AdminInput>
-            <AdminTextarea
-              type="text"
-              placeholder="상품 관련 상세 설명을 입력해주세요."
-              value={productInfo}
-              onChange={setProductInfo}
-              onFocus={validateTextarea}
-            >
-              상품 상세 설명<S.AlertMsgBox>{alertTextarea}</S.AlertMsgBox>
-            </AdminTextarea>
-          </S.Box1>
-          <S.Box2>
-            <AdminInput
-              type="number"
-              placeholder="상품 가격을 입력해주세요."
-              value={productPrice}
-              onChange={setProductPrice}
-              required
-              onFocus={validateProductPrice}
-            >
-              가격<S.AlertMsgBox>{alertProductPrice}</S.AlertMsgBox>
-            </AdminInput>
+      <S.PageWrapper>
+        <Card>
+          <S.TitleBox>상품 등록하기</S.TitleBox>
+          <S.SubTitleBox>상품 정보</S.SubTitleBox>
+          <S.ProductsLayout1>
+            <S.Box1>
+              {" "}
+              <AdminInput
+                type="text"
+                placeholder="상품명을 입력해주세요."
+                value={productName}
+                onChange={setProductName}
+                required
+                minlength="4"
+                onFocus={validateProductName}
+              >
+                상품명 <S.AlertMsgBox>{alertProductName}</S.AlertMsgBox>
+              </AdminInput>
+              <AdminTextarea
+                type="text"
+                placeholder="상품 관련 상세 설명을 입력해주세요."
+                value={productInfo}
+                onChange={setProductInfo}
+                onFocus={validateTextarea}
+              >
+                상품 상세 설명<S.AlertMsgBox>{alertTextarea}</S.AlertMsgBox>
+              </AdminTextarea>
+            </S.Box1>
+            <S.Box2>
+              <AdminInput
+                type="number"
+                placeholder="상품 가격을 입력해주세요."
+                value={productPrice}
+                onChange={setProductPrice}
+                required
+                onFocus={validateProductPrice}
+              >
+                가격<S.AlertMsgBox>{alertProductPrice}</S.AlertMsgBox>
+              </AdminInput>
 
-            <AdminSelect title="상품 카테고리">
-              <SelectBoxCategory
-                value={categoryName}
-                onChange={setCategoryName}
-              />
-            </AdminSelect>
+              <AdminSelect title="상품 카테고리">
+                <SelectBoxCategory
+                  value={categoryName}
+                  onChange={setCategoryName}
+                />
+              </AdminSelect>
 
-            <AdminSelect title="상품 상태">
-              <SelectBoxProduct
-                value={productStatus}
-                onChange={setProductStatus}
-              />
-            </AdminSelect>
-            {/* 실패-------------------- */}
-            {/* <AdminSelect title="상품 옵션 - 사이즈">
+              <AdminSelect title="상품 상태">
+                <SelectBoxProduct
+                  value={productStatus}
+                  onChange={setProductStatus}
+                />
+              </AdminSelect>
+              {/* 실패-------------------- */}
+              {/* <AdminSelect title="상품 옵션 - 사이즈">
               <AdminOptionSize value={size} onChange={setSize} />
             </AdminSelect>        */}
-            {/* 실패-------------------- */}
-            <AdminSelect title="상품 옵션 - 사이즈">
-              <SelectBoxOptionSize value={size} onChange={setSize} />
-            </AdminSelect>
-            <AdminInput
-              type="text"
-              placeholder="상품컬러는 , 로 구분해주세요."
-              value={color}
-              onChange={setColor}
-              onFocus={validateColor}
-            >
-              상품 옵션 - 컬러 <S.AlertMsgBox>{alertColor}</S.AlertMsgBox>
-            </AdminInput>
-          </S.Box2>
-        </S.ProductsLayout1>
-        <S.SubTitleBox>이미지 정보</S.SubTitleBox>
-        <S.ProductsLayout2>
-          <S.Box3>
-            <S.SubjectBox>
-              썸네일 등록 (".png", ".jpg", ".jpeg", ".bmp")
-            </S.SubjectBox>
+              {/* 실패-------------------- */}
+              <AdminSelect title="상품 옵션 - 사이즈">
+                <SelectBoxOptionSize value={size} onChange={setSize} />
+              </AdminSelect>
+              <AdminInput
+                type="text"
+                placeholder="상품컬러는 , 로 구분해주세요."
+                value={color}
+                onChange={setColor}
+                onFocus={validateColor}
+              >
+                상품 옵션 - 컬러 <S.AlertMsgBox>{alertColor}</S.AlertMsgBox>
+              </AdminInput>
+            </S.Box2>
+          </S.ProductsLayout1>
+          <S.SubTitleBox>이미지 정보</S.SubTitleBox>
+          <S.ProductsLayout2>
+            <S.Box3>
+              <S.SubjectBox>
+                썸네일 등록 (".png", ".jpg", ".jpeg", ".bmp")
+              </S.SubjectBox>
 
-            <UploadThumbnail onFileChange={getImageDataThumbnail} />
-          </S.Box3>
-          <S.Box4>
-            <S.SubjectBox>
-              상세 이미지 등록 (".png", ".jpg", ".jpeg", ".bmp")
-            </S.SubjectBox>
+              <UploadThumbnail onFileChange={getImageDataThumbnail} />
+            </S.Box3>
+            <S.Box4>
+              <S.SubjectBox>
+                상세 이미지 등록 (".png", ".jpg", ".jpeg", ".bmp")
+              </S.SubjectBox>
 
-            <UploadDetail onFileChange={getImageDataDetail} />
-          </S.Box4>
-        </S.ProductsLayout2>
-        <br />
-        <hr />
-        <S.SendDataBtnWrapper>
-          <AdminButtonBlack onClick={sendData}>상품 등록하기</AdminButtonBlack>
-        </S.SendDataBtnWrapper>
-      </Card>
+              <UploadDetail onFileChange={getImageDataDetail} />
+            </S.Box4>
+          </S.ProductsLayout2>
+          <br />
+          <hr />
+          <S.SendDataBtnWrapper>
+            <AdminButtonBlack onClick={sendData}>
+              상품 등록하기
+            </AdminButtonBlack>
+          </S.SendDataBtnWrapper>
+        </Card>
+      </S.PageWrapper>
     </>
   );
 }

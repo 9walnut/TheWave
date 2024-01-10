@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminButtonGrey from "../../../components/adminPage/AdminButtonGrey";
-import * as S from "./UploadImageBox";
+import * as S from "./UploadImageBoxStyle";
 
 const UploadDetailEdit = ({ onFileChange, productId }) => {
   const [selectedFiles, setSelectedFiles] = useState(null);

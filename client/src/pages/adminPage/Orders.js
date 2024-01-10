@@ -16,27 +16,27 @@ const header = [
   {
     text: "NO.",
     value: "orderId",
-    width: 100,
+    width: 50,
   },
   {
     text: "주문자 (고객명)",
     value: "userName",
-    width: 180,
+    width: 110,
   },
   {
     text: "핸드폰 번호",
     value: "phoneNumber",
-    width: 250,
+    width: 150,
   },
   {
     text: "주소",
     value: "address",
-    width: 430,
+    width: 300,
   },
   {
     text: "주문 날짜",
     value: "orderDate",
-    width: 230,
+    width: 150,
   },
   {
     text: "주문 상태",

@@ -9,6 +9,7 @@ export const PageWrapper = styled.div`
     width: 95vw;
     margin-bottom: 60px;
     /* align-items: center; */
+    /* position: absolute; */
   }
 `;
 
@@ -90,7 +91,7 @@ export const SubTitleWideBox = styled.div`
   /* background-color: black; */
 
   margin-top: 10px;
-  text-align: center;
+  text-align: left;
   padding-top: 5px;
   color: #6e7f8d;
   font-size: large;
@@ -124,14 +125,28 @@ export const ProductsLayout1 = styled.div`
     /* justify-content: center; */
     align-content: center;
     /* margin: 0 auto; */
+    grid-template-columns: 1fr;
   }
 `;
-// export const ProductsLayout2 = styled.div`
-//   background-color: violet;
-//   height: 30vh;
-//   width: 25vw;
+export const ProductsLayout2 = styled.div`
+  /* background-color: violet; */
+  display: grid;
+  grid-template-columns: 0.8fr 0.8fr;
+  grid-gap: 3px;
+  /* height: 600px; */
+  height: auto;
 
-// `;
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    align-items: center;
+    /* justify-content: center; */
+    align-content: center;
+    /* margin: 0 auto; */
+    grid-template-columns: 1fr;
+  }
+`;
 export const Box1 = styled.div`
   /* background-color: red; */
   width: 36vw;
@@ -142,12 +157,14 @@ export const Box1 = styled.div`
     align-items: center;
     width: 85vw;
     margin-top: 10px;
-    height: 50vh;
+    /* height: 50vh; */
+    height: auto;
   }
   @media (max-width: 396px) {
     width: 80vw;
-    height: 80vh;
-    margin-top: -20px;
+    /* height: 80vh; */
+    height: auto;
+    /* margin-top: -20px; */
   }
 `;
 
@@ -155,15 +172,18 @@ export const Box2 = styled.div`
   /* background-color: blue; */
   background-color: none;
   width: 36vw;
-  height: 40vh;
+  /* height: 40vh; */
+  height: auto;
   @media (max-width: 767px) {
     width: 89vw;
-    margin-top: 25px;
+    margin-top: 35px;
+    height: auto;
   }
   @media (max-width: 396px) {
     width: 90vw;
-    margin-top: 50px;
-    height: 50vh;
+    /* margin-top: 50px; */
+    /* height: 50vh; */
+    height: auto;
   }
 `;
 
@@ -177,29 +197,35 @@ export const Box3 = styled.div`
   align-items: center;
   justify-content: center;
   align-content: center;
+  margin-left: 10%;
 
   @media (max-width: 767px) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 85vw;
-    margin-top: 620px;
-    height: 50vh;
+    /* margin-top: 620px; */
+    /* height: 50vh; */
+    height: auto;
+    margin-left: 0px;
   }
   @media (max-width: 396px) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 80vw;
-    height: 50vh;
+    /* height: 50vh; */
+    height: auto;
     margin-left: 14px;
+    margin: auto;
   }
 `;
 
 export const ItemBox = styled.div`
   /* width: 810px; */
   width: 35vw;
-  height: 4vh;
+  /* height: 4vh; */
+  height: auto;
   /* height: 60px; */
   flex-shrink: 0;
   border-radius: 13px;
@@ -213,7 +239,8 @@ export const ItemBox = styled.div`
   padding-top: 23px;
   @media (max-width: 767px) {
     width: 87vw;
-    height: 4vh;
+    /* height: 4vh; */
+    height: auto;
     padding: 10px;
     margin-bottom: 5px;
     margin-left: 5px;
