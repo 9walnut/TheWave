@@ -20,7 +20,7 @@ export const CardBox = styled.div`
     width: 95vw;
     display: flex;
     /* flex-direction: column; */
-    justify-content: space-between;
+    /* justify-content: space-between; */
     > div:not(:last-child) {
       margin-bottom: 35px;
     }
@@ -34,7 +34,8 @@ export const CardBox = styled.div`
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    /* justify-content: center; */
 
     > div:not(:last-child) {
       margin-bottom: 15px;

@@ -66,7 +66,7 @@ export const TableTr = styled.tr`
 `;
 
 export const TableTd = styled.td`
-  width: 100px;
+  width: 80px;
   padding: 20px;
   white-space: nowrap;
   @media (max-width: 767px) {
@@ -79,6 +79,9 @@ export const TableTd = styled.td`
     font-size: smaller;
     width: 70px;
     padding: 2px;
+
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
   }
 `;
 

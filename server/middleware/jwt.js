@@ -12,7 +12,7 @@ async function generateAccessToken(loginUser) {
     };
 
     const accessToken = jwt.sign(payload, secret, {
-      expiresIn: "30s",
+      expiresIn: "1d",
     });
 
     const refreshToken = jwt.sign(payload, secret, {
@@ -37,7 +37,7 @@ async function generateAccessTokenSNS(loginUser) {
     };
 
     const accessToken = jwt.sign(payload, secret, {
-      expiresIn: "30s",
+      expiresIn: "1d",
     });
 
     const refreshToken = jwt.sign(payload, secret, {
@@ -50,6 +50,7 @@ async function generateAccessTokenSNS(loginUser) {
     return { accessToken: accessToken };
   } catch (error) {
     console.error(error);
+    return { error: "accessToken 생성 중 오류 발생함" };
   }
 }
 

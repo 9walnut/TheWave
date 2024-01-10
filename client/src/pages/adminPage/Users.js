@@ -14,37 +14,37 @@ const header = [
   {
     text: "NO.",
     value: "userNumber",
-    width: 100,
+    width: 50,
   },
   {
     text: "아이디",
     value: "userId",
-    width: 230,
+    width: 130,
   },
   {
     text: "이름",
     value: "userName",
-    width: 180,
+    width: 110,
   },
   {
     text: "핸드폰 번호",
     value: "phoneNumber",
-    width: 250,
+    width: 150,
   },
   {
     text: "생년월일",
     value: "birthday",
-    width: 230,
+    width: 150,
   },
   {
     text: "성별",
     value: "gender",
-    width: 100,
+    width: 50,
   },
   {
     text: "주소",
     value: "address",
-    width: 430,
+    width: 300,
   },
 ];
 
@@ -54,10 +54,6 @@ function Users() {
   const descendingData = (a, b) => {
     return b.userNumber - a.userNumber;
   };
-
-  // const descendingData = (a, b) => {
-  //   return b.userId.localeCompare(a.userId);
-  // };
 
   //---axios get
   const fetchData = async () => {

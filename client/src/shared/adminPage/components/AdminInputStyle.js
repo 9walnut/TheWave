@@ -10,10 +10,18 @@ export const InputBox = styled.div`
   padding: 12px;
   margin-bottom: 10px;
   margin-left: 5px;
+  @media (max-width: 767px) {
+    height: auto;
+    width: 85vw;
+    padding: 6px;
+    margin-bottom: 5px;
+    font-size: smaller;
+    /* text-align: center; */
+  }
   @media (max-width: 396px) {
     height: auto;
     width: 85vw;
-    padding: 1;
+    padding: 6px;
     margin-bottom: 4px;
     font-size: smaller;
     /* text-align: center; */
@@ -48,5 +56,8 @@ export const StyledInput = styled.input`
   @media (max-width: 396px) {
     font-size: smaller;
     height: 11px;
+    &::placeholder {
+      font-size: smaller;
+    }
   }
 `;

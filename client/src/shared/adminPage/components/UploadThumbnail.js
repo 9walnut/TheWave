@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminButtonGrey from "../../../components/adminPage/AdminButtonGrey";
-import * as S from "./UploadImageBox";
+import * as S from "./UploadImageBoxStyle";
 
 const UploadThumbnail = ({ onFileChange }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -82,12 +82,14 @@ const UploadThumbnail = ({ onFileChange }) => {
             </div>
           ) : (
             <>
+              {/* <S.DetailBox> */}
               <p>{fileBasicMessage}</p>
               <p>{fileSelectedMessage}</p>
+              {/* </S.DetailBox> */}
             </>
           )}
         </S.ThumbnailBox>
-        <div>
+        <S.ImageBtnWrapper>
           <div style={{ position: "relative" }}>
             <S.FileSelectBtn>파일 선택</S.FileSelectBtn>
 
@@ -99,7 +101,7 @@ const UploadThumbnail = ({ onFileChange }) => {
           <AdminButtonGrey onClick={handleUpload}>
             썸네일 업로드
           </AdminButtonGrey>
-        </div>
+        </S.ImageBtnWrapper>
       </S.ImageUploadWrapper>
     </>
   );

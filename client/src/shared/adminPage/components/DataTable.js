@@ -68,6 +68,13 @@ function DataTable({
 
   const headerList = headers.map((header) => header.value);
 
+  const etxText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
+
   return (
     <>
       <S.TableContainer>
@@ -134,7 +141,8 @@ function DataTable({
                         onOrderIdValue={item.orderId}
                       />
                     ) : (
-                      item[value]
+                      // item[value]
+                      etxText(item[value], 40)
                     )}
                   </S.TableTd>
                 ))}
