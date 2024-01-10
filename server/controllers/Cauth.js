@@ -89,36 +89,64 @@ exports.loginUser = async (req, res) => {
 // 간편 로그인
 exports.loginSNS = async (req, res) => {
   try {
-    const { idToken } = req.body;
+    const { idToken, data } = req.body;
 
-    // 회원 정보 db 저장
-    const decoding = jwt.decode(idToken);
-    console.log("sns 토큰 디코딩 결과", decoding);
+    if (!idToken) {
+      const { userPw, salt } = await hashedPwWithSalt("data.profile.id");
+      const kakaoId = String(data.profile.id);
+      console.log("kakaoIdkakaoIdkakaoIdkakaoId", typeof kakaoId);
 
-    const { userPw, salt } = await hashedPwWithSalt(decoding.sub); // 암호화
+      const userInfo = await db.users.create({
+        userId: kakaoId,
+        password: userPw,
+        passwordSalt: salt,
+        userName: data.profile.displayName || "Unknown",
+        phoneNumber: data.profile.phoneNumber || "01099999999",
+        birthday: data.profile.birthday || "1900-01-01",
+        gender: data.profile.gender || "M",
+      });
 
-    const userInfo = await db.users.create({
-      userId: decoding.sub,
-      password: userPw,
-      passwordSalt: salt,
-      userName: decoding.name,
-      phoneNumber: decoding.phoneNumber || "01012345678",
-      birthday: decoding.birthday || "1999-01-01",
-      isAdmin: "N",
-      gender: decoding.gender || "M",
-    });
+      const userAddress = await db.address.create({
+        userNumber: userInfo.userNumber,
+        address: "전북 군산",
+      });
 
-    const userAddress = await db.address.create({
-      userNumber: userInfo.userNumber,
-      address: "전북 익산",
-    });
+      const { accessToken } = await generateAccessTokenSNS(userInfo);
+      console.log("accessToken", accessToken);
+      res.send({
+        result: true,
+        isAdmin: false,
+        accessToken: accessToken,
+      });
+    } else {
+      // 회원 정보 db 저장
+      const decoding = jwt.decode(idToken);
+      console.log("sns jwt 토큰 디코딩 결과", decoding);
+      const { userPw, salt } = await hashedPwWithSalt(decoding.sub);
 
-    const { accessToken } = await generateAccessTokenSNS(userInfo);
-    res.send({
-      result: true,
-      isAdmin: false,
-      accessToken: accessToken,
-    });
+      const userInfo = await db.users.create({
+        userId: decoding.sub,
+        password: userPw,
+        passwordSalt: salt,
+        userName: decoding.name,
+        phoneNumber: decoding.phoneNumber || "01012345678",
+        birthday: decoding.birthday || "1999-01-01",
+        isAdmin: "N",
+        gender: decoding.gender || "M",
+      });
+
+      const userAddress = await db.address.create({
+        userNumber: userInfo.userNumber,
+        address: "전북 익산",
+      });
+
+      const { accessToken } = await generateAccessTokenSNS(userInfo);
+      res.send({
+        result: true,
+        isAdmin: false,
+        accessToken: accessToken,
+      });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("간편 로그인 오류");
