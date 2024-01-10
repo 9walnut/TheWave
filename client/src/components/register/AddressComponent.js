@@ -51,7 +51,7 @@ function AddressComponent({ getAddress, userAddress }) {
           }}
         />
       </Modal>
-
+      <br />
       <Button onClick={() => setModal(true)}>우편번호 찾기</Button>
 
       {/* 서버 요청 시 전달해야 하는 데이터 */}

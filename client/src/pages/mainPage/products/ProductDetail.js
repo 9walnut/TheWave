@@ -147,14 +147,18 @@ function ProductDetail() {
               <span className="miniProductName"> {product.productName}</span>
             </div>
             {/* 셀렉트박스 */}
+
             <div className="productName">{product.productName}</div>
-            <div>{product.productInfo}</div>
-            <div>
-              <span>가격 : </span>
-              <span>{product.productPrice}</span>
-            </div>
-            <div>
-              <select onChange={handleColor} value={color}>
+
+            <S.InfoProductBox>
+              <div>{product.productInfo}</div>
+              <div>
+                <span>가격: </span>
+                <span className="productPrice">{product.productPrice}</span>
+              </div>
+            </S.InfoProductBox>
+            <S.SelectBox>
+              <S.Select onChange={handleColor} value={color}>
                 {colorList.map((color) => {
                   return (
                     <option value={color} key={color}>
@@ -162,9 +166,9 @@ function ProductDetail() {
                     </option>
                   );
                 })}
-              </select>
+              </S.Select>
               {/*  */}
-              <select onChange={handleSize} value={size}>
+              <S.Select onChange={handleSize} value={size}>
                 {sizeList.map((size) => {
                   return (
                     <option value={size} key={size}>
@@ -172,25 +176,27 @@ function ProductDetail() {
                     </option>
                   );
                 })}
-              </select>
-            </div>
-            <S.ProductCountBox>
-              <button onClick={minusBtn}>
-                <img src="/assets/minus.svg" />
-              </button>
-              <div>{orderQuantity}</div>
-              <button onClick={plusBtn}>
-                <img src="/assets/plus.svg" />
-              </button>
-            </S.ProductCountBox>
-            <div>
+              </S.Select>
+            </S.SelectBox>
+            <S.CenterBox>
+              <S.ProductCountBox>
+                <button onClick={minusBtn}>
+                  <img src="/assets/minus.svg" />
+                </button>
+                <div>{orderQuantity}</div>
+                <button onClick={plusBtn}>
+                  <img src="/assets/plus.svg" />
+                </button>
+              </S.ProductCountBox>
+            </S.CenterBox>
+            <S.PaymentBox>
               <span>결제 금액: </span>
               <span>{displayValue}</span>
-            </div>
-            <button onClick={goPayment}>구매하기</button>
-            {/* <Button>구매하기</Button> */}
-            {/* <Button>장바구니</Button> */}
-            <button onClick={cartIn}>장바구니</button>
+            </S.PaymentBox>
+            <S.InfoButtonBox>
+              <S.InfoButton onClick={goPayment}>구매하기</S.InfoButton>
+              <S.InfoButton onClick={cartIn}>장바구니</S.InfoButton>
+            </S.InfoButtonBox>
           </S.ProductInfoBox>
         </S.ProductTopBox>
         {/* 상품 사진 ~ 내용 등 */}

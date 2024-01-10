@@ -21,15 +21,16 @@ exports.goPayment = async (req, res) => {
     });
     console.log("userInfo", userInfo);
 
-    const userAddress = await db.address.findOne({
+    const address = await db.address.findOne({
       where: { userNumber: userNumber },
       attributes: ["address"],
     });
+    const userAddress = address.address ? address.address.split("/") : [];
     console.log("userAddress", userAddress);
 
     const productInfo = await db.products.findOne({
       where: { productId: productId },
-      attributes: ["productName", "thumbnailUrl", "productPrice"],
+      attributes: ["productId", "productName", "thumbnailUrl", "productPrice"],
     });
     console.log("productInfo", productInfo);
 
@@ -53,7 +54,15 @@ exports.goPayment = async (req, res) => {
 exports.payment = async (req, res) => {
   // 주문서에서 작성한 정보
   // 여러 상품들에 대한 개별 데이터(color, size, orderQuantity)가 어떤 식으로 넘어올지...
-  const { userAddress, receiveName, deliveryRequest, productInfo } = req.body;
+  const {
+    userAddress,
+    receiveName,
+    deliveryRequest,
+    productInfo,
+    color,
+    size,
+    orderQuantity,
+  } = req.body;
   const accessToken = req.headers["authorization"];
 
   const t = await sequelize.transaction();
@@ -67,8 +76,9 @@ exports.payment = async (req, res) => {
     let payment;
     let productOut;
 
+    console.log("상품정보", productInfo);
     console.log("productInfo.length", productInfo.length);
-
+    console.log("주소임", userAddress);
     try {
       // 단일 상품 구매
       if (productInfo.length === 1) {
@@ -81,13 +91,13 @@ exports.payment = async (req, res) => {
           {
             userNumber,
             productId: productInfo[0].productId,
-            orderQuantity: productInfo[0].orderQuantity,
-            color: productInfo[0].productoption.color[0],
-            size: productInfo[0].productoption.size[0],
+            orderQuantity: orderQuantity,
+            color: color,
+            size: size,
             receiveName,
             address: userAddress,
             deliveryRequest,
-            totalPrice: product.productPrice * productInfo[0].orderQuantity,
+            totalPrice: product.productPrice * orderQuantity,
             orderDate: new Date(),
             changeDate: new Date(),
           },
