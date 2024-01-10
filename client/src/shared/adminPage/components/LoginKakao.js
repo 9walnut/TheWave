@@ -3,12 +3,12 @@ import { setUser } from "../../../redux/reducers/userSlice";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import KakaoLogin from "react-kakao-login";
+import React, { useEffect } from "react";
+import NaverLogin from "react-naver-login";
 import styled from "styled-components";
 import Bg from "../../../assets/img/kakaologin.png";
 
-const StyledKakaoLogin = styled.div`
+const StyledkakaoLogin = styled.div`
   background-image: url(${Bg});
   background-repeat: no-repeat;
   background-size: cover;

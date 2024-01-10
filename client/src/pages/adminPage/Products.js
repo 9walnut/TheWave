@@ -17,7 +17,7 @@ const header = [
   {
     text: "NO.",
     value: "productID",
-    width: 100,
+    width: 50,
   },
   {
     text: "상품명",
@@ -32,7 +32,7 @@ const header = [
   {
     text: "가격",
     value: "productPrice",
-    width: 230,
+    width: 150,
   },
   {
     text: "상태",

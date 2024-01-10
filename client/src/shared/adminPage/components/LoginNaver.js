@@ -1,44 +1,55 @@
-import * as S from "./LoginNaverStyle.js";
-import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../redux/reducers/userSlice";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import NaverLogin from "react-naver-login";
+import styled from "styled-components";
+import Bg from "../../../assets/img/naverlogin.png";
 
-const NAVER_ID = process.env.REACT_APP_NAVER_ID;
-const NAVER_URL = process.env.REACT_APP_NAVER_URL;
-export const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_ID}&state=STATE_STRING&redirect_uri=${NAVER_URL}`;
+const StyledNaverLogin = styled.div`
+  background-image: url(${Bg});
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 10px auto;
+  color: transparent;
+  width: 300px;
+  height: 60px;
+`;
 
 export default function LoginNaver() {
-  // const location = useLocation();
+  const dispatch = useDispatch();
+  const naverClientId = process.env.REACT_APP_NAVER_ID;
+  const naverOnSuccess = async (data) => {
+    console.log(data);
+    const idToken = data.response.access_token; // 엑세스 토큰 백엔드로 전달
 
-  // useEffect(() => {
-  //   const url = new URL(window.location.href);
-  //   const authorizationCode = url.searchParams.get("code");
+    // 서버에 사용자 정보 전달
+    const response = await axios.post("/api/snsLogin", { idToken });
 
-  //   const fetchToken = async () => {
-  //     if (authorizationCode) {
-  //       try {
-  //         const res = await axios.get(`${NAVER_URL}?code=${authorizationCode}`);
+    // 서버로부터 응답 받기
+    const result = response.data;
+    console.log("result", result);
 
-  //         console.log(res); // 응답 확인
-  //         // 서버로부터 받은 토큰을 저장
-  //         localStorage.setItem("accessToken", res.data.accessToken);
-  //         const headers = {
-  //           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //         };
-
-  //         console.log(headers);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //   };
-
-  //   fetchToken();
-  // }, [location]);
+    // 응답 처리 로직
+    if (result.success) {
+      // 사용자 정보를 리덕스 스토어에 저장
+      dispatch(setUser(result.user));
+    } else {
+      // 로그인 실패 처리
+      console.error("Login failed:", result.message);
+    }
+  };
+  const naverOnFailure = (error) => {
+    console.log(error);
+  };
 
   return (
-    <>
-      <S.LoginNaverStyle></S.LoginNaverStyle>
-    </>
+    <NaverLogin
+      clientId={naverClientId}
+      callbackUrl={process.env.REACT_APP_NAVER_CALLBACK_URL}
+      onSuccess={naverOnSuccess}
+      onFailure={naverOnFailure}
+      render={({ onClick }) => <StyledNaverLogin onClick={onClick} />}
+    />
   );
 }
