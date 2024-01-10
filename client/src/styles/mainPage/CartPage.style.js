@@ -1,6 +1,17 @@
 import styled from "styled-components";
 
-export const OrderListLayout = styled.div`
+export const CartTitle = styled.h1`
+  font-size: 30px;
+`;
+
+export const CheckBox = styled.div`
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+`;
+
+// --------------------------------------------
+
+export const CartListLayout = styled.div`
   display: flex;
   height: 1400px;
   width: 100%;
@@ -11,7 +22,7 @@ export const OrderListLayout = styled.div`
   }
 `;
 
-export const OrderLeftBox = styled.div`
+export const CartLeftBox = styled.div`
   height: 100%;
   width: 60%;
   padding: 2em;
@@ -22,7 +33,7 @@ export const OrderLeftBox = styled.div`
   }
 `;
 
-export const OrderRightBox = styled.div`
+export const CartRightBox = styled.div`
   max-width: 400px;
   height: 100%;
   width: 40%;
@@ -33,12 +44,12 @@ export const OrderRightBox = styled.div`
     border-right: 1px solid #ddd;
   }
 `;
-export const OrderListTitle = styled.h1`
+export const CartListTitle = styled.h1`
   font-size: 24px;
   width: 100%;
 `;
 
-export const OrderBox = styled.div`
+export const CartBox = styled.div`
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   font-weight: 700;

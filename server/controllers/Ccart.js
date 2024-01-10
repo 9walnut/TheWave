@@ -111,7 +111,7 @@ exports.payCart = async (req, res) => {
       res.json({
         userInfo,
         userAddress,
-        // productInfo,
+        productInfo,
         cartQuantity,
         productInfo,
         color,

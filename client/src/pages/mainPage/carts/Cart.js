@@ -1,4 +1,4 @@
-import * as S from "../../../styles/mainPage/CartPage";
+import * as S from "../../../styles/mainPage/CartPage.style";
 import CartProduct from "../../../components/mainPage/CartProduct";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -46,7 +46,7 @@ function Cart() {
       <div>
         <ul>
           {cartItem.map((product) => {
-            return <CartProduct product={product} />;
+            return <CartProduct key={product.cartId} product={product} />;
           })}
         </ul>
       </div>

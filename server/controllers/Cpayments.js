@@ -25,6 +25,7 @@ exports.goPayment = async (req, res) => {
       where: { userNumber: userNumber },
       attributes: ["address"],
     });
+
     const userAddress = address.address ? address.address.split("/") : [];
     console.log("userAddress", userAddress);
 

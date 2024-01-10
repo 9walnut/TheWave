@@ -52,12 +52,6 @@ function ProductDetail() {
     setColor(colorList[0]);
   }, [sizeList, colorList]);
 
-  // useEffect(() => {
-  //   console.log("플덕입니다", product);
-  //   setSize(product.productOption.size);
-  //   setColor(product.productOption.color);
-  // }, [product]);
-
   const plusBtn = () => {
     SetOrderQuantity(orderQuantity + 1);
     setValue(value + product.productPrice);
@@ -74,7 +68,7 @@ function ProductDetail() {
       const headers = {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       };
-      const data = { cartQuantity: orderQuantity };
+      const data = { cartQuantity: orderQuantity, color: color, size: size };
       const res = await axios.post(`/api/product/${productId}`, data, {
         headers,
       });
