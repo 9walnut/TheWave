@@ -37,6 +37,7 @@ function WishList() {
     }
   };
 
+  // 불가능
   const addToCart = async (productId) => {
     try {
       const headers = getAccessToken();
@@ -73,9 +74,9 @@ function WishList() {
                 <button onClick={() => removeWishList(product.productId)}>
                   삭제
                 </button>
-                <button onClick={() => addToCart(product.productId)}>
+                {/* <button onClick={() => addToCart(product.productId)}>
                   장바구니
-                </button>
+                </button> */}
               </div>
             </S.CardItemBox>
           );

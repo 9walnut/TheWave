@@ -9,12 +9,12 @@ function ModifyPw() {
   const [checkPassword, setCheckPassword] = useState("");
   const [checkResult, setCheckResult] = useState(false);
   const [alertText, setAlertText] = useState("");
-  const [alertText2, setAlertText2] = useState("");
+  const [newAlertText, setNewAlertText] = useState("");
 
   useEffect(() => {
     validatePassword();
-    validateNewPassword();
-  }, [password, newPassword]);
+    validateCheckPassword();
+  }, [password, newPassword, checkPassword]);
 
   const validatePassword = () => {
     if (password.length == 0) {
@@ -24,11 +24,13 @@ function ModifyPw() {
     }
   };
 
-  const validateNewPassword = () => {
-    if (newPassword.length == 0) {
-      setAlertText2("비밀번호를 입력해주세요");
-    } else {
-      setAlertText2("");
+  const validateCheckPassword = () => {
+    if (newPassword == "" || checkPassword == "") {
+      setNewAlertText("비밀번호를 입력해주세요");
+    } else if (newPassword === checkPassword) {
+      setNewAlertText("비밀번호가 일치합니다");
+    } else if (!(newPassword === checkPassword)) {
+      setNewAlertText("비밀번호가 일치하지 않습니다");
     }
   };
 
@@ -81,8 +83,6 @@ function ModifyPw() {
       } catch (error) {
         console.log(error);
       }
-    } else {
-      setAlertText2("비밀번호가 일치하지 않습니다.");
     }
   };
 
@@ -137,7 +137,7 @@ function ModifyPw() {
                 placeholder="비밀번호 확인"
               />
               <br />
-              <div>{alertText2}</div>
+              <div>{newAlertText}</div>
             </InputWrapper>
             <Button type="button" onClick={modifyPw}>
               확인

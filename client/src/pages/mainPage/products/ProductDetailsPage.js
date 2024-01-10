@@ -9,9 +9,11 @@ function ProductDetailsPage() {
   return (
     <>
       <Navbar />
-      <S.ProductLayout>
-        <ProductDetail />
-      </S.ProductLayout>
+      <section>
+        <S.ProductLayout>
+          <ProductDetail />
+        </S.ProductLayout>
+      </section>
       <Footer />
     </>
   );

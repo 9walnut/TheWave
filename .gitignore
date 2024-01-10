@@ -8,3 +8,4 @@ cert.key
 .env.development
 client/.env.development
 server/app.js
+server/app.js

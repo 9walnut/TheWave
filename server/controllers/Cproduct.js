@@ -59,7 +59,7 @@ exports.wish = async (req, res) => {
 
 // '장바구니 담기' 클릭
 exports.cartIn = async (req, res) => {
-  const { cartQuantity } = req.body;
+  const { cartQuantity, color, size } = req.body;
   const productId = req.params.productId;
   const accessToken = req.headers["authorization"];
 
@@ -69,7 +69,6 @@ exports.cartIn = async (req, res) => {
     } else {
       const tokenCheck = await verifyToken(accessToken);
       const userNumber = tokenCheck.userData.userNumber;
-
       // 이미 장바구니에 담긴 상품 있는지 확인
       const sameProduct = await db.carts.findOne({
         where: { userNumber: userNumber, productId: productId },
@@ -91,6 +90,8 @@ exports.cartIn = async (req, res) => {
           productId: productId,
           userNumber: userNumber,
           cartQuantity: cartQuantity,
+          color: color,
+          size: size,
           isChecked: "0",
         });
         res.json({ result: true, cart: cartIn });

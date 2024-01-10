@@ -56,6 +56,8 @@
 		`userNumber`	INT	NOT NULL,
 		`productId`	INT	NOT NULL,
 		`cartQuantity`	INT NOT NULL,
+	  `color`	VARCHAR(50) NOT NULL,
+	  `size`	VARCHAR(50)	NOT NULL, 
 		`isChecked`	INT	NOT NULL,
 		`isDeleted` BOOLEAN DEFAULT FALSE NOT NULL,
 		foreign key (userNumber) references users (userNumber) ON DELETE CASCADE,

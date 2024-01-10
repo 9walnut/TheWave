@@ -63,7 +63,6 @@ function MypageInfo() {
   const getAddress = (addressData) => {
     const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
     setAddress(newAddress);
-    // return newAddress;
   };
   // const getUserInfo = async () => {
   //   try {

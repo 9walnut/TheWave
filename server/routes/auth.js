@@ -12,22 +12,25 @@ router.get("/login", controller.loginPage);
 // '로그인' 버튼 클릭 시
 router.post("/login", controller.loginUser);
 
-// 구글 로그인
-router.get(
-  "/login/google",
-  passport.authenticate("google", { scope: ["profile"] })
-);
+// 간편 로그인
+router.post("/snsLogin", controller.loginSNS);
 
-// 구글 로그인 콜백
-router.get(
-  "/login/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "http://localhost:3000/login",
-  }),
-  (req, res) => {
-    res.redirect("http://localhost:3000");
-  }
-);
+// // 구글 로그인
+// router.get(
+//   "/login/google",
+//   passport.authenticate("google", { scope: ["profile"] })
+// );
+
+// // 구글 로그인 콜백
+// router.get(
+//   "/login/google/callback",
+//   passport.authenticate("google", {
+//     failureRedirect: "http://localhost:3000/login",
+//   }),
+//   (req, res) => {
+//     res.redirect(`http://localhost:3000`);
+//   }
+// );
 
 // 카카오 로그인
 router.get("/login/kakao", passport.authenticate("kakao"));
