@@ -6,7 +6,7 @@ function CategoryPage() {
   return (
     <>
       <Navbar />
-      <section>
+      <section className="category">
         <BestProducts />
       </section>
       <Footer />

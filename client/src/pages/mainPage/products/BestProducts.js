@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../MainPage.css";
-import * as S from "../../../styles/mainPage/ProductCard.style";
+import * as S from "../../../styles/mainPage/CategoryProducts.style";
 import axios from "axios";
 
 function BestProducts() {
@@ -22,25 +22,27 @@ function BestProducts() {
   }, []);
 
   return (
-    <S.ProductContentBox>
-      <div>Best Products</div>
-      {products.map((product) => (
-        <S.CardItemBox key={product.productId}>
-          <Link to={`/products/${product.productId}`}>
-            <div>
-              <img src={product.thumbnailUrl} alt={product.productName} />
-            </div>
-            <div>
-              <ul>
-                <li>{product.productName}</li>
-                <li>{product.productInfo}</li>
-                <li>{product.productPrice}원</li>
-              </ul>
-            </div>
-          </Link>
-        </S.CardItemBox>
-      ))}
-    </S.ProductContentBox>
+    <>
+      <S.CategoryTitle>Best Products</S.CategoryTitle>
+      <S.ProductContentBox>
+        {products.map((product) => (
+          <S.CardItemBox key={product.productId}>
+            <Link to={`/products/${product.productId}`}>
+              <div>
+                <img src={product.thumbnailUrl} alt={product.productName} />
+              </div>
+              <div>
+                <ul>
+                  <li>{product.productName}</li>
+                  <li>{product.productInfo}</li>
+                  <li>{product.productPrice}원</li>
+                </ul>
+              </div>
+            </Link>
+          </S.CardItemBox>
+        ))}
+      </S.ProductContentBox>
+    </>
   );
 }
 
