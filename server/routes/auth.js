@@ -33,19 +33,19 @@ router.post("/snsLogin", controller.loginSNS);
 // );
 
 // 카카오 로그인
-router.get("/login/kakao", passport.authenticate("kakao"));
+// router.get("/login/kakao", passport.authenticate("kakao"));
 
-// 카카오 로그인 콜백
-router.get(
-  "/login/kakao/callback",
-  passport.authenticate("kakao", {
-    failureRedirect: "http://localhost:3000/login", // 로그인 실패 시 리다이렉션 주소
-  }),
-  (req, res) => {
-    // 로그인 성공 시 리다이렉션 주소
-    res.redirect("http://localhost:3000");
-  }
-);
+// // 카카오 로그인 콜백
+// router.get(
+//   "/login/kakao/callback",
+//   passport.authenticate("kakao", {
+//     failureRedirect: "http://localhost:3000/login", // 로그인 실패 시 리다이렉션 주소
+//   }),
+//   (req, res) => {
+//     // 로그인 성공 시 리다이렉션 주소
+//     res.redirect("http://localhost:3000");
+//   }
+// );
 
 // 네이버 로그인
 router.get("/login/naver", passport.authenticate("naver", { session: false }));

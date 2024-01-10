@@ -8,7 +8,13 @@ import { setUser } from "../../../redux/reducers/userSlice";
 import styled from "styled-components";
 import Bg from "../../../assets/img/googlelogin.png";
 
-const StyledGoogleLogin = styled.div`
+const StyledContainer = styled.div`
+  position: relative;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
   background-image: url(${Bg});
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,7 +22,15 @@ const StyledGoogleLogin = styled.div`
   color: transparent;
   width: 300px;
   height: 60px;
+  z-index: 1000;
   cursor: pointer;
+`;
+
+const GoogleLoginWrapper = styled.div`
+  position: relative;
+  z-index: 100;
+  bottom: 0;
+  opacity: 0;
 `;
 
 export default function LoginGoogle() {
@@ -54,18 +68,22 @@ export default function LoginGoogle() {
       console.error(err);
     }
   };
+
   return (
     <>
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        <GoogleLogin
-          onSuccess={(res) => {
-            googleOnSuccess(res);
-          }}
-          onFailure={(error) => {
-            console.log(error);
-          }}
-          render={({ onClick }) => <StyledGoogleLogin onClick={onClick} />}
-        />
+        <StyledContainer>
+          <GoogleLoginWrapper>
+            <GoogleLogin
+              onSuccess={(res) => {
+                googleOnSuccess(res);
+              }}
+              onFailure={(error) => {
+                console.log(error);
+              }}
+            />
+          </GoogleLoginWrapper>
+        </StyledContainer>
       </GoogleOAuthProvider>
     </>
   );

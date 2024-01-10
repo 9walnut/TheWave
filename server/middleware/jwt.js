@@ -50,6 +50,7 @@ async function generateAccessTokenSNS(loginUser) {
     return { accessToken: accessToken };
   } catch (error) {
     console.error(error);
+    return { error: "accessToken 생성 중 오류 발생함" };
   }
 }
 

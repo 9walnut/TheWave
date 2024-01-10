@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/reducers/userSlice";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import React, { useEffect } from "react";
 import NaverLogin from "react-naver-login";
@@ -14,29 +16,44 @@ const StyledkakaoLogin = styled.div`
   color: transparent;
   width: 300px;
   height: 60px;
+  cursor: pointer;
 `;
 
 export default function LoginKakao() {
   const dispatch = useDispatch();
-  const kakaoClientId = process.env.REACT_APP_KAKAO_ID;
+  const navigate = useNavigate();
+  const kakaoClientId = process.env.REACT_APP_KAKAO_JS;
   const kakaoOnSuccess = async (data) => {
-    console.log(data);
-    const idToken = data.response.access_token; // 엑세스 토큰 백엔드로 전달
+    console.log("카카오 로그인 성공 res", data);
+    // const idToken = data.response.access_token; // 엑세스 토큰 백엔드로 전달
 
     // 서버에 사용자 정보 전달
-    const response = await axios.post("/api/snsLogin", { idToken });
+    const response = await axios.post("/api/snsLogin", { data });
 
     // 서버로부터 응답 받기
-    const result = response.data;
-    console.log("result", result);
+    const result = response.data.result;
+    console.log("response.data", response.data);
 
+    const { isAdmin, accessToken } = response.data;
     // 응답 처리 로직
-    if (result.success) {
+    if (result === true) {
+      const user = { isAdmin, accessToken };
       // 사용자 정보를 리덕스 스토어에 저장
-      dispatch(setUser(result.user));
+      dispatch(setUser(user));
+
+      localStorage.setItem("accessToken", user.accessToken);
+      const headers = {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      };
+
+      if (isAdmin === "Y") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } else {
       // 로그인 실패 처리
-      console.error("Login failed:", result.message);
+      console.error("Login failed:");
     }
   };
   const kakaoOnFailure = (error) => {
@@ -44,12 +61,13 @@ export default function LoginKakao() {
   };
 
   return (
-    <NaverLogin
-      clientId={kakaoClientId}
-      callbackUrl={process.env.REACT_APP_kakao_CALLBACK_URL}
-      onSuccess={kakaoOnSuccess}
-      onFailure={kakaoOnFailure}
-      render={({ onClick }) => <StyledkakaoLogin onClick={onClick} />}
+    <KakaoLogin
+      token={kakaoClientId}
+      onSuccess={(res) => {
+        kakaoOnSuccess(res);
+      }}
+      onFail={kakaoOnFailure}
+      render={({ onClick }) => <StyledKakaoLogin onClick={onClick} />}
     />
   );
 }
