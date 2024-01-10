@@ -28,6 +28,17 @@ async function generateAccessToken(loginUser) {
   }
 }
 
+// 간편 로그인 토큰 생성 함수
+async function generateAccessTokenSNS(token) {
+  const decoding = jwt.decode(token)
+  try {
+    const payload = {
+      userId: decoding.
+    }
+    
+  }
+}
+
 // 토큰 검증 및 디코딩
 const verifyToken = async (accessToken) => {
   // 토큰이 없는 경우

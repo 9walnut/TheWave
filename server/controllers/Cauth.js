@@ -81,6 +81,13 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+// 간편 로그인
+exports.loginSNS = async (req, res) => {
+  try {
+    const { idToken } = req.body
+  }
+}
+
 // 로그아웃(access 토큰 받아 해당 사용자의 refresh 토큰 삭제)
 exports.logout = async (req, res) => {
   try {
