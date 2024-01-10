@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import * as S from "../../styles/mainPage/ProductCard.style";
 import axios from "axios";
 import getAccessToken from "../../hooks/getAcessToken";
+import ModifiedPrice from "../../shared/ModifiedPrice";
 
 function ProductCard() {
   const navigate = useNavigate();
@@ -51,14 +52,13 @@ function ProductCard() {
                   <ul>
                     <li>{product.productName}</li>
                     <li>{product.productInfo}</li>
-                    <li>{product.productPrice}원</li>
+                    <li>
+                      <ModifiedPrice number={product.productPrice} />원
+                    </li>
                   </ul>
                 </div>
               </Link>
               <div className="buttons-container">
-                {/* <button onClick={() => addToCart(product.productId)}>
-                  장바구니
-                </button> */}
                 <button onClick={() => addToWishlist(product.productId)}>
                   찜하기
                 </button>

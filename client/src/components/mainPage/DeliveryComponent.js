@@ -38,6 +38,9 @@ const DeliveryStatusTitle = styled.h3`
 const DeliveryStatusBoxes = styled.div`
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 980px) {
+  }
 `;
 
 const DeliveryStatusBox = styled.div`
@@ -45,6 +48,12 @@ const DeliveryStatusBox = styled.div`
   padding: 10px;
   width: 20%;
   margin-bottom: 10px;
+
+  @media (max-width: 980px) {
+    border: 1px solid #ccc;
+    padding: 5px;
+    width: 10%;
+  }
 `;
 
 export default DeliveryComponent;

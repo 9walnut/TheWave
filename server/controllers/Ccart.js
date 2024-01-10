@@ -102,11 +102,6 @@ exports.payCart = async (req, res) => {
       attributes: ["productId", "cartId"],
     });
 
-    // const productInfo = await db.products.findOne({
-    //   where: { productId: productId },
-    //   attributes: ["productName", "thumbnailUrl", "productPrice"],
-    // });
-
     if (userInfo && userAddress) {
       res.json({
         userInfo,

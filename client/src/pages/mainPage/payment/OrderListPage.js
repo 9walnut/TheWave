@@ -8,6 +8,7 @@ import getAccessToken from "../../../hooks/getAcessToken";
 import axios from "axios";
 import AddressComponent from "../../../components/register/AddressComponent";
 import SeperatedPrice from "../../../hooks/SeparatedPrice";
+import ModifiedPrice from "../../../shared/ModifiedPrice";
 
 function OrderListPage() {
   const { state } = useLocation();
@@ -21,7 +22,7 @@ function OrderListPage() {
   const curPrice = productInfo.productPrice * orderQuantity;
   const totalPrice = curPrice + 3000;
   const navigate = useNavigate();
-  console.log("가져온 정보입니다.", state);
+  // console.log("가져온 정보입니다.", state);
 
   const getAddress = (addressData) => {
     const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
@@ -92,6 +93,7 @@ function OrderListPage() {
                       <img src="/assets/plus.svg" />
                     </button>
                   </S.ProductCountBox>
+                  <ModifiedPrice number={curPrice} />원
                 </S.InfoBox>
               </S.Productbox>
 
@@ -126,7 +128,7 @@ function OrderListPage() {
             <S.PaymentBox>
               <S.PaymentPriceBox>
                 <div>주문금액</div>
-                <div>{curPrice}원</div>
+                <ModifiedPrice number={curPrice} />원
               </S.PaymentPriceBox>
               <S.PaymentPriceBox>
                 <div>배송비</div>
@@ -135,7 +137,7 @@ function OrderListPage() {
               <S.PaymentLine />
               <S.PaymentPriceBox>
                 <div style={{ fontWeight: "500" }}>총 금액</div>
-                <div>{totalPrice}원</div>
+                <ModifiedPrice number={totalPrice} />원
               </S.PaymentPriceBox>
             </S.PaymentBox>
             <S.Button onClick={postPayment}>결제하기</S.Button>

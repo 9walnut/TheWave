@@ -5,6 +5,7 @@ import * as S from "../../../styles/mainPage/ProductDetails.style";
 import axios from "axios";
 import SeperatedPrice from "../../../hooks/SeparatedPrice";
 import getAccessToken from "../../../hooks/getAcessToken";
+import ModifiedPrice from "../../../shared/ModifiedPrice";
 
 function ProductDetail() {
   const navigate = useNavigate();
@@ -138,7 +139,7 @@ function ProductDetail() {
               <Link to={`/category/${product.categoryId}`}>
                 <a>{categoryName} / </a>
               </Link>
-              <span className="miniProductName"> {product.productName}</span>
+              <span className="miniProductName">{product.productName}</span>
             </div>
             {/* 셀렉트박스 */}
 
@@ -148,7 +149,9 @@ function ProductDetail() {
               <div>{product.productInfo}</div>
               <div>
                 <span>가격: </span>
-                <span className="productPrice">{product.productPrice}</span>
+                {product.productPrice && (
+                  <ModifiedPrice number={product.productPrice} />
+                )}
               </div>
             </S.InfoProductBox>
             <S.SelectBox>
@@ -161,7 +164,6 @@ function ProductDetail() {
                   );
                 })}
               </S.Select>
-              {/*  */}
               <S.Select onChange={handleSize} value={size}>
                 {sizeList.map((size) => {
                   return (

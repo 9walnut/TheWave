@@ -3,8 +3,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import getAccessToken from "../../../hooks/getAcessToken";
 import { setUser } from "../../../redux/reducers/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import AddressComponent from "../../../components/register/AddressComponent";
-
+import { resetUser } from "../../../redux/reducers/userSlice";
 function MypageInfo() {
   const [password, setPassword] = useState("");
   const [checkResult, setCheckResult] = useState(false);
@@ -15,6 +16,9 @@ function MypageInfo() {
   const [address, setAddress] = useState();
   const [userAddress, setUserAddress] = useState([]);
   const [alertText, setAlertText] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     validatePassword();
@@ -37,6 +41,7 @@ function MypageInfo() {
         { headers }
       );
       if (res.data.result == true) {
+        setPassword("");
         setCheckResult(true);
         console.log("정보임", res.data);
         const { birthday, phoneNumber, userName, userId } = res.data.userInfo;
@@ -90,6 +95,30 @@ function MypageInfo() {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // 회원 탈퇴
+  const deleteUserInfo = async () => {
+    try {
+      const data = {
+        password: password,
+      };
+      const headers = getAccessToken();
+      // confirm("정말 탈퇴하시겠습니까 ?")
+      if (true) {
+        const res = await axios.delete("/api/mypage", data, { headers });
+        if (res.data.result == true) {
+          alert("탈퇴 성공");
+          dispatch(resetUser());
+          localStorage.removeItem("accessToken");
+          window.location.replace("/");
+        } else {
+          alert("실패");
+        }
+      }
+    } catch (error) {
+      console.log(error, "탈퇴 에러");
     }
   };
 
@@ -167,6 +196,22 @@ function MypageInfo() {
               />
             </InputWrapper>
             <Button onClick={patchUserInfo}>수정</Button>
+            <Button onClick={() => setDeleteModal(!deleteModal)}>
+              회원 탈퇴
+            </Button>
+            {deleteModal && (
+              <>
+                <InputWrapper>
+                  <InputLabel>비밀번호</InputLabel>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <Button onClick={deleteUserInfo}>탈퇴</Button>
+                </InputWrapper>
+              </>
+            )}
           </FormBox>
         </>
       )}

@@ -8,15 +8,22 @@ import getAccessToken from "../../../hooks/getAcessToken";
 import axios from "axios";
 import AddressComponent from "../../../components/register/AddressComponent";
 import SeperatedPrice from "../../../hooks/SeparatedPrice";
+import ModifiedPrice from "../../../shared/ModifiedPrice";
 
 function CartPage() {
-  const [orderQuantity, SetOrderQuantity] = useState();
+  // const [orderQuantity, SetOrderQuantity] = useState();
+  const [cartItems, setCartItems] = useState([]);
   const [receiveName, setReceiveName] = useState();
   const [deliveryRequest, setDeliveryRequest] = useState("");
   const [address, setAddress] = useState();
-  // const [value, displayValue, setValue] = SeperatedPrice(0);
+  const [userAddress, setUserAdderss] = useState();
   const [cartItem, setCartItem] = useState([]);
   const [isPayment, setIsPayment] = useState(false);
+  const [orderQuantity, SetOrderQuantity] = useState("");
+  const [totalPrice, setTotalPrice] = useState("");
+  const [cartQuantity, setCartQuantity] = useState("");
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
 
   const getAddress = (addressData) => {
     const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
@@ -31,6 +38,22 @@ function CartPage() {
   const minusBtn = () => {
     // SetOrderQuantity(orderQuantity - 1);
     // setValue(value - productInfo.productPrice);
+  };
+
+  const calculateProductTotal = (quantity, price) => quantity * price;
+
+  const calculateTotalPrice = () => {
+    return cartItem.reduce((total, item) => {
+      return total + calculateProductTotal(item.quantity, item.price);
+    }, 0);
+  };
+
+  // 상품 수량 업데이트 함수
+  const updateQuantity = (itemId, newQuantity) => {
+    const updatedCartItems = cartItem.map((item) =>
+      item.cartId === itemId ? { ...item, cartQuantity: newQuantity } : item
+    );
+    setCartItem(updatedCartItems);
   };
 
   const getCartProduct = async () => {
@@ -60,17 +83,36 @@ function CartPage() {
     }
   };
 
+  // 결제하기 이동(데이터 불러오기)
   const goPayment = async () => {
-    // try {
-    //   const headers = getAccessToken();
-    //   const res = await axios.post(
-    //     `/api/cart/checkout`,
-    //     { cartQuantity, color, size },
-    //     { headers }
-    //   );
-    // } catch (error) {
-    //   console.log("장바구니 결제하기 데이터 불러오기 실패", error);
-    // }
+    try {
+      const headers = getAccessToken();
+      const res = await axios.post(
+        `/api/cart/checkout`,
+        { cartQuantity, color, size },
+        { headers }
+      );
+      if (res.data.result == false) {
+        console.log("주문 실패");
+      } else {
+      }
+    } catch (error) {
+      console.log("장바구니 결제하기 데이터 불러오기 실패", error);
+    }
+  };
+
+  // 장바구니 삭제
+  const deleteCart = async (cartId) => {
+    try {
+      const res = await axios.delete("/api/cart", { data: cartId });
+      if (res.data.result == true) {
+        alert("삭제되었습니다.");
+      } else {
+        alert("삭제실패");
+      }
+    } catch (error) {
+      console.log("장바구니 삭제 에러", error);
+    }
   };
 
   useEffect(() => {
@@ -88,10 +130,10 @@ function CartPage() {
               <S.CartListTitle>장바구니</S.CartListTitle>
               <S.CartBox>주문 상품</S.CartBox>
               {cartItem &&
-                cartItem.map((product, index) => {
+                cartItem.map((product, i) => {
                   return (
                     <>
-                      <S.Productbox>
+                      <S.Productbox key={product.cartId}>
                         <S.ImgBox>
                           <img src={product.product.thumbnailUrl} />
                         </S.ImgBox>
@@ -104,15 +146,41 @@ function CartPage() {
                             옵션: {product.size} / {product.color}
                           </div>
                           <S.ProductCountBox>
-                            <button onClick={minusBtn}>
+                            <input
+                              type="number"
+                              value={product.cartQuantity}
+                              onChange={(e) =>
+                                updateQuantity(
+                                  product.cartId,
+                                  parseInt(e.target.value)
+                                )
+                              }
+                            />
+                            {/* <button>
                               <img src="/assets/minus.svg" />
                             </button>
-                            <div>{orderQuantity}</div>
+                            <div>{product.cartQuantity}</div>
                             <button onClick={plusBtn}>
                               <img src="/assets/plus.svg" />
-                            </button>
+                            </button>  */}
                           </S.ProductCountBox>
+                          <div>
+                            <ModifiedPrice
+                              number={
+                                product.cartQuantity *
+                                product.product.productPrice
+                              }
+                            />
+                            원
+                          </div>
                         </S.InfoBox>
+                        <div
+                          onClick={() => {
+                            deleteCart(product.cartId);
+                          }}
+                        >
+                          X
+                        </div>
                       </S.Productbox>
                     </>
                   );
@@ -138,10 +206,10 @@ function CartPage() {
                   </S.InputWrapper>
                   <S.InputWrapper>
                     <S.InputLabel>주소</S.InputLabel>
-                    {/* <AddressComponent
+                    <AddressComponent
                       getAddress={getAddress}
                       userAddress={userAddress}
-                    /> */}
+                    />
                   </S.InputWrapper>
                 </>
               )}
@@ -155,7 +223,9 @@ function CartPage() {
                 <S.PaymentBox>
                   <S.PaymentPriceBox>
                     <div>주문금액</div>
-                    <div>원</div>
+                    <div>
+                      <ModifiedPrice number={totalPrice} />원
+                    </div>
                   </S.PaymentPriceBox>
                   <S.PaymentPriceBox>
                     <div>배송비</div>
@@ -164,7 +234,9 @@ function CartPage() {
                   <S.PaymentLine />
                   <S.PaymentPriceBox>
                     <div style={{ fontWeight: "500" }}>총 금액</div>
-                    <div>원</div>
+                    <div>
+                      <ModifiedPrice number={totalPrice + 3000} />원
+                    </div>
                   </S.PaymentPriceBox>
                 </S.PaymentBox>
                 <S.Button>결제하기</S.Button>
@@ -175,7 +247,9 @@ function CartPage() {
                 <S.PaymentBox>
                   <S.PaymentPriceBox>
                     <div>주문금액</div>
-                    <div>원</div>
+                    <div>
+                      <ModifiedPrice number={totalPrice} />원
+                    </div>
                   </S.PaymentPriceBox>
                   <S.PaymentPriceBox>
                     <div>배송비</div>
@@ -184,7 +258,9 @@ function CartPage() {
                   <S.PaymentLine />
                   <S.PaymentPriceBox>
                     <div style={{ fontWeight: "500" }}>총 금액</div>
-                    <div>원</div>
+                    <div>
+                      <ModifiedPrice number={totalPrice + 3000} />원
+                    </div>
                   </S.PaymentPriceBox>
                 </S.PaymentBox>
                 <S.Button>주문하기</S.Button>

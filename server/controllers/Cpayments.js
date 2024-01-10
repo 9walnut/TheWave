@@ -64,6 +64,7 @@ exports.payment = async (req, res) => {
     size,
     orderQuantity,
   } = req.body;
+
   const accessToken = req.headers["authorization"];
 
   const t = await sequelize.transaction();

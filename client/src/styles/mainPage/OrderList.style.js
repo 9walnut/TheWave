@@ -19,6 +19,7 @@ export const OrderLeftBox = styled.div`
   @media (max-width: 980px) {
     width: 100%;
     max-width: 1400px;
+    border-right: none;
   }
 `;
 
@@ -30,7 +31,7 @@ export const OrderRightBox = styled.div`
   @media (max-width: 980px) {
     width: 100%;
     max-width: 1400px;
-    border-right: 1px solid #ddd;
+    border-right: none;
   }
 `;
 export const OrderListTitle = styled.h1`
@@ -80,7 +81,7 @@ export const InfoBox = styled.div`
 `;
 
 export const ProductCountBox = styled.div`
-  margin-top: 10px;
+  margin: 10px 0;
   display: flex;
   width: 14vw;
   justify-content: space-between;
