@@ -44,9 +44,14 @@ module.exports = () => {
             });
             firstLogin = true;
           }
+          user = await db.users.findOne({
+            where: {
+              userId: profile.id,
+            },
+          });
 
-          const { accessToken, refreshToken } = await generateAccessToken(user);
-          done(null, { user, accessToken, refreshToken });
+          const { accessToken } = await generateAccessToken(user);
+          done(null, { user, accessToken });
         } catch (err) {
           console.error(err);
           done(err);

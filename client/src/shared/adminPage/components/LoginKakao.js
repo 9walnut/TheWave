@@ -1,69 +1,42 @@
 import * as S from "./LoginKakaoStyle.js";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/reducers/userSlice";
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
-import qs from "qs";
-
-const KAKAO_ID = process.env.REACT_APP_KAKAO_ID; //REST API KEY
-const KAKAO_URL = process.env.REACT_APP_KAKAO_URL; //Redirect URI
-export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_ID}&redirect_uri=${KAKAO_URL}&response_type=code`;
-const KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
+import React, { useEffect, useState } from "react";
 
 export default function LoginKakao() {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const kakaoClientId = process.env.REACT_APP_KAKAO_ID;
+  const kakaoOnSuccess = async (data) => {
+    console.log(data);
+    const idToken = data.response.access_token; // 엑세스 토큰 백엔드로 전달
 
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get("code");
+    // 서버에 사용자 정보 전달
+    const response = await axios.post("/api/loginSNS", { idToken });
 
-    const fetchToken = async () => {
-      console.log(authorizationCode);
-      if (authorizationCode) {
-        try {
-          const res = await axios.post(
-            KAKAO_TOKEN_URL,
-            qs.stringify({
-              grant_type: "authorization_code",
-              client_id: KAKAO_ID,
-              redirect_uri: KAKAO_URL,
-              code: authorizationCode,
-            }),
-            {
-              headers: {
-                "Content-type":
-                  "application/x-www-form-urlencoded;charset=utf-8",
-              },
-            }
-          );
+    // 서버로부터 응답 받기
+    const result = response.data;
 
-          const { access_token, refresh_token } = res.data;
-          localStorage.setItem("accessToken", access_token);
-          localStorage.setItem("refreshToken", refresh_token);
-
-          const user = {
-            accessToken: access_token,
-            refreshToken: refresh_token,
-            isAdmin: false,
-          };
-          console.log(user);
-          dispatch(setUser(user));
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    };
-
-    fetchToken();
-  }, [location]);
+    // 응답 처리 로직
+    if (result.success) {
+      // 사용자 정보를 리덕스 스토어에 저장
+      dispatch(setUser(result.user));
+    } else {
+      // 로그인 실패 처리
+      console.error("Login failed:", result.message);
+    }
+  };
+  const kakaoOnFailure = (error) => {
+    console.log(error);
+  };
 
   return (
     <>
-      <a href={KAKAO_AUTH_URL}>
-        <S.LoginKakaoStyle></S.LoginKakaoStyle>
-      </a>
+      <S.LoginKakaoStyle
+        token={kakaoClientId}
+        onSuccess={kakaoOnSuccess}
+        onFail={kakaoOnFailure}
+      ></S.LoginKakaoStyle>
     </>
   );
 }
