@@ -12,7 +12,7 @@ async function generateAccessToken(loginUser) {
     };
 
     const accessToken = jwt.sign(payload, secret, {
-      expiresIn: "30s",
+      expiresIn: "1d",
     });
 
     const refreshToken = jwt.sign(payload, secret, {
@@ -37,7 +37,7 @@ async function generateAccessTokenSNS(loginUser) {
     };
 
     const accessToken = jwt.sign(payload, secret, {
-      expiresIn: "30s",
+      expiresIn: "1d",
     });
 
     const refreshToken = jwt.sign(payload, secret, {
