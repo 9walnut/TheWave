@@ -8,15 +8,18 @@ export const ImageUploadWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 7px;
+  @media (max-width: 767px) {
+    align-items: center;
+  }
 `;
 export const ThumbnailBox = styled.div`
   /* background-color: #e9eff4; */
   /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
-  width: 36vw;
-  height: 30vh;
-  margin-top: 10px;
+  /* height: 300px; */
+  width: 400px;
+  height: 300px;
   padding-top: 21px;
   color: #6e7f8d;
   text-align: center;
@@ -30,15 +33,19 @@ export const ThumbnailBox = styled.div`
 
   overflow: hidden;
 
+  /* background-color: beige; */
   @media (max-width: 767px) {
     align-items: center;
-    width: 85vw;
+    /* width: 85vw;
     margin-top: 10px;
-    height: 50vh;
+    height: 50vh; */
+
+    width: 400px;
+    height: 300px;
   }
   @media (max-width: 396px) {
     width: 80vw;
-    height: 80vh;
+    height: 30vh;
     margin-top: -20px;
   }
 `;
@@ -79,9 +86,7 @@ export const DetailImagesBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   overflow: hidden;
-
   position: absolute;
 `;
 export const DetailBox = styled.div`
@@ -104,6 +109,12 @@ export const DetailBox = styled.div`
   justify-content: center;
 
   overflow: hidden;
+  @media (max-width: 396px) {
+    width: 80vw;
+    height: 30vh;
+    margin-top: -20px;
+  }
+  /* background-color: red; */
 `;
 export const DetailBoxes = styled.div`
   /* background-color: #e9eff4; */
@@ -131,29 +142,6 @@ export const DetailBoxes = styled.div`
   top: 362px;
 `;
 
-export const FileSelectBtn = styled.button`
-  /* position: relative; */
-  /* z-index: 2; */
-
-  width: 80px;
-  height: 27px;
-  background-color: white;
-  color: #6e7f8d;
-  border: 1px solid #6e7f8d;
-  padding: 10px;
-  font-size: smaller;
-  border-radius: 6px;
-  justify-content: center;
-  align-items: center;
-  display: inline-flex;
-  margin-left: 40px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #6e7f8d;
-    color: white;
-  }
-`;
 export const EditFileSelectBtn = styled.button`
   width: 80px;
   height: 27px;
@@ -182,7 +170,35 @@ export const EditFileSelectBtn = styled.button`
     margin: 2px;
   }
 `;
+export const FileSelectBtn = styled.button`
+  /* position: relative; */
+  /* z-index: 2; */
+  background-color: red;
+  width: 80px;
+  height: 27px;
+  background-color: white;
+  color: #6e7f8d;
+  border: 1px solid #6e7f8d;
+  padding: 10px;
+  font-size: smaller;
+  border-radius: 6px;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  margin-left: 40px;
+  cursor: pointer;
 
+  &:hover {
+    background-color: #6e7f8d;
+    color: white;
+  }
+  @media (max-width: 396px) {
+    width: 91px;
+    height: 24px;
+    font-size: xx-small;
+    margin: 2px;
+  }
+`;
 export const FileTypeLeftInput = styled.input`
   /* pointer-events: none; */
   /* position: absolute; */
@@ -228,22 +244,34 @@ export const FileTypeRightInput = styled.input`
   position: absolute;
   height: 30px;
   margin-top: 4px;
-  right: -138px;
+  right: -130px;
+  @media (max-width: 767px) {
+    left: 48px;
+  }
+  @media (max-width: 396px) {
+    left: 14px;
+  }
 `;
 
 export const ImageBtnWrapper = styled.div`
+  /* background-color: red; */
   @media (max-width: 767px) {
-    width: 100vw;
+    width: 40vw;
     justify-content: center;
   }
   @media (max-width: 396px) {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
     bottom: 0;
     width: 95vw;
-    margin-left: -35px;
+    margin-left: -35px; */
+    width: 26vw;
+    left: 140px;
+    z-index: 5;
+    position: absolute;
+    margin-top: 372px;
   }
 `;

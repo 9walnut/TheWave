@@ -10,10 +10,18 @@ export const SelectBox = styled.div`
   padding: 12px;
   margin-bottom: 10px;
   margin-left: 5px;
+  @media (max-width: 767px) {
+    height: auto;
+    width: 85vw;
+    padding: 6px;
+    margin-bottom: 5px;
+    font-size: smaller;
+    /* text-align: center; */
+  }
   @media (max-width: 396px) {
     height: auto;
     width: 85vw;
-    padding: 1;
+    padding: 8px;
     margin-bottom: 4px;
     font-size: smaller;
   }
