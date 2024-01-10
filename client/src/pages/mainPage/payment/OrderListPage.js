@@ -75,9 +75,13 @@ function OrderListPage() {
                 <S.ImgBox>
                   <img src={state.productInfo.thumbnailUrl} />
                 </S.ImgBox>
+                <S.ProductNameBox>
+                  <div style={{ fontSize: "small" }}>상품명</div>
+                  {productInfo.productName}
+                </S.ProductNameBox>
                 <S.InfoBox>
                   <div>
-                    {size} / {color}
+                    옵션: {size} / {color}
                   </div>
                   <S.ProductCountBox>
                     <button onClick={minusBtn}>

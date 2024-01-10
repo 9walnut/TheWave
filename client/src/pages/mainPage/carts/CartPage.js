@@ -52,6 +52,7 @@ function CartPage() {
         const data = {
           result: false,
         };
+
         const res = await axios.get("/api/cart", { params: data });
       }
     } catch (error) {
@@ -60,16 +61,16 @@ function CartPage() {
   };
 
   const goPayment = async () => {
-    try {
-      const headers = getAccessToken();
-      const res = await axios.post(
-        `/api/cart/checkout`,
-        { cartQuantity, color, size },
-        { headers }
-      );
-    } catch (error) {
-      console.log("장바구니 결제하기 데이터 불러오기 실패", error);
-    }
+    // try {
+    //   const headers = getAccessToken();
+    //   const res = await axios.post(
+    //     `/api/cart/checkout`,
+    //     { cartQuantity, color, size },
+    //     { headers }
+    //   );
+    // } catch (error) {
+    //   console.log("장바구니 결제하기 데이터 불러오기 실패", error);
+    // }
   };
 
   useEffect(() => {
@@ -94,8 +95,14 @@ function CartPage() {
                         <S.ImgBox>
                           <img src={product.product.thumbnailUrl} />
                         </S.ImgBox>
+                        <S.ProductNameBox>
+                          <div style={{ fontSize: "small" }}>상품명</div>
+                          {product.product.productName}
+                        </S.ProductNameBox>
                         <S.InfoBox>
-                          <div>{/* {size} / {color} */}</div>
+                          <div>
+                            옵션: {product.size} / {product.color}
+                          </div>
                           <S.ProductCountBox>
                             <button onClick={minusBtn}>
                               <img src="/assets/minus.svg" />

@@ -71,7 +71,7 @@ export const CardItemBox = styled.div`
   .buttons-container {
     position: absolute;
     top: 25%;
-    left: 25%;
+    left: 40%;
     display: flex;
     align-items: center;
     padding: 10px;

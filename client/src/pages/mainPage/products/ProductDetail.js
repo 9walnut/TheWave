@@ -68,7 +68,7 @@ function ProductDetail() {
       const headers = {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       };
-      const data = { cartQuantity: orderQuantity };
+      const data = { cartQuantity: orderQuantity, color: color, size: size };
       const res = await axios.post(`/api/product/${productId}`, data, {
         headers,
       });

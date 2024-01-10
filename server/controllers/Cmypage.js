@@ -107,6 +107,7 @@ exports.wishToCart = async (req, res) => {
       res.send({ result: false });
     } else {
       const cartIn = await db.carts.create({
+        // color, size가 필요하나 옵션 설정은 detail에서만 가능......
         userNumber: tokenCheck.userData.userNumber,
         productId: productId,
         cartQuantity: "1", // 기본적으로 수량 1

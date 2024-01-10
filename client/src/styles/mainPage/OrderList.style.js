@@ -52,9 +52,16 @@ export const Productbox = styled.div`
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
   justify-content: space-between;
+  align-items: center;
   /* input {
     margin-right: 20px;
   } */
+`;
+
+export const ProductNameBox = styled.div`
+  @media (max-width: 980px) {
+    font-size: small;
+  }
 `;
 
 export const InfoBox = styled.div`
@@ -63,6 +70,12 @@ export const InfoBox = styled.div`
   justify-content: center;
   div {
     font-size: medium;
+  }
+  @media (max-width: 980px) {
+    div {
+      font-size: small;
+    }
+    font-size: small;
   }
 `;
 
@@ -89,6 +102,10 @@ export const ProductCountBox = styled.div`
 
   img {
     width: 16px;
+  }
+
+  @media (max-width: 980px) {
+    height: 30px;
   }
 `;
 

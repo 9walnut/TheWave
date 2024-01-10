@@ -56,9 +56,9 @@ function ProductCard() {
                 </div>
               </Link>
               <div className="buttons-container">
-                <button onClick={() => addToCart(product.productId)}>
+                {/* <button onClick={() => addToCart(product.productId)}>
                   장바구니
-                </button>
+                </button> */}
                 <button onClick={() => addToWishlist(product.productId)}>
                   찜하기
                 </button>
