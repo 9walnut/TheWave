@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/reducers/userSlice";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import KakaoLogin from "react-kakao-login";
+import React, { useEffect } from "react";
+import NaverLogin from "react-naver-login";
 import styled from "styled-components";
 import Bg from "../../../assets/img/kakaologin.png";
 
-const StyledKakaoLogin = styled.div`
+const StyledkakaoLogin = styled.div`
   background-image: url(${Bg});
   background-repeat: no-repeat;
   background-size: cover;
@@ -44,11 +44,12 @@ export default function LoginKakao() {
   };
 
   return (
-    <KakaoLogin
-      token={kakaoClientId}
+    <NaverLogin
+      clientId={kakaoClientId}
+      callbackUrl={process.env.REACT_APP_kakao_CALLBACK_URL}
       onSuccess={kakaoOnSuccess}
-      onFail={kakaoOnFailure}
-      render={({ onClick }) => <StyledKakaoLogin onClick={onClick} />}
+      onFailure={kakaoOnFailure}
+      render={({ onClick }) => <StyledkakaoLogin onClick={onClick} />}
     />
   );
 }
