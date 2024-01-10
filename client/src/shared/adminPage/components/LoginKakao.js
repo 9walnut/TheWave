@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import React, { useEffect } from "react";
-import NaverLogin from "react-naver-login";
+import KakaoLogin from "react-kakao-login";
 import styled from "styled-components";
 import Bg from "../../../assets/img/kakaologin.png";
 
@@ -67,7 +67,7 @@ export default function LoginKakao() {
         kakaoOnSuccess(res);
       }}
       onFail={kakaoOnFailure}
-      render={({ onClick }) => <StyledKakaoLogin onClick={onClick} />}
+      render={({ onClick }) => <StyledkakaoLogin onClick={onClick} />}
     />
   );
 }
