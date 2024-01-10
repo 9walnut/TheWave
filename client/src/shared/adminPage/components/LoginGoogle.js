@@ -30,7 +30,7 @@ const GoogleLoginWrapper = styled.div`
   position: relative;
   z-index: 100;
   bottom: 0;
-  opacity: 0; // 이 부분을 추가했습니다.
+  opacity: 0;
 `;
 
 export default function LoginGoogle() {

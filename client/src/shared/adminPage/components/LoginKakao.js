@@ -36,11 +36,15 @@ export default function LoginKakao() {
 
     const { isAdmin, accessToken } = response.data;
     // 응답 처리 로직
-    if (result === "true") {
+    if (result === true) {
       const user = { isAdmin, accessToken };
-      console.log("useruseruseruseruser", user);
       // 사용자 정보를 리덕스 스토어에 저장
       dispatch(setUser(user));
+
+      localStorage.setItem("accessToken", user.accessToken);
+      const headers = {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      };
 
       if (isAdmin === "Y") {
         navigate("/admin");

@@ -94,7 +94,6 @@ exports.loginSNS = async (req, res) => {
     if (!idToken) {
       const { userPw, salt } = await hashedPwWithSalt("data.profile.id");
       const kakaoId = String(data.profile.id);
-      console.log("kakaoIdkakaoIdkakaoIdkakaoId", typeof kakaoId);
 
       const userInfo = await db.users.create({
         userId: kakaoId,
