@@ -23,6 +23,7 @@
     "react-bootstrap": "^2.9.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
+    "react-kakao-login": "^2.1.1",
     "react-native-webview": "^13.6.3",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.20.1",
