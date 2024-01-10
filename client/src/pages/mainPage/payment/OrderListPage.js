@@ -25,7 +25,6 @@ function OrderListPage() {
 
   const getAddress = (addressData) => {
     const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
-    console.log("주주ㅜㅜㅜㅜ줒소소소");
     setAddress(newAddress);
   };
 

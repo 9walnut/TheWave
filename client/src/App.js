@@ -9,7 +9,7 @@ import FindIdPage from "./pages/mainPage/Registers/FindIdPage";
 import FindPwPage from "./pages/mainPage/Registers/FindPwPage";
 import NewPwPage from "./pages/mainPage/Registers/NewPwPage";
 import MyPage from "./pages/mainPage/mypage/MyPage";
-import CartPage from "./pages/mainPage/CartPage";
+import CartPage from "./pages/mainPage/carts/CartPage";
 // admin
 import AdminPageMain from "./pages/adminPage/AdminPageMain";
 import MainDashBoard from "./pages/adminPage/MainDashBoard";

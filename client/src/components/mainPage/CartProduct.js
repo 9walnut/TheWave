@@ -2,7 +2,7 @@ import styled from "styled-components";
 const Productbox = styled.div`
   display: flex;
   padding: 10px 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ddd;
   input {
     margin-right: 20px;
   }
@@ -11,7 +11,8 @@ const Productbox = styled.div`
 const ImgBox = styled.div`
   width: 100px;
   height: 100px;
-  border: 1px solid black;
+
+  border: 1px solid #ddd;
 
   img {
     width: 100%;
@@ -27,7 +28,7 @@ function CartProduct({ product }) {
         <Productbox>
           <input type="checkbox" />
           <ImgBox>
-            <img src={product} />
+            <img src={product.product.thumbnailUrl} />
           </ImgBox>
         </Productbox>
       </li>
