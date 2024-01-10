@@ -90,27 +90,27 @@ exports.loginUser = async (req, res) => {
 exports.loginSNS = async (req, res) => {
   try {
     const { idToken } = req.body;
-    console.log("jwt.decode(idToken) 결과결과", jwt.decode(idToken));
 
     // 회원 정보 db 저장
     const decoding = jwt.decode(idToken);
+    console.log("sns 토큰 디코딩 결과", decoding);
 
-    const { userPw, salt } = await hashedPwWithSalt(decoding.clientId); // 암호화
+    const { userPw, salt } = await hashedPwWithSalt(decoding.sub); // 암호화
 
     const userInfo = await db.users.create({
-      userId: decoding.clientId,
+      userId: decoding.sub,
       password: userPw,
       passwordSalt: salt,
-      userName: decoding.userName,
-      phoneNumber: decoding.phoneNumber,
-      birthday: decoding.birthday,
+      userName: decoding.name,
+      phoneNumber: decoding.phoneNumber || "01012345678",
+      birthday: decoding.birthday || "1999-01-01",
       isAdmin: "N",
-      gender: decoding.gender,
+      gender: decoding.gender || "M",
     });
 
     const userAddress = await db.address.create({
-      userNumber: decoding.userNumber,
-      address: address,
+      userNumber: userInfo.userNumber,
+      address: "전북 익산",
     });
 
     const { accessToken } = await generateAccessTokenSNS(userInfo);
