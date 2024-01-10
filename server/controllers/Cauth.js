@@ -1,9 +1,14 @@
 const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
-const { generateAccessToken, deleteToken } = require("../middleware/jwt");
+const {
+  generateAccessToken,
+  deleteToken,
+  generateAccessTokenSNS,
+} = require("../middleware/jwt");
 const axios = require("axios");
 const qs = require("qs");
+const jwt = require("jsonwebtoken");
 
 // 메인 페이지 렌더
 exports.main = async (req, res) => {
@@ -20,7 +25,7 @@ exports.main = async (req, res) => {
         "thumbnailUrl",
       ],
     });
-    console.log(productsInfo);
+    // console.log(productsInfo);
     res.json(productsInfo);
   } catch (error) {
     console.error(error);
@@ -78,6 +83,45 @@ exports.loginUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("로그인 오류");
+  }
+};
+
+// 간편 로그인
+exports.loginSNS = async (req, res) => {
+  try {
+    const { idToken } = req.body;
+    console.log("jwt.decode(idToken) 결과결과", jwt.decode(idToken));
+
+    // 회원 정보 db 저장
+    const decoding = jwt.decode(idToken);
+
+    const { userPw, salt } = await hashedPwWithSalt(decoding.clientId); // 암호화
+
+    const userInfo = await db.users.create({
+      userId: decoding.clientId,
+      password: userPw,
+      passwordSalt: salt,
+      userName: decoding.userName,
+      phoneNumber: decoding.phoneNumber,
+      birthday: decoding.birthday,
+      isAdmin: "N",
+      gender: decoding.gender,
+    });
+
+    const userAddress = await db.address.create({
+      userNumber: decoding.userNumber,
+      address: address,
+    });
+
+    const { accessToken } = await generateAccessTokenSNS(userInfo);
+    res.send({
+      result: true,
+      isAdmin: false,
+      accessToken: accessToken,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("간편 로그인 오류");
   }
 };
 

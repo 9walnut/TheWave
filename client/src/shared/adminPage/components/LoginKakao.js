@@ -28,6 +28,7 @@ export default function LoginKakao() {
 
     // 서버로부터 응답 받기
     const result = response.data;
+    console.log("result", result);
 
     // 응답 처리 로직
     if (result.success) {

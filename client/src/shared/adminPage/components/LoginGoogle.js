@@ -2,45 +2,82 @@ import * as S from "./LoginGoogleStyle.js";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
 
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-const GOOGLE_REDIRECT_URL = process.env.REACT_APP_GOOGLE_CALLBACK;
-export const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile&client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URL}`;
+// const GOOGLE_REDIRECT_URL = process.env.REACT_APP_GOOGLE_CALLBACK;
+// export const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile&client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URL}`;
 
 export default function LoginGoogle() {
-  const location = useLocation();
+  const dispatch = useDispatch();
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get("code");
-    console.log("authorizationCode", authorizationCode);
+  const googleOnSuccess = async (data) => {
+    const idToken = data.credential;
+    try {
+      const res = await axios.post("api/snsLogin", { idToken });
+      console.log("res 결과", res);
 
-    const fetchToken = async () => {
-      if (authorizationCode) {
-        try {
-          const res = await axios.get(
-            `${GOOGLE_REDIRECT_URL}?code=${authorizationCode}`
-          );
-          console.log("res 결과", res);
-          localStorage.setItem("accessToken", res.data.accessToken);
-          const headers = {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          };
-          console.log(headers);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-    };
-
-    fetchToken();
-  }, [location]);
-
+      const result = res.data;
+      localStorage.setItem("accessToken", result.accessToken);
+      const headers = {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      };
+      console.log("headers", headers);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <>
-      <a href={GOOGLE_AUTH_URL}>
-        <S.LoginGoogleStyle></S.LoginGoogleStyle>
-      </a>
+      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+        <GoogleLogin
+          onSuccess={(res) => {
+            googleOnSuccess(res);
+          }}
+          onFailure={(error) => {
+            console.log(error);
+          }}
+        />
+      </GoogleOAuthProvider>
     </>
   );
 }
+
+// export default function LoginGoogle() {
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     const url = new URL(window.location.href);
+//     const authorizationCode = url.searchParams.get("code");
+//     console.log("authorizationCode", authorizationCode);
+
+//     const fetchToken = async () => {
+//       if (authorizationCode) {
+//         try {
+//           const res = await axios.get(
+//             `${GOOGLE_REDIRECT_URL}?code=${authorizationCode}`
+//           );
+//           console.log("res 결과", res);
+//           localStorage.setItem("accessToken", res.data.accessToken);
+//           const headers = {
+//             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+//           };
+//           console.log(headers);
+//         } catch (err) {
+//           console.error(err);
+//         }
+//       }
+//     };
+
+//     fetchToken();
+//   }, [location]);
+
+//   return (
+//     <>
+//       <a href={GOOGLE_AUTH_URL}>
+//         <S.LoginGoogleStyle></S.LoginGoogleStyle>
+//       </a>
+//     </>
+//   );
+// }
