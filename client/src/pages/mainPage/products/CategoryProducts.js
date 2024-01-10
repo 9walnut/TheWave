@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as S from "../../../styles/mainPage/CategoryProducts.style";
 import axios from "axios";
+import ModifiedPrice from "../../../shared/ModifiedPrice";
 
 function CategoryProducts() {
   const [products, setProducts] = useState([]);
@@ -42,7 +43,9 @@ function CategoryProducts() {
                   <ul>
                     <li>{product.productName}</li>
                     <li>{product.productInfo}</li>
-                    <li>{product.productPrice}원</li>
+                    <li>
+                      <ModifiedPrice number={product.productPrice} />원
+                    </li>
                   </ul>
                 </div>
               </Link>

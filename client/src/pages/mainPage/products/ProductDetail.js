@@ -5,6 +5,8 @@ import * as S from "../../../styles/mainPage/ProductDetails.style";
 import axios from "axios";
 import SeperatedPrice from "../../../hooks/SeparatedPrice";
 import getAccessToken from "../../../hooks/getAcessToken";
+import ModifiedPrice from "../../../shared/ModifiedPrice";
+import Swal from "sweetalert2";
 
 function ProductDetail() {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ function ProductDetail() {
   const { productId } = useParams();
   const [categoryName, setCategoryName] = useState();
   const [value, displayValue, setValue] = SeperatedPrice(0);
-  const [orderQuantity, SetOrderQuantity] = useState(0);
+  const [orderQuantity, SetOrderQuantity] = useState(1);
   const [sizeList, setSizeList] = useState([]);
   const [colorList, setColorList] = useState([]);
   const [size, setSize] = useState();
@@ -54,12 +56,19 @@ function ProductDetail() {
 
   const plusBtn = () => {
     SetOrderQuantity(orderQuantity + 1);
-    setValue(value + product.productPrice);
   };
 
   const minusBtn = () => {
-    SetOrderQuantity(orderQuantity - 1);
-    setValue(value - product.productPrice);
+    if (orderQuantity > 1) {
+      SetOrderQuantity(orderQuantity - 1);
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "최소 구매 수량은 1개입니다",
+        confirmButtonColor: "#5a5a5a",
+        width: "60%",
+      });
+    }
   };
 
   // 장바구니
@@ -72,6 +81,22 @@ function ProductDetail() {
       const res = await axios.post(`/api/product/${productId}`, data, {
         headers,
       });
+      if (res.data.result == true) {
+        Swal.fire({
+          icon: "success",
+          title: "장바구니에 담겼습니다.",
+          html: "바로 확인하시겠습니까?",
+          confirmButtonColor: "#5a5a5a",
+          showCancelButton: true,
+          confirmButtonText: "예",
+          cancelButtonText: "아니오",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/cart");
+          } else {
+          }
+        });
+      }
 
       // 비회원일 때
       if (res.data.result === "guest") {
@@ -138,7 +163,7 @@ function ProductDetail() {
               <Link to={`/category/${product.categoryId}`}>
                 <a>{categoryName} / </a>
               </Link>
-              <span className="miniProductName"> {product.productName}</span>
+              <span className="miniProductName">{product.productName}</span>
             </div>
             {/* 셀렉트박스 */}
 
@@ -148,7 +173,9 @@ function ProductDetail() {
               <div>{product.productInfo}</div>
               <div>
                 <span>가격: </span>
-                <span className="productPrice">{product.productPrice}</span>
+                {product.productPrice && (
+                  <ModifiedPrice number={product.productPrice} />
+                )}
               </div>
             </S.InfoProductBox>
             <S.SelectBox>
@@ -161,7 +188,6 @@ function ProductDetail() {
                   );
                 })}
               </S.Select>
-              {/*  */}
               <S.Select onChange={handleSize} value={size}>
                 {sizeList.map((size) => {
                   return (
@@ -185,7 +211,7 @@ function ProductDetail() {
             </S.CenterBox>
             <S.PaymentBox>
               <span>결제 금액: </span>
-              <span>{displayValue}</span>
+              <ModifiedPrice number={orderQuantity * product.productPrice} />
             </S.PaymentBox>
             <S.InfoButtonBox>
               <S.InfoButton onClick={goPayment}>구매하기</S.InfoButton>

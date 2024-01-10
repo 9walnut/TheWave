@@ -3,6 +3,7 @@ import getAccessToken from "../../../hooks/getAcessToken";
 import * as S from "../../../styles/mainPage/wishList.style";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ModifiedPrice from "../../../shared/ModifiedPrice";
 
 function WishList() {
   const [products, setProducts] = useState([]);
@@ -38,20 +39,21 @@ function WishList() {
   };
 
   // 불가능
-  const addToCart = async (productId) => {
-    try {
-      const headers = getAccessToken();
-      const res = await axios.post(
-        "/api/mypage/wishList",
-        {
-          data: { productId: productId },
-        },
-        { headers }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const addToCart = async (productId) => {
+  //   try {
+  //     const headers = getAccessToken();
+  //     const res = await axios.post(
+  //       "/api/mypage/wishList",
+  //       {
+  //         data: { productId: productId },
+  //       },
+  //       { headers }
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <>
       <h3>위시리스트</h3>
@@ -66,7 +68,9 @@ function WishList() {
                 <div>
                   <ul>
                     <li>{product.product.productName}</li>
-                    <li>{product.product.productPrice}원</li>
+                    <li>
+                      <ModifiedPrice number={product.product.productPrice} />원
+                    </li>
                   </ul>
                 </div>
               </Link>

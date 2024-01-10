@@ -7,7 +7,8 @@ import Footer from "../../../components/mainPage/Footer";
 import getAccessToken from "../../../hooks/getAcessToken";
 import axios from "axios";
 import AddressComponent from "../../../components/register/AddressComponent";
-import SeperatedPrice from "../../../hooks/SeparatedPrice";
+import ModifiedPrice from "../../../shared/ModifiedPrice";
+import Swal from "sweetalert2";
 
 function OrderListPage() {
   const { state } = useLocation();
@@ -17,11 +18,10 @@ function OrderListPage() {
   const [receiveName, setReceiveName] = useState(userInfo.userName);
   const [deliveryRequest, setDeliveryRequest] = useState("");
   const [address, setAddress] = useState(userAddress);
-  const [value, displayValue, setValue] = SeperatedPrice(0);
+  const [deliveryPrice, setDeliveryPrice] = useState(3000);
   const curPrice = productInfo.productPrice * orderQuantity;
-  const totalPrice = curPrice + 3000;
+  const totalPrice = curPrice + deliveryPrice;
   const navigate = useNavigate();
-  console.log("가져온 정보입니다.", state);
 
   const getAddress = (addressData) => {
     const newAddress = `${addressData.selectAddress}/${addressData.postNumber}/${addressData.detailAddress}`;
@@ -30,13 +30,27 @@ function OrderListPage() {
 
   const plusBtn = () => {
     SetOrderQuantity(orderQuantity + 1);
-    setValue(value + productInfo.productPrice);
   };
 
   const minusBtn = () => {
-    SetOrderQuantity(orderQuantity - 1);
-    setValue(value - productInfo.productPrice);
+    if (orderQuantity > 1) {
+      SetOrderQuantity(orderQuantity - 1);
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "최소 구매 수량은 1개입니다.",
+        confirmButtonColor: "#5a5a5a",
+      });
+    }
   };
+
+  useEffect(() => {
+    if (curPrice >= 50000) {
+      setDeliveryPrice(0);
+    } else {
+      setDeliveryPrice(3000);
+    }
+  }, [totalPrice]);
 
   const postPayment = async () => {
     try {
@@ -54,7 +68,11 @@ function OrderListPage() {
       const res = await axios.post(`/api/payment`, data, {
         headers,
       });
-      alert("결제완료~");
+      Swal.fire({
+        icon: "success",
+        title: "결제가 완료되었습니다.",
+        confirmButtonColor: "#5a5a5a",
+      });
       navigate("/");
     } catch (error) {
       console.log("ㅋㅋ실패요", error);
@@ -92,6 +110,7 @@ function OrderListPage() {
                       <img src="/assets/plus.svg" />
                     </button>
                   </S.ProductCountBox>
+                  <ModifiedPrice number={curPrice} />원
                 </S.InfoBox>
               </S.Productbox>
 
@@ -122,20 +141,25 @@ function OrderListPage() {
           </S.OrderLeftBox>
           {/* 오른쪽 */}
           <S.OrderRightBox>
-            <S.Payment>결제</S.Payment>
+            <S.Payment>
+              결제
+              <span>5만원 이상 구매 시 배송비 무료</span>
+            </S.Payment>
             <S.PaymentBox>
               <S.PaymentPriceBox>
                 <div>주문금액</div>
-                <div>{curPrice}원</div>
+                <ModifiedPrice number={curPrice} />원
               </S.PaymentPriceBox>
               <S.PaymentPriceBox>
                 <div>배송비</div>
-                <div>3,000원</div>
+                <div>
+                  <ModifiedPrice number={deliveryPrice} />원
+                </div>
               </S.PaymentPriceBox>
               <S.PaymentLine />
               <S.PaymentPriceBox>
                 <div style={{ fontWeight: "500" }}>총 금액</div>
-                <div>{totalPrice}원</div>
+                <ModifiedPrice number={totalPrice} />원
               </S.PaymentPriceBox>
             </S.PaymentBox>
             <S.Button onClick={postPayment}>결제하기</S.Button>

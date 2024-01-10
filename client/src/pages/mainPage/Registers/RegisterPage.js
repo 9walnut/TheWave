@@ -6,8 +6,10 @@ import "../MainPage.css";
 import axios from "axios";
 import AddressSearch from "../../../components/AddressSearch";
 import * as S from "./RegisterPageStyle.js";
+import Swal from "sweetalert2";
 
 function Register() {
+  const [isUseId, setIsUseId] = useState(false);
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
@@ -35,14 +37,34 @@ function Register() {
   // 아이디 중복 확인
   const idCheck = async () => {
     if (userId == "") {
-      alert("아이디를 입력해주세요");
+      Swal.fire({
+        icon: "warning",
+        title: "아이디를 입력해주세요",
+        confirmButtonColor: "#5a5a5a", // 버튼 색상
+      });
     } else {
       try {
         const res = await axios.post("/api/register/idCheck", { userId });
         if (res.data.result == true) {
-          alert("사용 가능한 아이디입니다.");
+          Swal.fire({
+            icon: "success",
+            title: "사용 가능한 아이디입니다.",
+            html: "사용하시겠습니까 ?",
+            confirmButtonColor: "#5a5a5a",
+            showCancelButton: true,
+            confirmButtonText: "예",
+            cancelButtonText: "아니오",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              setIsUseId(true);
+            }
+          });
         } else {
-          alert("중복된 아이디입니다.");
+          Swal.fire({
+            icon: "warning",
+            title: "중복된 아이디입니다.",
+            confirmButtonColor: "#5a5a5a", // 버튼 색상
+          });
         }
       } catch (error) {
         console.log("중복확인 에러", error);
@@ -65,7 +87,10 @@ function Register() {
       const res = await axios.post("/api/register", { data });
 
       if (res.data.result) {
-        alert("회원가입 성공 ~~");
+        Swal.fire({
+          icon: "success",
+          title: "회원가입 완료.",
+        });
         navigate("/login");
       } else {
         alert("에러");
@@ -103,16 +128,22 @@ function Register() {
           >
             <label style={{ position: "relative" }}>
               {/* 아이디: */}
-              <S.Input
-                placeholder="아이디"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-              />
+              {isUseId ? (
+                <S.DisabledInput value={userId} disabled />
+              ) : (
+                <S.Input
+                  placeholder="아이디"
+                  value={userId}
+                  onChange={(e) => setUserId(e.target.value)}
+                />
+              )}
+
               <S.IdCheckButton
                 onSubmit={(e) => {
                   e.preventDefault();
                 }}
                 onClick={idCheck}
+                disabled={isUseId}
               >
                 중복 확인
               </S.IdCheckButton>
@@ -186,7 +217,7 @@ function Register() {
               />
             </label>
             <br />
-            <S.Button type="button" onClick={onSubmit}>
+            <S.Button type="button" onClick={onSubmit} disabled={!isUseId}>
               가입하기
             </S.Button>
           </form>

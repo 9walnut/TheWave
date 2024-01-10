@@ -88,6 +88,13 @@ module.exports = function (app) {
   );
 
   app.use(
+    createProxyMiddleware("/api/payment/cart", {
+      target: apiURL,
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
     createProxyMiddleware("/api/mypage", {
       target: apiURL,
       changeOrigin: true,

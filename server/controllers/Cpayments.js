@@ -53,8 +53,6 @@ exports.goPayment = async (req, res) => {
 
 // 결제하기(장바구니 결제, 단일 상품 결제 모두)
 exports.payment = async (req, res) => {
-  // 주문서에서 작성한 정보
-  // 여러 상품들에 대한 개별 데이터(color, size, orderQuantity)가 어떤 식으로 넘어올지...
   const {
     userAddress,
     receiveName,
@@ -64,6 +62,9 @@ exports.payment = async (req, res) => {
     size,
     orderQuantity,
   } = req.body;
+  // 주문서에서 작성한 정보
+  // 여러 상품들에 대한 개별 데이터(color, size, orderQuantity)가 어떤 식으로 넘어올지...
+
   const accessToken = req.headers["authorization"];
 
   const t = await sequelize.transaction();
@@ -77,9 +78,9 @@ exports.payment = async (req, res) => {
     let payment;
     let productOut;
 
-    console.log("상품정보", productInfo);
-    console.log("productInfo.length", productInfo.length);
-    console.log("주소임", userAddress);
+    // console.log("상품정보", productInfo);
+    // console.log("productInfo.length", productInfo.length);
+    // console.log("주소임", userAddress);
     try {
       // 단일 상품 구매
       if (productInfo.length === 1) {
@@ -192,6 +193,94 @@ exports.payment = async (req, res) => {
 
       if (newOrder) res.json(newOrder);
       else res.send({ result: false });
+    } catch (error) {
+      await t.rollback();
+      throw error;
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("결제하기 오류");
+  }
+};
+
+exports.cartPayment = async (req, res) => {
+  const {
+    userAddress,
+    receiveName,
+    deliveryRequest,
+    cartItems, // 변경된 부분: cartItems로 받음
+  } = req.body;
+  console.log("주소소소", userAddress);
+
+  const accessToken = req.headers["authorization"];
+  const t = await sequelize.transaction();
+
+  try {
+    const tokenCheck = await verifyToken(accessToken);
+    const userNumber = tokenCheck.userData.userNumber;
+    console.log("유저넘버", userNumber);
+
+    let newOrders = [];
+    let payment;
+    let productOut;
+
+    console.log("상품정보", cartItems);
+
+    try {
+      for (const cartItem of cartItems) {
+        const product = await db.products.findOne({
+          where: { productId: cartItem.productId },
+        });
+
+        const newOrder = await db.orders.create(
+          {
+            userNumber,
+            productId: cartItem.productId,
+            orderQuantity: cartItem.cartQuantity,
+            color: cartItem.color,
+            size: cartItem.size,
+            receiveName,
+            address: userAddress, // 주소 정보를 문자열로 합침
+            deliveryRequest,
+            totalPrice: product.productPrice * cartItem.cartQuantity,
+            orderDate: new Date(),
+            changeDate: new Date(),
+          },
+          { transaction: t }
+        );
+
+        newOrders.push(newOrder);
+
+        payment = await db.payment.create(
+          {
+            orderId: newOrder.orderId,
+            payPrice: newOrder.totalPrice,
+            payMethod: "1",
+            isPaid: "0",
+            isRefund: "0",
+          },
+          { transaction: t }
+        );
+
+        productOut = await db.productout.create(
+          {
+            orderId: newOrder.orderId,
+            cartId: newOrder.cartId || null,
+            productId: newOrder.productId,
+            outStatus: "1",
+            outDate: new Date(),
+          },
+          { transaction: t }
+        );
+      }
+
+      await t.commit();
+
+      if (newOrders.length > 0) {
+        res.json(newOrders);
+      } else {
+        res.send({ result: false });
+      }
     } catch (error) {
       await t.rollback();
       throw error;

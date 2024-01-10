@@ -3,7 +3,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import getAccessToken from "../../../hooks/getAcessToken";
 import { setUser } from "../../../redux/reducers/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import AddressComponent from "../../../components/register/AddressComponent";
+import { resetUser } from "../../../redux/reducers/userSlice";
+import Swal from "sweetalert2";
 
 function MypageInfo() {
   const [password, setPassword] = useState("");
@@ -15,6 +18,9 @@ function MypageInfo() {
   const [address, setAddress] = useState();
   const [userAddress, setUserAddress] = useState([]);
   const [alertText, setAlertText] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     validatePassword();
@@ -37,6 +43,7 @@ function MypageInfo() {
         { headers }
       );
       if (res.data.result == true) {
+        setPassword("");
         setCheckResult(true);
         console.log("정보임", res.data);
         const { birthday, phoneNumber, userName, userId } = res.data.userInfo;
@@ -54,7 +61,11 @@ function MypageInfo() {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       if (password === "") {
-        alert("비밀번호를 입력해주세요.");
+        Swal.fire({
+          icon: "warning",
+          title: "경고",
+          text: "비밀번호를 입력해주세요 !",
+        });
       } else {
         pwCheck();
       }
@@ -85,11 +96,57 @@ function MypageInfo() {
       const res = await axios.patch("/api/mypage/info", data, { headers });
       console.log("수정 res", res.data);
       if (res.data.result == true) {
-        alert("수정 완료");
+        Swal.fire({
+          icon: "success",
+          title: "수정 완료",
+        });
         window.location.replace("/mypage/info");
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // 회원 탈퇴
+  const deleteUserInfo = async () => {
+    try {
+      const data = {
+        password: password,
+      };
+      const headers = getAccessToken();
+      const result = await Swal.fire({
+        icon: "question",
+        title: "탈퇴",
+        html: "바로 탈퇴하시겠습니까?",
+        confirmButtonColor: "#5a5a5a",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+      });
+
+      if (result.isConfirmed) {
+        const res = await axios.delete("/api/mypage", { data, headers });
+        if (res.data.result === true) {
+          Swal.fire({
+            icon: "success",
+            title: "탈퇴 성공",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          dispatch(resetUser());
+          localStorage.removeItem("accessToken");
+          window.location.replace("/");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "탈퇴 실패",
+            text: "다시 시도해주세요.",
+            confirmButtonColor: "#5a5a5a",
+          });
+        }
+      }
+    } catch (error) {
+      console.error("탈퇴 에러", error);
     }
   };
 
@@ -167,6 +224,22 @@ function MypageInfo() {
               />
             </InputWrapper>
             <Button onClick={patchUserInfo}>수정</Button>
+            <Button onClick={() => setDeleteModal(!deleteModal)}>
+              회원 탈퇴
+            </Button>
+            {deleteModal && (
+              <>
+                <InputWrapper>
+                  <InputLabel>비밀번호</InputLabel>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </InputWrapper>
+                <Button onClick={deleteUserInfo}>탈퇴</Button>
+              </>
+            )}
           </FormBox>
         </>
       )}
