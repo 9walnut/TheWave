@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/reducers/userSlice";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import KakaoLogin from "react-kakao-login";
 
 export default function LoginKakao() {
   const dispatch = useDispatch();
@@ -12,10 +13,11 @@ export default function LoginKakao() {
     const idToken = data.response.access_token; // 엑세스 토큰 백엔드로 전달
 
     // 서버에 사용자 정보 전달
-    const response = await axios.post("/api/loginSNS", { idToken });
+    const response = await axios.post("/api/snsLogin", { idToken });
 
     // 서버로부터 응답 받기
     const result = response.data;
+    console.log("result", result);
 
     // 응답 처리 로직
     if (result.success) {
@@ -32,11 +34,16 @@ export default function LoginKakao() {
 
   return (
     <>
-      <S.LoginKakaoStyle
+      <KakaoLogin
         token={kakaoClientId}
         onSuccess={kakaoOnSuccess}
         onFail={kakaoOnFailure}
-      ></S.LoginKakaoStyle>
+      />
+      {/* <S.LoginKakaoStyle
+        token={kakaoClientId}
+        onSuccess={kakaoOnSuccess}
+        onFail={kakaoOnFailure}
+      ></S.LoginKakaoStyle> */}
     </>
   );
 }

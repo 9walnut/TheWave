@@ -25,7 +25,7 @@ exports.main = async (req, res) => {
         "thumbnailUrl",
       ],
     });
-    console.log(productsInfo);
+    // console.log(productsInfo);
     res.json(productsInfo);
   } catch (error) {
     console.error(error);
@@ -90,7 +90,7 @@ exports.loginUser = async (req, res) => {
 exports.loginSNS = async (req, res) => {
   try {
     const { idToken } = req.body;
-    console.log(jwt.decode(idToken));
+    console.log("jwt.decode(idToken) 결과결과", jwt.decode(idToken));
 
     // 회원 정보 db 저장
     const decoding = jwt.decode(idToken);
