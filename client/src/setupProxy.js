@@ -60,7 +60,28 @@ module.exports = function (app) {
   );
 
   app.use(
-    createProxyMiddleware("/api/payment/:productId", {
+    createProxyMiddleware("/api/cart/:cartId", {
+      target: apiURL,
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/api/cart/checkout", {
+      target: apiURL,
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/api/payment/orderList/:productId", {
+      target: apiURL,
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/api/payment", {
       target: apiURL,
       changeOrigin: true,
     })
