@@ -14,7 +14,7 @@ function ProductDetail() {
   const { productId } = useParams();
   const [categoryName, setCategoryName] = useState();
   const [value, displayValue, setValue] = SeperatedPrice(0);
-  const [orderQuantity, SetOrderQuantity] = useState(0);
+  const [orderQuantity, SetOrderQuantity] = useState(1);
   const [sizeList, setSizeList] = useState([]);
   const [colorList, setColorList] = useState([]);
   const [size, setSize] = useState();
@@ -55,12 +55,14 @@ function ProductDetail() {
 
   const plusBtn = () => {
     SetOrderQuantity(orderQuantity + 1);
-    setValue(value + product.productPrice);
   };
 
   const minusBtn = () => {
-    SetOrderQuantity(orderQuantity - 1);
-    setValue(value - product.productPrice);
+    if (orderQuantity > 1) {
+      SetOrderQuantity(orderQuantity - 1);
+    } else {
+      alert("최소 구매 수량은 1개입니다.");
+    }
   };
 
   // 장바구니
@@ -187,7 +189,7 @@ function ProductDetail() {
             </S.CenterBox>
             <S.PaymentBox>
               <span>결제 금액: </span>
-              <span>{displayValue}</span>
+              <ModifiedPrice number={orderQuantity * product.productPrice} />
             </S.PaymentBox>
             <S.InfoButtonBox>
               <S.InfoButton onClick={goPayment}>구매하기</S.InfoButton>

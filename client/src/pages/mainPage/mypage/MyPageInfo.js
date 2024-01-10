@@ -107,7 +107,7 @@ function MypageInfo() {
       const headers = getAccessToken();
       // confirm("정말 탈퇴하시겠습니까 ?")
       if (true) {
-        const res = await axios.delete("/api/mypage", data, { headers });
+        const res = await axios.delete("/api/mypage", { data, headers });
         if (res.data.result == true) {
           alert("탈퇴 성공");
           dispatch(resetUser());
@@ -208,8 +208,8 @@ function MypageInfo() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <Button onClick={deleteUserInfo}>탈퇴</Button>
                 </InputWrapper>
+                <Button onClick={deleteUserInfo}>탈퇴</Button>
               </>
             )}
           </FormBox>

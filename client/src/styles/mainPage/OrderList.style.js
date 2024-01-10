@@ -20,6 +20,7 @@ export const OrderLeftBox = styled.div`
     width: 100%;
     max-width: 1400px;
     border-right: none;
+    padding: 1em;
   }
 `;
 
@@ -32,6 +33,7 @@ export const OrderRightBox = styled.div`
     width: 100%;
     max-width: 1400px;
     border-right: none;
+    padding: 1em;
   }
 `;
 export const OrderListTitle = styled.h1`
@@ -83,7 +85,8 @@ export const InfoBox = styled.div`
 export const ProductCountBox = styled.div`
   margin: 10px 0;
   display: flex;
-  width: 14vw;
+  width: 100%;
+  max-width: 120px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -107,6 +110,7 @@ export const ProductCountBox = styled.div`
 
   @media (max-width: 980px) {
     height: 30px;
+    max-width: 84px;
   }
 `;
 
@@ -173,6 +177,11 @@ export const Payment = styled.div`
   font-weight: 700;
   text-align: left;
   width: 100%;
+  span {
+    margin-left: 10px;
+    font-size: small;
+    font-weight: 400;
+  }
   @media (max-width: 980px) {
     margin: auto;
     width: 100%;

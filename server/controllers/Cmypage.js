@@ -232,6 +232,7 @@ exports.editPw = async (req, res) => {
 // 회원 탈퇴
 exports.deleteUser = async (req, res) => {
   try {
+    console.log(req.body);
     const accessToken = req.headers["authorization"];
     const tokenCheck = await verifyToken(accessToken);
 

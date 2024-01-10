@@ -39,7 +39,7 @@ function LoginPage() {
     };
     try {
       const res = await axios.post("api/login", data);
-      if (res.data.result) {
+      if (res.data.result == true) {
         localStorage.setItem("accessToken", res.data.accessToken);
         const headers = {
           Authorization: `${localStorage.getItem("accessToken")}`,
@@ -60,6 +60,7 @@ function LoginPage() {
           navigate("/");
         }
       } else {
+        alert("아이디 혹은 비밀번호가 틀립니다.");
         console.log("로그인 실패");
       }
     } catch (error) {

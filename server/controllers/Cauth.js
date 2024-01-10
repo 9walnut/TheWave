@@ -79,7 +79,7 @@ exports.loginUser = async (req, res) => {
           accessToken: accessToken,
         });
       }
-    } else res.status(401).send({ result: false });
+    } else res.send({ result: false });
   } catch (error) {
     console.error(error);
     res.status(500).send("로그인 오류");
