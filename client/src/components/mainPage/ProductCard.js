@@ -4,6 +4,7 @@ import * as S from "../../styles/mainPage/ProductCard.style";
 import axios from "axios";
 import getAccessToken from "../../hooks/getAcessToken";
 import ModifiedPrice from "../../shared/ModifiedPrice";
+import Swal from "sweetalert2";
 
 function ProductCard() {
   const navigate = useNavigate();
@@ -23,18 +24,33 @@ function ProductCard() {
     getProduct();
   }, []);
 
-  const addToCart = (productId) => {
-    navigate(`/products/${productId}`);
-  };
+  // const addToCart = (productId) => {
+  //   navigate(`/products/${productId}`);
+  // };
 
   const addToWishlist = async (productId) => {
     const headers = getAccessToken();
-    console.log(productId, "프로덕아디");
-    const res = await axios.get(`/api/product/wish/${productId}`, { headers });
-    if (res.data.result == true) {
-      alert("찜하기 완료");
+    if (headers == false) {
+      Swal.fire({
+        icon: "error",
+        title: "회원만 찜하기가 가능합니다.",
+      });
     } else {
-      alert("이미 존재하는 상품입니다.");
+      console.log(productId, "프로덕아디");
+      const res = await axios.get(`/api/product/wish/${productId}`, {
+        headers,
+      });
+      if (res.data.result == true) {
+        Swal.fire({
+          icon: "success",
+          title: "찜하기 완료",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "이미 존재하는 상품입니다",
+        });
+      }
     }
   };
 

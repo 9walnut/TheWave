@@ -18,17 +18,21 @@ const ImgBox = styled.div`
     /* margin: 0px 50px; */
     /* width: 100%; */
     height: 700px;
+    @media (max-width: 600px) {
+      height: 200px;
+      /* width: 500px; */
+    }
     @media (max-width: 767px) {
       height: 300px;
-      width: 500px;
+      /* width: 500px; */
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 100px) {
       height: 400px;
-      width: 500px;
+      /* width: 500px; */
     }
     @media (max-width: 1200px) {
       height: 500px;
-      width: 300px;
+      /* width: 300px; */
     }
   }
 `;
@@ -65,7 +69,7 @@ function MainCarousel() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },

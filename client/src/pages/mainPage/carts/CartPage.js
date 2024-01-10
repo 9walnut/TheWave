@@ -9,6 +9,7 @@ import axios from "axios";
 import AddressComponent from "../../../components/register/AddressComponent";
 import SeperatedPrice from "../../../hooks/SeparatedPrice";
 import ModifiedPrice from "../../../shared/ModifiedPrice";
+import Swal from "sweetalert2";
 
 function CartPage() {
   const [receiveName, setReceiveName] = useState();
@@ -130,7 +131,10 @@ function CartPage() {
     try {
       const res = await axios.delete("/api/cart", { data: { cartId } });
       if (res.data.result == true) {
-        alert("삭제되었습니다");
+        Swal.fire({
+          icon: "success",
+          title: "삭제되었습니다.",
+        });
         getCartProduct();
       } else {
         alert("삭제 실패");
@@ -158,7 +162,10 @@ function CartPage() {
       const res = await axios.post(`/api/payment/cart`, data, {
         headers,
       });
-      alert("결제완료~");
+      Swal.fire({
+        icon: "success",
+        title: "결제가 완료되었습니다.",
+      });
       navigate("/");
     } catch (error) {
       console.log("ㅋㅋ실패요", error);
@@ -203,7 +210,10 @@ function CartPage() {
                                       product.cartQuantity - 1
                                     );
                                   } else {
-                                    alert("최소 구매수량은 1개 입니다.");
+                                    Swal.fire({
+                                      icon: "warning",
+                                      title: "최소 구매 수량은 1개입니다.",
+                                    });
                                   }
                                 }}
                               >

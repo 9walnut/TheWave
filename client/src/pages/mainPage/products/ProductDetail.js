@@ -6,6 +6,7 @@ import axios from "axios";
 import SeperatedPrice from "../../../hooks/SeparatedPrice";
 import getAccessToken from "../../../hooks/getAcessToken";
 import ModifiedPrice from "../../../shared/ModifiedPrice";
+import Swal from "sweetalert2";
 
 function ProductDetail() {
   const navigate = useNavigate();
@@ -61,7 +62,12 @@ function ProductDetail() {
     if (orderQuantity > 1) {
       SetOrderQuantity(orderQuantity - 1);
     } else {
-      alert("최소 구매 수량은 1개입니다.");
+      Swal.fire({
+        icon: "warning",
+        title: "최소 구매 수량은 1개입니다",
+        confirmButtonColor: "#5a5a5a",
+        width: "60%",
+      });
     }
   };
 
@@ -75,6 +81,22 @@ function ProductDetail() {
       const res = await axios.post(`/api/product/${productId}`, data, {
         headers,
       });
+      if (res.data.result == true) {
+        Swal.fire({
+          icon: "success",
+          title: "장바구니에 담겼습니다.",
+          html: "바로 확인하시겠습니까?",
+          confirmButtonColor: "#5a5a5a",
+          showCancelButton: true,
+          confirmButtonText: "예",
+          cancelButtonText: "아니오",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/cart");
+          } else {
+          }
+        });
+      }
 
       // 비회원일 때
       if (res.data.result === "guest") {

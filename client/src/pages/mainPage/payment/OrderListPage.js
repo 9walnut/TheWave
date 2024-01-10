@@ -8,6 +8,7 @@ import getAccessToken from "../../../hooks/getAcessToken";
 import axios from "axios";
 import AddressComponent from "../../../components/register/AddressComponent";
 import ModifiedPrice from "../../../shared/ModifiedPrice";
+import Swal from "sweetalert2";
 
 function OrderListPage() {
   const { state } = useLocation();
@@ -35,7 +36,11 @@ function OrderListPage() {
     if (orderQuantity > 1) {
       SetOrderQuantity(orderQuantity - 1);
     } else {
-      alert("최소 구매 수량은 1개입니다.");
+      Swal.fire({
+        icon: "warning",
+        title: "최소 구매 수량은 1개입니다.",
+        confirmButtonColor: "#5a5a5a",
+      });
     }
   };
 
@@ -63,7 +68,11 @@ function OrderListPage() {
       const res = await axios.post(`/api/payment`, data, {
         headers,
       });
-      alert("결제완료~");
+      Swal.fire({
+        icon: "success",
+        title: "결제가 완료되었습니다.",
+        confirmButtonColor: "#5a5a5a",
+      });
       navigate("/");
     } catch (error) {
       console.log("ㅋㅋ실패요", error);

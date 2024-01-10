@@ -10,6 +10,7 @@ import LoginGoogle from "../../../shared/adminPage/components/LoginGoogle";
 import axios from "axios";
 import "../MainPage.css";
 import * as S from "./LoginPageStyle.js";
+import Swal from "sweetalert2";
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -60,7 +61,11 @@ function LoginPage() {
           navigate("/");
         }
       } else {
-        alert("아이디 혹은 비밀번호가 틀립니다.");
+        Swal.fire({
+          icon: "warning",
+          title: "아이디 혹은 비밀번호가 틀립니다.",
+          confirmButtonColor: "#5a5a5a",
+        });
         console.log("로그인 실패");
       }
     } catch (error) {

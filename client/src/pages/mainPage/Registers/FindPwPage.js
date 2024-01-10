@@ -6,6 +6,7 @@ import Footer from "../../../components/mainPage/Footer";
 import "../MainPage.css";
 import * as S from "./FindPwPageStyle.js";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function FindPwPage() {
   const [userId, setUserId] = useState("");
@@ -40,7 +41,11 @@ function FindPwPage() {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       if (userId === "" || phoneNumber === "") {
-        alert("이름 또는 핸드폰번호를 입력해주세요.");
+        Swal.fire({
+          icon: "warning",
+          title: "이름 혹은 휴대폰 번호를 입력해주세요",
+          confirmButtonColor: "#5a5a5a",
+        });
       } else {
         handleFindPw();
       }
@@ -90,7 +95,12 @@ function FindPwPage() {
 
         const res = await axios.post("/api/findPw/newPw", data);
         if (res.data.result == true) {
-          alert("비밀번호가 변경되었습니다.");
+          Swal.fire({
+            icon: "success",
+            title: "비밀번호가 변경되었습니다.",
+            confirmButtonColor: "#5a5a5a", // 버튼 색상
+          });
+          navigate("/login");
         }
       } catch (error) {
         console.log(error);

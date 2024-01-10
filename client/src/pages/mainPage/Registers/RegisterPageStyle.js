@@ -53,6 +53,10 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
+export const DisabledInput = styled(Input)`
+  background-color: #f0f0f0;
+`;
+
 export const IdCheckButton = styled.button`
   display: flex;
   position: absolute;

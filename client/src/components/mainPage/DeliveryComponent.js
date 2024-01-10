@@ -10,15 +10,15 @@ function DeliveryComponent({ orderList }) {
         <DeliveryStatusBoxes>
           <DeliveryStatusBox>
             <div>배송 대기 중</div>
-            {countDeliveryStatus(1)}
+            <div>{countDeliveryStatus(1)}</div>
           </DeliveryStatusBox>
           <DeliveryStatusBox>
             <div>배송 중</div>
-            {countDeliveryStatus(2)}
+            <div>{countDeliveryStatus(2)}</div>
           </DeliveryStatusBox>
           <DeliveryStatusBox>
             <div>배송 완료</div>
-            {countDeliveryStatus(3)}
+            <div>{countDeliveryStatus(3)}</div>
           </DeliveryStatusBox>
         </DeliveryStatusBoxes>
       </DeliveryStatusContainer>
@@ -48,11 +48,14 @@ const DeliveryStatusBox = styled.div`
   padding: 10px;
   width: 20%;
   margin-bottom: 10px;
+  font-size: medium;
 
   @media (max-width: 980px) {
     border: 1px solid #ccc;
     padding: 5px;
-    width: 10%;
+    div {
+      font-size: small;
+    }
   }
 `;
 

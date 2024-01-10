@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import getAccessToken from "../../../hooks/getAcessToken";
+import Swal from "sweetalert2";
 
 function ModifyPw() {
   const [password, setPassword] = useState("");
@@ -75,7 +76,11 @@ function ModifyPw() {
           { headers }
         );
         if (res.data.result == true) {
-          alert("비밀번호가 변경되었습니다.");
+          Swal.fire({
+            icon: "success",
+            title: "비밀번호 변경 완료",
+            confirmButtonColor: "#5a5a5a", // 버튼 색상
+          });
           window.location.replace("/mypage/modifypw");
         } else {
           alert("변경 실패..!");
