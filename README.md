@@ -33,10 +33,10 @@ https://thewavemarket.co.kr/
 
 | 프로필  | 이름 | 역할 | 역할 내용 |
 | --- | --- | --- | --- |
-| <img src="https://github.com/9walnut/TheWave/assets/144768130/cbffbe1f-68de-4974-9ba3-1cc76519ead8" width="150" height="150" /> | [권구호(팀장) (BE)](https://github.com/9walnut) | BE | 기획/문서 작성, DB 설계, CI/CD 구축, https 보안 서버 구축,  관리자 / 장바구니 API 구현, <br /> S3 이미지 업로드 기능 구현 |
-| <img src="https://github.com/9walnut/TheWave/assets/144768130/620a9128-de56-4b96-8775-9a37372ab9f1"  width="150" height="150" /> | [이예찬 (BE)](https://github.com/yeeeeechan) | BE | 회원 전용 기능 전반  주문하기/결제하기/상품 페이지 API 구현(JWT),  SNS 간편 로그인 |
-| <img src="https://github.com/9walnut/TheWave/assets/144768130/81420a4b-c1ca-48ec-a57a-45b8f5224bdd" width="150" height="150" /> | [양현정 (FE)](https://github.com/hyeoonjeoong) | FE | 관리자 전용 기능 전반  (대시보드, 상품 등록/수정/삭제,  회원 관리, 거래 내역 관리) <br /> 페이지네이션, 반응형 디자인 적용 |
-| <img src="https://github.com/9walnut/TheWave/assets/144768130/bc0aa2ec-89f0-411a-a538-6de87c1fca4d" width="150" height="150" /> | [정우성 (FE)](https://github.com/dntjd129) | FE | 메인 공통 반응형 컴포넌트  (Navbar, Footer, Carousel), 회원 전용 기능 전반 구현, <br /> 상품 카테고리, 상품 상세, 주문 목록, 배송 상태 |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/cbffbe1f-68de-4974-9ba3-1cc76519ead8" width="150" height="150" /> | [권구호(팀장) (BE)](https://github.com/9walnut) | BE | 기획/문서 작성, DB 설계, CI/CD 구축, https 보안 서버 구축, <br /> 관리자 / 장바구니 API 구현, S3 이미지 업로드 기능 구현 |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/620a9128-de56-4b96-8775-9a37372ab9f1"  width="150" height="150" /> | [이예찬 (BE)](https://github.com/yeeeeechan) | BE | 회원 전용 기능 전반(주문하기/결제하기/상품 페이지) API 구현(JWT), <br /> SNS 간편 로그인 |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/81420a4b-c1ca-48ec-a57a-45b8f5224bdd" width="150" height="150" /> | [양현정 (FE)](https://github.com/hyeoonjeoong) | FE | 관리자 전용 기능 전반(대시보드, 상품 등록/수정/삭제,  회원 관리, 거래 내역 관리) <br /> 페이지네이션, 반응형 디자인 적용 |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/bc0aa2ec-89f0-411a-a538-6de87c1fca4d" width="150" height="150" /> | [정우성 (FE)](https://github.com/dntjd129) | FE | 메인 공통 반응형 컴포넌트 (Navbar, Footer, Carousel), <br /> 회원 전용 기능 전반(장바구니/주문하기/결제하기/상품 페이지) 구현 |
 
 </div>
 
@@ -67,41 +67,48 @@ $ node .\app.js
 
 <br />
 
+<details>
+<summary>
+    
 ## 📌 화면 구성
 
+</summary>
+
 <div align=center >
-  
+
 | 회원/비회원 서비스 | 
 | :---: |
-| ![메인화면](https://github.com/9walnut/TheWave/assets/144768130/4beeb8e0-1ca9-47d4-b5c6-55c2d8e77baf) |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/4beeb8e0-1ca9-47d4-b5c6-55c2d8e77baf" width="750"> |
 | 홈페이지 메인 |
-| ![로그인](https://github.com/9walnut/TheWave/assets/144768130/a2e1eb43-0e3c-40a0-bcae-33211b4f3cd7) |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/a2e1eb43-0e3c-40a0-bcae-33211b4f3cd7" width="750"> |
 | 로그인 페이지 |
-| ![회원가입](https://github.com/9walnut/TheWave/assets/144768130/b0a3bcae-ce62-42a3-b795-4e95d07e483a) |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/b0a3bcae-ce62-42a3-b795-4e95d07e483a" width="750"> |
 | 회원 가입 |
-| ![정보 수정](https://github.com/9walnut/TheWave/assets/144768130/167cc85c-f8ce-45c6-b8c3-c71730510d1c) |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/167cc85c-f8ce-45c6-b8c3-c71730510d1c" width="750"> |
 | 회원 정보 수정 |
+
 
 ---
 
 | 관리자 서비스 |
 | :---: |
-| ![관리자메인](https://github.com/9walnut/TheWave/assets/144768130/01365fa8-feca-4fa8-b0e3-7fa3ed7beff5) |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/01365fa8-feca-4fa8-b0e3-7fa3ed7beff5" width="750"> |
 | 어드민 페이지 메인 |
-| ![상품등록](https://github.com/9walnut/TheWave/assets/144768130/8ccc1488-4329-4aa8-9d5f-9edbf8d87e2c) |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/8ccc1488-4329-4aa8-9d5f-9edbf8d87e2c" width="750"> |
 | 상품 등록 |
-| ![회원관리](https://github.com/9walnut/TheWave/assets/144768130/d1e718cb-9ae1-4b3f-848f-2d0f04faf3b8) |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/d1e718cb-9ae1-4b3f-848f-2d0f04faf3b8" width="750"> |
 | 회원 관리 |
-| ![거래내역관리](https://github.com/9walnut/TheWave/assets/144768130/516f2529-1961-4f50-82ea-e186b18095ad) |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/516f2529-1961-4f50-82ea-e186b18095ad" width="750"> |
 | 거래 내역 관리 |
 
+</details>
 
 </div>
 <br />
 
 ## ✨ 주요 사항
 
-(프로젝트에서 자랑하고 싶은 사항 -있다면 추후 기입)
+
 <br /><br />
 
 ## 📌 프로젝트 구성
