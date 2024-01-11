@@ -104,10 +104,6 @@ $ node .\app.js
 </details>
 
 </div>
-<br />
-
-## ✨ 주요 사항
-
 
 <br /><br />
 
@@ -129,12 +125,12 @@ $ node .\app.js
   
 | **개체-관계 모델(ERD)** |
 | :----------: |
-| <img src='https://github.com/9walnut/TheWave/assets/144768130/cb4944e5-13c7-4575-ac9a-ef6e91fb4db5' width="700" /> |
+| <img src='https://github.com/9walnut/TheWave/assets/144768130/cb4944e5-13c7-4575-ac9a-ef6e91fb4db5' width="800" /> |
 
 
 | **시스템 구성** |
 | :----------: |
-| <img src='https://github.com/9walnut/TheWave/assets/144768130/e718ac2a-4707-4d99-a3f1-ec247c0f5674' width="700" /> |
+| <img src='https://github.com/9walnut/TheWave/assets/144768130/e718ac2a-4707-4d99-a3f1-ec247c0f5674' width="800" /> |
 
 
 ## 🛠️ 기술 스택
