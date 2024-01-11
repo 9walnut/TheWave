@@ -128,6 +128,7 @@ function OrderListPage() {
                   type="text"
                   value={deliveryRequest}
                   onChange={(e) => setDeliveryRequest(e.target.value)}
+                  placeholder="요청사항"
                 />
               </S.InputWrapper>
               <S.InputWrapper>

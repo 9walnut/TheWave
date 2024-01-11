@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ModifiedPrice from "../../shared/ModifiedPrice";
 
 function DeliveryComponent({ orderList }) {
   const getStatusText = (orderStatus) => {
@@ -31,7 +32,10 @@ function DeliveryComponent({ orderList }) {
                 </div>
                 <div>
                   <div>주문수량: {order.orderQuantity}</div>
-                  <div>총 가격: {order.totalPrice}</div>
+                  <div>
+                    총 가격:
+                    <ModifiedPrice number={order.totalPrice} />
+                  </div>
                   <div>{getStatusText(order.orderStatus)}</div>
                 </div>
               </ProductInfo>
@@ -44,11 +48,13 @@ function DeliveryComponent({ orderList }) {
 }
 const OrderContainer = styled.div`
   display: flex;
-  /* align-items: center; */
+  align-items: center;
+  justify-content: center;
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
   border-radius: 8px;
+  width: 100%;
 `;
 
 const OrderInfo = styled.div`
@@ -68,7 +74,7 @@ const Image = styled.img`
 
 const ProductInfo = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
