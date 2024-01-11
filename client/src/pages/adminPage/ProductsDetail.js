@@ -10,6 +10,7 @@ import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 import ModifiedPrice from "../../shared/ModifiedPrice.js";
 // import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
+import Swal from "sweetalert2";
 
 function ProductsDetail({ products }) {
   const [product, setProduct] = useState({});
@@ -33,8 +34,17 @@ function ProductsDetail({ products }) {
   //---axios delete
 
   const deleteProduct = async () => {
-    if (window.confirm("정말 상품을 삭제하시겠습니까?")) {
-      try {
+    try {
+      const result = await Swal.fire({
+        icon: "question",
+        title: "삭제",
+        html: "상품을 삭제하시겠습니까?",
+        confirmButtonColor: "#5e748f",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+      });
+      if (result.isConfirmed) {
         const response = await axios.delete(`/api/admin/products/${productId}`);
         console.log("response.data: ", response.data);
 
@@ -45,9 +55,9 @@ function ProductsDetail({ products }) {
         } else {
           console.error("상품 삭제 실패");
         }
-      } catch (error) {
-        console.error("에러", error);
       }
+    } catch (error) {
+      console.error("에러", error);
     }
   };
 

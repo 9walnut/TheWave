@@ -6,6 +6,7 @@ import Footer from "../../../components/mainPage/Footer";
 import "../MainPage.css";
 import * as S from "./FindIdPageStyle.js";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function FindIdPage() {
   const navigate = useNavigate();
@@ -25,7 +26,10 @@ function FindIdPage() {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       if (userName === "" || phoneNumber === "") {
-        alert("이름 또는 핸드폰번호를 입력해주세요.");
+        Swal.fire({
+          icon: "error",
+          title: "이름 혹은 휴대폰 번호를 입력해주세요",
+        });
       } else {
         handleFindId();
       }

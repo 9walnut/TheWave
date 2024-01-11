@@ -9,6 +9,7 @@ import DataTable from "../../shared/adminPage/components/DataTable";
 import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
 import ModifiedPhoneNumber from "../../shared/ModifiedPhoneNumber.js";
+import Swal from "sweetalert2";
 
 const header = [
   {
@@ -100,8 +101,17 @@ function Users() {
     console.log("deleteUsers 함수 호출되냐");
     console.log("삭제할 UserNumber:", selectedUserNumbers.selectedUserNumber);
 
-    if (window.confirm("정말 회원을 삭제하시겠습니까?")) {
-      try {
+    try {
+      const result = await Swal.fire({
+        icon: "question",
+        title: "삭제",
+        html: "회원을 삭제하시겠습니까 ?",
+        confirmButtonColor: "#5e748f",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+      });
+      if (result.isConfirmed) {
         const response = await axios.delete("/api/admin/users", {
           data: { userNumber: selectedUserNumbers.selectedUserNumber },
         });
@@ -113,9 +123,9 @@ function Users() {
         } else {
           console.error("유저 삭제 실패");
         }
-      } catch (error) {
-        console.error("에러", error);
       }
+    } catch (error) {
+      console.error("에러", error);
     }
   };
   return (
