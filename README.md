@@ -79,7 +79,7 @@ $ node .\app.js
 | 로그인 페이지 |
 | ![회원가입](https://github.com/9walnut/TheWave/assets/144768130/b0a3bcae-ce62-42a3-b795-4e95d07e483a) |
 | 회원 가입 |
-| ![정보수정](https://github.com/9walnut/TheWave/assets/144768130/8f909df2-f3de-4405-aac4-a56b30d41b84) |
+| ![정보 수정](https://github.com/9walnut/TheWave/assets/144768130/167cc85c-f8ce-45c6-b8c3-c71730510d1c) |
 | 회원 정보 수정 |
 
 ---
