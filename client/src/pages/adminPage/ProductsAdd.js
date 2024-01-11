@@ -16,6 +16,7 @@ import AdminSelect from "../../shared/adminPage/components/AdminSelect";
 import UploadThumbnail from "../../shared/adminPage/components/UploadThumbnail";
 import UploadDetail from "../../shared/adminPage/components/UploadDetail";
 import AdminOptionSize from "../../shared/adminPage/components/AdminOptionSize.js";
+import Swal from "sweetalert2";
 
 function ProductsAdd() {
   const navigate = useNavigate();
@@ -128,7 +129,10 @@ function ProductsAdd() {
         // console.log("안보내짐");
       }
     } catch (error) {
-      alert("입력란과 옵션 선택, 이미지를 모두 등록해주세요.");
+      Swal.fire({
+        icon: "error",
+        title: "입력란과 옵션 선택, 이미지를 모두 등록해주세요.",
+      });
       console.log("에러", error);
     }
   };
