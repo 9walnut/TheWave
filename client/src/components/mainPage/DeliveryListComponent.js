@@ -22,9 +22,6 @@ function DeliveryComponent({ orderList }) {
         <OrderItem key={index}>
           <OrderContainer>
             <OrderInfo>
-              <div style={{ textAlign: "center", marginBottom: "5px" }}>
-                주문일자: {order.orderDate}
-              </div>
               <ProductInfo>
                 <div>
                   <Image src={order.product.thumbnailUrl} alt="Product Image" />
@@ -37,6 +34,9 @@ function DeliveryComponent({ orderList }) {
                     <ModifiedPrice number={order.totalPrice} />
                   </div>
                   <div>{getStatusText(order.orderStatus)}</div>
+                  <div style={{ textAlign: "center", marginTop: "8px" }}>
+                    주문일자: {order.orderDate}
+                  </div>
                 </div>
               </ProductInfo>
             </OrderInfo>
@@ -49,9 +49,9 @@ function DeliveryComponent({ orderList }) {
 const OrderContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 16px;
   margin: 10px;
   border-radius: 8px;
   width: 100%;
@@ -78,6 +78,6 @@ const ProductInfo = styled.div`
   align-items: center;
 `;
 
-const ProductName = styled.p``;
+const ProductName = styled.div``;
 
 export default DeliveryComponent;
