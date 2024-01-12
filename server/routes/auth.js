@@ -1,6 +1,5 @@
 const express = require("express");
 const controller = require("../controllers/Cauth");
-const passport = require("passport");
 const router = express.Router();
 
 // 메인 페이지
@@ -14,52 +13,6 @@ router.post("/login", controller.loginUser);
 
 // 간편 로그인
 router.post("/snsLogin", controller.loginSNS);
-
-// // 구글 로그인
-// router.get(
-//   "/login/google",
-//   passport.authenticate("google", { scope: ["profile"] })
-// );
-
-// // 구글 로그인 콜백
-// router.get(
-//   "/login/google/callback",
-//   passport.authenticate("google", {
-//     failureRedirect: "http://localhost:3000/login",
-//   }),
-//   (req, res) => {
-//     res.redirect(`http://localhost:3000`);
-//   }
-// );
-
-// 카카오 로그인
-// router.get("/login/kakao", passport.authenticate("kakao"));
-
-// // 카카오 로그인 콜백
-// router.get(
-//   "/login/kakao/callback",
-//   passport.authenticate("kakao", {
-//     failureRedirect: "http://localhost:3000/login", // 로그인 실패 시 리다이렉션 주소
-//   }),
-//   (req, res) => {
-//     // 로그인 성공 시 리다이렉션 주소
-//     res.redirect("http://localhost:3000");
-//   }
-// );
-
-// 네이버 로그인
-router.get("/login/naver", passport.authenticate("naver", { session: false }));
-
-// 네이버 로그인 콜백
-router.get(
-  "/login/naver/callback",
-  passport.authenticate("naver", {
-    failureRedirect: "http://localhost:3000/login",
-  }),
-  (req, res) => {
-    res.redirect("http://localhost:3000");
-  }
-);
 
 // '로그아웃' 버튼 클릭 시
 router.get("/logout", controller.logout);
