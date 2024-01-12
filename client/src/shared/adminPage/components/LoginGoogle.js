@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/reducers/userSlice";
@@ -42,7 +42,6 @@ export default function LoginGoogle() {
     const idToken = data.credential;
     try {
       const res = await axios.post("api/snsLogin", { idToken });
-      console.log("res 결과", res);
 
       const result = res.data;
       localStorage.setItem("accessToken", result.accessToken);
@@ -50,7 +49,6 @@ export default function LoginGoogle() {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       };
       const { isAdmin, accessToken } = res.data;
-      console.log("headers", headers);
 
       const user = {
         accessToken,

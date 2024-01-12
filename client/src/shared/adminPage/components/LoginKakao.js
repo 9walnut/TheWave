@@ -24,21 +24,12 @@ export default function LoginKakao() {
   const navigate = useNavigate();
   const kakaoClientId = process.env.REACT_APP_KAKAO_JS;
   const kakaoOnSuccess = async (data) => {
-    console.log("카카오 로그인 성공 res", data);
-    // const idToken = data.response.access_token; // 엑세스 토큰 백엔드로 전달
-
-    // 서버에 사용자 정보 전달
     const response = await axios.post("/api/snsLogin", { data });
-
-    // 서버로부터 응답 받기
     const result = response.data.result;
-    console.log("response.data", response.data);
 
     const { isAdmin, accessToken } = response.data;
-    // 응답 처리 로직
     if (result === true) {
       const user = { isAdmin, accessToken };
-      // 사용자 정보를 리덕스 스토어에 저장
       dispatch(setUser(user));
 
       localStorage.setItem("accessToken", user.accessToken);
@@ -52,8 +43,7 @@ export default function LoginKakao() {
         navigate("/");
       }
     } else {
-      // 로그인 실패 처리
-      console.error("Login failed:");
+      console.error("Login failed");
     }
   };
   const kakaoOnFailure = (error) => {
