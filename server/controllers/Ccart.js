@@ -44,12 +44,11 @@ exports.getCart = async (req, res) => {
 };
 
 // 장바구니 수정
-// ------------ 이게 과연 필요할까 고민 --------------
 exports.editCart = async (req, res) => {
   try {
     const { cartId } = req.params;
-    const { cartQuantity, color, size } = req.body; // 옵션 정보 추가
-    let updateData = { cartQuantity, color, size }; // 수정할 데이터에 옵션 정보 포함
+    const { cartQuantity, color, size } = req.body;
+    let updateData = { cartQuantity, color, size };
     const editCart = await db.carts.update(updateData, { where: { cartId } });
     return res.send(editCart);
   } catch (error) {

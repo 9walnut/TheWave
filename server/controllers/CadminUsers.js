@@ -26,7 +26,7 @@ exports.getAdminUsers = async (req, res) => {
 // 체크박스로 구현해서 body로 요청
 exports.deleteAdminUsers = async (req, res) => {
   try {
-    const userNumbers = req.body.userNumber; // 클라이언트로부터 받은 userNumber 리스트
+    const userNumbers = req.body.userNumber;
     const isDeleted = await db.users.destroy({
       where: { userNumber: { [Op.in]: userNumbers } },
     });
