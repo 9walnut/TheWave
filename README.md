@@ -33,10 +33,10 @@ https://thewavemarket.co.kr/
 
 | 프로필  | 이름 | 역할 | 역할 내용 |
 | --- | --- | --- | --- |
-| <img src="https://github.com/9walnut/TheWave/assets/144768130/cbffbe1f-68de-4974-9ba3-1cc76519ead8" width="150" height="150" /> | [권구호(팀장) (BE)](https://github.com/9walnut) | BE | 기획/문서 작성, DB 설계, CI/CD 구축, https 보안 서버 구축, <br /> 관리자 / 장바구니 API 구현, S3 이미지 업로드 기능 구현 |
-| <img src="https://github.com/9walnut/TheWave/assets/144768130/620a9128-de56-4b96-8775-9a37372ab9f1"  width="150" height="150" /> | [이예찬 (BE)](https://github.com/yeeeeechan) | BE | 회원 전용 기능 전반(주문하기/결제하기/상품 페이지) API 구현(JWT), <br /> SNS 간편 로그인 |
-| <img src="https://github.com/9walnut/TheWave/assets/144768130/81420a4b-c1ca-48ec-a57a-45b8f5224bdd" width="150" height="150" /> | [양현정 (FE)](https://github.com/hyeoonjeoong) | FE | 관리자 전용 기능 전반(대시보드, 상품 등록/수정/삭제,  회원 관리, 거래 내역 관리) <br /> 페이지네이션, 반응형 디자인 적용 |
-| <img src="https://github.com/9walnut/TheWave/assets/144768130/bc0aa2ec-89f0-411a-a538-6de87c1fca4d" width="150" height="150" /> | [정우성 (FE)](https://github.com/dntjd129) | FE | 메인 공통 반응형 컴포넌트 (Navbar, Footer, Carousel), <br /> 회원 전용 기능 전반(장바구니/주문하기/결제하기/상품 페이지) 구현 |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/cbffbe1f-68de-4974-9ba3-1cc76519ead8" width="150" height="150" /> | [권구호(팀장)](https://github.com/9walnut) | BE | 기획/문서 작성, DB 설계, CI/CD 구축, https 보안 서버 구축, <br /> 관리자 / 장바구니 API 구현, S3 이미지 업로드 기능 구현 |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/620a9128-de56-4b96-8775-9a37372ab9f1"  width="150" height="150" /> | [이예찬](https://github.com/yeeeeechan) | BE | 회원 전용 기능 전반(주문하기/결제하기/상품 페이지) API 구현(JWT), <br /> SNS 간편 로그인 |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/81420a4b-c1ca-48ec-a57a-45b8f5224bdd" width="150" height="150" /> | [양현정](https://github.com/hyeoonjeoong) | FE | 관리자 전용 기능 전반(대시보드, 상품 등록/수정/삭제,  회원 관리, 거래 내역 관리) <br /> 페이지네이션, 반응형 디자인 적용 |
+| <img src="https://github.com/9walnut/TheWave/assets/144768130/bc0aa2ec-89f0-411a-a538-6de87c1fca4d" width="150" height="150" /> | [정우성](https://github.com/dntjd129) | FE | 메인 공통 반응형 컴포넌트 (Navbar, Footer, Carousel), <br /> 회원 전용 기능 전반(장바구니/주문하기/결제하기/상품 페이지) 구현 |
 
 </div>
 
