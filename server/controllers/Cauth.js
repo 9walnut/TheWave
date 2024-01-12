@@ -1,4 +1,3 @@
-const { createHash } = require("crypto");
 const { db } = require("../models/index");
 const { hashedPwWithSalt, comparePw } = require("../middleware/pw");
 const {
@@ -6,8 +5,6 @@ const {
   deleteToken,
   generateAccessTokenSNS,
 } = require("../middleware/jwt");
-const axios = require("axios");
-const qs = require("qs");
 const jwt = require("jsonwebtoken");
 
 // 메인 페이지 렌더
@@ -25,7 +22,6 @@ exports.main = async (req, res) => {
         "thumbnailUrl",
       ],
     });
-    // console.log(productsInfo);
     res.json(productsInfo);
   } catch (error) {
     console.error(error);
@@ -111,7 +107,6 @@ exports.loginSNS = async (req, res) => {
       });
 
       const { accessToken } = await generateAccessTokenSNS(userInfo);
-      console.log("accessToken", accessToken);
       res.send({
         result: true,
         isAdmin: false,
@@ -120,7 +115,6 @@ exports.loginSNS = async (req, res) => {
     } else {
       // 회원 정보 db 저장
       const decoding = jwt.decode(idToken);
-      console.log("sns jwt 토큰 디코딩 결과", decoding);
       const { userPw, salt } = await hashedPwWithSalt(decoding.sub);
 
       const userInfo = await db.users.create({
@@ -152,7 +146,7 @@ exports.loginSNS = async (req, res) => {
   }
 };
 
-// 로그아웃(access 토큰 받아 해당 사용자의 refresh 토큰 삭제)
+// 로그아웃
 exports.logout = async (req, res) => {
   try {
     const accessToken = req.headers["authorization"];
@@ -160,7 +154,6 @@ exports.logout = async (req, res) => {
 
     if (logoutCheck) {
       res.send({ result: true });
-      console.log(logoutCheck.result);
     } else res.send({ result: false });
   } catch (error) {
     console.error(error);
@@ -179,7 +172,6 @@ exports.idCheck = async (req, res) => {
     const checkInfo = await db.users.findOne({
       where: {
         userId: req.body.userId,
-        // phoneNumber: req.body.phoneNumber,
       },
     });
     if (!checkInfo) res.send({ result: true });
@@ -204,12 +196,7 @@ exports.register = async (req, res) => {
       address,
     } = req.body.data;
 
-    console.log(req.body, "바디바디");
-    console.log(req.body.data, "바디데이터");
-    console.log("주소입니다 ! ", address);
-
     const { userPw, salt } = await hashedPwWithSalt(password); // 암호화
-    console.log("userPw", salt);
 
     const userInfo = await db.users.create({
       userId: userId,
@@ -250,7 +237,7 @@ exports.findId = async (req, res) => {
     });
 
     if (findId) res.json(findId);
-    else res.send({ result: false }); // 아이디 찾기 실패 시 false 반환
+    else res.send({ result: false });
   } catch (error) {
     console.error(error);
     res.status(500).send("아이디 찾기 오류");
@@ -290,7 +277,7 @@ exports.newPw = async (req, res) => {
         password: userPw,
         passwordSalt: salt,
       },
-      { where: { userId: userId } } // 유저 아이디와 일치하는 컬럼에서 비번 업데이트
+      { where: { userId: userId } }
     );
     console.log("newPw", newPw);
     res.send({ result: true });

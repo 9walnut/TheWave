@@ -32,15 +32,13 @@ exports.productPage = async (req, res) => {
 
 // 찜하기
 exports.wish = async (req, res) => {
-  const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
+  const accessToken = req.headers["authorization"];
   const tokenCheck = await verifyToken(accessToken);
 
   try {
     const checkWishList = await db.wishlist.findOne({
       where: { productId: req.params.productId },
     });
-
-    console.log("checkWishList 결과", checkWishList);
 
     if (!checkWishList) {
       const wishListIn = await db.wishlist.create({

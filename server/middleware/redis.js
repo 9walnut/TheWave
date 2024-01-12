@@ -10,21 +10,12 @@ const redisClient = redis.createClient({
 });
 
 redisClient.connect((err) => {
-  if (err) console.error(err, "redis 연결 실패ㅠㅠ");
+  if (err) console.error(err, "redis 연결 실패");
   else {
     console.log("redis 연결 성공!");
 
     // 연결 성공 후 테스트 키-값 설정
     redisClient.set("testKey", "testValue", redis.print);
-  }
-});
-
-// 설정한 키의 값을 가져와서 출력
-redisClient.get("testKey", (err, reply) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log("testKey의 값:", reply);
   }
 });
 
