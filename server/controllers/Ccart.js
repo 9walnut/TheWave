@@ -13,8 +13,6 @@ exports.getCart = async (req, res) => {
       const accessToken = req.headers["authorization"];
       const tokenCheck = await verifyToken(accessToken);
 
-      console.log("넌 회원");
-
       cart = await db.carts.findAll({
         where: { userNumber: tokenCheck.userData.userNumber },
         include: [
@@ -33,7 +31,6 @@ exports.getCart = async (req, res) => {
       });
     } else {
       // 비회원인 경우
-      console.log("넌 비회원");
       cart = req.body.cart || [];
     }
     return res.send(cart);
@@ -60,7 +57,6 @@ exports.editCart = async (req, res) => {
 // 장바구니 삭제
 exports.deleteCart = async (req, res) => {
   try {
-    console.log("장바구니삭제한다고!!!!!!!!!!!!!!!!!!!!!!!!!", req.body);
     const { cartId } = req.body;
     console.log(cartId);
     const isDeleted = await db.carts.destroy({
@@ -76,7 +72,6 @@ exports.deleteCart = async (req, res) => {
 
 // 장바구니 구매하기 버튼 - 주문 정보 페이지로 정보 발송
 exports.payCart = async (req, res) => {
-  // console.log("장바구니결제한다", req.body);
   // const { cartIds } = req.body;
   // const accessToken = req.headers["authorization"];
   // try {

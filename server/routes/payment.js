@@ -9,7 +9,4 @@ router.post("/orderList/:productId", controller.goPayment);
 router.post("/", controller.payment);
 router.post("/cart", controller.cartPayment);
 
-// 결제하기 > '비회원으로 결제' 클릭 시
-// router.post("/:productId/N", controller.noMemberPay);
-
 module.exports = router;

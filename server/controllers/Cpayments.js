@@ -19,7 +19,6 @@ exports.goPayment = async (req, res) => {
       where: { userNumber: userNumber },
       attributes: ["userName", "phoneNumber"],
     });
-    console.log("userInfo", userInfo);
 
     const address = await db.address.findOne({
       where: { userNumber: userNumber },
@@ -27,13 +26,11 @@ exports.goPayment = async (req, res) => {
     });
 
     const userAddress = address.address ? address.address.split("/") : [];
-    console.log("userAddress", userAddress);
 
     const productInfo = await db.products.findOne({
       where: { productId: productId },
       attributes: ["productId", "productName", "thumbnailUrl", "productPrice"],
     });
-    console.log("productInfo", productInfo);
 
     if (userInfo && userAddress) {
       res.json({
@@ -63,7 +60,6 @@ exports.payment = async (req, res) => {
     orderQuantity,
   } = req.body;
   // 주문서에서 작성한 정보
-  // 여러 상품들에 대한 개별 데이터(color, size, orderQuantity)가 어떤 식으로 넘어올지...
 
   const accessToken = req.headers["authorization"];
 
@@ -72,19 +68,14 @@ exports.payment = async (req, res) => {
   try {
     const tokenCheck = await verifyToken(accessToken);
     const userNumber = tokenCheck.userData.userNumber;
-    console.log("유저넘버", userNumber);
 
     let newOrder;
     let payment;
     let productOut;
 
-    // console.log("상품정보", productInfo);
-    // console.log("productInfo.length", productInfo.length);
-    // console.log("주소임", userAddress);
     try {
       // 단일 상품 구매
       if (productInfo.length === 1) {
-        console.log("단일 상품 구매");
         const product = await db.products.findOne({
           where: { productId: productInfo[0].productId },
         });
@@ -128,15 +119,12 @@ exports.payment = async (req, res) => {
           { t }
         );
       } else {
-        console.log("여러 상품 구매");
-
         // 구매 상품 정보
         let productIds = productInfo.map((item) => item.productId);
 
         const productsCheck = await db.products.findAll({
           where: { productId: { [Op.in]: productIds } },
         });
-        console.log("productsCheck 결과 확인", productsCheck);
 
         for (let i = 0; i < productInfo.length; i++) {
           newOrder = await db.orders.create(
@@ -210,7 +198,6 @@ exports.cartPayment = async (req, res) => {
     deliveryRequest,
     cartItems, // 변경된 부분: cartItems로 받음
   } = req.body;
-  console.log("주소소소", userAddress);
 
   const accessToken = req.headers["authorization"];
   const t = await sequelize.transaction();
@@ -218,13 +205,10 @@ exports.cartPayment = async (req, res) => {
   try {
     const tokenCheck = await verifyToken(accessToken);
     const userNumber = tokenCheck.userData.userNumber;
-    console.log("유저넘버", userNumber);
 
     let newOrders = [];
     let payment;
     let productOut;
-
-    console.log("상품정보", cartItems);
 
     try {
       for (const cartItem of cartItems) {

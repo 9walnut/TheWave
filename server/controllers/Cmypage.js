@@ -7,7 +7,6 @@ exports.mypage = async (req, res) => {
   const accessToken = req.headers["authorization"]; // 헤더에서 access 토큰값 받아오기
   try {
     const tokenCheck = await verifyToken(accessToken); // 토큰 검증 및 디코딩
-    console.log("tokenCheck", tokenCheck);
 
     if (
       tokenCheck.result !== "no token" &&
@@ -90,7 +89,6 @@ exports.wishList = async (req, res) => {
 // 찜한 상품 장바구니 담기 (담고 나서도 찜한 상품에서는 사라지지 않음)
 exports.wishToCart = async (req, res) => {
   const accessToken = req.headers["authorization"];
-  console.log("마바디", req.body);
   const { productId } = req.body.data;
 
   try {
@@ -101,7 +99,6 @@ exports.wishToCart = async (req, res) => {
       where: { productId: productId },
       attributes: ["isDeleted"],
     });
-    console.log("productIsDeleted", productIsDeleted);
 
     if (productIsDeleted === true) {
       res.send({ result: false });
@@ -124,9 +121,8 @@ exports.wishToCart = async (req, res) => {
 // 찜한 상품 삭제
 exports.deleteWish = async (req, res) => {
   const accessToken = req.headers["authorization"];
-  console.log("찜상품삭제", req.body);
   const { productId } = req.body;
-  console.log(productId);
+
   try {
     const tokenCheck = await verifyToken(accessToken);
 
@@ -203,9 +199,7 @@ exports.editInfo = async (req, res) => {
 // 회원 비밀번호 수정
 exports.editPw = async (req, res) => {
   const accessToken = req.headers["authorization"];
-  console.log(req.body);
   const { newPassword } = req.body;
-  console.log(newPassword, "newpwpwpwpw");
   const tokenCheck = await verifyToken(accessToken);
 
   try {
@@ -217,7 +211,6 @@ exports.editPw = async (req, res) => {
       },
       { where: { userNumber: tokenCheck.userData.userNumber } }
     );
-    console.log("editPw 결과", editPw);
     if (editPw == 1) {
       res.send({ result: true });
     } else {
@@ -232,7 +225,6 @@ exports.editPw = async (req, res) => {
 // 회원 탈퇴
 exports.deleteUser = async (req, res) => {
   try {
-    console.log(req.body);
     const accessToken = req.headers["authorization"];
     const tokenCheck = await verifyToken(accessToken);
 
