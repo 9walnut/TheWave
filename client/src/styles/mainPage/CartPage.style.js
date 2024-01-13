@@ -76,7 +76,6 @@ export const Productbox = styled.div`
 `;
 
 export const ProductNameBox = styled.div`
-  width: 90px;
   @media (max-width: 980px) {
     font-size: small;
   }
