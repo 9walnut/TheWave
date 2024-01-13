@@ -12,6 +12,7 @@ import PageNationFunc from "../../shared/PageNationFunc.js";
 import DataTable from "../../shared/adminPage/components/DataTable";
 import ProductsDetail from "./ProductsDetail.js";
 import ModifiedPrice from "../../shared/ModifiedPrice.js";
+import Swal from "sweetalert2";
 
 const header = [
   {
@@ -103,12 +104,25 @@ function Products() {
 
   const deleteProducts = async () => {
     if (selectedProductIds.length === 0) {
-      alert("선택된 상품이 없습니다.");
+      Swal.fire({
+        icon: "error",
+        title: "선택된 상품이 없습니다.",
+        confirmButtonColor: "#5e748f",
+      });
       return;
     }
     // console.log("삭제할 제품 ID:", selectedProductIds);
-    if (window.confirm("정말 상품을 삭제하시겠습니까?")) {
-      try {
+    try {
+      const result = await Swal.fire({
+        icon: "question",
+        title: "삭제",
+        html: "상품을 삭제하시겠습니까?",
+        confirmButtonColor: "#5e748f",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+      });
+      if (result.isConfirmed) {
         const response = await axios.delete("/api/admin/products", {
           data: { productId: selectedProductIds.selectedProductId },
         });
@@ -123,9 +137,9 @@ function Products() {
         } else {
           console.error("상품 삭제 실패");
         }
-      } catch (error) {
-        console.error("에러", error);
       }
+    } catch (error) {
+      console.error("에러", error);
     }
   };
 

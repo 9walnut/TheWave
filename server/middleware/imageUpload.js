@@ -7,9 +7,9 @@ const path = require("path");
 dotenv.config();
 
 AWS.config.update({
-  region: process.env.AWS_REGION, // region 값
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID, // accessKeyId
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, // secretAccessKey
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
 const s3 = new AWS.S3();
@@ -18,11 +18,10 @@ const allowedExtensions = [".png", ".jpg", ".jpeg", ".bmp"];
 const thumbnailUpload = multer({
   storage: multer3({
     s3: s3,
-    bucket: "thewave-bucket", // bucket-name
+    bucket: "thewave-bucket",
     key: (req, file, callback) => {
       const uploadDirectory = "thumbnails";
       const extension = path.extname(file.originalname);
-      // 확장자 검사
       if (!allowedExtensions.includes(extension)) {
         return callback(new Error("wrong extension"));
       }
@@ -35,11 +34,10 @@ const thumbnailUpload = multer({
 const detailUpload = multer({
   storage: multer3({
     s3: s3,
-    bucket: "thewave-bucket", // bucket-name
+    bucket: "thewave-bucket",
     key: (req, file, callback) => {
       const uploadDirectory = "details";
       const extension = path.extname(file.originalname);
-      // 확장자 검사
       if (!allowedExtensions.includes(extension)) {
         return callback(new Error("wrong extension"));
       }
