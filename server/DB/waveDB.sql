@@ -21,7 +21,9 @@
 	CREATE TABLE `address` (
 		`addressId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		`userNumber`	INT	NOT NULL,
-		`address`	VARCHAR(200) NOT NULL,
+		`address1`	VARCHAR(200) NOT NULL,
+		`address2`	VARCHAR(200) NOT NULL,
+		`address3`	VARCHAR(200) NOT NULL,
 		foreign key (userNumber) references users (userNumber) ON DELETE CASCADE
 	);
 
@@ -56,8 +58,8 @@
 		`userNumber`	INT	NOT NULL,
 		`productId`	INT	NOT NULL,
 		`cartQuantity`	INT NOT NULL,
-	  `color`	VARCHAR(50) NOT NULL,
-	  `size`	VARCHAR(50)	NOT NULL, 
+	  `cartColor`	VARCHAR(50) NOT NULL,
+	  `cartSize`	VARCHAR(50)	NOT NULL, 
 		`isChecked`	INT	NOT NULL,
 		`isDeleted` BOOLEAN DEFAULT FALSE NOT NULL,
 		foreign key (userNumber) references users (userNumber) ON DELETE CASCADE,
@@ -69,11 +71,7 @@ CREATE TABLE `orders` (
 	`orderId`	INT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`userNumber`	INT	NOT NULL,
 	`cartId`	INT	NULL,
-	`productId`	INT	NOT NULL,
-	`orderQuantity`	INT NOT 	NULL,
-	`color`	VARCHAR(50) NOT 	NULL,
-	`size`	VARCHAR(50)	NOT NULL, 
-  `totalPrice` INT NOT NULL,
+	`totalPrice` INT NOT NULL,
 	`receiveName`	VARCHAR(10)	NOT NULL,
 	`address`	VARCHAR(200)	NOT NULL,
 	`deliveryRequest`	VARCHAR(255)	NOT NULL,
@@ -81,9 +79,20 @@ CREATE TABLE `orders` (
 	`orderStatus`	INT	NOT NULL DEFAULT 1,
 	`changeDate`	DATE NOT NULL,
 	FOREIGN KEY (userNumber) REFERENCES users (userNumber) ON DELETE CASCADE,
-	FOREIGN KEY (cartId) REFERENCES carts (cartId),
-	FOREIGN KEY (productId) REFERENCES products (productId)
+	FOREIGN KEY (cartId) REFERENCES carts (cartId)
 );
+
+CREATE TABLE `order_products` (
+	`orderId` INT NOT NULL,
+	`productId` INT NOT NULL,
+	`orderQuantity` INT NOT NULL,
+	`orderColor` VARCHAR(20) NOT NULL,
+	`orderSize` VARCHAR(20) NOT NULL,
+	PRIMARY KEY (`orderId`, `productId`),
+	FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`),
+	FOREIGN KEY (`productId`) REFERENCES `products` (`productId`)
+);
+
 	CREATE TABLE `payment` (
 		`paymentId`	INT	NOT NULL  AUTO_INCREMENT PRIMARY KEY,
 		`orderId`	INT	NOT NULL,
@@ -150,38 +159,39 @@ VALUES
 
 
 
-INSERT INTO address (userNumber, address)
+INSERT INTO address (userNumber, address1, address2, address3)
 VALUES 
-  (1, '서울특별시 강남구 테스트로 123'),
-  (2, '부산광역시 해운대구 샘플로 456'),
-  (3, '인천광역시 남동구 새로운로 789'),
-  (4, '대구광역시 수성구 더미로 101'),
-  (5, '광주광역시 서구 주소로 202'),
-  (6, '대전광역시 유성구 다른로 303'),
-  (7, '울산광역시 중구 샘플길 404'),
-  (8, '세종특별자치시 테스트동 505'),
-  (9, '경기도 수원시 삼성로 606'),
-  (10, '강원도 춘천시 테스트길 707'),
-  (11, '충청북도 청주시 다른로 808'),
-  (12, '충청남도 아산시 주소길 909'),
-  (13, '전라북도 전주시 도로로 1010'),
-  (14, '전라남도 목포시 산책로 1111'),
-  (15, '경상북도 포항시 테스트길 1212'),
-  (16, '경상남도 창원시 산책로 1313'),
-  (17, '제주특별자치도 제주시 주소길 1414'),
-  (18, '서울특별시 종로구 테스트길 1515'),
-  (19, '경기도 고양시 더미로 1616'),
-  (20, '인천광역시 중구 다른로 1717'),
-  (21, '부산광역시 사하구 테스트로 1818'),
-  (22, '대구광역시 달서구 주소로 1919'),
-  (23, '광주광역시 북구 더미로 2020'),
-  (24, '대전광역시 서구 테스트길 2121'),
-  (25, '울산광역시 남구 주소로 2222'),
-  (26, '세종특별자치시 다른로 2323'),
-  (27, '경기도 수원시 테스트로 2424'),
-  (28, '강원도 춘천시 주소길 2525'),
-  (29, '충청북도 청주시 더미로 2626'),
-  (30, '충청남도 아산시 테스트길 2727');
+  (1, '서울특별시 강남구 테스트로 123', '서울특별시 서초구 더미로 124', '서울특별시 용산구 샘플로 125'),
+  (2, '부산광역시 해운대구 샘플로 456', '부산광역시 수영구 테스트로 457', '부산광역시 중구 새로운로 458'),
+  (3, '인천광역시 남동구 새로운로 789', '인천광역시 부평구 주소로 790', '인천광역시 연수구 다른로 791'),
+  (4, '대구광역시 수성구 더미로 101', '대구광역시 중구 테스트길 102', '대구광역시 달서구 샘플길 103'),
+  (5, '광주광역시 서구 주소로 202', '광주광역시 북구 삼성로 203', '광주광역시 남구 테스트길 204'),
+  (6, '대전광역시 유성구 다른로 303', '대전광역시 중구 주소길 304', '대전광역시 동구 도로로 305'),
+  (7, '울산광역시 중구 샘플길 404', '울산광역시 남구 산책로 405', '울산광역시 동구 테스트길 406'),
+  (8, '세종특별자치시 테스트동 505', '세종특별자치시 샘플동 506', '세종특별자치시 더미동 507'),
+  (9, '경기도 수원시 삼성로 606', '경기도 성남시 산책로 607', '경기도 안양시 주소길 608'),
+  (10, '강원도 춘천시 테스트길 707', '강원도 원주시 더미로 708', '강원도 강릉시 다른로 709'),
+  (11, '충청북도 청주시 다른로 808', '충청북도 충주시 테스트로 809', '충청북도 제천시 주소로 810'),
+  (12, '충청남도 아산시 주소길 909', '충청남도 천안시 더미로 910', '충청남도 공주시 테스트길 911'),
+  (13, '전라북도 전주시 도로로 1010', '전라북도 군산시 샘플길 1011', '전라북도 익산시 주소길 1012'),
+  (14, '전라남도 목포시 산책로 1111', '전라남도 여수시 테스트길 1112', '전라남도 순천시 더미로 1113'),
+  (15, '경상북도 포항시 테스트길 1212', '경상북도 경주시 새로운로 1213', '경상북도 안동시 샘플로 1214'),
+  (16, '경상남도 창원시 산책로 1313', '경상남도 진주시 테스트로 1314', '경상남도 거제시 주소로 1315'),
+  (17, '제주특별자치도 제주시 주소길 1414', '제주특별자치도 서귀포시 더미로 1415', '제주특별자치도 제주시 다른로 1416'),
+  (18, '서울특별시 종로구 테스트길 1515', '서울특별시 성동구 샘플길 1516', '서울특별시 강북구 주소길 1517'),
+  (19, '경기도 고양시 더미로 1616', '경기도 파주시 테스트길 1617', '경기도 용인시 새로운로 1618'),
+  (20, '인천광역시 중구 다른로 1717', '인천광역시 계양구 샘플로 1718', '인천광역시 남동구 테스트로 1719'),
+  (21, '부산광역시 사하구 테스트로 1818', '부산광역시 동래구 주소로 1819', '부산광역시 서구 더미로 1820'),
+  (22, '대구광역시 달서구 주소로 1919', '대구광역시 동구 테스트길 1920', '대구광역시 북구 샘플길 1921'),
+  (23, '광주광역시 북구 더미로 2020', '광주광역시 동구 새로운로 2021', '광주광역시 광산구 주소로 2022'),
+  (24, '대전광역시 서구 테스트길 2121', '대전광역시 중구 다른로 2122', '대전광역시 동구 샘플로 2123'),
+  (25, '울산광역시 남구 주소로 2222', '울산광역시 동구 테스트로 2223', '울산광역시 북구 더미로 2224'),
+  (26, '세종특별자치시 다른로 2323', '세종특별자치시 테스트로 2324', '세종특별자치시 샘플로 2325'),
+  (27, '경기도 수원시 테스트로 2424', '경기도 안산시 주소로 2425', '경기도 오산시 더미로 2426'),
+  (28, '강원도 춘천시 주소길 2525', '강원도 태백시 테스트길 2526', '강원도 동해시 샘플길 2527'),
+  (29, '충청북도 청주시 더미로 2626', '충청북도 보은시 새로운로 2627', '충청북도 옥천시 테스트로 2628'),
+  (30, '충청남도 아산시 테스트길 2727', '충청남도 논산시 주소로 2728', '충청남도 당진시 더미로 2729');
+
 
 INSERT INTO categories (categoryName)
 VALUES 
@@ -214,7 +224,7 @@ VALUES
   (1, '상품16', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
   (2, '상품17', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
   (3, '상품18', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE),
-  (7, '상품15', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE);
+  (7, '상품19', 15000, '장미 향기 가득한 특별한 상품입니다.', '판매준비중', 'https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1703911197678_hodu.jpg', '["https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu2.jpg","https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/details/hodu3.jpg"]', FALSE);
 
 INSERT INTO productoption (productId, color, size)
 VALUES
@@ -236,81 +246,65 @@ VALUES
 	(16, '["분홍"]', '["S"]'),
 	(17, '["분홍"]', '["S", "M", "L"]'),
 	(18, '["흰색"]', '["M"]'),
-	(19, '["흰색"]', '["L"]');
+	(19, '["흰색"]', '["M"]');
 
     
-INSERT INTO carts (userNumber, productId, cartQuantity, isChecked, isDeleted)
+INSERT INTO carts (userNumber, productId, cartQuantity, cartColor, cartSize, isChecked, isDeleted)
 VALUES 
-  (2, 2, 3, 1, FALSE),
-  (3, 3, 1, 0, FALSE),
-  (4, 4, 2, 1, FALSE),
-  (5, 5, 1, 0, FALSE),
-  (6, 6, 2, 1, FALSE),
-  (7, 7, 1, 0, FALSE),
-  (8, 8, 3, 1, FALSE),
-  (9, 9, 2, 0, FALSE),
-  (10, 10, 1, 1, FALSE),
-  (11, 11, 2, 0, FALSE),
-  (12, 12, 3, 1, FALSE),
-  (13, 13, 1, 0, FALSE),
-  (14, 14, 2, 1, FALSE),
-  (15, 15, 1, 0, FALSE),
-    (2, 2, 3, 1, FALSE),
-  (3, 3, 1, 0, FALSE),
-  (4, 4, 2, 1, FALSE),
-  (5, 5, 1, 0, FALSE),
-  (6, 6, 2, 1, FALSE),
-  (7, 7, 1, 0, FALSE),
-  (8, 8, 3, 1, FALSE),
-  (9, 9, 2, 0, FALSE),
-  (10, 10, 1, 1, FALSE),
-  (11, 11, 2, 0, FALSE),
-  (12, 12, 3, 1, FALSE),
-  (13, 13, 1, 0, FALSE),
-  (14, 14, 2, 1, FALSE),
-  (15, 15, 1, 0, FALSE);
+  (1, 1, 3, '파랑', 'M', 1, FALSE),
+  (2, 2, 3, '파랑', 'M', 1, FALSE),
+  (3, 3, 1, '노랑', 'S', 0, FALSE),
+  (4, 4, 2, '검정', 'S', 1, FALSE),
+  (5, 5, 1, '초록', 'S', 0, FALSE),
+  (6, 6, 2, '주황', 'S', 1, FALSE),
+  (7, 7, 1, '분홍', 'S', 0, FALSE),
+  (8, 8, 3, '흰색', 'S', 1, FALSE),
+  (9, 9, 2, '파랑', 'S', 0, FALSE),
+  (10, 10, 1, '빨강', 'S', 1, FALSE),
+  (11, 11, 2, '검정', 'M', 0, FALSE),
+  (12, 12, 3, '초록', 'L', 1, FALSE),
+  (13, 13, 1, '주황', 'XL', 0, FALSE),
+  (14, 14, 2, '분홍', 'S', 1, FALSE),
+  (15, 15, 1, '분홍', 'S', 0, FALSE);
+
   
 
-INSERT INTO orders (userNumber, cartId, productId, orderQuantity, color, size, totalPrice, receiveName, address, deliveryRequest, orderDate, orderStatus, changeDate)
-VALUES 
-  (1, 1, 1, 2, 'Red', 'M', 50000, '권구호', '서울특별시 강남구 테스트로 123', 'Fast Delivery', CURDATE(), 1, CURDATE()),
-  (2, 2, 2, 3, 'Blue', 'L', 75000, '이지은', '서울특별시 강북구 테스트로 456', 'Standard Delivery', CURDATE(), 2, CURDATE()),
-  (3, null, 3, 1, 'Yellow', 'XL', 30000, '김민수', '서울특별시 서초구 테스트로 789', 'Express Delivery', CURDATE(), 1, CURDATE()),
-  (4, null, 4, 2, 'Black', 'S', 60000, '박지영', '서울특별시 송파구 테스트로 101', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (5, null, 5, 1, 'Green', 'M', 40000, '정민우', '서울특별시 동작구 테스트로 111', 'Standard Delivery', CURDATE(), 2, CURDATE()),
-  (6, null, 6, 2, 'Orange', 'S', 55000, '김수현', '서울특별시 강동구 테스트로 222', 'Express Delivery', CURDATE(), 1, CURDATE()),
-  (7, null, 7, 1, 'Pink', 'L', 45000, '이재현', '서울특별시 마포구 테스트로 333', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (8, null, 8, 3, 'White', 'XL', 90000, '박영희', '서울특별시 강서구 테스트로 444', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (9, null, 9, 2, 'Blue', 'S', 70000, '김현우', '서울특별시 영등포구 테스트로 555', 'Express Delivery', CURDATE(), 3, CURDATE()),
-  (10, null, 10, 1, 'Red', 'M', 35000, '이미란', '서울특별시 구로구 테스트로 666', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (11, null, 11, 2, 'Black', 'L', 65000, '박승현', '서울특별시 동대문구 테스트로 777', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (12, null, 12, 3, 'Green', 'XL', 80000, '윤지수', '서울특별시 중랑구 테스트로 888', 'Express Delivery', CURDATE(), 2, CURDATE()),
-  (13, null, 13, 1, 'Orange', 'S', 45000, '임정희', '서울특별시 강북구 테스트로 999', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (14, null, 14, 2, 'Pink', 'M', 55000, '이동욱', '서울특별시 서초구 테스트로 1010', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (15, null, 15, 1, 'White', 'L', 60000, '김수진', '서울특별시 강남구 테스트로 1111', 'Express Delivery', CURDATE(), 2, CURDATE()),
-  (16, null, 1, 2, 'Red', 'M', 50000, '정재호', '서울특별시 송파구 테스트로 1212', 'Fast Delivery', CURDATE(), 1, CURDATE()),
-  (17, null, 2, 3, 'Blue', 'L', 75000, '이정민', '서울특별시 마포구 테스트로 1313', 'Standard Delivery', CURDATE(), 2, CURDATE()),
-  (18, null, 3, 1, 'Yellow', 'XL', 30000, '김재현', '서울특별시 강서구 테스트로 1414', 'Express Delivery', CURDATE(), 1, CURDATE()),
-  (19, null, 4, 2, 'Black', 'S', 60000, '박소연', '서울특별시 동작구 테스트로 1515', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (20, null, 5, 1, 'Green', 'M', 40000, '이수진', '서울특별시 강동구 테스트로 1616', 'Standard Delivery', CURDATE(), 2, CURDATE()),
-  (21, null, 6, 2, 'Orange', 'S', 55000, '김민재', '서울특별시 중랑구 테스트로 1717', 'Express Delivery', CURDATE(), 1, CURDATE()),
-  (22, null, 7, 1, 'Pink', 'L', 45000, '정민지', '서울특별시 영등포구 테스트로 1818', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (23, null, 8, 3, 'White', 'XL', 90000, '김재원', '서울특별시 구로구 테스트로 1919', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (24, null, 9, 2, 'Blue', 'S', 70000, '김수민', '서울특별시 동대문구 테스트로 2020', 'Express Delivery', CURDATE(), 3, CURDATE()),
-  (25, null, 10, 1, 'Red', 'M', 35000, '이지은', '서울특별시 중랑구 테스트로 2121', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (26, null, 11, 2, 'Black', 'L', 65000, '박민성', '서울특별시 서초구 테스트로 2222', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (27, null, 12, 3, 'Green', 'XL', 80000, '임다영', '서울특별시 강남구 테스트로 2323', 'Express Delivery', CURDATE(), 2, CURDATE()),
-  (28, null, 13, 1, 'Orange', 'S', 45000, '정유진', '서울특별시 강북구 테스트로 2424', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (29, null, 14, 2, 'Pink', 'M', 55000, '이동훈', '서울특별시 서초구 테스트로 2525', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (30, null, 15, 1, 'White', 'L', 60000, '박민지', '서울특별시 강동구 테스트로 2626', 'Express Delivery', CURDATE(), 2, CURDATE()),
-  (23, null, 8, 3, 'White', 'XL', 90000, '김재원', '서울특별시 구로구 테스트로 1919', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (24, null, 9, 2, 'Blue', 'S', 70000, '김수민', '서울특별시 동대문구 테스트로 2020', 'Express Delivery', CURDATE(), 3, CURDATE()),
-  (25, null, 10, 1, 'Red', 'M', 35000, '이지은', '서울특별시 중랑구 테스트로 2121', 'Fast Delivery', CURDATE(), 2, CURDATE()),
-  (26, null, 11, 2, 'Black', 'L', 65000, '박민성', '서울특별시 서초구 테스트로 2222', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (27, null, 12, 3, 'Green', 'XL', 80000, '임다영', '서울특별시 강남구 테스트로 2323', 'Express Delivery', CURDATE(), 2, CURDATE()),
-  (28, null, 13, 1, 'Orange', 'S', 45000, '정유진', '서울특별시 강북구 테스트로 2424', 'Fast Delivery', CURDATE(), 3, CURDATE()),
-  (29, null, 14, 2, 'Pink', 'M', 55000, '이동훈', '서울특별시 서초구 테스트로 2525', 'Standard Delivery', CURDATE(), 1, CURDATE()),
-  (30, null, 15, 1, 'White', 'L', 60000, '박민지', '서울특별시 강동구 테스트로 2626', 'Express Delivery', CURDATE(), 2, CURDATE());
+INSERT INTO orders (userNumber, cartId, totalPrice, receiveName, address, deliveryRequest, orderDate, changeDate)
+VALUES
+    (2, 1, 75000, 'Jane', '456 Oak St', 'Fragile items', '2024-02-01', '2024-02-01'),
+    (3, 2, 30000, 'Bob', '789 Pine St', 'No rush', '2024-02-02', '2024-02-02'),
+    (4, 3, 60000, 'Alice', '987 Elm St', 'Urgent delivery', '2024-02-03', '2024-02-03'),
+    (5, 4, 90000, 'Charlie', '654 Birch St', 'Standard shipping', '2024-02-04', '2024-02-04'),
+    (6, 5, 40000, 'Eva', '321 Maple St', 'Fragile items', '2024-02-05', '2024-02-05'),
+    (7, 6, 55000, 'David', '222 Cedar St', 'Handle with care', '2024-02-06', '2024-02-06'),
+    (8, 7, 70000, 'Grace', '888 Pine St', 'No rush', '2024-02-07', '2024-02-07'),
+    (9, 8, 65000, 'Henry', '777 Oak St', 'Standard shipping', '2024-02-08', '2024-02-08'),
+    (10, 9, 120000, 'Olivia', '555 Elm St', 'Urgent delivery', '2024-02-09', '2024-02-09'),
+    (11, 10, 48000, 'Frank', '333 Birch St', 'Handle with care', '2024-02-10', '2024-02-10'),
+    (12, 11, 88000, 'Sophia', '444 Maple St', 'Fragile items', '2024-02-11', '2024-02-11'),
+    (13, 12, 76000, 'Isaac', '666 Cedar St', 'No rush', '2024-02-12', '2024-02-12'),
+    (14, 13, 92000, 'Ava', '999 Pine St', 'Standard shipping', '2024-02-13', '2024-02-13'),
+    (15, 14, 51000, 'William', '777 Oak St', 'Handle with care', '2024-02-14', '2024-02-14'),
+    (16, 15, 68000, 'Emma', '123 Rose St', 'Express delivery', '2024-02-15', '2024-02-15');
+
+INSERT INTO order_products (orderId, productId, orderQuantity, orderColor, orderSize)
+VALUES
+    (1, 2, 3, '파랑', 'M'),
+    (2, 3, 1, '파랑', 'S'),
+    (2, 4, 2, '파랑', 'S'),
+    (3, 5, 2, '파랑', 'M'),
+    (4, 6, 1, '파랑', 'S'),
+    (5, 7, 3, '파랑', 'L'),
+    (6, 8, 2, '파랑', 'S'),
+    (7, 9, 1, '파랑', 'S'),
+    (8, 10, 3, '파랑', 'S'),
+    (9, 11, 1, '파랑', 'M'),
+    (10, 12, 2, '파랑', 'L'),
+    (11, 13, 3, '파랑', 'XL'),
+    (12, 14, 1, '파랑', 'S'),
+    (13, 15, 2, '파랑', 'S'),
+    (14, 16, 1, '파랑', 'S'),
+    (15, 17, 2, '파랑', 'M');
 
 INSERT INTO payment (orderId, payPrice, payMethod, isPaid, isRefund)
 VALUES 
@@ -328,22 +322,7 @@ VALUES
   (12, 32000, 2, 1, 0),
   (13, 15000, 1, 1, 0),
   (14, 20000, 2, 1, 0),
-  (15, 25000, 1, 1, 0),
-  (16, 22000, 2, 1, 0),
-  (17, 18000, 1, 1, 0),
-  (18, 30000, 2, 1, 0),
-  (19, 15000, 1, 1, 0),
-  (20, 21000, 2, 1, 0),
-  (21, 19000, 1, 1, 0),
-  (22, 27000, 2, 1, 0),
-  (23, 12000, 1, 1, 0),
-  (24, 28000, 2, 1, 0),
-  (25, 32000, 1, 1, 0),
-  (26, 15000, 2, 1, 0),
-  (27, 20000, 1, 1, 0),
-  (28, 25000, 2, 1, 0),
-  (29, 22000, 1, 1, 0),
-  (30, 18000, 2, 1, 0);
+  (15, 25000, 1, 1, 0);
 
 INSERT INTO productout (orderId, cartId, productId, outStatus, outDate)
 VALUES 

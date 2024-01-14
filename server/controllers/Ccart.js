@@ -143,7 +143,7 @@ exports.payCart = async (req, res) => {
 
     const address = await db.address.findOne({
       where: { userNumber },
-      attributes: ["address"],
+      attributes: ["address1"],
     });
 
     const userAddress = address.address ? address.address.split("/") : [];
@@ -161,7 +161,6 @@ exports.payCart = async (req, res) => {
       res.json({
         userInfo,
         userAddress,
-        productInfo,
         productInfo,
         carts,
         result: true,
