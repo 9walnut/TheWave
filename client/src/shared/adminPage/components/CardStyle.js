@@ -8,11 +8,12 @@ export const CardBox = styled.div`
   border-radius: 13px;
   padding: 1rem;
   height: 93vh;
-  width: 74vw;
+  width: 82vw;
   margin-top: -8px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  right: 1%;
 
   @media (max-width: 767px) {
     margin-top: 30px;

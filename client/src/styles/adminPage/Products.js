@@ -10,6 +10,14 @@ export const ButtonContainer = styled.div`
     margin-top: 5px;
   }
 `;
+export const SearchButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 396px) {
+    padding: 0;
+    margin-top: 5px;
+  }
+`;
 
 export const InnerCardTitleBox = styled.div`
   box-shadow: 2px 11px 14px -4px #fafbff;
