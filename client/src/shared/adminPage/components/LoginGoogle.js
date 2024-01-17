@@ -41,13 +41,14 @@ export default function LoginGoogle() {
   const googleOnSuccess = async (data) => {
     const idToken = data.credential;
     try {
-      const res = await axios.post("api/snsLogin", { idToken });
+      const res = await axios.post("api/snsLogin", {
+        idToken,
+        provider: "google",
+      });
 
       const result = res.data;
       localStorage.setItem("accessToken", result.accessToken);
-      const headers = {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      };
+
       const { isAdmin, accessToken } = res.data;
 
       const user = {

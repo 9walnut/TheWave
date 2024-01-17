@@ -24,7 +24,10 @@ export default function LoginKakao() {
   const navigate = useNavigate();
   const kakaoClientId = process.env.REACT_APP_KAKAO_JS;
   const kakaoOnSuccess = async (data) => {
-    const response = await axios.post("/api/snsLogin", { data });
+    const response = await axios.post("/api/snsLogin", {
+      data,
+      provider: "kakao",
+    });
     const result = response.data.result;
 
     const { isAdmin, accessToken } = response.data;
@@ -33,9 +36,6 @@ export default function LoginKakao() {
       dispatch(setUser(user));
 
       localStorage.setItem("accessToken", user.accessToken);
-      const headers = {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      };
 
       if (isAdmin === "Y") {
         navigate("/admin");
