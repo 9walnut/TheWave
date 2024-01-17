@@ -36,3 +36,12 @@ export const InnerCardTitleBox = styled.div`
     margin-bottom: 5px;
   }
 `;
+
+export const SearchButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 396px) {
+    padding: 0;
+    margin-top: 5px;
+  }
+`;

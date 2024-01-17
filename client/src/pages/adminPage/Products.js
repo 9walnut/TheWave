@@ -53,6 +53,7 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchType, setSearchType] = useState("");
+  const [searchData, setSearchData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -82,6 +83,7 @@ function Products() {
       modifiedData.sort(descendingData);
 
       setProducts(modifiedData);
+      setSearchData(modifiedData);
       // console.log(products);
       // console.log(modifiedData);
     } catch (error) {
@@ -144,7 +146,7 @@ function Products() {
       console.error("에러", error);
     }
   };
-
+  //---searchItem
   const searchItem = () => {
     console.log(searchType);
 
@@ -153,13 +155,13 @@ function Products() {
       return;
     }
 
-    const searchItems = products.filter((value) => {
+    const searchItems = searchData.filter((value) => {
       const inputSearchText = searchText;
       const selectSearchType =
         searchType === "productName" ? value.productName : value.categoryName;
       return selectSearchType.includes(inputSearchText);
     });
-    console.log(products);
+    console.log(searchData);
     console.log(searchItems);
 
     setSearchText("");
