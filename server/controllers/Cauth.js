@@ -6,6 +6,8 @@ const {
   generateAccessTokenSNS,
 } = require("../middleware/jwt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const axios = require("axios");
 
 // 메인 페이지 렌더
 exports.main = async (req, res) => {
@@ -83,11 +85,11 @@ exports.loginUser = async (req, res) => {
 };
 
 // 간편 로그인
-exports.loginSNS = async (req, res) => {
-  try {
-    const { idToken, data } = req.body;
+exports.snsLogin = async (req, res) => {
+  const { idToken, data, provider } = req.body;
 
-    if (!idToken) {
+  try {
+    if (provider === "kakao") {
       const { userPw, salt } = await hashedPwWithSalt("data.profile.id");
       const kakaoId = String(data.profile.id);
 
@@ -96,7 +98,7 @@ exports.loginSNS = async (req, res) => {
         password: userPw,
         passwordSalt: salt,
         userName: data.profile.displayName || "Unknown",
-        phoneNumber: data.profile.phoneNumber || "01099999999",
+        phoneNumber: data.profile.phoneNumber || "01011112222",
         birthday: data.profile.birthday || "1900-01-01",
         gender: data.profile.gender || "M",
       });
@@ -112,8 +114,31 @@ exports.loginSNS = async (req, res) => {
         isAdmin: false,
         accessToken: accessToken,
       });
-    } else {
-      // 회원 정보 db 저장
+    } else if (provider === "naver") {
+      const { userPw, salt } = await hashedPwWithSalt("data.id");
+      const phoneNumber = data.mobile.replace(/-/g, "");
+      const userInfo = await db.users.create({
+        userId: data.id,
+        password: userPw,
+        passwordSalt: salt,
+        userName: data.name || "Unknown",
+        phoneNumber: phoneNumber || "01033334444",
+        birthday: data.birthday || "1990-01-01",
+        gender: data.gender || "M",
+      });
+
+      const userAddress = await db.address.create({
+        userNumber: userInfo.userNumber,
+        address: "강원도 원주",
+      });
+
+      const { accessToken } = await generateAccessTokenSNS(userInfo);
+      res.send({
+        result: true,
+        isAdmin: false,
+        accessToken: accessToken,
+      });
+    } else if (provider === "google") {
       const decoding = jwt.decode(idToken);
       const { userPw, salt } = await hashedPwWithSalt(decoding.sub);
 
@@ -122,7 +147,7 @@ exports.loginSNS = async (req, res) => {
         password: userPw,
         passwordSalt: salt,
         userName: decoding.name,
-        phoneNumber: decoding.phoneNumber || "01012345678",
+        phoneNumber: decoding.phoneNumber || "01055556666",
         birthday: decoding.birthday || "1999-01-01",
         isAdmin: "N",
         gender: decoding.gender || "M",

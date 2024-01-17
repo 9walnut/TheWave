@@ -12,7 +12,7 @@ router.get("/login", controller.loginPage);
 router.post("/login", controller.loginUser);
 
 // 간편 로그인
-router.post("/snsLogin", controller.loginSNS);
+router.post("/snsLogin", controller.snsLogin);
 
 // '로그아웃' 버튼 클릭 시
 router.get("/logout", controller.logout);
