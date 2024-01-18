@@ -27,6 +27,12 @@ const FooterBox = styled.div`
   padding: 20px;
   flex-direction: column;
   color: #5a5a5a;
+  .contactItem {
+    img {
+      margin: 8px;
+      opacity: 0.7;
+    }
+  }
   div {
     margin-bottom: 4px;
     font-size: small;
@@ -75,11 +81,19 @@ function Footer() {
           <div>Contact</div>
           <div className="contactBox">
             <div>
-              <a href="https://link.inpock.co.kr/thewave" target="_blank">
+              <a
+                href="https://link.inpock.co.kr/thewave"
+                target="_blank"
+                className="contactItem"
+              >
                 <img src="/footer/link.png" />
               </a>
 
-              <a href="https://open.kakao.com/o/s3MTxx5d" target="_blank">
+              <a
+                href="https://open.kakao.com/o/s3MTxx5d"
+                target="_blank"
+                className="contactItem"
+              >
                 <img src="/footer/kakaotalk.png" />
               </a>
             </div>
@@ -87,12 +101,14 @@ function Footer() {
               <a
                 href="https://www.instagram.com/thewave_balloon/?igsh=bDVwb2FpdHNqbmt1"
                 target="_blank"
+                className="contactItem"
               >
                 <img src="/footer/instagram.png" />
               </a>
               <a
                 href="https://smartstore.naver.com/studiowells"
                 target="_blank"
+                className="contactItem"
               >
                 <img src="/footer/naver.png" />
               </a>

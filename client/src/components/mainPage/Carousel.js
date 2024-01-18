@@ -7,34 +7,25 @@ import "./Carousel.css";
 
 const CarouselContainer = styled.div`
   max-width: 1600px;
-  margin: 0 auto; /* 가운데 정렬을 위해 auto로 마진을 조절합니다. */
+  margin: 0 auto;
 `;
 
 const ImgBox = styled.div`
-  /* margin: 0px 40px; */
+  padding: 0 10px;
+  @media (max-width: 767px) {
+    padding: 0 6px;
+  }
 
   img {
-    display: inline-block;
-    /* margin: 0px 50px; */
-    /* width: 100%; */
-    height: 700px;
-    @media (max-width: 600px) {
-      height: 200px;
-      /* width: 500px; */
-    }
-    @media (max-width: 767px) {
-      height: 300px;
-      /* width: 500px; */
-    }
-    @media (max-width: 100px) {
-      height: 400px;
-      /* width: 500px; */
-    }
-    @media (max-width: 1200px) {
-      height: 500px;
-      /* width: 300px; */
-    }
+    display: block;
+    width: 100%;
+    height: auto;
   }
+`;
+
+const SlickSlider = styled(Slider)`
+  max-width: 100%;
+  margin: 0 auto;
 `;
 
 function MainCarousel() {
@@ -43,7 +34,6 @@ function MainCarousel() {
     "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704722039518_tulipDetail02.jpg",
     "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704721891528_daisy02.jpg",
     "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704721508672_characterBalloon06.jpg",
-    "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704722917998_ombreBalloon14.jpg",
     "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704722733124_letteringBalloon17.jpg",
     "https://thewave-bucket.s3.ap-northeast-2.amazonaws.com/thumbnails/1704723100102_roseBallon03.jpg",
   ];
@@ -58,55 +48,27 @@ function MainCarousel() {
     arrows: true,
     autoplay: true, // 자동 캐러셀
     autoplaySpeed: 3000, // 자동 캐러셀 속도
-    responsive: [
-      {
-        breakpoint: 767,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    dots: true,
     // responsive: [
     //   {
-    //     breakpoint: 2300,
+    //     breakpoint: 767,
     //     settings: {
-    //       centerMode: true,
+    //       slidesToShow: 1,
+    //       slidesToScroll: 1,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 1024,
+    //     settings: {
     //       slidesToShow: 2,
+    //       slidesToScroll: 1,
     //     },
-    //     breakpoint: 1800,
+    //   },
+    //   {
+    //     breakpoint: 1200,
     //     settings: {
-    //       centerMode: true,
     //       slidesToShow: 2,
-    //     },
-    //     breakpoint: 1400,
-    //     settings: {
-    //       centerMode: true,
-    //       slidesToShow: 1,
-    //     },
-    //     breakpoint: 1100,
-    //     settings: {
-    //       centerMode: true,
-    //       slidesToShow: 1,
-    //     },
-    //     breakpoint: 1100,
-    //     settings: {
-    //       centerMode: true,
-    //       slidesToShow: 1,
+    //       slidesToScroll: 1,
     //     },
     //   },
     // ],
@@ -114,7 +76,7 @@ function MainCarousel() {
 
   return (
     <CarouselContainer>
-      <Slider {...settings}>
+      <SlickSlider {...settings}>
         {imgList.map((img) => {
           return (
             <ImgBox key={img}>
@@ -124,7 +86,7 @@ function MainCarousel() {
             </ImgBox>
           );
         })}
-      </Slider>
+      </SlickSlider>
     </CarouselContainer>
   );
 }

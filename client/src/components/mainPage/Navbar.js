@@ -34,6 +34,8 @@ function Navbar() {
   const [screenSize, setScreenSize] = useState(window.innerWidth <= 650);
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [sideModal, setSideModal] = useState(false);
+  const [searchBox, setSearchBox] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   const user = useSelector((state) => state.user);
   const isLogin = getAccessToken() ? true : false;
@@ -67,6 +69,8 @@ function Navbar() {
     if (!screenSize) setSideModal(false);
   });
 
+  useEffect(() => {}, [searchText]);
+
   return (
     <>
       <header>
@@ -82,9 +86,17 @@ function Navbar() {
                   }}
                 />
               ) : (
-                <img src={search} />
+                <img src={search} style={{ display: "none" }} />
               )}
             </a>
+            {searchBox && (
+              <SearchBox
+                type="text"
+                onChange={(e) => {
+                  setSearchText(e.target.value);
+                }}
+              />
+            )}
           </div>
           <div>
             <a>
@@ -195,6 +207,11 @@ function Navbar() {
   );
 }
 
+const SearchBox = styled.input`
+  border: none;
+  background-color: #dddddd78;
+`;
+
 const Sidebar = styled.nav`
   margin-top: 60px;
   width: 200px;
@@ -231,6 +248,12 @@ const NavLink = styled(Link)`
   &:hover {
     color: #7a7a7a;
   }
+`;
+const SearchImg = styled.div`
+  text-decoration: none;
+  color: #5a5a5a;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
 `;
 
 const SidebarMenu = ({ isOpen, onClose }) => {
