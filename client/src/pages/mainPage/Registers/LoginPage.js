@@ -55,7 +55,7 @@ function LoginPage() {
 
         dispatch(setUser(user));
 
-        if (isAdmin === "Y") {
+        if (isAdmin === true) {
           navigate("/admin");
         } else {
           navigate("/");
