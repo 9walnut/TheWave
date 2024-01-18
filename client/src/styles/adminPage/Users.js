@@ -43,3 +43,11 @@ export const BtnWrapper = styled.div`
     padding: 5px 30px 5px 30px;
   }
 `;
+export const SearchButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 396px) {
+    padding: 0;
+    margin-top: 5px;
+  }
+`;

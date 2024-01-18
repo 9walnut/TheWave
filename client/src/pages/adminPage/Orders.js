@@ -57,7 +57,7 @@ function Orders() {
   const params = useParams(); //*
 
   const [searchText, setSearchText] = useState("");
-  const [searchType, setSearchType] = useState("");
+  const [searchType, setSearchType] = useState("userName");
   const [searchData, setSearchData] = useState([]);
 
   const descendingData = (a, b) => {
@@ -167,16 +167,15 @@ function Orders() {
       const inputSearchText = searchText;
 
       const userNumberUser = value.userNumber_user;
-      console.log("userNumberUser", userNumberUser);
+      const phoneNumber = userNumberUser?.phoneNumber;
+
+      // console.log(value.phoneNumber?.props?.phoneNumber);
 
       const selectSearchType =
         searchType === "userName"
           ? value.userName
-          : userNumberUser?.phoneNumber;
+          : value.phoneNumber?.props?.phoneNumber;
 
-      console.log("selectSearchType", selectSearchType);
-
-      // return selectSearchType.includes(inputSearchText);
       return selectSearchType && selectSearchType.includes(inputSearchText);
     });
 

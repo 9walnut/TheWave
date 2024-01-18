@@ -10,6 +10,8 @@ import PageNation from "../../shared/PageNation.js";
 import PageNationFunc from "../../shared/PageNationFunc.js";
 import ModifiedPhoneNumber from "../../shared/ModifiedPhoneNumber.js";
 import Swal from "sweetalert2";
+import AdminButtonSearch from "../../components/adminPage/AdminButtonSearch.js";
+import AdminInputSearch from "../../shared/adminPage/components/AdminInputSearch.js";
 
 const header = [
   {
@@ -52,6 +54,10 @@ const header = [
 function Users() {
   const [users, setUsers] = useState([]);
 
+  const [searchText, setSearchText] = useState("");
+  const [searchType, setSearchType] = useState("userName");
+  const [searchData, setSearchData] = useState([]);
+
   const descendingData = (a, b) => {
     return b.userNumber - a.userNumber;
   };
@@ -75,6 +81,7 @@ function Users() {
       modifiedData.sort(descendingData);
 
       setUsers(modifiedData);
+      setSearchData(modifiedData);
       // console.log("user 데이터 들어왔나", users);
     } catch (error) {
       console.log("에러", error);
@@ -128,10 +135,66 @@ function Users() {
       console.error("에러", error);
     }
   };
+
+  //---searchItem
+  const searchItem = () => {
+    console.log(searchType);
+
+    if (searchText.length === 0) {
+      alert("검색 내용을 입력해주세요");
+      return;
+    }
+
+    const searchItems = searchData.filter((value) => {
+      const inputSearchText = searchText;
+
+      const userNumberUser = value.userNumber_user;
+      const phoneNumber = userNumberUser?.phoneNumber;
+
+      // console.log(value.phoneNumber?.props?.phoneNumber);
+
+      const selectSearchType =
+        searchType === "userName"
+          ? value.userName
+          : value.phoneNumber?.props?.phoneNumber;
+
+      return selectSearchType && selectSearchType.includes(inputSearchText);
+    });
+
+    console.log("searchData", searchData);
+    console.log("searchItems", searchItems);
+
+    setSearchText("");
+    setUsers(searchItems);
+  };
+
+  const allItem = () => {
+    fetchData();
+  };
+
   return (
     <>
       <Card>
         <S.InnerCardTitleBox>회원 관리</S.InnerCardTitleBox>
+        <S.SearchButtonContainer>
+          <select
+            name="search"
+            value={searchType}
+            onChange={(e) => setSearchType(e.target.value)}
+          >
+            <option value="userName">이름</option>
+            <option value="phoneNumber">핸드폰 번호</option>
+          </select>
+          <AdminInputSearch
+            type="text"
+            placeholder="검색어를 입력 해주세요."
+            value={searchText}
+            onChange={(value) => setSearchText(value)}
+          />
+
+          <AdminButtonSearch onClick={searchItem}>검색하기</AdminButtonSearch>
+          <AdminButtonSearch onClick={allItem}>전체보기</AdminButtonSearch>
+        </S.SearchButtonContainer>
         <DataTable
           keySet="usersTb_"
           headers={header}
