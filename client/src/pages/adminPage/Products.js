@@ -52,7 +52,7 @@ const header = [
 function Products() {
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [searchType, setSearchType] = useState("");
+  const [searchType, setSearchType] = useState("productName");
   const [searchData, setSearchData] = useState([]);
 
   const navigate = useNavigate();
