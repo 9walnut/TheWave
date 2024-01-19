@@ -11,19 +11,22 @@ export const InputBox = styled.div`
   margin-bottom: 10px; */
   margin-left: 5px;
   @media (max-width: 767px) {
-    height: auto;
+    /* height: auto;
     width: 85vw;
     padding: 6px;
-    margin-bottom: 5px;
+    margin-bottom: 5px; */
     font-size: smaller;
     /* text-align: center; */
   }
   @media (max-width: 396px) {
-    height: auto;
+    /* height: auto;
     width: 85vw;
     padding: 6px;
-    margin-bottom: 4px;
+    margin-bottom: 4px; */
+    width: 200px;
+    height: 27px;
     font-size: smaller;
+    border-radius: 8px;
     /* text-align: center; */
   }
 `;
@@ -43,6 +46,7 @@ export const StyledInput = styled.input`
   @media (max-width: 396px) {
     font-size: smaller;
     height: 11px;
+    margin-top: 6px;
     &::placeholder {
       font-size: smaller;
     }

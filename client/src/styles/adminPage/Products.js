@@ -10,16 +10,6 @@ export const ButtonContainer = styled.div`
     margin-top: 5px;
   }
 `;
-export const SearchButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 7px;
-  margin-right: 5px;
-  @media (max-width: 396px) {
-    padding: 0;
-    margin-top: 5px;
-  }
-`;
 
 export const InnerCardTitleBox = styled.div`
   box-shadow: 2px 11px 14px -4px #fafbff;
@@ -48,6 +38,18 @@ export const InnerCardTitleBox = styled.div`
     margin-bottom: 5px;
   }
 `;
+export const SearchButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 7px;
+  margin-right: 5px;
+  @media (max-width: 396px) {
+    flex-wrap: wrap;
+    padding: 0;
+    margin-top: 5px;
+  }
+`;
+
 export const Select = styled.select`
   width: 130px;
   height: 42px;
@@ -64,10 +66,9 @@ export const Select = styled.select`
   }
   @media (max-width: 396px) {
     font-size: 8px;
-    height: 18px;
-    width: 92px;
-    border-radius: 0;
-    padding: 1px 11px;
+    width: 90px;
+    height: 27px;
+    padding: 0;
     font-weight: 200;
   }
 `;

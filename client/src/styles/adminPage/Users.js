@@ -49,6 +49,7 @@ export const SearchButtonContainer = styled.div`
   margin-bottom: 7px;
   margin-right: 5px;
   @media (max-width: 396px) {
+    flex-wrap: wrap;
     padding: 0;
     margin-top: 5px;
   }
@@ -70,10 +71,9 @@ export const Select = styled.select`
   }
   @media (max-width: 396px) {
     font-size: 8px;
-    height: 18px;
-    width: 92px;
-    border-radius: 0;
-    padding: 1px 11px;
+    width: 90px;
+    height: 27px;
+    padding: 0;
     font-weight: 200;
   }
 `;

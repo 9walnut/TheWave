@@ -21,8 +21,8 @@ export const AdminButtonGreyStyle = styled.button`
   }
 
   @media (max-width: 396px) {
-    width: 76px;
-    height: 27px;
+    width: 62px;
+    height: 20px;
     font-size: xx-small;
     margin: 2px;
   }
