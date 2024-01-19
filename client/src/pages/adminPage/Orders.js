@@ -195,14 +195,14 @@ function Orders() {
       <Card>
         <S.InnerCardTitleBox>거래 내역 관리</S.InnerCardTitleBox>
         <S.SearchButtonContainer>
-          <select
+          <S.Select
             name="search"
             value={searchType}
             onChange={(e) => setSearchType(e.target.value)}
           >
             <option value="userName">주문자</option>
             <option value="phoneNumber">핸드폰 번호</option>
-          </select>
+          </S.Select>
           <AdminInputSearch
             type="text"
             placeholder="검색어를 입력 해주세요."

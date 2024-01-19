@@ -177,14 +177,14 @@ function Products() {
       <Card>
         <S.InnerCardTitleBox>상품 관리</S.InnerCardTitleBox>
         <S.SearchButtonContainer>
-          <select
+          <S.Select
             name="search"
             value={searchType}
             onChange={(e) => setSearchType(e.target.value)}
           >
             <option value="productName">상품명</option>
             <option value="categoryName">카테고리</option>
-          </select>
+          </S.Select>
           <AdminInputSearch
             type="text"
             placeholder="검색어를 입력 해주세요."

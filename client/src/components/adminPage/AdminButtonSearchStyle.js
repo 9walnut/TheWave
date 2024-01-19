@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 export const AdminButtonGreyStyle = styled.button`
   /* background: #8a8b8d; */
-  background: #99aab7;
+  background: #b1c1cd;
   color: whitesmoke;
   border: none;
   display: inline-flex;
   width: 80px;
-  height: 30px;
+  height: 40px;
   padding: 12px;
-  margin: 10px;
+  /* margin: 10px; */
+  margin-left: 5px;
   border-radius: 6px;
   justify-content: center;
   align-items: center;
