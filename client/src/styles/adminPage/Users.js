@@ -46,8 +46,34 @@ export const BtnWrapper = styled.div`
 export const SearchButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 7px;
+  margin-right: 5px;
   @media (max-width: 396px) {
+    flex-wrap: wrap;
     padding: 0;
     margin-top: 5px;
+  }
+`;
+
+export const Select = styled.select`
+  width: 130px;
+  height: 42px;
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 9px 13px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  @media (max-width: 767px) {
+    width: 150px;
+  }
+  @media (max-width: 396px) {
+    font-size: 8px;
+    width: 90px;
+    height: 27px;
+    padding: 0;
+    font-weight: 200;
   }
 `;

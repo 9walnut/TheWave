@@ -1,4 +1,5 @@
 import React from "react";
+import * as S from "./AdminInputSearchStyle.js";
 
 function AdminInputSearch(props) {
   const handleChange = (e) => {
@@ -8,13 +9,15 @@ function AdminInputSearch(props) {
   };
   return (
     <>
-      <input
-        type={props.type}
-        placeholder={props.placeholder}
-        style={props.style}
-        value={props.value}
-        onChange={handleChange}
-      />
+      <S.InputBox>
+        <S.StyledInput
+          type={props.type}
+          placeholder={props.placeholder}
+          style={props.style}
+          value={props.value}
+          onChange={handleChange}
+        />
+      </S.InputBox>
     </>
   );
 }

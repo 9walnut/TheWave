@@ -177,14 +177,14 @@ function Users() {
       <Card>
         <S.InnerCardTitleBox>회원 관리</S.InnerCardTitleBox>
         <S.SearchButtonContainer>
-          <select
+          <S.Select
             name="search"
             value={searchType}
             onChange={(e) => setSearchType(e.target.value)}
           >
             <option value="userName">이름</option>
             <option value="phoneNumber">핸드폰 번호</option>
-          </select>
+          </S.Select>
           <AdminInputSearch
             type="text"
             placeholder="검색어를 입력 해주세요."
