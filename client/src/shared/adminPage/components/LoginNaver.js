@@ -19,7 +19,8 @@ import Bg from "../../../assets/img/naverlogin.png";
 // `;
 
 const naverClientId = process.env.REACT_APP_NAVER_ID;
-const REDIRECT_URI = "http://localhost:3000/login";
+// const REDIRECT_URI = "http://localhost:3000/login";
+const REDIRECT_URI = "https://thewavemarket.co.kr/login";
 
 const LoginNaver = () => {
   const { naver } = window;
