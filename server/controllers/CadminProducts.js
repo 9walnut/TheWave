@@ -158,14 +158,14 @@ exports.editAdminProduct = async (req, res) => {
 
     const category = await db.categories.findOne({ where: { categoryName } });
     if (!category) {
-      return res.status(400).send("Invalid categoryName");
+      return res.status(400).send("카테코리명 오류");
     }
 
     const categoryId = category.categoryId;
 
     const product = await db.products.findByPk(productId);
     if (!product) {
-      return res.status(404).send("Product not found");
+      return res.status(404).send("상품을 조회 오류");
     }
 
     const updatedProduct = await product.update({
@@ -182,7 +182,7 @@ exports.editAdminProduct = async (req, res) => {
       where: { productId },
     });
     if (!productOption) {
-      return res.status(404).send("Product option not found");
+      return res.status(404).send("상품 옵션 조회 오류");
     }
 
     const updatedProductOption = await productOption.update({

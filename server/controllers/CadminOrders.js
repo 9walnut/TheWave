@@ -77,7 +77,7 @@ exports.updateOutStatus = async (req, res) => {
 
     const productOut = await db.productout.findByPk(orderId);
     if (!productOut) {
-      return res.status(404).send("ProductOut not found");
+      return res.status(404).send("상품 출고 오류");
     }
 
     let updateData = { outStatus };
