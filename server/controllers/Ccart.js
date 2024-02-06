@@ -72,50 +72,6 @@ exports.deleteCart = async (req, res) => {
 
 // 장바구니 구매하기 버튼 - 주문 정보 페이지로 정보 발송
 exports.payCart = async (req, res) => {
-  // const { cartIds } = req.body;
-  // const accessToken = req.headers["authorization"];
-  // try {
-  //   const { cartIds } = req.body.cartId;
-  //   const isChecked = await db.carts.update(
-  //     { isChecked: 1 },
-  //     { where: { cartId: { [Op.in]: cartIds } } }
-  //   );
-  //   const tokenCheck = await verifyToken(accessToken);
-  //   const userNumber = tokenCheck.userData.userNumber;
-
-  //   const userInfo = await db.users.findOne({
-  //     where: { userNumber: userNumber },
-  //     attributes: ["userName", "phoneNumber"],
-  //   });
-
-  //   const userAddress = await db.address.findOne({
-  //     where: { userNumber: userNumber },
-  //     attributes: ["address"],
-  //   });
-
-  //   const productInfo = await db.carts.findAll({
-  //     where: { cartId: { [Op.in]: cartIds }, isChecked: 1 },
-  //     attributes: ["productId", "cartId"],
-  //   });
-
-  //   if (userInfo && userAddress) {
-  //     res.json({
-  //       userInfo,
-  //       userAddress,
-  //       productInfo,
-  //       cartQuantity,
-  //       productInfo,
-  //       color,
-  //       size,
-  //     });
-  //     if (isChecked[0] > 0) return res.send(true);
-  //   } else res.send({ result: false });
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).send("주문 정보 불러오기 오류");
-  // }
-
-  console.log("장바구니 결제한다", req.body);
   const { cartItems } = req.body; // 수정된 부분
 
   try {
