@@ -19,7 +19,6 @@ import axios from "axios";
 import UploadThumbnailEdit from "../../shared/adminPage/components/UploadThumbnailEdit";
 import UploadDetailEdit from "../../shared/adminPage/components/UploadDetailEdit";
 import SelectBoxOptionSize from "../../shared/adminPage/components/SelectBoxOptionSize";
-// import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
 import AdminOptionSize from "../../shared/adminPage/components/AdminOptionSize.js";
 
 function ProductsEdit() {
@@ -49,7 +48,6 @@ function ProductsEdit() {
       try {
         const response = await axios.get(`/api/admin/products/${productId}`);
         const productData = response.data;
-        //console.log(productData);
 
         setNewProductName(productData.productName);
         setNewProductInfo(productData.productInfo);
@@ -66,7 +64,6 @@ function ProductsEdit() {
         setNewColor(colorValue);
 
         const sizeValue = productData.productoption.size;
-        //console.log(sizeValue);
         setNewSize(sizeValue);
       } catch (error) {
         console.error("상품 정보를 가져오는 중 에러 발생", error);
@@ -84,11 +81,10 @@ function ProductsEdit() {
   };
   const getImageDataDetail = (editDetailUrls) => {
     setNewDetailUrls(editDetailUrls);
-    console.log("디테일왔니", editDetailUrls); //왔다!
+    console.log("디테일왔니", editDetailUrls);
   };
 
   const cancelEdit = async () => {
-    // 외않돼......
     setNewThumbnailUrl(originalThumbnailUrl);
     setNewDetailUrls(originalDetailUrls);
 
@@ -128,15 +124,6 @@ function ProductsEdit() {
     }
   };
 
-  // {
-  //   newSize && (
-  //     <>
-  //       {console.log(newSize)}
-  //       {console.log([...newSize])}
-  //       {console.log(Array.from(newSize))}
-  //     </>
-  //   );
-  // }
   //------------------------ 유효성 검사
   useEffect(() => {
     validateProductName();
@@ -259,18 +246,6 @@ function ProductsEdit() {
                 onChange={setNewProductStatus}
               />
             </AdminSelect>
-            {/* 실패-------------------- */}
-            {/* <AdminSelect title="상품 옵션 - 사이즈">
-              <AdminOptionSize
-                // value={["XL"]}
-                // value={`{newSize}`}
-                // value={[...newSize]}
-                // value={newSize}
-                value={Array.from(newSize)}
-                onChange={setNewSize}
-              />
-            </AdminSelect> */}
-            {/* 실패-------------------- */}
             <AdminSelect title="상품 옵션 - 사이즈">
               <SelectBoxOptionSize value={newSize} onChange={setNewSize} />
             </AdminSelect>

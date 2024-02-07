@@ -46,11 +46,10 @@ function CheckBoxHandlerChecked({
     (index) => items[index].orderId
   );
 
-  console.log("selectedContents", selectedContents);
-
-  console.log("selectedProductId", selectedProductId);
-  console.log("selectedUserNumber", selectedUserNumber);
-  console.log("selectedOrderId", selectedOrderId);
+  // console.log("selectedContents", selectedContents);
+  // console.log("selectedProductId", selectedProductId);
+  // console.log("selectedUserNumber", selectedUserNumber);
+  // console.log("selectedOrderId", selectedOrderId);
 
   onSelectionChange({
     selectedProductId,

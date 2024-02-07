@@ -36,8 +36,6 @@ function ProductsAdd() {
   const [alertColor, setAlertColor] = useState("");
   const [alertTextarea, setAlertTextarea] = useState("");
 
-  const [test, setTest] = useState("");
-
   //------------------------ 유효성 검사
   useEffect(() => {
     validateProductName();
@@ -94,11 +92,9 @@ function ProductsAdd() {
   //------------------------ 이미지 업로드
   const getImageDataThumbnail = (thumbnailUrl) => {
     setThumbnailUrl(thumbnailUrl);
-    // console.log("썸네일왔니", thumbnailUrl);
   };
   const getImageDataDetail = (detailUrls) => {
     setDetailUrls(detailUrls);
-    // console.log("디테일왔니", detailUrls);
   };
 
   //------------------------ 데이터 전송
@@ -115,7 +111,6 @@ function ProductsAdd() {
         color,
         size,
       };
-      // console.log("ㅎㅎㅎㅎ", detailUrls);
 
       const response = await axios.post("/api/admin/products/add", data);
       console.log("전송 성공response 데이터", response);
@@ -124,7 +119,6 @@ function ProductsAdd() {
       const productId = response.data.productId;
       if (response.data) {
         navigate(`/admin/products/${productId}`);
-        // console.log("되었다");
       } else {
         // console.log("안보내짐");
       }
@@ -136,10 +130,6 @@ function ProductsAdd() {
       console.log("에러", error);
     }
   };
-
-  // useEffect(() => {
-  //   console.log(size);
-  // }, [size]);
 
   return (
     <>
@@ -196,11 +186,6 @@ function ProductsAdd() {
                   onChange={setProductStatus}
                 />
               </AdminSelect>
-              {/* 실패-------------------- */}
-              {/* <AdminSelect title="상품 옵션 - 사이즈">
-              <AdminOptionSize value={size} onChange={setSize} />
-            </AdminSelect>        */}
-              {/* 실패-------------------- */}
               <AdminSelect title="상품 옵션 - 사이즈">
                 <SelectBoxOptionSize value={size} onChange={setSize} />
               </AdminSelect>

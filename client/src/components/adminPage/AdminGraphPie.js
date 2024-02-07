@@ -1,13 +1,7 @@
-// install (please try to align the version of installed @nivo packages)
-// yarn add @nivo/pie
 import { ResponsivePie } from "@nivo/pie";
 
 import { useEffect, useState } from "react";
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
+
 const AdminGraphPie = ({ getData }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
 
@@ -72,7 +66,6 @@ const AdminGraphPie = ({ getData }) => {
         /**
          * chart에 사용될 데이터
          */
-        //----원래꺼-----
         // data={[
         //   { id: "커스텀풍선", value: 324 },
         //   { id: "브라이덜샤워", value: 88 },

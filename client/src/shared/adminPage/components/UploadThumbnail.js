@@ -16,14 +16,7 @@ const UploadThumbnail = ({ onFileChange }) => {
     setSelectedFile(file);
     setFileBasicMessage("");
     setFileSelectedMessage("😀업로드 버튼을 꼭 눌러주세요😀");
-    // console.log("Selected File1:", file); //찍힘
-
-    // handleUpload(file);
   };
-  // useEffect(() => {
-  //   console.log("Selected File3:", selectedFile); //찍힘
-  // onFileChange(selectedFile);
-  // }, [selectedFile, onFileChange]);
 
   const handleUpload = async () => {
     if (!selectedFile) {
@@ -35,8 +28,6 @@ const UploadThumbnail = ({ onFileChange }) => {
     try {
       const formData = new FormData();
       formData.append("thumbnailUrl", selectedFile);
-
-      console.log("FormData:", formData);
 
       const response = await axios.post(
         "/api/admin/products/add/thumbnail",
@@ -50,11 +41,6 @@ const UploadThumbnail = ({ onFileChange }) => {
 
       const thumbnailUrl = response.data.thumbnailUrl;
 
-      console.log("Thumbnail URL:", thumbnailUrl);
-
-      console.log("이미지 업로드 성공", response.data);
-      console.log("Thumbnail URL:", response.data.thumbnailUrl);
-
       setThumbnailUrl(response.data.thumbnailUrl);
       onFileChange(thumbnailUrl);
       setFileSelectedMessage("");
@@ -64,9 +50,7 @@ const UploadThumbnail = ({ onFileChange }) => {
     }
   };
 
-  useEffect(() => {
-    // console.log("Selected File3:", selectedFile);
-  }, [selectedFile]);
+  useEffect(() => {}, [selectedFile]);
 
   return (
     <>
@@ -82,10 +66,8 @@ const UploadThumbnail = ({ onFileChange }) => {
             </div>
           ) : (
             <>
-              {/* <S.DetailBox> */}
               <p>{fileBasicMessage}</p>
               <p>{fileSelectedMessage}</p>
-              {/* </S.DetailBox> */}
             </>
           )}
         </S.ThumbnailBox>

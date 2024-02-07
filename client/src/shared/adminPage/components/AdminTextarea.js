@@ -4,10 +4,6 @@ import * as S from "./AdminTextareaStyle.js";
 function AdminTextarea(props) {
   const handleChange = (event) => {
     props.onChange(event.target.value);
-    // console.log(
-    //   `Textarea 입력값 확인 (${props.children}):`,
-    //   event.target.value
-    // );
   };
   return (
     <>

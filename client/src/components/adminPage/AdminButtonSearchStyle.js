@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const AdminButtonGreyStyle = styled.button`
-  /* background: #8a8b8d; */
   background: #b1c1cd;
   color: whitesmoke;
   border: none;

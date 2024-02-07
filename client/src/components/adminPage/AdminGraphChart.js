@@ -163,14 +163,13 @@ const AdminGraphChart = ({ getData }) => {
             symbolSize: 20, // symbol (색상 표기) 크기
             effects: [
               {
-                // 추가 효과 설정 (hover하면 item opacity 1로 변경)
                 on: "hover",
                 style: {
                   itemOpacity: 1,
                 },
               },
             ],
-            onClick: handle.legendClick, // legend 클릭 이벤트
+            onClick: handle.legendClick,
           },
         ]}
       />

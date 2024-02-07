@@ -16,19 +16,11 @@ const UploadDetailEdit = ({ onFileChange, productId }) => {
     setSelectedFiles(files);
     setFileBasicMessage("");
     setFileSelectedMessage("😀업로드 버튼을 꼭 눌러주세요😀");
-    console.log("Selected Files:", files); //찍힘
-
-    // handleUpload(files);
   };
-  // useEffect(() => {
-  //   console.log("Selected File3:", selectedFiles); //찍힘
-  // onFileChange(selectedFile);
-  // }, [selectedFiles, onFileChange]);
 
   const handleUpload = async () => {
     if (!selectedFiles) {
       setFileSelectedMessage("이미지가 선택되지 않았습니다.");
-      console.log("상세 이미지를 선택하세요."); //찍힘
       setFileBasicMessage("");
       return;
     }
@@ -38,8 +30,6 @@ const UploadDetailEdit = ({ onFileChange, productId }) => {
       for (let i = 0; i < selectedFiles.length; i++) {
         formData.append("detailUrls", selectedFiles[i]);
       }
-
-      console.log("FormData:", formData);
 
       const response = await axios.patch(
         `/api/admin/products/${productId}/edit/detail`,
@@ -54,8 +44,8 @@ const UploadDetailEdit = ({ onFileChange, productId }) => {
 
       const detailUrls = response.data.detailUrls;
 
-      // console.log("Detail URL 멀로 오니:", detailUrls);
-      // console.log("Detail URL detailUrlObject멀로 오니:", detailUrlObject);
+      // console.log("Detail URL: ", detailUrls);
+      // console.log("detailUrlObject: ", detailUrlObject);
 
       console.log("이미지 업로드 성공", response.data);
       console.log("Detail URL:", response.data.detailUrls);

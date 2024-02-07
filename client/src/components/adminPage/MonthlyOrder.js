@@ -12,7 +12,6 @@ function MonthlyOrder({
   return (
     <>
       <CardTitle>이번달 거래 현황</CardTitle>
-      {/* <h3>이번달 거래 현황</h3> */}
       <S.OrderItemWrapper>
         <S.ListItemBox>
           <S.IconContainer>

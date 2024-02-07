@@ -8,8 +8,6 @@ import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 
 const useRowClick = (onItemClick, onStatusChange) => {
   const onRowClick = (item, event) => {
-    //console.log("DataTable 클릭한 orderId", item.orderId);
-
     if (event && event.target.tagName !== "SELECT") {
       onItemClick?.({
         productId: item.productID,
@@ -96,9 +94,7 @@ function DataTable({
                   key={header.text}
                   text={header.text}
                   width={header.width}
-                  // style={{ width: `${header.width}px` }}
                 >
-                  {/* <S.TableHeader key={header.text}> */}
                   {header.value === "deliveryStatus"
                     ? header.text
                     : header.text}
@@ -128,9 +124,7 @@ function DataTable({
                   >
                     {value === "orderStatus" ? (
                       <SelectBoxDelivery
-                        // value={selectedStatus}
                         initialStatus={item.orderStatus}
-                        // value={item.orderStatus}
                         onChange={(e) => {
                           e.stopPropagation();
                           setSelectedStatus(e.target.value);
@@ -146,7 +140,6 @@ function DataTable({
                         onOrderIdValue={item.orderId}
                       />
                     ) : (
-                      // item[value]
                       etxText(item[value], 40)
                     )}
                   </S.TableTd>

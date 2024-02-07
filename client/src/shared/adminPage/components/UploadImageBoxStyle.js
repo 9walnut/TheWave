@@ -4,7 +4,6 @@ export const ImageUploadWrapper = styled.div`
   width: 750px;
   height: 300px;
   display: flex;
-  /* background-color: red; */
   align-items: center;
   justify-content: space-between;
   margin-bottom: 7px;
@@ -13,11 +12,8 @@ export const ImageUploadWrapper = styled.div`
   }
 `;
 export const ThumbnailBox = styled.div`
-  /* background-color: #e9eff4; */
-  /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
-  /* height: 300px; */
   width: 400px;
   height: 300px;
   padding-top: 21px;
@@ -25,21 +21,14 @@ export const ThumbnailBox = styled.div`
   text-align: center;
   font-weight: 900;
   border: 1px solid #e0e0e0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   overflow: hidden;
 
-  /* background-color: beige; */
   @media (max-width: 767px) {
     align-items: center;
-    /* width: 85vw;
-    margin-top: 10px;
-    height: 50vh; */
-
     width: 400px;
     height: 300px;
   }
@@ -50,27 +39,7 @@ export const ThumbnailBox = styled.div`
   }
 `;
 
-// export const Box1 = styled.div`
-//   width: 36vw;
-//   height: 30vh;
-//   background-color: none;
-
-//   @media (max-width: 767px) {
-//     align-items: center;
-//     width: 85vw;
-//     margin-top: 10px;
-//     height: 50vh;
-//   }
-//   @media (max-width: 396px) {
-//     width: 80vw;
-//     height: 80vh;
-//     margin-top: -20px;
-//   }
-// `;
-
 export const DetailImagesBox = styled.div`
-  /* background-color: #e9eff4; */
-  /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
   height: 300px;
@@ -81,7 +50,6 @@ export const DetailImagesBox = styled.div`
   text-align: center;
   font-weight: 900;
   border: 1px solid #e0e0e0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,11 +58,8 @@ export const DetailImagesBox = styled.div`
   position: absolute;
 `;
 export const DetailBox = styled.div`
-  /* background-color: #e9eff4; */
-  /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
-  /* height: 300px; */
   width: 400px;
   height: 300px;
   padding-top: 21px;
@@ -102,38 +67,29 @@ export const DetailBox = styled.div`
   text-align: center;
   font-weight: 900;
   border: 1px solid #e0e0e0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   overflow: hidden;
   @media (max-width: 396px) {
     width: 80vw;
     height: 30vh;
     margin-top: -20px;
   }
-  /* background-color: red; */
 `;
 export const DetailBoxes = styled.div`
-  /* background-color: #e9eff4; */
-  /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
-  /* height: 300px; */
 
   padding-top: 21px;
   color: #6e7f8d;
   text-align: center;
   font-weight: 900;
   border: 1px solid #e0e0e0;
-
   align-items: center;
   justify-content: center;
-
   overflow: hidden;
-
   width: 300px;
   height: auto;
   display: flex;
@@ -171,8 +127,6 @@ export const EditFileSelectBtn = styled.button`
   }
 `;
 export const FileSelectBtn = styled.button`
-  /* position: relative; */
-  /* z-index: 2; */
   background-color: red;
   width: 80px;
   height: 27px;
@@ -200,9 +154,6 @@ export const FileSelectBtn = styled.button`
   }
 `;
 export const FileTypeLeftInput = styled.input`
-  /* pointer-events: none; */
-  /* position: absolute; */
-  /* z-index: 3; */
   opacity: 0;
   position: absolute;
   height: 30px;
@@ -218,20 +169,14 @@ export const FileTypeLeftInput = styled.input`
 export const EditMsgBox = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: center;
   margin-left: 7px;
   box-shadow: 2px 11px 14px -4px #fafbff;
-  /* border-radius: 8px;
-  border: 1px solid #6e7f8d; */
   color: #6e7f8d;
-  /* height: 300px; */
   text-align: left;
   font-weight: 900;
   width: 700px;
   height: 60px;
-  /* padding: 4px; */
-  /* background-color: red; */
   @media (max-width: 396px) {
     font-size: xx-small;
     text-align: center;
@@ -239,7 +184,6 @@ export const EditMsgBox = styled.div`
 `;
 
 export const FileTypeRightInput = styled.input`
-  /* pointer-events: none; */
   opacity: 0;
   position: absolute;
   height: 30px;
@@ -254,20 +198,11 @@ export const FileTypeRightInput = styled.input`
 `;
 
 export const ImageBtnWrapper = styled.div`
-  /* background-color: red; */
   @media (max-width: 767px) {
     width: 40vw;
     justify-content: center;
   }
   @media (max-width: 396px) {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    bottom: 0;
-    width: 95vw;
-    margin-left: -35px; */
     width: 26vw;
     left: 140px;
     z-index: 5;

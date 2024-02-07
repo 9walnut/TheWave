@@ -2,12 +2,10 @@ import styled from "styled-components";
 
 export const CenteredPieWrapper = styled.div`
   @media (max-width: 767px) {
-    /* display: flex; */
     justify-content: center;
     align-items: center;
     position: relative;
     flex-direction: column;
-    /* height: 100vh; */
   }
 `;
 
@@ -18,12 +16,10 @@ export const PieGraphBox = styled.div`
 
 export const CenteredChartWrapper = styled.div`
   @media (max-width: 767px) {
-    /* display: flex; */
     justify-content: center;
     align-items: center;
     position: relative;
     flex-direction: column;
-    /* height: 100vh; */
   }
 `;
 

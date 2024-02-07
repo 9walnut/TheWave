@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const InputBox = styled.div`
   width: 810px;
-  /* height: 72px; */
   flex-shrink: 0;
   border-radius: 13px;
   border: 1px solid #e5e7eb;
@@ -16,7 +15,6 @@ export const InputBox = styled.div`
     padding: 6px;
     margin-bottom: 5px;
     font-size: smaller;
-    /* text-align: center; */
   }
   @media (max-width: 396px) {
     height: auto;
@@ -24,7 +22,6 @@ export const InputBox = styled.div`
     padding: 6px;
     margin-bottom: 4px;
     font-size: smaller;
-    /* text-align: center; */
   }
 `;
 
@@ -40,7 +37,6 @@ export const AdminInputText = styled.div`
   }
 `;
 
-// input 기본 스타일 속성
 export const StyledInput = styled.input`
   border: none;
   outline: none;

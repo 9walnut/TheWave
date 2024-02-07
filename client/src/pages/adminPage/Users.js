@@ -66,7 +66,6 @@ function Users() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/admin/users");
-      // console.log("response", response.data);
 
       const modifiedData = response.data.map((user) => ({
         userNumber: user.userNumber,
@@ -76,13 +75,11 @@ function Users() {
         birthday: user.birthday,
         gender: user.gender,
         address: user.addresses[0].address,
-        // address: user.addresses.map((address) => address.address),
       }));
       modifiedData.sort(descendingData);
 
       setUsers(modifiedData);
       setSearchData(modifiedData);
-      // console.log("user 데이터 들어왔나", users);
     } catch (error) {
       console.log("에러", error);
     }
@@ -100,14 +97,10 @@ function Users() {
   const [selectedUserNumbers, setSelectedUserNumbers] = useState([]);
   const onSelectionChange = (selectedUserNumber) => {
     setSelectedUserNumbers(selectedUserNumber);
-    console.log("onSelectionChange 호출됨:", selectedUserNumber); // 오고있음
   };
 
   //---axios delete
   const deleteUsers = async () => {
-    console.log("deleteUsers 함수 호출되냐");
-    console.log("삭제할 UserNumber:", selectedUserNumbers.selectedUserNumber);
-
     try {
       const result = await Swal.fire({
         icon: "question",
@@ -122,7 +115,6 @@ function Users() {
         const response = await axios.delete("/api/admin/users", {
           data: { userNumber: selectedUserNumbers.selectedUserNumber },
         });
-        console.log("서버 응답 확인", response.data);
 
         if (response.data.message === "회원 삭제 성공") {
           console.log("유저 삭제 완료");
@@ -147,11 +139,8 @@ function Users() {
 
     const searchItems = searchData.filter((value) => {
       const inputSearchText = searchText;
-
       const userNumberUser = value.userNumber_user;
       const phoneNumber = userNumberUser?.phoneNumber;
-
-      // console.log(value.phoneNumber?.props?.phoneNumber);
 
       const selectSearchType =
         searchType === "userName"
@@ -160,9 +149,6 @@ function Users() {
 
       return selectSearchType && selectSearchType.includes(inputSearchText);
     });
-
-    console.log("searchData", searchData);
-    console.log("searchItems", searchItems);
 
     setSearchText("");
     setUsers(searchItems);
@@ -191,7 +177,6 @@ function Users() {
             value={searchText}
             onChange={(value) => setSearchText(value)}
           />
-
           <AdminButtonSearch onClick={searchItem}>검색하기</AdminButtonSearch>
           <AdminButtonSearch onClick={allItem}>전체보기</AdminButtonSearch>
         </S.SearchButtonContainer>

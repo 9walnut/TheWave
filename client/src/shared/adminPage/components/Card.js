@@ -8,7 +8,6 @@ function Card({ children }) {
   return (
     <S.CardBox>
       <AdminButtonNavBack />
-
       {children}
     </S.CardBox>
   );

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const TextareaBox = styled.div`
   width: 810px;
-  /* height: 72px; */
   flex-shrink: 0;
   border-radius: 13px;
   border: 1px solid #e5e7eb;
@@ -16,7 +15,6 @@ export const TextareaBox = styled.div`
     padding: 6px;
     margin-bottom: 5px;
     font-size: smaller;
-    /* text-align: center; */
   }
   @media (max-width: 396px) {
     height: auto;
@@ -24,7 +22,6 @@ export const TextareaBox = styled.div`
     padding: 6px;
     margin-bottom: 4px;
     font-size: smaller;
-    /* text-align: center; */
   }
 `;
 
@@ -61,7 +58,6 @@ export const StyledTextarea = styled.textarea`
     padding: 6px;
     margin-bottom: 4px;
     font-size: smaller;
-    /* text-align: center; */
   }
   @media (max-width: 396px) {
     font-size: smaller;
