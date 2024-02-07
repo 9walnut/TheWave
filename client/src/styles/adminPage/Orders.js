@@ -7,8 +7,6 @@ export const ButtonContainer = styled.div`
 `;
 
 export const InnerCardTitleBox = styled.div`
-  /* background-color: #e9eff4; */
-  /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
   padding: 1rem;
@@ -42,6 +40,9 @@ export const SearchButtonContainer = styled.div`
   justify-content: flex-end;
   margin-bottom: 7px;
   margin-right: 5px;
+  padding: 0px 26px 0px 26px;
+  @media (max-width: 767px) {
+  }
   @media (max-width: 396px) {
     flex-wrap: wrap;
     padding: 0;

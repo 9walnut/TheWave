@@ -11,10 +11,7 @@ export const AdminPageMainLayout = styled.div`
   display: grid;
   grid-template-columns: 255px 0.8fr;
   grid-gap: 10px;
-  /* min-height: 100vh; */
-  /* height: 100%; */
   height: 100vh;
-  /* overflow-y: auto; */
 
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
@@ -39,7 +36,6 @@ export const LeftBox = styled.header`
     padding-top: 0;
     height: auto;
     width: 100%;
-    /* background-color: red; */
   }
 `;
 

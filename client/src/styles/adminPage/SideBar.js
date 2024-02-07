@@ -1,12 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-// export const NavLinksLayout = styled.ul`
-//   &.nav-link {
-//     padding-left: 100;
-//   }
-// `;
-
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -85,14 +79,10 @@ export const NavListItem = styled.li`
   &.nav-link:active {
     padding: 30px;
     background-color: #b5bfc6;
-
-    /* background: blue; */
   }
   &.nav-link:hover {
     padding: 30px;
     background-color: #d7e0e5;
-
-    /* background: blue; */
   }
 
   @media (max-width: 767px) {
@@ -102,21 +92,15 @@ export const NavListItem = styled.li`
     &.nav-link {
       font-weight: 900;
       font-size: smaller;
-      /* padding: 23px; */
       padding: 0;
-      /* flex-grow: 1; */
     }
     &.nav-link:active {
       padding: 0;
       background-color: #b5bfc6;
-
-      /* background: blue; */
     }
     &.nav-link:hover {
       padding: 0;
       background-color: #d7e0e5;
-
-      /* background: blue; */
     }
   }
 `;

@@ -5,7 +5,7 @@ export const TitleBox = styled.div`
   border-radius: 8px;
   padding: 1rem;
   height: 72px;
-  width: 1665px;
+  width: 1000px;
   margin-top: 10px;
   text-align: left;
   padding-top: 21px;
@@ -15,7 +15,6 @@ export const TitleBox = styled.div`
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 5px;
     text-align: center;
@@ -28,8 +27,6 @@ export const TitleBox = styled.div`
 `;
 
 export const SubTitleBox = styled.div`
-  /* box-shadow: 2px 11px 14px -4px #fafbff; */
-  /* border-radius: 8px; */
   padding: 1rem;
   height: 72px;
   width: 200px;
@@ -42,7 +39,6 @@ export const SubTitleBox = styled.div`
   margin-bottom: 10px;
   text-align: center;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 5px;
     text-align: center;
@@ -55,8 +51,6 @@ export const SubTitleBox = styled.div`
 `;
 
 export const OrdersDetailLayout1 = styled.div`
-  /* background-color: violet; */
-  /* background-color: #eff2f9; */
   display: flex;
   justify-content: space-between;
 
@@ -70,24 +64,19 @@ export const OrdersDetailLayout1 = styled.div`
     flex-direction: column;
     width: 90vw;
     align-items: center;
-    /* justify-content: center; */
     align-content: center;
-    /* margin: 0 auto; */
   }
 `;
 
 export const Box1 = styled.div`
-  /* background-color: red; */
   background-color: none;
   margin-left: -30px;
-
   align-items: center;
   justify-content: center;
   text-align: center;
 `;
 
 export const Box2 = styled.div`
-  /* background-color: blue; */
   background-color: none;
   margin-left: 28px;
 `;
@@ -131,7 +120,6 @@ export const ItemTitle = styled.div`
   font-weight: 900;
   margin-left: 5px;
   width: 150px;
-  /* background-color: red; */
   @media (max-width: 396px) {
     font-size: smaller;
     text-align: center;
@@ -153,11 +141,8 @@ export const ItemContent = styled.div`
 `;
 
 export const OrderProductImgBox = styled.div`
-  /* background-color: #e9eff4; */
-  /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
-  /* height: 300px; */
   width: 400px;
   height: 300px;
   padding-top: 21px;
@@ -165,15 +150,11 @@ export const OrderProductImgBox = styled.div`
   text-align: center;
   font-weight: 900;
   border: 1px solid #e0e0e0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   overflow: hidden;
-
-  background-color: yellow;
 `;
 
 export const BtnWrapper = styled.div`

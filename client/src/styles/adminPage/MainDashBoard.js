@@ -7,9 +7,6 @@ export const Container = styled.div`
   align-items: center;
   height: 100vh;
   width: 100%;
-  /* @media (max-width: 768px) {
-    height: 300vh;
-  } */
 `;
 
 export const AdminPageMainLayout = styled.div`
@@ -32,15 +29,12 @@ export const AdminPageMainLayout = styled.div`
 
 export const StyledCardRow1 = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
-  /* background-color: #fcfeff; */
   position: relative;
   margin: 0;
-  /* border: 1px solid #e0e0e0; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 13px;
   padding: 1rem;
   margin: 7px;
-  /* width: 717px; */
   width: 35vw;
   height: 362px;
   overflow: hidden;
@@ -65,20 +59,16 @@ export const StyledCardRow1 = styled.div`
 `;
 export const StyledCardRow2 = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
-  /* background-color: #fcfeff; */
   position: relative;
   margin: 0;
-  /* border: 1px solid #e0e0e0; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 13px;
   padding: 1rem;
   margin: 7px;
-  /* width: 717px; */
   width: 35vw;
   height: 532px;
   overflow: hidden;
   overflow-x: auto;
-  /* margin-bottom: -4px; */
   margin-top: -75px;
   @media (max-width: 768px) {
     width: 99%;

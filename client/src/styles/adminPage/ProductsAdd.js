@@ -7,13 +7,10 @@ export const PageWrapper = styled.div`
   @media (max-width: 396px) {
     width: 95vw;
     margin-bottom: 60px;
-    /* align-items: center; */
-    /* position: absolute; */
   }
 `;
 
 export const ProductsLayout1 = styled.div`
-  /* background-color: #eff2f9; */
   display: grid;
   grid-template-columns: 0.8fr 0.8fr;
   grid-gap: 10px;
@@ -44,15 +41,12 @@ export const Box1 = styled.div`
 export const Box2 = styled.div`
   background-color: none;
   margin-bottom: 5px;
-  /* background-color: blue; */
 `;
 export const ProductsLayout2 = styled.div`
-  /* background-color: #eff2f9; */
   display: grid;
   grid-template-columns: 0.8fr 0.8fr;
   grid-gap: 10px;
   height: 100%;
-  /* margin-top: 300px; */
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
     grid-gap: 1px;
@@ -69,7 +63,6 @@ export const ProductsLayout2 = styled.div`
 
 export const Box3 = styled.div`
   background-color: none;
-  /* background-color: yellow; */
   @media (max-width: 767px) {
     margin-bottom: 5px;
   }
@@ -82,9 +75,6 @@ export const Box3 = styled.div`
 
 export const Box4 = styled.div`
   background-color: none;
-  /* background-color: green; */
-  /* margin: 20px;
-  margin-top: 45px; */
   @media (max-width: 767px) {
     margin-bottom: 5px;
   }
@@ -109,7 +99,6 @@ export const TitleBox = styled.div`
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 5px;
     text-align: center;
@@ -136,7 +125,6 @@ export const SubTitleBox = styled.div`
   font-weight: 600;
   margin-bottom: 10px;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 5px;
     text-align: center;
@@ -172,7 +160,6 @@ export const SendDataBtnWrapper = styled.div`
 `;
 
 export const AlertMsgBox = styled.span`
-  /* background-color: blue; */
   width: auto;
   height: auto;
   margin-left: 30px;

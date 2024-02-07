@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ProductsLayout1 = styled.div`
-  /* background-color: #eff2f9; */
   display: grid;
   grid-template-columns: 0.8fr 0.8fr;
   grid-gap: 10px;
@@ -18,20 +17,16 @@ export const ProductsLayout1 = styled.div`
 
 export const Box1 = styled.div`
   background-color: none;
-  /* background-color: red; */
 `;
 
 export const Box2 = styled.div`
   background-color: none;
-  /* background-color: blue; */
 `;
 export const ProductsLayout2 = styled.div`
-  /* background-color: #eff2f9; */
   display: grid;
   grid-template-columns: 0.8fr 0.8fr;
   grid-gap: 10px;
   height: 100%;
-  /* margin-top: 300px; */
   @media (max-width: 396px) {
     grid-template-columns: 1fr;
     grid-gap: 10px;
@@ -41,7 +36,6 @@ export const ProductsLayout2 = styled.div`
 
 export const Box3 = styled.div`
   background-color: none;
-  /* background-color: yellow; */
   @media (max-width: 396px) {
     margin-left: 20px;
   }
@@ -49,9 +43,6 @@ export const Box3 = styled.div`
 
 export const Box4 = styled.div`
   background-color: none;
-  /* background-color: green; */
-  /* margin: 20px;
-  margin-top: 45px; */
   @media (max-width: 396px) {
     margin-left: 20px;
   }
@@ -72,7 +63,6 @@ export const TitleBox = styled.div`
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 5px;
     text-align: center;
@@ -99,7 +89,6 @@ export const SubTitleBox = styled.div`
   font-weight: 600;
   margin-bottom: 10px;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 5px;
     text-align: center;
@@ -134,8 +123,6 @@ export const sendDataBtnWrapper = styled.div`
 `;
 
 export const ThumbnailBox = styled.div`
-  /* background-color: #e9eff4; */
-  /* border: 0px solid #e0e0e0; */
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
   height: 300px;
@@ -146,7 +133,6 @@ export const ThumbnailBox = styled.div`
   text-align: center;
   font-weight: 900;
   border: 1px solid #e0e0e0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,7 +145,6 @@ export const ThumbnailBox = styled.div`
 `;
 
 export const AlertMsgBox = styled.span`
-  /* background-color: blue; */
   width: auto;
   height: auto;
   margin-left: 30px;

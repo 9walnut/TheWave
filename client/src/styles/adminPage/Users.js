@@ -48,6 +48,7 @@ export const SearchButtonContainer = styled.div`
   justify-content: flex-end;
   margin-bottom: 7px;
   margin-right: 5px;
+  padding: 0px 26px 0px 0px;
   @media (max-width: 396px) {
     flex-wrap: wrap;
     padding: 0;

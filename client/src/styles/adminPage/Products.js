@@ -25,6 +25,7 @@ export const InnerCardTitleBox = styled.div`
   font-weight: 900;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
+  margin-left: 25px;
   @media (max-width: 396px) {
     font-size: smaller;
     margin-top: -10px;
@@ -43,6 +44,7 @@ export const SearchButtonContainer = styled.div`
   justify-content: flex-end;
   margin-bottom: 7px;
   margin-right: 5px;
+  padding: 0px 26px 0px 26px;
   @media (max-width: 396px) {
     flex-wrap: wrap;
     padding: 0;

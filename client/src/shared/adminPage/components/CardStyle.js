@@ -9,11 +9,12 @@ export const CardBox = styled.div`
   padding: 1rem;
   height: 93vh;
   width: 82vw;
+  /* width: auto; */
   margin-top: -8px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   right: 1%;
+  overflow-y: auto;
 
   @media (max-width: 767px) {
     margin-top: 30px;
