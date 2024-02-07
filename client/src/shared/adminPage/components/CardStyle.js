@@ -9,34 +9,30 @@ export const CardBox = styled.div`
   padding: 1rem;
   height: 93vh;
   width: 82vw;
+  /* width: auto; */
   margin-top: -8px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   right: 1%;
+  overflow-y: auto;
 
   @media (max-width: 767px) {
     margin-top: 30px;
     height: 83vh;
     width: 95vw;
     display: flex;
-    /* flex-direction: column; */
-    /* justify-content: space-between; */
     > div:not(:last-child) {
       margin-bottom: 35px;
     }
   }
   @media (max-width: 396px) {
     margin-top: 3px;
-    /* margin-top: -65px; */
     height: 88vh;
     width: 95vw;
     margin-left: -5px;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    /* justify-content: space-between; */
-    /* justify-content: center; */
 
     > div:not(:last-child) {
       margin-bottom: 15px;

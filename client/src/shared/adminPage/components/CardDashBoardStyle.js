@@ -10,18 +10,11 @@ export const CardBox = styled.div`
   height: 93vh;
   width: 80vw;
   overflow-y: auto;
-  /* width: 1700px; */
   margin: auto;
   margin-top: 10px;
   padding-top: 100px;
 
   @media (max-width: 767px) {
-    /* margin-top: 500px; */
-    /* width: 100%;
-    height: 93vh;
-    width: 89vw;
-    margin-top: 5px;
-
     /* margin-bottom: 10px; */
   }
   @media (max-width: 396px) {

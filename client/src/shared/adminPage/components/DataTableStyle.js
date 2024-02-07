@@ -11,7 +11,6 @@ export const Table = styled.table`
   border: 1px solid #ddd;
   border-spacing: 0;
   border-radius: 7px;
-  /* width: 1600px; */
   width: 78vw;
   margin-left: 33px;
 
@@ -84,9 +83,6 @@ export const TableTd = styled.td`
     font-size: smaller;
     width: 70px;
     padding: 2px;
-
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
   }
 `;
 

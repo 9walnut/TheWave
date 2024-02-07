@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 export const OrderItemWrapper = styled.div`
-  /* background-color: darkblue; */
   position: relative;
   width: 100%;
   align-content: center;
   height: 129px;
   margin-top: 59px;
-
   justify-content: center;
   align-items: center;
 
@@ -17,14 +15,11 @@ export const OrderItemWrapper = styled.div`
   }
 `;
 export const ProductItemWrapper = styled.div`
-  /* background-color: blue; */
   position: relative;
-
   width: 100%;
   align-content: center;
   height: 129px;
   margin-top: 85px;
-
   justify-content: center;
   align-items: center;
   @media (max-width: 768px) {
@@ -40,7 +35,6 @@ export const ListItemBox = styled.div`
   align-items: center;
   display: flex;
   width: 250px;
-  /* background-color: red; */
 
   @media (max-width: 768px) {
     width: 100%;

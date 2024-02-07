@@ -47,14 +47,11 @@ const header = [
   },
 ];
 
-//✅ onChange로 선택 값 바뀌면 그거 가져와서 수정요청 되도록?
-//✅ selectBox 클릭할 떄 orderId, status 가져와야한다.
-
 function Orders() {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
-  const [selectedOrderId, setSelectedOrderId] = useState(null); //*
-  const params = useParams(); //*
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const params = useParams();
 
   const [searchText, setSearchText] = useState("");
   const [searchType, setSearchType] = useState("userName");
@@ -84,7 +81,7 @@ function Orders() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/admin/orders");
-      console.log("orders response", response.data);
+      //console.log("orders response", response.data);
 
       const modifiedData = response.data.map((order) => ({
         orderId: order.orderId,
@@ -96,7 +93,6 @@ function Orders() {
         ),
         address: order.address,
         orderDate: order.orderDate,
-        // orderStatus: order.orderStatus,
         orderStatus: orderStatusToName(order.orderStatus),
       }));
 
@@ -104,7 +100,6 @@ function Orders() {
 
       setOrders(modifiedData);
       setSearchData(modifiedData);
-      // console.log(modifiedData); //orderStatus 한글로 변경 완료
     } catch (error) {
       console.log("에러", error);
     }
@@ -122,14 +117,14 @@ function Orders() {
   const [checkedOrderId, setCheckedOrderId] = useState([]);
   const onSelectionChange = (checkedOrderId) => {
     setCheckedOrderId(checkedOrderId);
-    console.log("onSelectionChange 호출됨:", checkedOrderId); // 오고있음
+    //console.log("onSelectionChange 호출됨:", checkedOrderId);
   };
 
   //---셀렉트 박스 내용 가져오기
   const [selectBoxStatus, setSelectBoxStatus] = useState({});
 
   const handleStatusChange = (selectBoxStatus) => {
-    console.log("Orders 컴포넌트 - selectBoxStatus:", selectBoxStatus);
+    //console.log("Orders 컴포넌트 - selectBoxStatus:", selectBoxStatus);
     const { orderId, outStatus } = selectBoxStatus;
     if (orderId && outStatus) {
       updateData(orderId, outStatus);
@@ -145,7 +140,6 @@ function Orders() {
           outStatus,
         });
         console.log("patch응답 성공 (response)", response);
-        // console.log("patch응답 성공 (response.data)", response.data);
         fetchData();
         setSelectBoxStatus({});
       } catch (error) {
@@ -165,12 +159,8 @@ function Orders() {
 
     const searchItems = searchData.filter((value) => {
       const inputSearchText = searchText;
-
       const userNumberUser = value.userNumber_user;
       const phoneNumber = userNumberUser?.phoneNumber;
-
-      // console.log(value.phoneNumber?.props?.phoneNumber);
-
       const selectSearchType =
         searchType === "userName"
           ? value.userName
@@ -178,9 +168,6 @@ function Orders() {
 
       return selectSearchType && selectSearchType.includes(inputSearchText);
     });
-
-    console.log("searchData", searchData);
-    console.log("searchItems", searchItems);
 
     setSearchText("");
     setOrders(searchItems);
@@ -220,12 +207,12 @@ function Orders() {
           onSelectionChange={onSelectionChange}
           onItemClick={(item) => {
             const orderId = item.orderId;
-            setSelectedOrderId(orderId); //*
-            console.log("클릭한 orderId:", orderId);
+            setSelectedOrderId(orderId);
             navigate(`/admin/orders/${orderId}`);
           }}
           onStatusChange={handleStatusChange}
           page={currentPage}
+          hideCheckboxes={true}
         />
         <S.ButtonContainer>
           <PageNation

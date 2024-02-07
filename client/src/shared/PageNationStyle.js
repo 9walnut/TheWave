@@ -1,17 +1,10 @@
 import styled from "styled-components";
-{
-  /* <StyleSheetManager shouldForwardProp={...}>
-   */
-}
-
-// </StyleSheetManager>
 
 export const PageNationWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 30px;
   @media (max-width: 396px) {
-    /* margin-top: 20px; */
     margin-bottom: 20px;
   }
 `;

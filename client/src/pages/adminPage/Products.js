@@ -65,8 +65,6 @@ function Products() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/admin/products");
-      // console.log("response", response.data);
-
       const filteredData = response.data.filter(
         (product) => !product.isDeleted
       );
@@ -84,8 +82,6 @@ function Products() {
 
       setProducts(modifiedData);
       setSearchData(modifiedData);
-      // console.log(products);
-      // console.log(modifiedData);
     } catch (error) {
       console.error("에러", error);
     }
@@ -103,7 +99,7 @@ function Products() {
 
   const onSelectionChange = (selectedProductId) => {
     setSelectedProductIds(selectedProductId);
-    console.log("onSelectionChange 호출됨:", selectedProductId); // 오고있음
+    //console.log("onSelectionChange 호출됨:", selectedProductId);
   };
 
   const deleteProducts = async () => {
@@ -115,7 +111,6 @@ function Products() {
       });
       return;
     }
-    // console.log("삭제할 제품 ID:", selectedProductIds);
     try {
       const result = await Swal.fire({
         icon: "question",
@@ -130,12 +125,8 @@ function Products() {
         const response = await axios.delete("/api/admin/products", {
           data: { productId: selectedProductIds.selectedProductId },
         });
-        console.log("서버 응답 왜 안되니", response.data);
 
         if (response.data) {
-          console.log(
-            "상품 삭제 완료. 삭제되면1(isDeleted: true), 아니면 0(isDeleted: false)"
-          );
           await fetchData();
           setSelectedProductIds([]);
         } else {
@@ -148,8 +139,6 @@ function Products() {
   };
   //---searchItem
   const searchItem = () => {
-    console.log(searchType);
-
     if (searchText.length === 0) {
       alert("검색 내용을 입력해주세요");
       return;
@@ -161,8 +150,6 @@ function Products() {
         searchType === "productName" ? value.productName : value.categoryName;
       return selectSearchType.includes(inputSearchText);
     });
-    console.log(searchData);
-    console.log(searchItems);
 
     setSearchText("");
     setProducts(searchItems);
@@ -201,11 +188,8 @@ function Products() {
           items={currentItems}
           page={currentPage}
           onSelectionChange={onSelectionChange}
-          // checkedItem={selectedProductIds}
           onItemClick={(item) => {
             const productId = item.productId;
-
-            console.log("클릭한 productId:", productId);
             navigate(`/admin/products/${productId}`);
           }}
         />

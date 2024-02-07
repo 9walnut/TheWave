@@ -16,8 +16,6 @@ const UploadDetail = ({ onFileChange }) => {
     setSelectedFiles(files);
     setFileBasicMessage("");
     setFileSelectedMessage("😀업로드 버튼을 꼭 눌러주세요😀");
-
-    // handleUpload(files);
   };
 
   const handleUpload = async () => {
@@ -34,8 +32,6 @@ const UploadDetail = ({ onFileChange }) => {
         formData.append("detailUrls", selectedFiles[i]);
       }
 
-      console.log("FormData:", formData);
-
       const response = await axios.post(
         "/api/admin/products/add/detail",
         formData,
@@ -49,11 +45,8 @@ const UploadDetail = ({ onFileChange }) => {
 
       const detailUrls = response.data.detailUrls;
 
-      // console.log("Detail URL 멀로 오니:", detailUrls);
-      // console.log("Detail URL detailUrlObject멀로 오니:", detailUrlObject);
-
-      console.log("이미지 업로드 성공", response.data);
-      console.log("Detail URL:", response.data.detailUrls);
+      // console.log("Detail URL: ", detailUrls);
+      // console.log("detailUrlObject: ", detailUrlObject);
 
       // 업로드 성공 후 썸네일 저장
       setDetailUrls(response.data.detailUrls);
@@ -70,7 +63,6 @@ const UploadDetail = ({ onFileChange }) => {
   return (
     <>
       <S.ImageUploadWrapper>
-        {/* <S.DetailBox /> */}
         <S.DetailBox>
           <p>{fileBasicMessage}</p>
           <p>{fileSelectedMessage}</p>

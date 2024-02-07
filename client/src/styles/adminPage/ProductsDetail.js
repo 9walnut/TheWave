@@ -3,13 +3,10 @@ import styled from "styled-components";
 export const PageWrapper = styled.div`
   height: 93vh;
   width: 74vw;
-  /* background-color: yellow; */
   position: relative;
   @media (max-width: 396px) {
     width: 95vw;
     margin-bottom: 60px;
-    /* align-items: center; */
-    /* position: absolute; */
   }
 `;
 
@@ -31,7 +28,7 @@ export const TitleBox = styled.div`
   border-radius: 8px;
   padding: 1rem;
   height: 72px;
-  width: 1665px;
+  width: 1000px;
   margin-top: 10px;
   text-align: left;
   padding-top: 21px;
@@ -41,7 +38,6 @@ export const TitleBox = styled.div`
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 5px;
     text-align: center;
@@ -56,11 +52,8 @@ export const SubTitleBox = styled.div`
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
   padding: 1rem;
-  /* height: 72px;
-  width: 682px; */
   height: 3vh;
   width: 35vw;
-  /* background-color: black; */
 
   margin-top: 10px;
   text-align: center;
@@ -70,7 +63,6 @@ export const SubTitleBox = styled.div`
   font-weight: 600;
   margin-bottom: 10px;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 15px;
     text-align: center;
@@ -84,11 +76,8 @@ export const SubTitleWideBox = styled.div`
   box-shadow: 2px 11px 14px -4px #fafbff;
   border-radius: 8px;
   padding: 1rem;
-  /* height: 72px;
-  width: 682px; */
   height: 3vh;
   width: 70vw;
-  /* background-color: black; */
 
   margin-top: 10px;
   text-align: left;
@@ -98,7 +87,6 @@ export const SubTitleWideBox = styled.div`
   font-weight: 600;
   margin-bottom: 10px;
   @media (max-width: 767px) {
-    /* height: auto; */
     width: 100%;
     margin-top: 5px;
     text-align: center;
@@ -109,12 +97,9 @@ export const SubTitleWideBox = styled.div`
   }
 `;
 export const ProductsLayout1 = styled.div`
-  /* background-color: #eff2f9; */
-  /* background-color: violet; */
   display: grid;
   grid-template-columns: 0.8fr 0.8fr;
   grid-gap: 3px;
-  /* height: 600px; */
   height: 40vh;
 
   @media (max-width: 767px) {
@@ -122,18 +107,14 @@ export const ProductsLayout1 = styled.div`
     flex-direction: column;
     width: 90vw;
     align-items: center;
-    /* justify-content: center; */
     align-content: center;
-    /* margin: 0 auto; */
     grid-template-columns: 1fr;
   }
 `;
 export const ProductsLayout2 = styled.div`
-  /* background-color: violet; */
   display: grid;
   grid-template-columns: 0.8fr 0.8fr;
   grid-gap: 3px;
-  /* height: 600px; */
   height: auto;
 
   @media (max-width: 767px) {
@@ -141,14 +122,11 @@ export const ProductsLayout2 = styled.div`
     flex-direction: column;
     width: 90vw;
     align-items: center;
-    /* justify-content: center; */
     align-content: center;
-    /* margin: 0 auto; */
     grid-template-columns: 1fr;
   }
 `;
 export const Box1 = styled.div`
-  /* background-color: red; */
   width: 36vw;
   height: 30vh;
   background-color: none;
@@ -157,22 +135,17 @@ export const Box1 = styled.div`
     align-items: center;
     width: 85vw;
     margin-top: 10px;
-    /* height: 50vh; */
     height: auto;
   }
   @media (max-width: 396px) {
     width: 80vw;
-    /* height: 80vh; */
     height: auto;
-    /* margin-top: -20px; */
   }
 `;
 
 export const Box2 = styled.div`
-  /* background-color: blue; */
   background-color: none;
   width: 36vw;
-  /* height: 40vh; */
   height: auto;
   @media (max-width: 767px) {
     width: 89vw;
@@ -181,19 +154,14 @@ export const Box2 = styled.div`
   }
   @media (max-width: 396px) {
     width: 90vw;
-    /* margin-top: 50px; */
-    /* height: 50vh; */
     height: auto;
   }
 `;
 
 export const Box3 = styled.div`
-  /* background-color: green; */
   height: 25vh;
   width: 25vw;
   background-color: none;
-  /* display: flex; */
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   align-content: center;
@@ -204,8 +172,6 @@ export const Box3 = styled.div`
     align-items: center;
     justify-content: center;
     width: 85vw;
-    /* margin-top: 620px; */
-    /* height: 50vh; */
     height: auto;
     margin-left: 0px;
   }
@@ -214,7 +180,6 @@ export const Box3 = styled.div`
     align-items: center;
     justify-content: center;
     width: 80vw;
-    /* height: 50vh; */
     height: auto;
     margin-left: 14px;
     margin: auto;
@@ -222,11 +187,8 @@ export const Box3 = styled.div`
 `;
 
 export const ItemBox = styled.div`
-  /* width: 810px; */
   width: 35vw;
-  /* height: 4vh; */
   height: auto;
-  /* height: 60px; */
   flex-shrink: 0;
   border-radius: 13px;
   border: 1px solid #e5e7eb;
@@ -239,7 +201,6 @@ export const ItemBox = styled.div`
   padding-top: 23px;
   @media (max-width: 767px) {
     width: 87vw;
-    /* height: 4vh; */
     height: auto;
     padding: 10px;
     margin-bottom: 5px;
@@ -263,7 +224,6 @@ export const ItemTitle = styled.div`
   font-weight: 900;
   margin-left: 5px;
   width: 150px;
-  /* background-color: red; */
   @media (max-width: 396px) {
     font-size: smaller;
     text-align: center;

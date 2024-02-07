@@ -8,8 +8,6 @@ import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 
 const useRowClick = (onItemClick, onStatusChange) => {
   const onRowClick = (item, event) => {
-    console.log("DataTable 클릭한 orderId", item.orderId);
-
     if (event && event.target.tagName !== "SELECT") {
       onItemClick?.({
         productId: item.productID,
@@ -34,6 +32,7 @@ function DataTable({
   onItemClick,
   onStatusChange,
   page,
+  hideCheckboxes,
 }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
@@ -81,21 +80,21 @@ function DataTable({
         <S.Table>
           <thead>
             <S.TableTr>
-              <S.TableInputTd>
-                <input
-                  type="checkbox"
-                  onChange={SelectAll}
-                  checked={selectedLists.size === items.length}
-                />
-              </S.TableInputTd>
+              {!hideCheckboxes && (
+                <S.TableInputTd>
+                  <input
+                    type="checkbox"
+                    onChange={SelectAll}
+                    checked={selectedLists.size === items.length}
+                  />
+                </S.TableInputTd>
+              )}
               {headers.map((header) => (
                 <S.TableHeader
                   key={header.text}
                   text={header.text}
                   width={header.width}
-                  // style={{ width: `${header.width}px` }}
                 >
-                  {/* <S.TableHeader key={header.text}> */}
                   {header.value === "deliveryStatus"
                     ? header.text
                     : header.text}
@@ -109,13 +108,15 @@ function DataTable({
                 key={`${keySet}_${index}`}
                 onClick={(event) => onRowClick(item, event)}
               >
-                <S.TableTd>
-                  <CheckBox
-                    onChange={() => onChecked(item)}
-                    checked={selectedLists.has(index)}
-                    currentPage={page}
-                  />
-                </S.TableTd>
+                {!hideCheckboxes && (
+                  <S.TableTd>
+                    <CheckBox
+                      onChange={() => onChecked(item)}
+                      checked={selectedLists.has(index)}
+                      currentPage={page}
+                    />
+                  </S.TableTd>
+                )}
                 {headerList.map((value, columnIndex) => (
                   <S.TableTd
                     key={`${keySet}_${index}_${columnIndex}`}
@@ -123,9 +124,7 @@ function DataTable({
                   >
                     {value === "orderStatus" ? (
                       <SelectBoxDelivery
-                        // value={selectedStatus}
                         initialStatus={item.orderStatus}
-                        // value={item.orderStatus}
                         onChange={(e) => {
                           e.stopPropagation();
                           setSelectedStatus(e.target.value);
@@ -141,7 +140,6 @@ function DataTable({
                         onOrderIdValue={item.orderId}
                       />
                     ) : (
-                      // item[value]
                       etxText(item[value], 40)
                     )}
                   </S.TableTd>

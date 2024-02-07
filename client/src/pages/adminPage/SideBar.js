@@ -1,8 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 import * as S from "../../styles/adminPage/SideBar.js";
-
 import ListItem from "../../shared/adminPage/components/ListItem";
 
 function SideBar({ selectItem }) {
@@ -12,11 +10,9 @@ function SideBar({ selectItem }) {
     selectItem(item);
   };
 
-  //exact="true" : 경로가 정확히 일치할 때만 해당 링크 활성화
   return (
     <S.Container>
       <S.SideBarBox>
-        {/* <S.NavLinksLayout> */}
         <S.NavList>
           <NavLink
             to="/admin"
@@ -44,8 +40,6 @@ function SideBar({ selectItem }) {
               ></ListItem>
             </S.NavListItemNone>
           </NavLink>
-          {/* </S.NavLinksLayout> */}
-          {/* <S.NavLinksLayout> */}
           <S.StyledNavLink
             to="/admin/dashboard"
             exact={true}
@@ -98,8 +92,6 @@ function SideBar({ selectItem }) {
               </ListItem>
             </S.NavListItem>
           </S.StyledNavLink>
-          {/* </S.NavLinksLayout> */}
-          {/* <S.NavLinksLayout> */}
           <S.NavListItemNone>
             <ListItem
               icon="/adminPage/sidebar/none.svg"
@@ -122,7 +114,6 @@ function SideBar({ selectItem }) {
               </ListItem>
             </S.NavListItem>
           </NavLink>
-          {/* </S.NavLinksLayout> */}
         </S.NavList>
       </S.SideBarBox>
     </S.Container>

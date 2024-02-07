@@ -8,9 +8,6 @@ function CheckBoxHandlerSelectAll({ selectedLists, items, setSelectedLists }) {
   const selectedAllContents = Array.from(newSelectedLists).map(
     (index) => items[index]
   );
-
-  console.log("selectedAllContents", selectedAllContents);
-
   return null;
 }
 

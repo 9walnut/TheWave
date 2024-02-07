@@ -9,7 +9,6 @@ import ProductsEdit from "./ProductsEdit.js";
 import AdminButtonGrey from "../../components/adminPage/AdminButtonGrey.js";
 import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 import ModifiedPrice from "../../shared/ModifiedPrice.js";
-// import ModifiedOptionText from "../../shared/ModifiedOptionText.js";
 import Swal from "sweetalert2";
 
 function ProductsDetail({ products }) {
@@ -21,7 +20,6 @@ function ProductsDetail({ products }) {
   const getProductsDetail = async () => {
     try {
       const response = await axios.get(`/api/admin/products/${productId}`);
-      console.log("응답오나", response.data);
       setProduct(response.data);
     } catch (error) {
       console.error("상품 불러오기 에러", error);
@@ -31,8 +29,8 @@ function ProductsDetail({ products }) {
   useEffect(() => {
     getProductsDetail();
   }, [productId]);
-  //---axios delete
 
+  //---axios delete
   const deleteProduct = async () => {
     try {
       const result = await Swal.fire({
@@ -46,7 +44,6 @@ function ProductsDetail({ products }) {
       });
       if (result.isConfirmed) {
         const response = await axios.delete(`/api/admin/products/${productId}`);
-        console.log("response.data: ", response.data);
 
         if (response.data) {
           console.log("상품 삭제 완료");
@@ -95,7 +92,6 @@ function ProductsDetail({ products }) {
               </S.ItemBox>
               <S.ItemBox>
                 <S.ItemTitle>상품 설명</S.ItemTitle>
-                {/* <S.ItemContent>{product.productInfo}</S.ItemContent> */}
                 <S.ItemContent>
                   {" "}
                   <p style={{ whiteSpace: "pre-line" }}>

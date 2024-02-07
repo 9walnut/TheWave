@@ -8,7 +8,6 @@ function CardDashBoard({ children }) {
   return (
     <S.CardBox>
       <AdminDashButtonNavBack />
-
       {children}
     </S.CardBox>
   );

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SelectBox = styled.div`
   width: 810px;
-  /* height: 72px; */
   flex-shrink: 0;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
@@ -16,7 +15,6 @@ export const SelectBox = styled.div`
     padding: 6px;
     margin-bottom: 5px;
     font-size: smaller;
-    /* text-align: center; */
   }
   @media (max-width: 396px) {
     height: auto;

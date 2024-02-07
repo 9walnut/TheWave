@@ -24,9 +24,6 @@ function MainDashBoard() {
     try {
       const response = await axios.get("/api/admin");
 
-      console.log("response.data", response);
-      console.log("response.data", response.data);
-
       setTotalOrders(response.data.totalOrders);
       setTotalOrderPrices(response.data.totalOrderPrices);
       setDeliveryCompleteOrders(response.data.deliveryCompleteOrders);
@@ -39,14 +36,6 @@ function MainDashBoard() {
       console.log("에러", error);
     }
   };
-
-  // console.log("totalOrders", totalOrders);
-  // console.log("totalOrderPrices", totalOrderPrices);
-  // console.log("deliveryCompleteOrders", deliveryCompleteOrders);
-  // console.log("deliveryReadyOrders", deliveryReadyOrders);
-  // console.log("totalProducts", totalProducts);
-  // console.log("categoryCount", categoryCount);
-  // console.log("dailyOutStatus", dailyOutStatus);
 
   useEffect(() => {
     fetchData();
