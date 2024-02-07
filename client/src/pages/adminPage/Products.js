@@ -205,7 +205,7 @@ function Products() {
           onItemClick={(item) => {
             const productId = item.productId;
 
-            console.log("클릭한 productId:", productId);
+            // console.log("클릭한 productId:", productId);
             navigate(`/admin/products/${productId}`);
           }}
         />

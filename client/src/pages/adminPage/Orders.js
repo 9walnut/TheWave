@@ -84,7 +84,7 @@ function Orders() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/admin/orders");
-      console.log("orders response", response.data);
+      //console.log("orders response", response.data);
 
       const modifiedData = response.data.map((order) => ({
         orderId: order.orderId,
@@ -129,7 +129,7 @@ function Orders() {
   const [selectBoxStatus, setSelectBoxStatus] = useState({});
 
   const handleStatusChange = (selectBoxStatus) => {
-    console.log("Orders 컴포넌트 - selectBoxStatus:", selectBoxStatus);
+    //console.log("Orders 컴포넌트 - selectBoxStatus:", selectBoxStatus);
     const { orderId, outStatus } = selectBoxStatus;
     if (orderId && outStatus) {
       updateData(orderId, outStatus);
@@ -221,7 +221,7 @@ function Orders() {
           onItemClick={(item) => {
             const orderId = item.orderId;
             setSelectedOrderId(orderId); //*
-            console.log("클릭한 orderId:", orderId);
+            //console.log("클릭한 orderId:", orderId);
             navigate(`/admin/orders/${orderId}`);
           }}
           onStatusChange={handleStatusChange}

@@ -24,8 +24,8 @@ function MainDashBoard() {
     try {
       const response = await axios.get("/api/admin");
 
-      console.log("response.data", response);
-      console.log("response.data", response.data);
+      // console.log("response.data", response);
+      // console.log("response.data", response.data);
 
       setTotalOrders(response.data.totalOrders);
       setTotalOrderPrices(response.data.totalOrderPrices);

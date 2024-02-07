@@ -8,7 +8,7 @@ import CheckBoxHandlerSelectAll from "./CheckBoxHandlerSelectAll.js";
 
 const useRowClick = (onItemClick, onStatusChange) => {
   const onRowClick = (item, event) => {
-    console.log("DataTable 클릭한 orderId", item.orderId);
+    //console.log("DataTable 클릭한 orderId", item.orderId);
 
     if (event && event.target.tagName !== "SELECT") {
       onItemClick?.({

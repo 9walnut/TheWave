@@ -49,7 +49,7 @@ function ProductsEdit() {
       try {
         const response = await axios.get(`/api/admin/products/${productId}`);
         const productData = response.data;
-        console.log(productData);
+        //console.log(productData);
 
         setNewProductName(productData.productName);
         setNewProductInfo(productData.productInfo);
@@ -66,7 +66,7 @@ function ProductsEdit() {
         setNewColor(colorValue);
 
         const sizeValue = productData.productoption.size;
-        console.log(sizeValue);
+        //console.log(sizeValue);
         setNewSize(sizeValue);
       } catch (error) {
         console.error("상품 정보를 가져오는 중 에러 발생", error);
@@ -74,7 +74,7 @@ function ProductsEdit() {
     };
 
     fetchProductData();
-    console.log(newSize);
+    //console.log(newSize);
   }, [productId]);
 
   const getImageDataThumbnail = (editThumbnailUrl) => {

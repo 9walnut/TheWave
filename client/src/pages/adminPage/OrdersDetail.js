@@ -11,12 +11,12 @@ import AdminButtonBlack from "../../components/adminPage/AdminButtonBlack.js";
 function OrdersDetail({ orders }) {
   const [order, setOrder] = useState({});
   const { orderId } = useParams();
-  console.log("OrdersDetail Params 아이디", orderId);
+  //console.log("OrdersDetail Params 아이디", orderId);
 
   const getOrdersDetail = async () => {
     try {
       const response = await axios.get(`/api/admin/orders/${orderId}`);
-      console.log("응답오나", response.data);
+      //console.log("응답오나", response.data);
       setOrder(response.data);
     } catch (error) {
       console.error("상품 불러오기 에러", error);

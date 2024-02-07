@@ -10,9 +10,9 @@ import * as S from "./GraphBoxStyle";
 // ];
 
 function CategorySales({ dailyOutStatus }) {
-  console.log(dailyOutStatus[0]);
-  console.log(dailyOutStatus[0].outDate);
-  console.log(dailyOutStatus[0].count);
+  // console.log(dailyOutStatus[0]);
+  // console.log(dailyOutStatus[0].outDate);
+  // console.log(dailyOutStatus[0].count);
 
   // const categorySalesData = dailyOutStatus.map((data) => ({
   //   outDate: data.outDate,
@@ -26,7 +26,7 @@ function CategorySales({ dailyOutStatus }) {
     .slice(0, 7)
     .map((data) => ({ outDate: data.outDate, count: data.count }));
 
-  console.log(categorySalesData);
+  // console.log(categorySalesData);
   return (
     <>
       <CardTitle>일자별 판매량</CardTitle>
