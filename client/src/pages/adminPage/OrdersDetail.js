@@ -27,8 +27,6 @@ function OrdersDetail({ orders }) {
     getOrdersDetail();
   }, [orderId]);
 
-  //✅ 데이터테이블에 있는것만 보여주면됨.
-
   //orderStatus switch
   const getOrderStatus = (status) => {
     switch (status) {

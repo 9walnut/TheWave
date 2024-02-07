@@ -34,6 +34,7 @@ function DataTable({
   onItemClick,
   onStatusChange,
   page,
+  hideCheckboxes,
 }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
@@ -81,13 +82,15 @@ function DataTable({
         <S.Table>
           <thead>
             <S.TableTr>
-              <S.TableInputTd>
-                <input
-                  type="checkbox"
-                  onChange={SelectAll}
-                  checked={selectedLists.size === items.length}
-                />
-              </S.TableInputTd>
+              {!hideCheckboxes && (
+                <S.TableInputTd>
+                  <input
+                    type="checkbox"
+                    onChange={SelectAll}
+                    checked={selectedLists.size === items.length}
+                  />
+                </S.TableInputTd>
+              )}
               {headers.map((header) => (
                 <S.TableHeader
                   key={header.text}
@@ -109,13 +112,15 @@ function DataTable({
                 key={`${keySet}_${index}`}
                 onClick={(event) => onRowClick(item, event)}
               >
-                <S.TableTd>
-                  <CheckBox
-                    onChange={() => onChecked(item)}
-                    checked={selectedLists.has(index)}
-                    currentPage={page}
-                  />
-                </S.TableTd>
+                {!hideCheckboxes && (
+                  <S.TableTd>
+                    <CheckBox
+                      onChange={() => onChecked(item)}
+                      checked={selectedLists.has(index)}
+                      currentPage={page}
+                    />
+                  </S.TableTd>
+                )}
                 {headerList.map((value, columnIndex) => (
                   <S.TableTd
                     key={`${keySet}_${index}_${columnIndex}`}

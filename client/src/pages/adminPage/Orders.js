@@ -226,6 +226,7 @@ function Orders() {
           }}
           onStatusChange={handleStatusChange}
           page={currentPage}
+          hideCheckboxes={true}
         />
         <S.ButtonContainer>
           <PageNation
