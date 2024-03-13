@@ -5,11 +5,19 @@ WORKDIR /app
 # package.json 및 package-lock.json 복사
 COPY package*.json ./
 
-# 일부 핵심 의존성 먼저 설치
-RUN npm install --save @reduxjs/toolkit react react-dom --omit=optional --prefer-offline --no-audit
+# NODE_OPTIONS 환경 변수를 설정하여 메모리 한계를 증가
+ENV NODE_OPTIONS=--max-old-space-size=512
+
+# 의존성을 그룹으로 나누어 순차적으로 설치
+# 예시: 핵심 의존성 먼저 설치
+RUN npm install @reduxjs/toolkit react react-dom --omit=optional --prefer-offline --no-audit
+
+# 예시: 다른 핵심 패키지 그룹 설치
+RUN npm install axios react-redux --omit=optional --prefer-offline --no-audit
 
 # 나머지 의존성 설치
 RUN npm install --omit=optional --prefer-offline --no-audit
+
 
 # 소스 코드 복사 및 빌드
 COPY . .
