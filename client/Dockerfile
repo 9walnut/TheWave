@@ -4,6 +4,11 @@ WORKDIR /app
 
 # package.json 및 package-lock.json 복사
 COPY package*.json ./
+
+# 일부 핵심 의존성 먼저 설치
+RUN npm install --save @reduxjs/toolkit react react-dom --omit=optional --prefer-offline --no-audit
+
+# 나머지 의존성 설치
 RUN npm install --omit=optional --prefer-offline --no-audit
 
 # 소스 코드 복사 및 빌드
