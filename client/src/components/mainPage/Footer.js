@@ -1,17 +1,14 @@
-// import "./Footer.css"
 import styled from "styled-components";
 
 const FooterLayout = styled.div`
   display: flex;
   align-items: center;
-  position: absolute;
   justify-content: center;
-  /* border: 1px solid black; */
   border-top: 1px solid #ddd;
-  /* bottom: 0; */
+  bottom: 0;
   width: 100%;
   height: 200px;
-  @media (max-width: 980px) {
+  @media (max-width: 550px) {
     display: block;
     border: none;
     height: auto;

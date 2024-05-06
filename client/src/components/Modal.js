@@ -13,8 +13,8 @@ const Modal = ({ isVisible, onClose, children }) => {
         onClick={(e) => {
           console.log("Close button clicked");
           e.preventDefault();
-          e.stopPropagation(); // 이벤트 전파 중지
-          onClose(); // 모달 닫기 함수 실행
+          e.stopPropagation();
+          onClose();
         }}
       >
         ×

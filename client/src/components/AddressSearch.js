@@ -28,18 +28,14 @@ function AddressSearch({ getAddress }) {
   const handleOpenModal = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("Opening modal...", e.target);
     setIsModalOpen(true);
   };
 
   const handleClose = () => {
-    console.log("Before closing modal, isModalOpen:", isModalOpen);
     setIsModalOpen(false);
-    console.log("After closing modal, isModalOpen:", isModalOpen);
   };
 
   useEffect(() => {
-    console.log("Modal open state is now:", isModalOpen);
     if (isModalOpen) {
       console.log("Modal was opened at", new Date().toLocaleTimeString());
     }

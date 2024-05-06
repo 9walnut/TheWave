@@ -3,19 +3,31 @@ body {
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 section {
   box-sizing: border-box;
   width: auto;
-  height: 100%;
+  flex: 1;
   padding: 60px;
+  padding-bottom: 200px;
   @media (max-width: 767px) {
     padding: 16px;
+    padding-bottom: 200px;
   }
 }
 .category {
   padding: 20px 60px;
 }
 
-/* https://d2.naver.com/helloworld/8540176 */
+.main-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1; /* 사용 가능한 공간을 모두 사용 */
+}
