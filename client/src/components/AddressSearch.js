@@ -1,77 +1,86 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Postcode from "@actbase/react-daum-postcode";
 import Modal from "./Modal";
 import * as S from "./AddressSearchStyle.js";
 
 function AddressSearch({ getAddress }) {
-  const [isModal, setModal] = useState(false);
-  const [selectAddress, setAddress] = useState("");
-  const [postNumber, setPostNumber] = useState("");
-  const [detailAddress, setdetailAd] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [address, setAddress] = useState({
+    selectAddress: "",
+    postNumber: "",
+    detailAddress: "",
+  });
+
+  const handleSelect = (data) => {
+    const { address: selectAddress, zonecode: postNumber } = data;
+    setAddress((prev) => ({
+      ...prev,
+      selectAddress,
+      postNumber,
+    }));
+    setIsModalOpen(false);
+  };
+
+  const handleDetailChange = (e) => {
+    setAddress((prev) => ({ ...prev, detailAddress: e.target.value }));
+  };
+
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Opening modal...", e.target);
+    setIsModalOpen(true);
+  };
+
+  const handleClose = () => {
+    console.log("Before closing modal, isModalOpen:", isModalOpen);
+    setIsModalOpen(false);
+    console.log("After closing modal, isModalOpen:", isModalOpen);
+  };
 
   useEffect(() => {
-    setAddress(selectAddress);
-    setPostNumber(postNumber);
-    setdetailAd(detailAddress);
-    const address = {
-      selectAddress: selectAddress,
-      postNumber: postNumber,
-      detailAddress: detailAddress,
-    };
-    getAddress(address);
-  }, [selectAddress, postNumber, detailAddress]);
-
-  const handleAddressChange = (addressData) => {
-    getAddress(addressData);
-  };
+    console.log("Modal open state is now:", isModalOpen);
+    if (isModalOpen) {
+      console.log("Modal was opened at", new Date().toLocaleTimeString());
+    }
+  }, [isModalOpen]);
 
   return (
     <>
-      <Modal isVisible={isModal}>
+      <Modal isVisible={isModalOpen} onClose={handleClose}>
         <Postcode
           style={{ width: 400, height: 400 }}
           jsOptions={{ animation: true, hideMapBtn: true }}
-          onSelected={(addressData) => {
-            console.log(addressData);
-            setAddress(addressData.address);
-            setPostNumber(addressData.zonecode);
-            setModal(false);
-          }}
+          onSelected={handleSelect}
         />
       </Modal>
 
-      <S.Button onClick={() => setModal(true)}>우편번호 찾기</S.Button>
+      <S.Button onClick={handleOpenModal}>우편번호 찾기</S.Button>
 
-      {/* 서버 요청 시 전달해야 하는 데이터 */}
       <div>
-        {/* 주소 */}
         <S.Input
           placeholder="주소"
           type="text"
-          value={selectAddress}
+          value={address.selectAddress}
           readOnly
         />
       </div>
       <div>
-        {/* 우편번호  */}
         <S.Input
           placeholder="우편번호"
           type="text"
-          value={postNumber}
+          value={address.postNumber}
           readOnly
         />
       </div>
       <div>
-        {/* 상세 주소 */}
         <S.Input
           placeholder="상세 주소"
           type="text"
-          value={detailAddress}
-          onChange={(e) => setdetailAd(e.target.value)}
+          value={address.detailAddress}
+          onChange={handleDetailChange}
         />
       </div>
-
-      {handleAddressChange({ selectAddress, postNumber, detailAddress })}
     </>
   );
 }

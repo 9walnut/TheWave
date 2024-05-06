@@ -10,32 +10,21 @@ function AddressComponent({ getAddress, userAddress }) {
   const [detailAddress, setdetailAd] = useState("");
 
   useEffect(() => {
-    setAddress(selectAddress);
-    setPostNumber(postNumber);
-    setdetailAd(detailAddress);
-    const address = {
-      selectAddress: selectAddress,
-      postNumber: postNumber,
-      detailAddress: detailAddress,
-    };
-    getAddress(address);
-  }, [selectAddress, postNumber, detailAddress]);
+    if (userAddress) {
+      setAddress(userAddress[0]);
+      setPostNumber(userAddress[1]);
+      setdetailAd(userAddress[2]);
+    }
+  }, [userAddress]);
 
   const handleAddressChange = (addressData) => {
     getAddress(addressData);
   };
 
   useEffect(() => {
-    // console.log(userAddress);
-    setAddress(userAddress[0]);
-    setPostNumber(userAddress[1]);
-    setdetailAd(userAddress[2]);
-  }, []);
-
-  //   useEffect(() => {
-  //     console.log(address);
-  //     setAddress(address.address);
-  //   }, [address]);
+    const addressData = { selectAddress, postNumber, detailAddress };
+    getAddress(addressData);
+  }, [selectAddress, postNumber, detailAddress, getAddress]);
 
   return (
     <>
