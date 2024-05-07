@@ -23,12 +23,16 @@ RUN npm run build
 
 # Stage 2: Nginx를 사용하여 React 앱 서빙
 FROM nginx
+
 # 빌드된 앱을 Nginx 서버의 html 디렉토리로 복사
 COPY --from=build-stage /app/build /usr/share/nginx/html
+
 # 기본 Nginx 설정 파일 삭제
 RUN rm /etc/nginx/conf.d/default.conf
+
 # 커스텀 Nginx 설정 파일 복사
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80 443
+
 CMD ["nginx", "-g", "daemon off;"]

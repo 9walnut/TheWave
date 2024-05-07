@@ -32,7 +32,6 @@ export const select = styled.select`
   width: 300px;
   height: 45px;
   border: none;
-  /* color: black; */
   border-bottom: 1px solid #e5e5e5;
 `;
 

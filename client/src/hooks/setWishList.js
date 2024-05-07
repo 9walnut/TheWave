@@ -2,6 +2,7 @@ import axios from "axios";
 import getAccessToken from "./getAcessToken";
 import { useParams } from "react-router";
 import { useState } from "react";
+
 function setWishList() {
   const { productId } = useParams();
   const [wish, setWish] = useState(false);

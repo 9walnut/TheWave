@@ -57,7 +57,6 @@ function Navbar() {
   };
 
   const handleMouseLeave = () => {
-    // 굳이 필요 없음
     setMenuVisible(false);
   };
 

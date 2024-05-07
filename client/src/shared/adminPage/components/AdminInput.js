@@ -4,7 +4,6 @@ import React from "react";
 function AdminInput(props) {
   const handleChange = (event) => {
     props.onChange(event.target.value);
-    // console.log(`input 입력값 확인 (${props.children}):`, event.target.value);
   };
 
   return (

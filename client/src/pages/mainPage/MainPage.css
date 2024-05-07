@@ -29,5 +29,5 @@ section {
 }
 
 .content {
-  flex: 1; /* 사용 가능한 공간을 모두 사용 */
+  flex: 1;
 }

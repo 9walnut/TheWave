@@ -23,12 +23,12 @@ export const ModalContent = styled.div`
 export const CloseButton = styled.button`
   position: relative;
   top: -275px;
-  right: -40px; // 우측에서 10px 떨어진 위치
-  width: 40px; // 버튼 너비 설정
-  height: 40px; // 버튼 높이 설정
+  right: -40px;
+  width: 40px;
+  height: 40px;
   border: none;
   background: white;
-  border-radius: 50%; // 원형 버튼
+  border-radius: 50%;
   cursor: pointer;
   font-size: 24px;
   display: flex;

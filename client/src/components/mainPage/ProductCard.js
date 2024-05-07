@@ -13,7 +13,6 @@ function ProductCard() {
   const getProduct = async () => {
     try {
       const res = await axios.get("/api");
-      console.log(res);
       setProducts(res.data);
     } catch (error) {
       console.log("불러오기 에러");
@@ -24,10 +23,6 @@ function ProductCard() {
     getProduct();
   }, []);
 
-  // const addToCart = (productId) => {
-  //   navigate(`/products/${productId}`);
-  // };
-
   const addToWishlist = async (productId) => {
     const headers = getAccessToken();
     if (headers == false) {
@@ -36,7 +31,6 @@ function ProductCard() {
         title: "회원만 찜하기가 가능합니다.",
       });
     } else {
-      console.log(productId, "프로덕아디");
       const res = await axios.get(`/api/product/wish/${productId}`, {
         headers,
       });

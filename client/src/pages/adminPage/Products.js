@@ -99,7 +99,6 @@ function Products() {
 
   const onSelectionChange = (selectedProductId) => {
     setSelectedProductIds(selectedProductId);
-    //console.log("onSelectionChange 호출됨:", selectedProductId);
   };
 
   const deleteProducts = async () => {
