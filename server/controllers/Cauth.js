@@ -7,7 +7,6 @@ const {
 } = require("../middleware/jwt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const axios = require("axios");
 
 // 메인 페이지 렌더
 exports.main = async (req, res) => {

@@ -9,3 +9,4 @@ cert.key
 client/.env.development
 server/app.js
 server/app.js
+.env.test

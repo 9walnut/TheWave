@@ -6,7 +6,7 @@ const app = express();
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
-const PORT = 8001;
+const PORT = 8000;
 const https_port = 8000;
 
 // https - ssl 인증서 참조
